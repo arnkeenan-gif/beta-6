@@ -160,22 +160,22 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
     <div class="conv-note" id="conv-note">Loading live rates…</div>
     <div class="currency-grid">
       <div class="cur-card" onclick="openPayment('btc')">
-        <div class="cur-logo"><img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC"></div>
+        <div class="cur-logo"><img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/btc.png" alt="BTC" onerror="this.src='https://assets.coingecko.com/coins/images/1/large/bitcoin.png'"></div>
         <div class="cur-info"><div class="cur-ticker">BTC</div><div class="cur-name-small">Bitcoin</div><div class="cur-amount" id="amt-btc">—</div></div>
         <span class="chevron">›</span>
       </div>
       <div class="cur-card" onclick="openPayment('eth')">
-        <div class="cur-logo"><img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH"></div>
+        <div class="cur-logo"><img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/eth.png" alt="ETH" onerror="this.src='https://assets.coingecko.com/coins/images/279/large/ethereum.png'"></div>
         <div class="cur-info"><div class="cur-ticker">ETH</div><div class="cur-name-small">Ethereum</div><div class="cur-amount" id="amt-eth">—</div></div>
         <span class="chevron">›</span>
       </div>
       <div class="cur-card" onclick="openPayment('sol')">
-        <div class="cur-logo"><img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="SOL"></div>
+        <div class="cur-logo"><img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/sol.png" alt="SOL" onerror="this.src='https://assets.coingecko.com/coins/images/4128/large/solana.png'"></div>
         <div class="cur-info"><div class="cur-ticker">SOL</div><div class="cur-name-small">Solana</div><div class="cur-amount" id="amt-sol">—</div></div>
         <span class="chevron">›</span>
       </div>
       <div class="cur-card" onclick="openPayment('usdc')">
-        <div class="cur-logo"><img src="https://cryptologos.cc/logos/usd-coin-usdc-logo.png" alt="USDC"></div>
+        <div class="cur-logo"><img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/usdc.png" alt="USDC" onerror="this.src='https://assets.coingecko.com/coins/images/6319/large/usdc.png'"></div>
         <div class="cur-info"><div class="cur-ticker">USDC</div><div class="cur-name-small">USD Coin · SOL</div><div class="cur-amount" id="amt-usdc">—</div></div>
         <span class="chevron">›</span>
       </div>
@@ -236,10 +236,10 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
 const CONFIG = { ETHERSCAN_KEY:'YCNIYTGQQ666ICG3R1IKTRVH7NRCWFHYSV', REDIRECT_URL:'confirmation.html', POLL_MS:15000, REDIRECT_SECS:5 };
  
 const currencies = {
-  btc:  {ticker:'BTC', name:'Bitcoin',  network:'Bitcoin Network',            addr:'bc1q7n3vqfsy0sm8res9vltk8zcdd996ux5gdp2jfx',  logo:'https://cryptologos.cc/logos/bitcoin-btc-logo.png',   explorer:tx=>`https://mempool.space/tx/${tx}`},
-  eth:  {ticker:'ETH', name:'Ethereum', network:'Ethereum Network (ERC-20)',  addr:'0xe8153fd51A3F7d52a2A8cC84A9523E195E17F5A7',  logo:'https://cryptologos.cc/logos/ethereum-eth-logo.png',  explorer:tx=>`https://etherscan.io/tx/${tx}`},
-  sol:  {ticker:'SOL', name:'Solana',   network:'Solana Network',             addr:'5mcfJ1ZSvhypqt4EpMFPHkte5brgMQYLbnN6yXNRgWGb',logo:'https://cryptologos.cc/logos/solana-sol-logo.png',    explorer:tx=>`https://solscan.io/tx/${tx}`},
-  usdc: {ticker:'USDC',name:'USD Coin', network:'Solana Network (SPL Token)', addr:'5mcfJ1ZSvhypqt4EpMFPHkte5brgMQYLbnN6yXNRgWGb',logo:'https://cryptologos.cc/logos/usd-coin-usdc-logo.png', explorer:tx=>`https://solscan.io/tx/${tx}`},
+  btc:  {ticker:'BTC', name:'Bitcoin',  network:'Bitcoin Network',            addr:'bc1q7n3vqfsy0sm8res9vltk8zcdd996ux5gdp2jfx',  logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/btc.png',  explorer:tx=>`https://mempool.space/tx/${tx}`},
+  eth:  {ticker:'ETH', name:'Ethereum', network:'Ethereum Network (ERC-20)',  addr:'0xe8153fd51A3F7d52a2A8cC84A9523E195E17F5A7',  logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/eth.png',  explorer:tx=>`https://etherscan.io/tx/${tx}`},
+  sol:  {ticker:'SOL', name:'Solana',   network:'Solana Network',             addr:'5mcfJ1ZSvhypqt4EpMFPHkte5brgMQYLbnN6yXNRgWGb',logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/sol.png',  explorer:tx=>`https://solscan.io/tx/${tx}`},
+  usdc: {ticker:'USDC',name:'USD Coin', network:'Solana Network (SPL Token)', addr:'5mcfJ1ZSvhypqt4EpMFPHkte5brgMQYLbnN6yXNRgWGb',logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/usdc.png', explorer:tx=>`https://solscan.io/tx/${tx}`},
 };
  
 const cart         = JSON.parse(localStorage.getItem('rp_cart')||'[]');
