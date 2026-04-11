@@ -19,13 +19,13 @@ body { display:flex; flex-direction:column; align-items:center; justify-content:
 body::before { content:''; position:fixed; inset:0; background-image:linear-gradient(rgba(37,99,235,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.03) 1px,transparent 1px); background-size:52px 52px; pointer-events:none; z-index:0; }
 #wave-canvas { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; }
 .container { position:relative; z-index:1; width:100%; max-width:500px; display:flex; flex-direction:column; align-items:center; }
- 
+
 .header { display:flex; align-items:center; gap:10px; margin-bottom:5px; }
 .logo-mark { width:36px; height:36px; background:var(--blue-mid); border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .logo-mark svg { width:20px; height:20px; }
 .logo-name { font-family:'Syne',sans-serif; font-size:16px; font-weight:700; color:#fff; letter-spacing:-0.2px; }
 .tagline { font-size:12px; color:var(--muted); margin-bottom:20px; }
- 
+
 /* Cart + shipping strip */
 .cart-strip { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); border-radius:13px; padding:14px 16px; margin-bottom:20px; }
 .cart-strip-title { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); margin-bottom:10px; }
@@ -41,14 +41,14 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
 .cart-strip-total { display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.07); padding-top:10px; margin-top:4px; }
 .cart-strip-total-label { font-size:12px; color:var(--muted); }
 .cart-strip-total-val { font-family:'Syne',sans-serif; font-size:18px; font-weight:700; color:#fff; }
- 
+
 .section-label { font-size:10px; font-weight:500; letter-spacing:2.5px; text-transform:uppercase; color:var(--dim); margin-bottom:11px; align-self:flex-start; }
 .conv-note { font-size:10px; color:var(--dim); margin-bottom:14px; text-align:center; }
- 
+
 .screen { width:100%; display:none; flex-direction:column; align-items:center; animation:fadeUp 0.3s ease both; }
 .screen.active { display:flex; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
- 
+
 .currency-grid { display:grid; grid-template-columns:1fr 1fr; gap:11px; width:100%; }
 .cur-card { background:var(--card-bg); border:1px solid var(--card-bd); border-radius:15px; padding:18px 14px; cursor:pointer; transition:background 0.2s,border-color 0.2s,transform 0.18s; display:flex; align-items:center; gap:12px; }
 .cur-card:hover { background:var(--card-hov); border-color:rgba(255,255,255,0.15); transform:translateY(-2px); }
@@ -61,24 +61,24 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
 .cur-amount { font-size:11px; color:rgba(255,255,255,0.45); margin-top:3px; font-family:'Courier New',monospace; }
 .chevron { color:var(--dim); font-size:16px; transition:transform 0.2s,color 0.2s; flex-shrink:0; }
 .cur-card:hover .chevron { transform:translateX(3px); color:var(--muted); }
- 
+
 .pay-card { background:var(--card-bg); border:1px solid var(--card-bd); border-radius:20px; padding:26px 22px; width:100%; display:flex; flex-direction:column; align-items:center; }
 .pay-cur-row { display:flex; align-items:center; gap:10px; align-self:flex-start; margin-bottom:3px; }
 .pay-cur-logo { width:30px; height:30px; border-radius:50%; overflow:hidden; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .pay-cur-logo img { width:30px; height:30px; object-fit:contain; display:block; }
 .pay-cur-label { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:#fff; }
 .pay-network-tag { align-self:flex-start; margin-left:40px; font-size:10px; color:var(--dim); letter-spacing:0.4px; margin-bottom:14px; }
- 
+
 .amount-due { width:100%; background:rgba(37,99,235,0.1); border:1px solid rgba(37,99,235,0.2); border-radius:12px; padding:13px 16px; margin-bottom:18px; display:flex; align-items:center; justify-content:space-between; }
 .amount-due-label { font-size:11px; color:rgba(181,212,244,0.7); }
 .amount-due-gbp { font-size:11px; color:rgba(181,212,244,0.45); margin-top:2px; }
 .amount-due-crypto { font-family:'Syne',sans-serif; font-size:20px; font-weight:700; color:#fff; text-align:right; }
 .amount-due-ticker { font-size:11px; color:var(--muted); text-align:right; margin-top:2px; }
- 
+
 .qr-container { background:#fff; border-radius:13px; padding:13px; margin-bottom:20px; width:168px; height:168px; display:flex; align-items:center; justify-content:center; }
 #qr-output { display:flex; align-items:center; justify-content:center; }
 #qr-output img, #qr-output canvas { border-radius:3px; display:block; }
- 
+
 .addr-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); align-self:flex-start; margin-bottom:7px; }
 .addr-row { width:100%; background:rgba(0,0,0,0.22); border:1px solid rgba(255,255,255,0.06); border-radius:11px; padding:10px 12px; display:flex; align-items:flex-start; gap:9px; margin-bottom:13px; }
 .addr-value { font-family:'Courier New',monospace; font-size:10.5px; color:rgba(255,255,255,0.58); flex:1; word-break:break-all; line-height:1.65; user-select:all; }
@@ -86,9 +86,9 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
 .copy-btn:hover { background:var(--blue-b); }
 .copy-btn:active { transform:scale(0.95); }
 .copy-btn.ok { background:var(--green-b); }
- 
+
 .warn { width:100%; background:rgba(234,179,8,0.055); border:1px solid rgba(234,179,8,0.14); border-radius:10px; padding:10px 13px; font-size:11px; color:rgba(234,179,8,0.68); line-height:1.55; margin-bottom:13px; }
- 
+
 .tracker-bar { width:100%; background:rgba(0,0,0,0.18); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:10px 13px; display:flex; align-items:center; gap:9px; margin-bottom:16px; }
 .tracker-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:var(--dim); transition:background 0.3s; }
 .tracker-dot.scanning { background:var(--blue); animation:tpulse 1.4s ease infinite; }
@@ -96,10 +96,10 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
 @keyframes tpulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(37,99,235,0.5)} 50%{opacity:.7;box-shadow:0 0 0 5px rgba(37,99,235,0)} }
 .tracker-text { font-size:11px; color:var(--muted); flex:1; line-height:1.45; }
 .tracker-text strong { color:#fff; font-weight:500; }
- 
+
 .back-btn { background:transparent; border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:9px 20px; font-family:'DM Sans',sans-serif; font-size:13px; color:var(--muted); cursor:pointer; transition:background 0.18s,color 0.18s; }
 .back-btn:hover { background:rgba(255,255,255,0.05); color:#fff; }
- 
+
 #screen-success { text-align:center; }
 .success-card { background:var(--card-bg); border:1px solid rgba(34,197,94,0.22); border-radius:20px; padding:36px 24px; width:100%; display:flex; flex-direction:column; align-items:center; }
 .success-icon { width:64px; height:64px; border-radius:50%; background:rgba(34,197,94,0.1); border:2px solid rgba(34,197,94,0.28); display:flex; align-items:center; justify-content:center; margin-bottom:16px; animation:popIn 0.4s cubic-bezier(0.175,0.885,0.32,1.275) both; }
@@ -113,7 +113,7 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
 .redirect-count { font-family:'Syne',sans-serif; font-size:14px; font-weight:700; color:var(--green); min-width:16px; text-align:center; }
 .explorer-link { display:inline-block; margin-top:12px; font-size:11px; color:#60a5fa; text-decoration:none; border-bottom:1px solid rgba(96,165,250,0.3); }
 .explorer-link:hover { color:#93c5fd; }
- 
+
 .footer { margin-top:24px; display:flex; align-items:center; gap:7px; }
 .dot-live { width:6px; height:6px; border-radius:50%; background:var(--green); animation:livepulse 3.5s ease infinite; flex-shrink:0; }
 @keyframes livepulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,0.45)} 50%{opacity:.8;box-shadow:0 0 0 5px rgba(34,197,94,0)} }
@@ -123,7 +123,7 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
 <body>
 <canvas id="wave-canvas"></canvas>
 <div class="container">
- 
+
   <div class="header">
     <div class="logo-mark">
       <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" fill="white"/><path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.93 4.93l2.83 2.83M12.24 12.24l2.83 2.83M4.93 15.07l2.83-2.83M12.24 7.76l2.83-2.83" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -131,8 +131,7 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
     <span class="logo-name">Research Peptides</span>
   </div>
   <div class="tagline">Complete your order with crypto</div>
- 
-  <!-- Cart + shipping strip -->
+
   <div class="cart-strip">
     <div class="cart-strip-title">Your order</div>
     <div class="cart-strip-items" id="cartStripItems"></div>
@@ -153,8 +152,7 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
       <div class="cart-strip-total-val" id="cartStripTotal">£0.00</div>
     </div>
   </div>
- 
-  <!-- SELECT SCREEN -->
+
   <div class="screen active" id="screen-select">
     <div class="section-label">Select currency</div>
     <div class="conv-note" id="conv-note">Loading live rates…</div>
@@ -181,8 +179,7 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
       </div>
     </div>
   </div>
- 
-  <!-- PAYMENT SCREEN -->
+
   <div class="screen" id="screen-pay">
     <div class="pay-card">
       <div class="pay-cur-row">
@@ -214,8 +211,7 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
       <button class="back-btn" onclick="stopAndGoBack()">← Choose different currency</button>
     </div>
   </div>
- 
-  <!-- SUCCESS SCREEN -->
+
   <div class="screen" id="screen-success">
     <div class="success-card">
       <div class="success-icon">
@@ -228,26 +224,22 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
       <a class="explorer-link" id="explorer-link" href="#" target="_blank" rel="noopener">View on blockchain explorer →</a>
     </div>
   </div>
- 
+
   <div class="footer"><div class="dot-live"></div><span class="footer-text">Verified · Secure · Worldwide</span></div>
 </div>
- 
+
 <script>
 const CONFIG = {
-  ETHERSCAN_KEY:'YCNIYTGQQ666ICG3R1IKTRVH7NRCWFHYSV',
-  REDIRECT_URL:'confirmation.html',
-  POLL_MS:2500,
-  REDIRECT_SECS:5
+  REDIRECT_URL: 'confirmation.html',
+  POLL_MS: 2000,
+  REDIRECT_SECS: 5
 };
-
-const SOL_HTTP_RPC = 'https://api.mainnet-beta.solana.com';
-const SOL_WS_RPC = 'wss://api.mainnet-beta.solana.com';
 
 const currencies = {
   btc:  {ticker:'BTC', name:'Bitcoin',  network:'Bitcoin Network',            addr:'bc1q7n3vqfsy0sm8res9vltk8zcdd996ux5gdp2jfx',  logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/btc.png',  explorer:tx=>`https://mempool.space/tx/${tx}`},
   eth:  {ticker:'ETH', name:'Ethereum', network:'Ethereum Network (ERC-20)',  addr:'0xe8153fd51A3F7d52a2A8cC84A9523E195E17F5A7',  logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/eth.png',  explorer:tx=>`https://etherscan.io/tx/${tx}`},
-  sol:  {ticker:'SOL', name:'Solana',   network:'Solana Network',             addr:'5mcfJ1ZSvhypqt4EpMFPHkte5brgMQYLbnN6yXNRgWGb',logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/sol.png',  explorer:tx=>`https://solscan.io/tx/${tx}`},
-  usdc: {ticker:'USDC',name:'USD Coin', network:'Solana Network (SPL Token)', addr:'5mcfJ1ZSvhypqt4EpMFPHkte5brgMQYLbnN6yXNRgWGb',logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/usdc.png', explorer:tx=>`https://solscan.io/tx/${tx}`},
+  sol:  {ticker:'SOL', name:'Solana',   network:'Solana Network',             addr:'5mcfJ1ZSvhypqt4EpMFPHkte5brgMQYLbnN6yXNRgWGb',logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/sol.png',  explorer:tx=>`https://solscan.io/account/${currencies.sol.addr}`},
+  usdc: {ticker:'USDC',name:'USD Coin', network:'Solana Network (SPL Token)', addr:'5mcfJ1ZSvhypqt4EpMFPHkte5brgMQYLbnN6yXNRgWGb',logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/usdc.png', explorer:tx=>`https://solscan.io/account/${currencies.usdc.addr}`},
 };
 
 const cart         = JSON.parse(localStorage.getItem('rp_cart')||'[]');
@@ -257,17 +249,12 @@ const subtotal     = cart.reduce((s,i)=>s+i.price*i.qty,0);
 const shipPrice    = shipMethod.price || 6.99;
 const gbpTotal     = subtotal + shipPrice;
 
-let rates={}, cryptoAmounts={};
-let currentKey=null,pollTimer=null,seenTxids=new Set(),pollCount=0,sessionStart=0,currentAddr='';
-let tickTimer=null;
-
-let solBaselineLamports = null;
-let solLastLamports = null;
-let solBaselineSignature = null;
-let solWs = null;
-let solWsSubId = null;
-let solReady = false;
-let solPaymentFound = false;
+let rates = {}, cryptoAmounts = {};
+let currentKey = null, pollTimer = null, pollCount = 0, sessionStart = 0, currentAddr = '';
+let tickTimer = null;
+let solBaseline = null;
+let readyToScan = false;
+let paymentFound = false;
 
 /* Strip */
 (function renderStrip(){
@@ -306,7 +293,6 @@ async function fetchRates(){
     }
   }catch(e){
     document.getElementById('conv-note').textContent='Could not load live rates';
-    console.error('Rate load failed', e);
   }
 }
 fetchRates();
@@ -316,142 +302,28 @@ function showScreen(id){
   document.getElementById(id).classList.add('active');
 }
 
-function setTracker(state,html){
+function setTracker(state, html){
   document.getElementById('tracker-dot').className='tracker-dot'+(state==='scanning'?' scanning':state==='found'?' found':'');
   document.getElementById('tracker-text').innerHTML=html;
 }
 
-async function solRpc(method, params){
-  const res = await fetch(SOL_HTTP_RPC, {
+async function getSolBalanceLamports(addr){
+  const res = await fetch('https://api.mainnet-beta.solana.com', {
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({jsonrpc:'2.0', id:1, method, params})
+    body: JSON.stringify({
+      jsonrpc:'2.0',
+      id:1,
+      method:'getBalance',
+      params:[addr]
+    })
   });
 
-  if(!res.ok){
-    throw new Error(`Solana RPC HTTP ${res.status}`);
-  }
-
+  if(!res.ok) throw new Error('RPC failed');
   const data = await res.json();
-  if(data.error){
-    throw new Error(data.error.message || 'Solana RPC error');
-  }
-  return data.result;
-}
+  if(data.error) throw new Error(data.error.message || 'RPC error');
 
-async function getSolBalanceLamports(addr){
-  const result = await solRpc('getBalance', [addr, { commitment:'confirmed' }]);
-  return Number(result?.value || 0);
-}
-
-async function getLatestSignature(addr){
-  const result = await solRpc('getSignaturesForAddress', [addr, { limit:1 }]);
-  if(Array.isArray(result) && result.length && result[0]?.signature){
-    return result[0].signature;
-  }
-  return null;
-}
-
-async function prepareSolWatcher(){
-  solPaymentFound = false;
-  solReady = false;
-  solBaselineLamports = await getSolBalanceLamports(currencies.sol.addr);
-  solLastLamports = solBaselineLamports;
-  solBaselineSignature = await getLatestSignature(currencies.sol.addr);
-  connectSolWebSocket();
-  solReady = true;
-  console.log('SOL watcher ready', {
-    baselineLamports: solBaselineLamports,
-    baselineSignature: solBaselineSignature
-  });
-}
-
-function connectSolWebSocket(){
-  closeSolWebSocket();
-
-  try{
-    solWs = new WebSocket(SOL_WS_RPC);
-
-    solWs.onopen = () => {
-      solWs.send(JSON.stringify({
-        jsonrpc:'2.0',
-        id:1001,
-        method:'accountSubscribe',
-        params:[
-          currencies.sol.addr,
-          { commitment:'confirmed', encoding:'jsonParsed' }
-        ]
-      }));
-    };
-
-    solWs.onmessage = async (event) => {
-      try{
-        const msg = JSON.parse(event.data);
-
-        if(msg.id === 1001 && typeof msg.result === 'number'){
-          solWsSubId = msg.result;
-          return;
-        }
-
-        if(msg.method === 'accountNotification' && currentKey === 'sol' && !solPaymentFound && solReady){
-          const lamports = Number(msg.params?.result?.value?.lamports || 0);
-          console.log('SOL account notification lamports', lamports);
-
-          if(lamports > solLastLamports){
-            const diff = lamports - solLastLamports;
-            solLastLamports = lamports;
-            solPaymentFound = true;
-            onPaymentFound({
-              txid:'Balance change detected',
-              amount:`${(diff/1e9).toFixed(6)} SOL`,
-              explorer:`https://solscan.io/account/${currencies.sol.addr}`
-            });
-          } else {
-            solLastLamports = lamports;
-          }
-        }
-      }catch(err){
-        console.error('WS parse error', err);
-      }
-    };
-
-    solWs.onerror = (err) => {
-      console.error('SOL websocket error', err);
-    };
-
-    solWs.onclose = () => {
-      solWsSubId = null;
-      if(currentKey === 'sol' && !solPaymentFound){
-        setTimeout(() => {
-          if(currentKey === 'sol' && !solPaymentFound){
-            connectSolWebSocket();
-          }
-        }, 1500);
-      }
-    };
-  }catch(err){
-    console.error('WS connection failed', err);
-  }
-}
-
-function closeSolWebSocket(){
-  try{
-    if(solWs && solWs.readyState === WebSocket.OPEN && solWsSubId !== null){
-      solWs.send(JSON.stringify({
-        jsonrpc:'2.0',
-        id:1002,
-        method:'accountUnsubscribe',
-        params:[solWsSubId]
-      }));
-    }
-  }catch(e){}
-
-  try{
-    if(solWs) solWs.close();
-  }catch(e){}
-
-  solWs = null;
-  solWsSubId = null;
+  return Number(data.result?.value || 0);
 }
 
 async function openPayment(key){
@@ -459,8 +331,10 @@ async function openPayment(key){
   currentKey=key;
   currentAddr=c.addr;
   sessionStart=Math.floor(Date.now()/1000);
-  seenTxids.clear();
   pollCount=0;
+  paymentFound=false;
+  readyToScan=false;
+  solBaseline=null;
 
   document.getElementById('pay-logo-img').src=c.logo;
   document.getElementById('pay-logo-img').alt=c.ticker;
@@ -492,19 +366,21 @@ async function openPayment(key){
     cart,shipping,shipMethod,subtotal,shipPrice,gbpTotal,cryptoKey:key,cryptoAmount:camt,cryptoTicker:c.ticker
   }));
 
+  showScreen('screen-pay');
+
   if(key === 'sol'){
-    setTracker('scanning','<strong>Preparing Solana scanner…</strong><br>Setting secure starting balance');
-    showScreen('screen-pay');
+    setTracker('scanning','<strong>Preparing scanner…</strong><br>Locking starting balance');
     try{
-      await prepareSolWatcher();
+      solBaseline = await getSolBalanceLamports(c.addr);
+      readyToScan = true;
       setTracker('scanning','<strong>Scanning blockchain…</strong><br>Waiting for your transaction to be detected');
-    }catch(err){
-      console.error('prepareSolWatcher failed', err);
-      setTracker('scanning','<strong>Scanner startup issue…</strong><br>Retrying with RPC polling');
+    }catch(e){
+      setTracker('scanning','<strong>Scanner error…</strong><br>Could not reach Solana RPC');
+      return;
     }
-  }else{
-    setTracker('scanning','<strong>Scanning blockchain…</strong><br>Waiting for your transaction to be detected');
-    showScreen('screen-pay');
+  } else {
+    setTracker('scanning','<strong>Only SOL is enabled right now</strong><br>Select Solana to test detection');
+    return;
   }
 
   startPolling();
@@ -521,6 +397,9 @@ function copyAddress(){
 
 function stopAndGoBack(){
   stopPolling();
+  paymentFound=false;
+  readyToScan=false;
+  solBaseline=null;
   showScreen('screen-select');
 }
 
@@ -534,15 +413,14 @@ function startPolling(){
 function stopPolling(){
   if(pollTimer){clearInterval(pollTimer);pollTimer=null;}
   if(tickTimer){clearInterval(tickTimer);tickTimer=null;}
-  closeSolWebSocket();
 }
 
 function updateTimerDisplay(){
-  if(!sessionStart) return;
-  if(solPaymentFound){
+  if(paymentFound){
     setTracker('found','<strong>Payment detected</strong><br>Waiting for confirmation');
     return;
   }
+  if(!readyToScan) return;
   const elapsed=Math.floor(Date.now()/1000-sessionStart);
   const mins=Math.floor(elapsed/60),secs=elapsed%60;
   const timeStr=(mins>0?mins+'m ':'')+secs+'s';
@@ -550,147 +428,35 @@ function updateTimerDisplay(){
 }
 
 async function poll(){
+  if(currentKey !== 'sol' || !readyToScan || paymentFound) return;
+
   pollCount++;
   updateTimerDisplay();
-  try{
-    let r=null;
-    if(currentKey==='btc') r=await checkBTC();
-    else if(currentKey==='eth') r=await checkETH();
-    else if(currentKey==='sol') r=await checkSOL();
-    else r=await checkSOL();
 
-    if(r && !solPaymentFound){
-      solPaymentFound = true;
-      onPaymentFound(r);
+  try{
+    const current = await getSolBalanceLamports(currencies.sol.addr);
+
+    if(solBaseline === null){
+      solBaseline = current;
+      return;
+    }
+
+    if(current > solBaseline){
+      const diff = current - solBaseline;
+      solBaseline = current;
+      onPaymentFound({
+        txid:'balance-change',
+        amount:(diff / 1e9).toFixed(6) + ' SOL',
+        explorer:`https://solscan.io/account/${currencies.sol.addr}`
+      });
     }
   }catch(e){
-    console.error(e);
     setTracker('scanning',`<strong>Scanning blockchain…</strong><br>Network hiccup — retrying in ${CONFIG.POLL_MS/1000}s`);
   }
 }
 
-async function checkBTC(){
-  const addr=currencies.btc.addr,base='https://mempool.space/api';
-  const[mRes,cRes]=await Promise.all([fetch(`${base}/address/${addr}/txs/mempool`),fetch(`${base}/address/${addr}/txs`)]);
-  const all=[...(mRes.ok?await mRes.json():[]),...(cRes.ok?await cRes.json():[])];
-  for(const tx of all){
-    if(seenTxids.has(tx.txid))continue;
-    const recv=(tx.vout||[]).filter(o=>o.scriptpubkey_address===addr);
-    if(!recv.length)continue;
-    const t=tx.status?.block_time||0;
-    if(t>0&&t<sessionStart)continue;
-    seenTxids.add(tx.txid);
-    const btc=(recv.reduce((s,o)=>s+(o.value||0),0)/1e8).toFixed(8);
-    return{txid:tx.txid,amount:`${btc} BTC (${tx.status?.confirmed?'confirmed':'unconfirmed'})`,explorer:currencies.btc.explorer(tx.txid)};
-  }
-  return null;
-}
-
-async function checkETH(){
-  const addr=currencies.eth.addr;
-  const res=await fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${addr}&startblock=0&endblock=99999999&sort=desc&apikey=${CONFIG.ETHERSCAN_KEY}`);
-  if(!res.ok)throw new Error('Etherscan');
-  const d=await res.json();
-  if(d.status!=='1'||!Array.isArray(d.result))return null;
-  for(const tx of d.result){
-    if(seenTxids.has(tx.hash))continue;
-    if(parseInt(tx.timeStamp,10)<sessionStart)break;
-    if(!tx.to||tx.to.toLowerCase()!==addr.toLowerCase())continue;
-    if(tx.isError==='1')continue;
-    seenTxids.add(tx.hash);
-    return{txid:tx.hash,amount:`${(parseInt(tx.value,10)/1e18).toFixed(6)} ETH`,explorer:currencies.eth.explorer(tx.hash)};
-  }
-  return null;
-}
-
-async function checkSOL(){
-  const addr = currencies.sol.addr;
-
-  if(currentKey !== 'sol') return null;
-
-  const currentBalance = await getSolBalanceLamports(addr);
-
-  if(solBaselineLamports === null){
-    solBaselineLamports = currentBalance;
-    solLastLamports = currentBalance;
-    return null;
-  }
-
-  if(currentBalance > solLastLamports){
-    const diff = currentBalance - solLastLamports;
-    solLastLamports = currentBalance;
-    console.log('SOL balance increase detected', diff);
-    return {
-      txid:'Balance change detected',
-      amount:`${(diff/1e9).toFixed(6)} SOL`,
-      explorer:`https://solscan.io/account/${addr}`
-    };
-  }
-
-  solLastLamports = currentBalance;
-
-  const sigs = await solRpc('getSignaturesForAddress', [addr, { limit:10 }]);
-  if(!Array.isArray(sigs) || !sigs.length) return null;
-
-  for(const sig of sigs){
-    if(!sig?.signature) continue;
-    if(sig.signature === solBaselineSignature) break;
-    if(seenTxids.has(sig.signature) || sig.err) continue;
-
-    const tx = await solRpc('getTransaction', [
-      sig.signature,
-      { encoding:'jsonParsed', commitment:'confirmed', maxSupportedTransactionVersion:0 }
-    ]);
-
-    if(!tx) continue;
-
-    const allIx = [
-      ...(tx.transaction?.message?.instructions || []),
-      ...(tx.meta?.innerInstructions || []).flatMap(g=>g.instructions || [])
-    ];
-
-    for(const ix of allIx){
-      if(
-        ix?.program === 'system' &&
-        ix?.parsed?.type === 'transfer' &&
-        ix?.parsed?.info?.destination === addr
-      ){
-        const lamports = Number(ix.parsed.info?.lamports || 0);
-        if(lamports > 0){
-          seenTxids.add(sig.signature);
-          console.log('SOL parsed transfer detected', sig.signature, lamports);
-          return {
-            txid:sig.signature,
-            amount:`${(lamports/1e9).toFixed(6)} SOL`,
-            explorer:currencies.sol.explorer(sig.signature)
-          };
-        }
-      }
-    }
-
-    const keys = tx.transaction?.message?.accountKeys || [];
-    const idx = keys.findIndex(k => (k.pubkey || k) === addr);
-    if(idx >= 0){
-      const pre = Number(tx.meta?.preBalances?.[idx] ?? 0);
-      const post = Number(tx.meta?.postBalances?.[idx] ?? 0);
-      const diff = post - pre;
-      if(diff > 0){
-        seenTxids.add(sig.signature);
-        console.log('SOL balance diff in tx detected', sig.signature, diff);
-        return {
-          txid:sig.signature,
-          amount:`${(diff/1e9).toFixed(6)} SOL`,
-          explorer:currencies.sol.explorer(sig.signature)
-        };
-      }
-    }
-  }
-
-  return null;
-}
-
 function onPaymentFound(result){
-  solPaymentFound = true;
+  paymentFound = true;
   setTracker('found','<strong>Payment detected</strong><br>Waiting for confirmation');
   stopPolling();
 
@@ -700,12 +466,13 @@ function onPaymentFound(result){
   order.explorerUrl=result.explorer;
   sessionStorage.setItem('rp_order',JSON.stringify(order));
 
-  document.getElementById('success-sub').textContent=result.amount+' received. Your order is being processed.';
-  document.getElementById('success-txid').textContent=result.txid;
-  document.getElementById('explorer-link').href=result.explorer;
-
-  showScreen('screen-success');
-  startCountdown();
+  setTimeout(()=>{
+    document.getElementById('success-sub').textContent=result.amount+' received. Your order is being processed.';
+    document.getElementById('success-txid').textContent=result.txid;
+    document.getElementById('explorer-link').href=result.explorer;
+    showScreen('screen-success');
+    startCountdown();
+  }, 1500);
 }
 
 function startCountdown(){
