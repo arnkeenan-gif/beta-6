@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — Research Peptides</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --blue-deep: #042C53; --blue-strong: #0C447C; --blue-mid: #185FA5;
+  --blue-light: #378ADD; --blue-pale: #85B7EB; --blue-ghost: #B5D4F4;
+  --blue-frost: #E6F1FB; --white: #ffffff; --off-white: #F4F8FD;
+  --gray-soft: #8EA7BE; --gray-text: #4A6680;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--blue-deep); overflow-x: hidden; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 4rem;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(4,44,83,0.08);
+}
+.logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.25rem; color:var(--blue-deep); letter-spacing:-0.02em; display:flex; align-items:center; gap:10px; text-decoration:none; }
+.logo-mark { width:34px; height:34px; background:var(--blue-mid); border-radius:8px; display:flex; align-items:center; justify-content:center; }
+.logo-mark svg { width:20px; height:20px; }
+.nav-back { font-size:0.9rem; color:var(--gray-text); text-decoration:none; display:flex; align-items:center; gap:6px; transition:color 0.2s; }
+.nav-back:hover { color:var(--blue-mid); }
+.nav-back svg { width:16px; height:16px; }
+
+.page-header {
+  background: linear-gradient(135deg, var(--blue-deep) 0%, #0a3d6b 100%);
+  padding: 7.5rem 4rem 3rem; position: relative; overflow: hidden;
+}
+.page-header::before { content:''; position:absolute; inset:0; background-image:linear-gradient(rgba(55,138,221,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(55,138,221,0.07) 1px,transparent 1px); background-size:50px 50px; }
+.page-header-inner { position:relative; z-index:1; max-width:1100px; margin:0 auto; }
+.section-label { font-size:0.75rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--blue-pale); margin-bottom:0.6rem; }
+.page-header h1 { font-family:'Syne',sans-serif; font-size:clamp(1.8rem,3vw,2.6rem); font-weight:800; color:white; letter-spacing:-0.03em; }
+
+.checkout-wrap { max-width:1100px; margin:0 auto; padding:2.5rem 2rem 5rem; display:grid; grid-template-columns:1fr 380px; gap:2rem; align-items:start; }
+
+.form-card { background:white; border-radius:16px; border:1px solid rgba(4,44,83,0.08); padding:2rem 2.25rem; margin-bottom:1.25rem; }
+.form-card:last-child { margin-bottom:0; }
+.form-section-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; color:var(--blue-deep); margin-bottom:1.25rem; padding-bottom:0.75rem; border-bottom:1px solid rgba(4,44,83,0.07); }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.form-group { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1rem; }
+.form-group label { font-size:0.82rem; font-weight:500; color:var(--blue-strong); letter-spacing:0.01em; }
+.form-group input, .form-group select {
+  border:1.5px solid rgba(4,44,83,0.14); border-radius:9px;
+  padding:0.65rem 0.9rem; font-family:'DM Sans',sans-serif; font-size:0.92rem;
+  color:var(--blue-deep); background:var(--white); outline:none;
+  transition:border-color 0.2s, box-shadow 0.2s;
+}
+.form-group input:focus, .form-group select:focus { border-color:var(--blue-mid); box-shadow:0 0 0 3px rgba(24,95,165,0.1); }
+.form-group input::placeholder { color:var(--gray-soft); }
+
+/* Shipping options */
+.shipping-options { display:flex; flex-direction:column; gap:0.75rem; }
+.shipping-option {
+  border:1.5px solid rgba(4,44,83,0.12); border-radius:12px;
+  padding:1rem 1.1rem; cursor:pointer;
+  display:flex; align-items:center; gap:1rem;
+  transition:border-color 0.2s, background 0.2s;
+  position:relative;
+}
+.shipping-option:hover { border-color:var(--blue-pale); background:var(--blue-frost); }
+.shipping-option.selected { border-color:var(--blue-mid); background:rgba(24,95,165,0.06); }
+.shipping-option input[type="radio"] { display:none; }
+.shipping-radio {
+  width:18px; height:18px; border-radius:50%;
+  border:2px solid rgba(4,44,83,0.2);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; transition:border-color 0.2s;
+}
+.shipping-option.selected .shipping-radio { border-color:var(--blue-mid); }
+.shipping-radio-dot { width:8px; height:8px; border-radius:50%; background:var(--blue-mid); display:none; }
+.shipping-option.selected .shipping-radio-dot { display:block; }
+.shipping-icon { width:38px; height:38px; border-radius:9px; background:var(--blue-frost); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.shipping-icon svg { width:18px; height:18px; color:var(--blue-mid); }
+.shipping-option.selected .shipping-icon { background:rgba(24,95,165,0.12); }
+.shipping-info { flex:1; }
+.shipping-name { font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:700; color:var(--blue-deep); margin-bottom:2px; }
+.shipping-eta { font-size:0.78rem; color:var(--gray-text); }
+.shipping-price { font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--blue-deep); flex-shrink:0; }
+.shipping-badge { position:absolute; top:-9px; right:12px; background:var(--blue-mid); color:white; font-size:0.65rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:2px 8px; border-radius:100px; }
+
+.disclaimer-box { background:var(--blue-frost); border:1px solid rgba(24,95,165,0.15); border-radius:10px; padding:1rem 1.1rem; margin-top:1.5rem; font-size:0.8rem; color:var(--gray-text); line-height:1.6; }
+.disclaimer-box strong { color:var(--blue-deep); }
+
+/* Summary card */
+.summary-card { background:white; border-radius:16px; border:1px solid rgba(4,44,83,0.08); padding:1.75rem; position:sticky; top:6rem; }
+.summary-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; color:var(--blue-deep); margin-bottom:1.25rem; padding-bottom:0.75rem; border-bottom:1px solid rgba(4,44,83,0.07); }
+.summary-empty { text-align:center; padding:2rem 0; color:var(--gray-soft); font-size:0.88rem; }
+.summary-empty a { color:var(--blue-mid); text-decoration:none; }
+.summary-item { display:flex; align-items:center; gap:0.9rem; padding:0.75rem 0; border-bottom:1px solid rgba(4,44,83,0.06); }
+.summary-item-img { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.summary-item-info { flex:1; min-width:0; }
+.summary-item-name { font-size:0.85rem; font-weight:500; color:var(--blue-deep); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.summary-item-sub { font-size:0.75rem; color:var(--gray-soft); margin-top:2px; }
+.summary-item-price { font-size:0.9rem; font-weight:600; color:var(--blue-deep); font-family:'Syne',sans-serif; flex-shrink:0; }
+.summary-totals { padding-top:1rem; }
+.summary-row { display:flex; justify-content:space-between; align-items:center; font-size:0.88rem; color:var(--gray-text); margin-bottom:0.5rem; }
+.summary-row span:last-child { font-weight:500; color:var(--blue-deep); }
+.summary-row.total { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:700; color:var(--blue-deep); border-top:1.5px solid rgba(4,44,83,0.1); padding-top:0.75rem; margin-top:0.25rem; }
+.summary-row.total span:last-child { color:var(--blue-deep); }
+
+.proceed-btn { width:100%; margin-top:1.25rem; background:var(--blue-mid); color:white; border:none; border-radius:10px; padding:0.9rem 1rem; font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; cursor:pointer; transition:background 0.2s,transform 0.15s; display:flex; align-items:center; justify-content:center; gap:8px; letter-spacing:-0.01em; }
+.proceed-btn:hover { background:var(--blue-strong); transform:translateY(-1px); }
+.proceed-btn:disabled { background:var(--gray-soft); cursor:not-allowed; transform:none; }
+.proceed-btn svg { width:16px; height:16px; }
+.trust-strip { display:flex; flex-direction:column; gap:0.5rem; margin-top:1rem; }
+.trust-row { display:flex; align-items:center; gap:7px; font-size:0.78rem; color:var(--gray-text); }
+.trust-row svg { width:13px; height:13px; color:var(--blue-mid); flex-shrink:0; }
+
+@media (max-width: 768px) {
+  nav { padding:1rem 1.5rem; }
+  .page-header { padding:6.5rem 1.5rem 2.5rem; }
+  .checkout-wrap { grid-template-columns:1fr; padding:1.5rem 1rem 4rem; }
+  .form-row { grid-template-columns:1fr; }
+  .summary-card { position:static; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" fill="white"/><path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.93 4.93l2.83 2.83M12.24 12.24l2.83 2.83M4.93 15.07l2.83-2.83M12.24 7.76l2.83-2.83" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    Research Peptides
+  </a>
+  <a href="products.html" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Continue shopping
+  </a>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="section-label">Checkout</div>
+    <h1>Shipping Details</h1>
+  </div>
+</div>
+
+<div class="checkout-wrap">
+  <div>
+    <!-- Contact -->
+    <div class="form-card">
+      <div class="form-section-title">Contact Information</div>
+      <div class="form-row">
+        <div class="form-group"><label>First Name *</label><input type="text" id="firstName" placeholder="John" required></div>
+        <div class="form-group"><label>Last Name *</label><input type="text" id="lastName" placeholder="Smith" required></div>
+      </div>
+      <div class="form-group"><label>Email Address *</label><input type="email" id="email" placeholder="john@example.com" required></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" id="phone" placeholder="+44 7700 900000"></div>
+    </div>
+
+    <!-- Address -->
+    <div class="form-card">
+      <div class="form-section-title">Shipping Address</div>
+      <div class="form-group"><label>Address Line 1 *</label><input type="text" id="addr1" placeholder="123 Research Lane" required></div>
+      <div class="form-group"><label>Address Line 2</label><input type="text" id="addr2" placeholder="Apartment, suite, etc."></div>
+      <div class="form-row">
+        <div class="form-group"><label>City *</label><input type="text" id="city" placeholder="London" required></div>
+        <div class="form-group"><label>Postcode *</label><input type="text" id="postcode" placeholder="SW1A 1AA" required></div>
+      </div>
+      <div class="form-group">
+        <label>Country *</label>
+        <select id="country">
+          <option value="GB">United Kingdom</option>
+          <option value="DE">Germany</option>
+          <option value="FR">France</option>
+          <option value="NL">Netherlands</option>
+          <option value="SE">Sweden</option>
+          <option value="NO">Norway</option>
+          <option value="DK">Denmark</option>
+          <option value="US">United States</option>
+          <option value="CA">Canada</option>
+          <option value="AU">Australia</option>
+          <option value="OTHER">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Shipping method -->
+    <div class="form-card">
+      <div class="form-section-title">Shipping Method</div>
+      <div class="shipping-options">
+
+        <div class="shipping-option selected" id="opt-standard" onclick="selectShipping('standard')">
+          <input type="radio" name="shipping" value="standard" checked>
+          <div class="shipping-radio"><div class="shipping-radio-dot"></div></div>
+          <div class="shipping-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/>
+              <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
+            </svg>
+          </div>
+          <div class="shipping-info">
+            <div class="shipping-name">Standard Delivery</div>
+            <div class="shipping-eta">1–2 weeks · Tracked · Discreet packaging</div>
+          </div>
+          <div class="shipping-price">£6.99</div>
+        </div>
+
+        <div class="shipping-option" id="opt-express" onclick="selectShipping('express')">
+          <input type="radio" name="shipping" value="express">
+          <div class="shipping-radio"><div class="shipping-radio-dot"></div></div>
+          <div class="shipping-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+          </div>
+          <div class="shipping-info">
+            <div class="shipping-name">Express Delivery</div>
+            <div class="shipping-eta">2–7 days · Priority tracked · Dry ice packed</div>
+          </div>
+          <div class="shipping-price">£12.99</div>
+          <div class="shipping-badge">Fastest</div>
+        </div>
+
+      </div>
+
+      <div class="disclaimer-box">
+        <strong>Research Use Only.</strong> By proceeding you confirm that all compounds are purchased exclusively for in vitro laboratory research in controlled settings. Not for human or veterinary administration. You confirm compliance with all applicable laws in your jurisdiction.
+      </div>
+    </div>
+  </div>
+
+  <!-- Order summary -->
+  <div class="summary-card">
+    <div class="summary-title">Order Summary</div>
+    <div id="summaryItems"></div>
+    <div class="summary-totals" id="summaryTotals" style="display:none">
+      <div class="summary-row"><span>Subtotal</span><span id="subtotalVal">£0.00</span></div>
+      <div class="summary-row"><span>Shipping</span><span id="shippingVal">£6.99</span></div>
+      <div class="summary-row total"><span>Total</span><span id="totalVal">£0.00</span></div>
+    </div>
+    <button class="proceed-btn" id="proceedBtn" onclick="proceedToPayment()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Proceed to Payment
+    </button>
+    <div class="trust-strip">
+      <div class="trust-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Encrypted &amp; secure checkout</div>
+      <div class="trust-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/></svg>Discreet packaging</div>
+      <div class="trust-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Dispatched within 24–48 hours</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function bottleSVG(c1,c2,s){const id='g'+Math.random().toString(36).slice(2,6);return`<svg width="${s}" height="${Math.round(s*1.55)}" viewBox="0 0 80 124" fill="none"><rect x="28" y="3" width="24" height="13" rx="3" fill="${c1}" opacity="0.8"/><rect x="22" y="14" width="36" height="97" rx="11" fill="${c2}"/><rect x="22" y="14" width="36" height="97" rx="11" fill="url(#${id})" opacity="0.7"/><rect x="24" y="16" width="10" height="93" rx="5" fill="rgba(255,255,255,0.18)"/><rect x="22" y="86" width="36" height="25" fill="${c1}" opacity="0.5"/><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="white" stop-opacity="0.3"/><stop offset="100%" stop-color="white" stop-opacity="0"/></linearGradient></defs></svg>`;}
+
+const SHIPPING = {
+  standard: { label:'Standard Delivery', eta:'1–2 weeks', price:6.99 },
+  express:  { label:'Express Delivery',  eta:'2–7 days',  price:12.99 }
+};
+
+const cart = JSON.parse(localStorage.getItem('rp_cart') || '[]');
+let selectedShipping = 'standard';
+
+function selectShipping(key) {
+  selectedShipping = key;
+  document.getElementById('opt-standard').classList.toggle('selected', key==='standard');
+  document.getElementById('opt-express').classList.toggle('selected',  key==='express');
+  updateTotals();
+}
+
+function updateTotals() {
+  const subtotal = cart.reduce((s,i)=>s+i.price*i.qty, 0);
+  const ship     = SHIPPING[selectedShipping].price;
+  const total    = subtotal + ship;
+  document.getElementById('subtotalVal').textContent = '£'+subtotal.toFixed(2);
+  document.getElementById('shippingVal').textContent = '£'+ship.toFixed(2);
+  document.getElementById('totalVal').textContent    = '£'+total.toFixed(2);
+}
+
+function renderSummary() {
+  const items  = document.getElementById('summaryItems');
+  const totals = document.getElementById('summaryTotals');
+  const btn    = document.getElementById('proceedBtn');
+
+  if (!cart.length) {
+    items.innerHTML = `<div class="summary-empty">Your cart is empty.<br><a href="products.html">Browse products →</a></div>`;
+    btn.disabled = true;
+    return;
+  }
+
+  items.innerHTML = cart.map(item => `
+    <div class="summary-item">
+      <div class="summary-item-img" style="background:linear-gradient(145deg,${item.color[0]}22,${item.color[1]}44)">
+        ${bottleSVG(item.color[0],item.color[1],32)}
+      </div>
+      <div class="summary-item-info">
+        <div class="summary-item-name">${item.name} ${item.dose}</div>
+        <div class="summary-item-sub">Qty: ${item.qty}</div>
+      </div>
+      <div class="summary-item-price">£${(item.price*item.qty).toFixed(2)}</div>
+    </div>
+  `).join('');
+
+  totals.style.display = 'block';
+  updateTotals();
+}
+
+function proceedToPayment() {
+  const fields = {
+    firstName: document.getElementById('firstName').value.trim(),
+    lastName:  document.getElementById('lastName').value.trim(),
+    email:     document.getElementById('email').value.trim(),
+    phone:     document.getElementById('phone').value.trim(),
+    addr1:     document.getElementById('addr1').value.trim(),
+    addr2:     document.getElementById('addr2').value.trim(),
+    city:      document.getElementById('city').value.trim(),
+    postcode:  document.getElementById('postcode').value.trim(),
+    country:   document.getElementById('country').value,
+  };
+
+  if (!fields.firstName||!fields.lastName||!fields.email||!fields.addr1||!fields.city||!fields.postcode) {
+    alert('Please fill in all required fields.');
+    return;
+  }
+  if (!/\S+@\S+\.\S+/.test(fields.email)) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+  if (!cart.length) { alert('Your cart is empty.'); return; }
+
+  const subtotal = cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const shipInfo = SHIPPING[selectedShipping];
+
+  sessionStorage.setItem('rp_shipping', JSON.stringify(fields));
+  sessionStorage.setItem('rp_shipping_method', JSON.stringify({
+    key:      selectedShipping,
+    label:    shipInfo.label,
+    eta:      shipInfo.eta,
+    price:    shipInfo.price,
+    subtotal: subtotal,
+    total:    subtotal + shipInfo.price,
+  }));
+
+  window.location.href = 'crypto-payment.html';
+}
+
+renderSummary();
+</script>
+</body>
+</html>

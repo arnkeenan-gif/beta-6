@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Confirmed — Research Peptides</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --blue-deep: #042C53; --blue-strong: #0C447C; --blue-mid: #185FA5;
+  --blue-light: #378ADD; --blue-pale: #85B7EB; --blue-ghost: #B5D4F4;
+  --blue-frost: #E6F1FB; --white: #ffffff; --off-white: #F4F8FD;
+  --gray-soft: #8EA7BE; --gray-text: #4A6680;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--blue-deep); overflow-x: hidden; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 4rem;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(4,44,83,0.08);
+}
+.logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.25rem; color:var(--blue-deep); letter-spacing:-0.02em; display:flex; align-items:center; gap:10px; text-decoration:none; }
+.logo-mark { width:34px; height:34px; background:var(--blue-mid); border-radius:8px; display:flex; align-items:center; justify-content:center; }
+.logo-mark svg { width:20px; height:20px; }
+
+/* Green header */
+.page-header {
+  background: linear-gradient(135deg, #0a5c2a 0%, #0f7a38 100%);
+  padding: 7.5rem 4rem 3rem; position: relative; overflow: hidden;
+}
+.page-header::before {
+  content:''; position:absolute; inset:0;
+  background-image: linear-gradient(rgba(34,197,94,0.07) 1px,transparent 1px), linear-gradient(90deg,rgba(34,197,94,0.07) 1px,transparent 1px);
+  background-size: 50px 50px;
+}
+.page-header-inner { position:relative; z-index:1; max-width:900px; margin:0 auto; display:flex; align-items:center; gap:2rem; }
+.success-badge {
+  width:64px; height:64px; background:rgba(34,197,94,0.2);
+  border:2px solid rgba(34,197,94,0.4); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  animation: popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both;
+}
+@keyframes popIn { from{opacity:0;transform:scale(0.5)} to{opacity:1;transform:scale(1)} }
+.success-badge svg { width:30px; height:30px; }
+.header-text .section-label { font-size:0.75rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:rgba(134,239,172,0.8); margin-bottom:0.4rem; }
+.header-text h1 { font-family:'Syne',sans-serif; font-size:clamp(1.6rem,2.8vw,2.4rem); font-weight:800; color:white; letter-spacing:-0.03em; line-height:1.1; }
+.header-text p { font-size:0.9rem; color:rgba(134,239,172,0.7); margin-top:0.4rem; font-weight:300; }
+
+/* Layout */
+.confirm-wrap { max-width:900px; margin:0 auto; padding:2.5rem 2rem 5rem; display:grid; grid-template-columns:1fr 340px; gap:2rem; align-items:start; }
+
+/* Cards */
+.card { background:white; border-radius:16px; border:1px solid rgba(4,44,83,0.08); padding:1.75rem 2rem; margin-bottom:1.25rem; }
+.card:last-child { margin-bottom:0; }
+.card-title { font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--blue-deep); margin-bottom:1.25rem; padding-bottom:0.75rem; border-bottom:1px solid rgba(4,44,83,0.07); display:flex; align-items:center; gap:8px; }
+.card-title svg { width:16px; height:16px; color:var(--blue-mid); flex-shrink:0; }
+
+/* Order items */
+.order-item { display:flex; align-items:center; gap:1rem; padding:0.85rem 0; border-bottom:1px solid rgba(4,44,83,0.06); }
+.order-item:last-child { border-bottom:none; padding-bottom:0; }
+.order-item-img { width:50px; height:50px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.order-item-info { flex:1; }
+.order-item-name { font-family:'Syne',sans-serif; font-size:0.92rem; font-weight:700; color:var(--blue-deep); }
+.order-item-sub { font-size:0.78rem; color:var(--gray-text); margin-top:3px; }
+.order-item-qty { font-size:0.8rem; color:var(--gray-soft); margin-top:1px; }
+.order-item-price { font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--blue-deep); flex-shrink:0; }
+
+/* Shipping method badge */
+.shipping-method-box {
+  display:flex; align-items:center; gap:1rem;
+  background:var(--off-white); border:1px solid rgba(4,44,83,0.08);
+  border-radius:12px; padding:1rem 1.1rem;
+}
+.shipping-method-icon {
+  width:40px; height:40px; border-radius:9px;
+  background:var(--blue-frost); display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.shipping-method-icon svg { width:18px; height:18px; color:var(--blue-mid); }
+.shipping-method-info { flex:1; }
+.shipping-method-name { font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:700; color:var(--blue-deep); }
+.shipping-method-eta { font-size:0.8rem; color:var(--gray-text); margin-top:2px; }
+.shipping-method-price { font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--blue-deep); }
+
+/* Shipping address */
+.shipping-address { font-size:0.88rem; color:var(--gray-text); line-height:1.85; margin-top:1rem; }
+.shipping-address strong { color:var(--blue-deep); font-weight:500; display:block; margin-bottom:2px; }
+
+/* Transaction */
+.tx-box { background:var(--off-white); border:1px solid rgba(4,44,83,0.08); border-radius:10px; padding:1rem 1.1rem; }
+.tx-label { font-size:0.72rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-soft); margin-bottom:0.4rem; }
+.tx-value { font-family:'Courier New',monospace; font-size:0.78rem; color:var(--blue-deep); word-break:break-all; line-height:1.6; }
+.tx-link { display:inline-flex; align-items:center; gap:5px; margin-top:0.75rem; font-size:0.8rem; color:var(--blue-mid); text-decoration:none; font-weight:500; transition:color 0.2s; }
+.tx-link:hover { color:var(--blue-strong); }
+.tx-link svg { width:12px; height:12px; }
+
+/* Order timeline */
+.timeline { display:flex; flex-direction:column; gap:0; }
+.timeline-step { display:flex; gap:1rem; align-items:flex-start; padding-bottom:1.2rem; position:relative; }
+.timeline-step:last-child { padding-bottom:0; }
+.timeline-step::before { content:''; position:absolute; left:11px; top:24px; bottom:0; width:1.5px; background:rgba(4,44,83,0.1); }
+.timeline-step:last-child::before { display:none; }
+.step-dot { width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+.step-dot.done { background:rgba(34,197,94,0.12); border:1.5px solid rgba(34,197,94,0.35); }
+.step-dot.done svg { width:12px; height:12px; color:#15803d; }
+.step-dot.pending { background:rgba(24,95,165,0.08); border:1.5px solid rgba(24,95,165,0.18); }
+.step-dot.pending svg { width:10px; height:10px; color:var(--blue-mid); }
+.step-dot.future { background:rgba(4,44,83,0.05); border:1.5px solid rgba(4,44,83,0.1); }
+.step-dot.future svg { width:12px; height:12px; color:var(--gray-soft); }
+.step-info { flex:1; }
+.step-title { font-size:0.88rem; font-weight:500; color:var(--blue-deep); margin-bottom:2px; }
+.step-desc { font-size:0.78rem; color:var(--gray-text); line-height:1.5; }
+.step-eta { display:inline-block; margin-top:4px; font-size:0.72rem; font-weight:600; color:var(--blue-mid); background:rgba(24,95,165,0.08); padding:2px 8px; border-radius:100px; }
+
+/* Right column */
+.right-col { display:flex; flex-direction:column; gap:1.25rem; }
+
+/* Amount summary */
+.amount-row { display:flex; justify-content:space-between; align-items:center; padding:0.5rem 0; font-size:0.88rem; color:var(--gray-text); border-bottom:1px solid rgba(4,44,83,0.06); }
+.amount-row:last-child { border-bottom:none; }
+.amount-row.total-row { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; color:var(--blue-deep); border-top:1.5px solid rgba(4,44,83,0.1); padding-top:0.75rem; margin-top:0.25rem; border-bottom:none; }
+.amount-row span:last-child { font-weight:500; color:var(--blue-deep); }
+.crypto-val { font-family:'Courier New',monospace; font-size:0.8rem; color:var(--blue-mid); font-weight:400 !important; }
+
+/* Help + browse */
+.help-box { background:var(--blue-frost); border:1px solid rgba(24,95,165,0.15); border-radius:12px; padding:1.25rem 1.4rem; }
+.help-title { font-family:'Syne',sans-serif; font-size:0.88rem; font-weight:700; color:var(--blue-deep); margin-bottom:0.5rem; }
+.help-text { font-size:0.8rem; color:var(--gray-text); line-height:1.65; }
+.help-text a { color:var(--blue-mid); text-decoration:none; }
+.browse-btn { display:block; text-align:center; background:var(--blue-mid); color:white; text-decoration:none; border-radius:10px; padding:0.85rem 1rem; font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:700; transition:background 0.2s; }
+.browse-btn:hover { background:var(--blue-strong); }
+
+.legal-note { font-size:0.73rem; color:var(--gray-soft); line-height:1.6; text-align:center; }
+
+@media (max-width: 768px) {
+  nav { padding:1rem 1.5rem; }
+  .page-header { padding:6.5rem 1.5rem 2.5rem; }
+  .page-header-inner { flex-direction:column; align-items:flex-start; gap:1rem; }
+  .confirm-wrap { grid-template-columns:1fr; padding:1.5rem 1rem 4rem; }
+  .right-col { order:-1; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" fill="white"/><path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.93 4.93l2.83 2.83M12.24 12.24l2.83 2.83M4.93 15.07l2.83-2.83M12.24 7.76l2.83-2.83" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    Research Peptides
+  </a>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="success-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <div class="section-label">Order Confirmed</div>
+      <h1 id="confirm-heading">Payment Received</h1>
+      <p id="confirm-sub">Thank you for your order. We'll get it dispatched as soon as possible.</p>
+    </div>
+  </div>
+</div>
+
+<div class="confirm-wrap">
+
+  <!-- LEFT COLUMN -->
+  <div>
+
+    <!-- Items ordered -->
+    <div class="card">
+      <div class="card-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+        Items Ordered
+      </div>
+      <div id="orderItems">Loading…</div>
+    </div>
+
+    <!-- Shipping -->
+    <div class="card">
+      <div class="card-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        Shipping Details
+      </div>
+
+      <!-- Shipping method -->
+      <div class="shipping-method-box" id="shippingMethodBox">
+        <div class="shipping-method-icon" id="shippingMethodIcon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/></svg>
+        </div>
+        <div class="shipping-method-info">
+          <div class="shipping-method-name" id="shippingMethodName">Standard Delivery</div>
+          <div class="shipping-method-eta" id="shippingMethodEta">1–2 weeks · Tracked shipping</div>
+        </div>
+        <div class="shipping-method-price" id="shippingMethodPrice">£6.99</div>
+      </div>
+
+      <!-- Address -->
+      <div class="shipping-address" id="shippingAddress">—</div>
+    </div>
+
+    <!-- Transaction -->
+    <div class="card">
+      <div class="card-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Payment Confirmed
+      </div>
+      <div class="tx-box">
+        <div class="tx-label">Transaction ID</div>
+        <div class="tx-value" id="txid-display">—</div>
+        <a class="tx-link" id="explorer-link" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          View on blockchain explorer
+        </a>
+      </div>
+    </div>
+
+    <!-- Order status timeline -->
+    <div class="card">
+      <div class="card-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        Order Status
+      </div>
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="step-dot done">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="step-info">
+            <div class="step-title">Payment received</div>
+            <div class="step-desc">Crypto transaction detected and confirmed on-chain.</div>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-dot pending">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
+          </div>
+          <div class="step-info">
+            <div class="step-title">Order processing</div>
+            <div class="step-desc">Our team is preparing your compounds. Dispatch within 24–48 hours.</div>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-dot future">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <div class="step-info">
+            <div class="step-title">Dispatched</div>
+            <div class="step-desc">Lyophilised, sealed under nitrogen and packed with dry ice. Tracked shipping with your COA included.</div>
+            <span class="step-eta" id="timeline-eta">1–2 weeks estimated delivery</span>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <div class="step-dot future">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="step-info">
+            <div class="step-title">Delivered</div>
+            <div class="step-desc">Your order will arrive in discreet, temperature-controlled packaging.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="right-col">
+
+    <!-- Payment summary -->
+    <div class="card">
+      <div class="card-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Payment Summary
+      </div>
+      <div id="amountSummary">—</div>
+    </div>
+
+    <div class="help-box">
+      <div class="help-title">Questions about your order?</div>
+      <div class="help-text">
+        Email us at <a href="mailto:support@researchpeptides.com">support@researchpeptides.com</a> quoting your transaction ID and we'll get back to you within 24 hours.
+      </div>
+    </div>
+
+    <a href="products.html" class="browse-btn">Continue Browsing →</a>
+
+    <div class="legal-note">
+      All compounds are sold strictly for research purposes only. Not for human consumption.<br>
+      © 2025 Research Peptides Ltd.
+    </div>
+
+  </div>
+</div>
+
+<script>
+function bottleSVG(c1,c2,s){
+  const id='g'+Math.random().toString(36).slice(2,6);
+  return`<svg width="${s}" height="${Math.round(s*1.55)}" viewBox="0 0 80 124" fill="none">
+    <rect x="28" y="3" width="24" height="13" rx="3" fill="${c1}" opacity="0.8"/>
+    <rect x="22" y="14" width="36" height="97" rx="11" fill="${c2}"/>
+    <rect x="22" y="14" width="36" height="97" rx="11" fill="url(#${id})" opacity="0.7"/>
+    <rect x="24" y="16" width="10" height="93" rx="5" fill="rgba(255,255,255,0.18)"/>
+    <rect x="22" y="86" width="36" height="25" fill="${c1}" opacity="0.5"/>
+    <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="white" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </linearGradient></defs>
+  </svg>`;
+}
+
+// Read all order data from sessionStorage
+const order      = JSON.parse(sessionStorage.getItem('rp_order')      || '{}');
+const shipMethod = JSON.parse(sessionStorage.getItem('rp_shipping_method') || '{}');
+const shipping   = JSON.parse(sessionStorage.getItem('rp_shipping')   || '{}');
+
+const cart       = order.cart       || JSON.parse(localStorage.getItem('rp_cart') || '[]');
+const subtotal   = order.subtotal   || cart.reduce((s,i)=>s+i.price*i.qty, 0);
+const shipPrice  = order.shipPrice  || shipMethod.price  || 6.99;
+const shipLabel  = shipMethod.label || order.shipMethod?.label || 'Standard Delivery';
+const shipEta    = shipMethod.eta   || order.shipMethod?.eta   || '1–2 weeks';
+const shipKey    = shipMethod.key   || order.shipMethod?.key   || 'standard';
+const gbpTotal   = order.gbpTotal   || (subtotal + shipPrice);
+
+// ── Header personalisation ──
+if (shipping.firstName) {
+  document.getElementById('confirm-heading').textContent = 'Thank you, ' + shipping.firstName + '!';
+}
+
+// ── Items ──
+const itemsEl = document.getElementById('orderItems');
+if (cart.length) {
+  itemsEl.innerHTML = cart.map(i => `
+    <div class="order-item">
+      <div class="order-item-img" style="background:linear-gradient(145deg,${i.color[0]}22,${i.color[1]}44)">
+        ${bottleSVG(i.color[0], i.color[1], 36)}
+      </div>
+      <div class="order-item-info">
+        <div class="order-item-name">${i.name} ${i.dose}</div>
+        <div class="order-item-sub">${i.category} · Research Grade · CoA Included</div>
+        <div class="order-item-qty">Quantity: ${i.qty}</div>
+      </div>
+      <div class="order-item-price">£${(i.price * i.qty).toFixed(2)}</div>
+    </div>
+  `).join('');
+} else {
+  itemsEl.innerHTML = '<p style="color:var(--gray-text);font-size:0.88rem">No items found.</p>';
+}
+
+// ── Shipping method ──
+document.getElementById('shippingMethodName').textContent  = shipLabel;
+document.getElementById('shippingMethodEta').textContent   = shipEta + ' · Tracked shipping · Discreet packaging';
+document.getElementById('shippingMethodPrice').textContent = '£' + Number(shipPrice).toFixed(2);
+document.getElementById('timeline-eta').textContent        = shipEta + ' estimated delivery';
+
+// Swap icon for express
+if (shipKey === 'express') {
+  document.getElementById('shippingMethodIcon').innerHTML = `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`;
+}
+
+// ── Shipping address ──
+const s = shipping;
+if (s.firstName) {
+  document.getElementById('shippingAddress').innerHTML = `
+    <strong>${s.firstName} ${s.lastName}</strong>
+    ${s.addr1}${s.addr2 ? '<br>' + s.addr2 : ''}<br>
+    ${s.city}${s.postcode ? ', ' + s.postcode : ''}<br>
+    ${s.country}<br>
+    <span style="color:var(--gray-soft);font-size:0.8rem;margin-top:4px;display:block">${s.email}${s.phone ? ' · ' + s.phone : ''}</span>
+  `;
+} else {
+  document.getElementById('shippingAddress').textContent = 'No shipping details on record.';
+}
+
+// ── Transaction ──
+const txid = order.txid || null;
+if (txid) {
+  document.getElementById('txid-display').textContent = txid;
+  if (order.explorerUrl) document.getElementById('explorer-link').href = order.explorerUrl;
+  else document.getElementById('explorer-link').style.display = 'none';
+} else {
+  document.getElementById('txid-display').textContent = 'Awaiting confirmation…';
+  document.getElementById('explorer-link').style.display = 'none';
+}
+
+// ── Payment summary ──
+let summaryHTML = `
+  <div class="amount-row"><span>Subtotal</span><span>£${subtotal.toFixed(2)}</span></div>
+  <div class="amount-row">
+    <span>${shipLabel}</span>
+    <span>£${Number(shipPrice).toFixed(2)}</span>
+  </div>
+  <div class="amount-row total-row"><span>Total Paid</span><span>£${gbpTotal.toFixed(2)}</span></div>
+`;
+if (order.cryptoAmount && order.cryptoTicker) {
+  summaryHTML += `
+    <div class="amount-row" style="margin-top:0.6rem;padding-top:0.6rem;border-top:1px dashed rgba(4,44,83,0.08)">
+      <span style="font-size:0.8rem;color:var(--gray-soft)">Paid in crypto</span>
+      <span class="crypto-val">${order.cryptoAmount} ${order.cryptoTicker}</span>
+    </div>`;
+}
+document.getElementById('amountSummary').innerHTML = summaryHTML;
+
+// ── Clear cart once confirmed ──
+localStorage.removeItem('rp_cart');
+</script>
+</body>
+</html>
