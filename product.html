@@ -163,9 +163,8 @@
   .specs-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; }
   .spec-item { background:var(--off-white); border-radius:10px; padding:0.85rem 1rem; border:1px solid rgba(4,44,83,0.07); }
   .spec-key { font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-soft); margin-bottom:0.3rem; }
-  .spec-val { font-family:'Syne',sans-serif; font-size:0.88rem; font-weight:700; color:var(--blue-deep); line-height:1.35; word-break:break-word; }
-  /* Storage and solubility use body font for readability at smaller size */
-  .spec-val.body-text { font-family:'DM Sans',sans-serif; font-size:0.8rem; font-weight:400; color:var(--gray-text); }
+  .spec-val { font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:700; color:var(--blue-deep); line-height:1.4; }
+  .spec-val.body-text { font-weight:700; }
  
   .tags-row { display:flex; flex-wrap:wrap; gap:0.5rem; }
   .tag { background:var(--blue-frost); color:var(--blue-strong); font-size:0.75rem; font-weight:500; padding:0.32rem 0.85rem; border-radius:100px; }
@@ -177,16 +176,16 @@
     box-shadow:0 4px 20px rgba(4,44,83,0.06);
   }
  
-  .price-row { display:flex; align-items:baseline; gap:0.5rem; }
+  .price-row { display:flex; align-items:center; gap:0.5rem; }
   .price-main {
-    font-family:'Syne',sans-serif;
-    font-size:2.25rem;
-    font-weight:800;
+    font-family:'DM Sans',sans-serif;
+    font-size:2rem;
+    font-weight:700;
     color:var(--blue-deep);
-    letter-spacing:-0.03em;
+    letter-spacing:0;
     line-height:1;
   }
-  .price-unit { font-size:0.85rem; color:var(--gray-soft); font-weight:300; }
+  .price-unit { font-size:0.85rem; color:var(--gray-soft); font-weight:400; }
  
   .qty-row { display:flex; align-items:center; gap:1rem; }
   .qty-label { font-size:0.85rem; color:var(--gray-text); font-weight:500; }
