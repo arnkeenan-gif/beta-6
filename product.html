@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product — Research Peptides</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --blue-deep: #042C53;
+    --blue-strong: #0C447C;
+    --blue-mid: #185FA5;
+    --blue-light: #378ADD;
+    --blue-pale: #85B7EB;
+    --blue-ghost: #B5D4F4;
+    --blue-frost: #E6F1FB;
+    --white: #ffffff;
+    --off-white: #F4F8FD;
+    --gray-soft: #8EA7BE;
+    --gray-text: #4A6680;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--blue-deep); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(4,44,83,0.08);
+  }
+  .logo {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem;
+    color: var(--blue-deep); letter-spacing: -0.02em;
+    display: flex; align-items: center; gap: 10px; text-decoration: none;
+  }
+  .logo-mark {
+    width: 34px; height: 34px; background: var(--blue-mid); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-mark svg { width: 20px; height: 20px; }
+  nav ul { display: flex; list-style: none; gap: 2.5rem; }
+  nav ul a { font-size: 0.9rem; font-weight: 400; color: var(--gray-text); text-decoration: none; transition: color 0.2s; }
+  nav ul a:hover { color: var(--blue-mid); }
+  .cart-btn {
+    position: relative; background: none; border: 1.5px solid rgba(4,44,83,0.15);
+    border-radius: 8px; padding: 0.45rem 1rem; cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
+    color: var(--blue-deep); transition: border-color 0.2s, background 0.2s;
+  }
+  .cart-btn:hover { border-color: var(--blue-mid); background: var(--blue-frost); }
+  .cart-btn svg { width: 18px; height: 18px; }
+  .cart-count {
+    background: var(--blue-mid); color: white; font-size: 11px; font-weight: 700;
+    width: 18px; height: 18px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    position: absolute; top: -7px; right: -7px;
+    transition: transform 0.2s;
+  }
+  .cart-count.bump { transform: scale(1.4); }
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb-bar {
+    padding: 6rem 4rem 0;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .breadcrumb {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.82rem; color: var(--gray-soft);
+  }
+  .breadcrumb a { color: var(--gray-soft); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--blue-mid); }
+  .breadcrumb svg { width: 12px; height: 12px; }
+
+  /* ── MAIN LAYOUT ── */
+  .product-page {
+    max-width: 1200px; margin: 0 auto;
+    padding: 2rem 4rem 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  /* ── LEFT: VISUAL PANEL ── */
+  .visual-panel {
+    position: sticky; top: 6rem;
+  }
+  .visual-main {
+    border-radius: 24px;
+    height: 420px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  .visual-main::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(55,138,221,0.12) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .visual-main::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 60% 30%, rgba(255,255,255,0.4), transparent 60%);
+  }
+  .bottle-main {
+    position: relative; z-index: 1;
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+  .visual-thumbs {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;
+  }
+  .thumb {
+    border-radius: 14px; height: 90px;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid transparent;
+    cursor: pointer; transition: border-color 0.2s, transform 0.2s;
+    overflow: hidden; position: relative;
+  }
+  .thumb:hover { border-color: var(--blue-pale); transform: translateY(-2px); }
+  .thumb.active { border-color: var(--blue-mid); }
+  .thumb svg { position: relative; z-index: 1; }
+
+  /* ── RIGHT: INFO PANEL ── */
+  .info-panel { display: flex; flex-direction: column; gap: 2rem; padding-top: 0.5rem; }
+
+  .product-eyebrow {
+    display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
+  }
+  .category-pill {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--blue-mid);
+    background: rgba(24,95,165,0.1); padding: 0.3rem 0.8rem; border-radius: 100px;
+  }
+  .purity-pill {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #0F6E56;
+    background: rgba(15,110,86,0.1); padding: 0.3rem 0.8rem; border-radius: 100px;
+  }
+
+  .product-title {
+    font-family: 'Syne', sans-serif; font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 800; color: var(--blue-deep); letter-spacing: -0.04em; line-height: 1.1;
+  }
+  .product-subtitle { font-size: 1rem; color: var(--gray-soft); font-weight: 300; margin-top: 0.35rem; }
+
+  .product-desc-long {
+    font-size: 0.92rem; color: var(--gray-text); line-height: 1.8; font-weight: 300;
+    border-left: 3px solid var(--blue-frost);
+    padding-left: 1.25rem;
+  }
+
+  /* Specs */
+  .specs-title {
+    font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-deep);
+    margin-bottom: 0.85rem;
+  }
+  .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; }
+  .spec-item {
+    background: white; border-radius: 12px; padding: 0.9rem 1rem;
+    border: 1px solid rgba(4,44,83,0.08);
+  }
+  .spec-label { font-size: 0.67rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-soft); margin-bottom: 0.3rem; }
+  .spec-value { font-family: 'Syne', sans-serif; font-size: 0.92rem; font-weight: 700; color: var(--blue-deep); }
+
+  /* Tags */
+  .tags-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag {
+    background: var(--blue-frost); color: var(--blue-strong);
+    font-size: 0.75rem; font-weight: 500; padding: 0.35rem 0.85rem; border-radius: 100px;
+  }
+
+  /* Purchase block */
+  .purchase-block {
+    background: white; border-radius: 18px;
+    border: 1px solid rgba(4,44,83,0.09);
+    padding: 1.5rem; display: flex; flex-direction: column; gap: 1.1rem;
+  }
+  .price-row { display: flex; align-items: baseline; gap: 0.5rem; }
+  .price-main {
+    font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800;
+    color: var(--blue-deep); letter-spacing: -0.03em;
+  }
+  .price-unit { font-size: 0.85rem; color: var(--gray-soft); }
+
+  .qty-row { display: flex; align-items: center; gap: 1rem; }
+  .qty-label { font-size: 0.82rem; color: var(--gray-text); font-weight: 500; }
+  .qty-controls { display: flex; align-items: center; gap: 0.5rem; }
+  .qty-btn {
+    width: 32px; height: 32px; border-radius: 8px;
+    border: 1px solid rgba(4,44,83,0.12); background: var(--off-white);
+    cursor: pointer; font-size: 1.1rem; font-weight: 600; color: var(--blue-deep);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s;
+  }
+  .qty-btn:hover { background: var(--blue-frost); }
+  .qty-num { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; min-width: 28px; text-align: center; color: var(--blue-deep); }
+
+  .add-to-cart-btn {
+    width: 100%; background: var(--blue-mid); color: white;
+    border: none; border-radius: 12px; padding: 1rem 1.5rem;
+    font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 9px;
+    letter-spacing: -0.01em;
+  }
+  .add-to-cart-btn:hover { background: var(--blue-strong); transform: translateY(-1px); }
+  .add-to-cart-btn.added { background: #0F6E56; }
+  .add-to-cart-btn svg { width: 18px; height: 18px; }
+
+  .purchase-note { font-size: 0.75rem; color: var(--gray-soft); line-height: 1.55; }
+  .purchase-note strong { color: var(--gray-text); }
+
+  .trust-row {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 0.78rem; color: var(--gray-text);
+  }
+  .trust-item svg { width: 14px; height: 14px; color: var(--blue-mid); flex-shrink: 0; }
+
+  /* Disclaimer section */
+  .disclaimer-section {
+    background: rgba(4,44,83,0.04); border-radius: 14px; padding: 1.25rem 1.5rem;
+    border: 1px solid rgba(4,44,83,0.08);
+    font-size: 0.78rem; color: var(--gray-soft); line-height: 1.7;
+  }
+  .disclaimer-section strong { color: var(--gray-text); display: block; margin-bottom: 0.25rem; }
+
+  /* Related products */
+  .related-section {
+    grid-column: 1 / -1;
+    border-top: 1px solid rgba(4,44,83,0.08);
+    padding-top: 3rem;
+  }
+  .related-title {
+    font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800;
+    color: var(--blue-deep); letter-spacing: -0.02em; margin-bottom: 1.5rem;
+  }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+  .related-card {
+    background: white; border: 1px solid rgba(4,44,83,0.08); border-radius: 14px;
+    overflow: hidden; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    text-decoration: none; display: block;
+  }
+  .related-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(4,44,83,0.1); border-color: rgba(55,138,221,0.2); }
+  .related-img {
+    height: 130px; display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .related-img::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 60% 30%, rgba(255,255,255,0.35), transparent 60%); }
+  .related-img svg { position: relative; z-index: 1; animation: float 4s ease-in-out infinite; }
+  .related-body { padding: 0.9rem 1rem 1rem; }
+  .related-cat { font-size: 0.67rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 0.25rem; }
+  .related-name { font-family: 'Syne', sans-serif; font-size: 0.92rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 0.2rem; }
+  .related-price { font-size: 0.85rem; font-weight: 600; color: var(--gray-text); }
+
+  /* Not found */
+  .not-found {
+    min-height: 60vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 1rem;
+    text-align: center; padding: 2rem;
+  }
+  .not-found h2 { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--blue-deep); }
+  .not-found p { font-size: 0.9rem; color: var(--gray-text); }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--blue-mid); color: white; padding: 0.7rem 1.5rem;
+    border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .back-link:hover { background: var(--blue-strong); }
+
+  /* Cart Drawer (same as products page) */
+  .drawer-overlay {
+    position: fixed; inset: 0; background: rgba(4,44,83,0.45);
+    z-index: 300; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s; backdrop-filter: blur(2px);
+  }
+  .drawer-overlay.open { opacity: 1; pointer-events: all; }
+  .cart-drawer {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: 420px; max-width: 100vw;
+    background: white; z-index: 400;
+    display: flex; flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: -8px 0 40px rgba(4,44,83,0.15);
+  }
+  .cart-drawer.open { transform: translateX(0); }
+  .drawer-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 1.5rem 1rem;
+    border-bottom: 1px solid rgba(4,44,83,0.08);
+  }
+  .drawer-title { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--blue-deep); }
+  .drawer-close { background: none; border: none; cursor: pointer; color: var(--gray-text); padding: 4px; border-radius: 6px; transition: background 0.2s; display: flex; }
+  .drawer-close:hover { background: var(--off-white); color: var(--blue-deep); }
+  .drawer-close svg { width: 22px; height: 22px; }
+  .drawer-body { flex: 1; overflow-y: auto; padding: 1rem 1.5rem; }
+  .cart-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 1rem; color: var(--gray-text); text-align: center; padding: 3rem 0; }
+  .cart-empty svg { width: 48px; height: 48px; opacity: 0.3; }
+  .cart-empty p { font-size: 0.95rem; }
+  .cart-empty small { font-size: 0.82rem; color: var(--gray-soft); }
+  .cart-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 0; border-bottom: 1px solid rgba(4,44,83,0.07);
+    animation: slide-in 0.25s ease;
+  }
+  @keyframes slide-in { from{opacity:0;transform:translateX(16px)} to{opacity:1;transform:none} }
+  .cart-item-img { width: 60px; height: 60px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .cart-item-info { flex: 1; min-width: 0; }
+  .cart-item-name { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cart-item-cat { font-size: 0.75rem; color: var(--gray-soft); }
+  .cart-item-price { font-size: 0.9rem; font-weight: 600; color: var(--blue-mid); margin-top: 4px; }
+  .ci-qty-controls { display: flex; align-items: center; gap: 8px; }
+  .ci-qty-btn { width: 28px; height: 28px; border-radius: 6px; border: 1px solid rgba(4,44,83,0.12); background: white; cursor: pointer; font-size: 1rem; font-weight: 600; color: var(--blue-deep); display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
+  .ci-qty-btn:hover { background: var(--blue-frost); }
+  .ci-qty-num { font-size: 0.9rem; font-weight: 600; min-width: 16px; text-align: center; color: var(--blue-deep); }
+  .remove-btn { background: none; border: none; cursor: pointer; color: var(--gray-soft); padding: 4px; border-radius: 4px; transition: color 0.15s; display: flex; }
+  .remove-btn:hover { color: #c0392b; }
+  .remove-btn svg { width: 16px; height: 16px; }
+  .drawer-footer { padding: 1.25rem 1.5rem; border-top: 1px solid rgba(4,44,83,0.08); }
+  .cart-subtotal { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+  .cart-subtotal span { font-size: 0.88rem; color: var(--gray-text); }
+  .cart-subtotal strong { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--blue-deep); }
+  .cart-note { font-size: 0.75rem; color: var(--gray-soft); margin-bottom: 1rem; }
+  .checkout-btn {
+    width: 100%; background: var(--blue-mid); color: white;
+    border: none; border-radius: 10px; padding: 1rem;
+    font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    letter-spacing: -0.01em;
+  }
+  .checkout-btn:hover { background: var(--blue-strong); transform: translateY(-1px); }
+  .checkout-btn svg { width: 18px; height: 18px; }
+  .clear-cart-btn { width: 100%; background: none; border: none; color: var(--gray-soft); font-size: 0.8rem; cursor: pointer; margin-top: 0.75rem; padding: 0.4rem; transition: color 0.2s; }
+  .clear-cart-btn:hover { color: #c0392b; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { display: none; }
+    .breadcrumb-bar { padding: 5.5rem 1.5rem 0; }
+    .product-page { grid-template-columns: 1fr; padding: 1.5rem 1.5rem 4rem; gap: 2rem; }
+    .visual-panel { position: static; }
+    .visual-main { height: 300px; }
+    .related-section { grid-column: 1; }
+    .cart-drawer { width: 100vw; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10" cy="10" r="3" fill="white"/>
+        <path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.93 4.93l2.83 2.83M12.24 12.24l2.83 2.83M4.93 15.07l2.83-2.83M12.24 7.76l2.83-2.83" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    Research Peptides
+  </a>
+  <ul>
+    <li><a href="../">Home</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="../#about">Science</a></li>
+    <li><a href="../#process">Process</a></li>
+  </ul>
+  <button class="cart-btn" onclick="openCart()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+    Cart
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb-bar">
+  <nav class="breadcrumb" id="breadcrumb">
+    <a href="../">Home</a>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+    <a href="products.html">Products</a>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+    <span id="breadcrumbName">—</span>
+  </nav>
+</div>
+
+<!-- MAIN CONTENT (injected by JS) -->
+<div id="pageRoot"></div>
+
+<!-- CART OVERLAY -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="drawer-header">
+    <span class="drawer-title">Your Cart</span>
+    <button class="drawer-close" onclick="closeCart()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-footer" id="drawerFooter" style="display:none">
+    <div class="cart-subtotal">
+      <span>Subtotal</span>
+      <strong id="cartTotal">£0.00</strong>
+    </div>
+    <p class="cart-note">Shipping calculated at checkout. For research use only.</p>
+    <button class="checkout-btn" onclick="checkout()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Proceed to Checkout
+    </button>
+    <button class="clear-cart-btn" onclick="clearCart()">Clear cart</button>
+  </div>
+</div>
+
+<script>
+// ── PRODUCT DATA ──
+const products = [
+  {
+    id: 1, name: 'Retatrutide', dose: '5mg',
+    category: 'GLP-1 / Weight Loss', catKey: 'f-glp',
+    desc: 'Triple agonist targeting GLP-1, GIP, and glucagon receptors. Studied for significant weight reduction and metabolic improvements.',
+    fullDesc: 'Retatrutide (LY3437943) is a novel triple hormone receptor agonist that simultaneously targets GLP-1, GIP, and glucagon receptors. Clinical research has shown it to produce among the most significant weight reductions of any compound in its class, with studies reporting reductions of up to 24% body weight. It also shows promising effects on cardiometabolic markers, lipid profiles, and liver fat reduction.',
+    price: 89, purity: '99.5%',
+    color: ['#0a3d6b','#185FA5'],
+    mw: '4,731 Da', sequence: 'GLP-1/GIP/Glucagon', storage: '−20 °C', solubility: 'Water / PBS',
+    tags: ['Triple Agonist', 'Metabolic', 'Weight Loss']
+  },
+  {
+    id: 2, name: 'Semaglutide', dose: '5mg',
+    category: 'GLP-1 / Weight Loss', catKey: 'f-glp',
+    desc: 'GLP-1 receptor agonist widely studied for appetite regulation, blood glucose control, and weight management.',
+    fullDesc: 'Semaglutide is a GLP-1 receptor agonist with a 94% amino acid sequence homology to native GLP-1. Its extended half-life of approximately 7 days makes it a key compound in ongoing obesity and type 2 diabetes research. Studies show robust reductions in HbA1c, body weight, and cardiovascular risk markers. It works by stimulating insulin secretion, suppressing glucagon, and slowing gastric emptying.',
+    price: 72, purity: '99.8%',
+    color: ['#0C447C','#378ADD'],
+    mw: '4,113 Da', sequence: 'GLP-1 Analogue', storage: '−20 °C', solubility: 'Water / Acetic Acid',
+    tags: ['GLP-1 Agonist', 'Glycaemic', 'Appetite']
+  },
+  {
+    id: 3, name: 'Tirzepatide', dose: '5mg',
+    category: 'GLP-1 / Weight Loss', catKey: 'f-glp',
+    desc: 'Dual GIP and GLP-1 receptor agonist. Investigated for superior glycaemic control and weight loss outcomes.',
+    fullDesc: 'Tirzepatide is a dual glucose-dependent insulinotropic polypeptide (GIP) and GLP-1 receptor agonist. It acts as a single peptide that activates both receptors, producing complementary metabolic effects. Research suggests it may outperform monoagonists in reducing HbA1c and body weight, with Phase 3 trial participants showing up to 22.5% mean weight reduction at the highest dose studied.',
+    price: 78, purity: '99.6%',
+    color: ['#042C53','#185FA5'],
+    mw: '4,813 Da', sequence: 'GIP/GLP-1 Dual', storage: '−20 °C', solubility: 'Water / PBS',
+    tags: ['Dual Agonist', 'Glycaemic', 'Metabolic']
+  },
+  {
+    id: 4, name: 'BPC-157', dose: '5mg',
+    category: 'Growth Peptides', catKey: 'f-growth',
+    desc: 'Body protection compound studied for tissue repair, gut healing, and musculoskeletal recovery mechanisms.',
+    fullDesc: 'BPC-157 (Body Protection Compound) is a pentadecapeptide derived from a gastric juice protein. It has been studied extensively for its cytoprotective and regenerative properties. Research indicates it may support angiogenesis, tendon and ligament healing, gut mucosal repair, and neuroprotection. It appears to modulate several growth factor pathways including VEGF and FAK-paxillin.',
+    price: 38, purity: '99.5%',
+    color: ['#0a3d6b','#1a6db5'],
+    mw: '1,419 Da', sequence: 'GEPPPGKPADDAGLV', storage: '−20 °C', solubility: 'Water / Acetic Acid',
+    tags: ['Tissue Repair', 'Gut Health', 'Recovery']
+  },
+  {
+    id: 5, name: 'TB-500', dose: '2mg',
+    category: 'Metabolic', catKey: 'f-met',
+    desc: 'Thymosin Beta-4 fragment investigated for wound healing, inflammation modulation, and cellular migration.',
+    fullDesc: 'TB-500 is a synthetic peptide fragment of the naturally occurring protein Thymosin Beta-4. It promotes actin polymerisation, which is critical for cell migration and division. Research shows it may accelerate wound closure, reduce inflammation, and support repair of damaged tissue including cardiac muscle. It is also studied for its potential neuroprotective and hair growth–related mechanisms.',
+    price: 44, purity: '99.6%',
+    color: ['#0C447C','#2980b9'],
+    mw: '1,895 Da', sequence: 'Thymosin β4 Frag.', storage: '−20 °C', solubility: 'Water / PBS',
+    tags: ['Wound Healing', 'Anti-Inflammatory', 'Cellular']
+  },
+  {
+    id: 6, name: 'CJC-1295', dose: '2mg',
+    category: 'GH Secretagogue', catKey: 'f-gh',
+    desc: 'Modified GRF analogue with extended half-life — a foundational compound in growth hormone research.',
+    fullDesc: 'CJC-1295 is a synthetic analogue of growth hormone releasing hormone (GHRH) with a significantly extended half-life due to its DAC (Drug Affinity Complex) modification that allows it to bind albumin. Unlike native GHRH, which clears within minutes, CJC-1295 maintains plasma activity for several days. It is studied for its ability to increase basal GH and IGF-1 levels without disrupting natural pulsatile release patterns.',
+    price: 46, purity: '99.7%',
+    color: ['#042C53','#0C447C'],
+    mw: '3,647 Da', sequence: 'GHRH Analogue', storage: '−20 °C', solubility: 'Water',
+    tags: ['GH Release', 'IGF-1', 'Extended Half-Life']
+  },
+  {
+    id: 7, name: 'Semax', dose: '30mg',
+    category: 'Cognitive', catKey: 'f-cog',
+    desc: 'Synthetic ACTH analogue studied for neuroprotective, nootropic, and neurogenic properties in CNS research.',
+    fullDesc: 'Semax is a heptapeptide derived from the N-terminal fragment of ACTH(4-10). Developed initially in Russia for ischemic stroke treatment, it has since attracted attention for its nootropic and neuroprotective profile. Research indicates it may upregulate BDNF (brain-derived neurotrophic factor), enhance dopaminergic and serotonergic neurotransmission, and improve memory consolidation and learning under stress conditions.',
+    price: 52, purity: '99.8%',
+    color: ['#0a3d6b','#185FA5'],
+    mw: '813 Da', sequence: 'MEHFPGP', storage: '−20 °C', solubility: 'Water',
+    tags: ['Neuroprotective', 'BDNF', 'Nootropic']
+  },
+  {
+    id: 8, name: 'Epitalon', dose: '10mg',
+    category: 'Anti-Aging', catKey: 'f-anti',
+    desc: 'Tetrapeptide studied for telomere elongation, circadian regulation, and longevity markers in aging models.',
+    fullDesc: 'Epitalon (Epithalon) is a synthetic tetrapeptide analogue of the natural pineal peptide Epithalamin. It is one of the most studied peptides in the context of aging biology. Key findings suggest it may activate telomerase, thereby slowing telomere shortening in somatic cells. It has also been associated with regulation of melatonin secretion, restoration of circadian rhythms in aged models, and reduction in oxidative stress markers.',
+    price: 58, purity: '99.9%',
+    color: ['#185FA5','#378ADD'],
+    mw: '390 Da', sequence: 'AEDG', storage: '−20 °C', solubility: 'Water',
+    tags: ['Telomerase', 'Anti-Aging', 'Circadian']
+  },
+  {
+    id: 9, name: 'Ipamorelin', dose: '2mg',
+    category: 'GH Secretagogue', catKey: 'f-gh',
+    desc: 'Selective growth hormone secretagogue with a clean side-effect profile. Widely used in GH release research.',
+    fullDesc: 'Ipamorelin is a pentapeptide ghrelin mimetic and selective growth hormone secretagogue receptor (GHSR) agonist. Unlike earlier generation secretagogues, it does not significantly stimulate cortisol or prolactin release at research doses, making it of particular interest for clean GH pulse modelling. It is frequently combined with CJC-1295 in research protocols to amplify pulsatile GH output synergistically.',
+    price: 36, purity: '99.5%',
+    color: ['#0C447C','#185FA5'],
+    mw: '711 Da', sequence: 'Aib-His-D-2Nal-D-Phe-Lys-NH₂', storage: '−20 °C', solubility: 'Water / Acetic Acid',
+    tags: ['GH Pulse', 'Selective', 'Ghrelin Mimetic']
+  },
+  {
+    id: 10, name: 'Selank', dose: '5mg',
+    category: 'Cognitive', catKey: 'f-cog',
+    desc: 'Anxiolytic peptide analogue of tuftsin. Studied for anxiety reduction, immune modulation, and memory effects.',
+    fullDesc: 'Selank is a synthetic analogue of the endogenous immunomodulatory tetrapeptide tuftsin (Thr-Lys-Pro-Arg). Developed at the Institute of Molecular Genetics in Russia, it is studied for its anxiolytic effects without the sedative or dependency potential associated with benzodiazepines. Research suggests it may modulate GABA-A receptor expression, regulate serotonin turnover, and enhance memory consolidation and cognitive flexibility under stress.',
+    price: 48, purity: '99.7%',
+    color: ['#042C53','#1a6db5'],
+    mw: '751 Da', sequence: 'TKPRPGP', storage: '−20 °C', solubility: 'Water',
+    tags: ['Anxiolytic', 'Memory', 'Immune']
+  }
+];
+
+// ── BOTTLE SVG ──
+function bottleSVG(c1, c2, size=80) {
+  const uid = Math.random().toString(36).slice(2,8);
+  return `<svg width="${size}" height="${Math.round(size*1.55)}" viewBox="0 0 80 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="28" y="3" width="24" height="13" rx="3" fill="${c1}" opacity="0.8"/>
+    <rect x="22" y="14" width="36" height="97" rx="11" fill="${c2}"/>
+    <rect x="22" y="14" width="36" height="97" rx="11" fill="url(#ga${uid})" opacity="0.7"/>
+    <rect x="24" y="16" width="10" height="93" rx="5" fill="rgba(255,255,255,0.16)"/>
+    <rect x="22" y="86" width="36" height="25" rx="0 0 11 11" fill="${c1}" opacity="0.45"/>
+    <defs><linearGradient id="ga${uid}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="white" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </linearGradient></defs>
+  </svg>`;
+}
+
+function bgColor(c) { return `linear-gradient(145deg, ${c}22 0%, ${c}44 100%)`; }
+
+// ── QTY STATE ──
+let qty = 1;
+
+// ── RENDER PAGE ──
+function renderPage() {
+  const params = new URLSearchParams(window.location.search);
+  const id = parseInt(params.get('id'));
+  const p = products.find(x => x.id === id);
+  const root = document.getElementById('pageRoot');
+
+  if (!p) {
+    root.innerHTML = `<div class="not-found">
+      <h2>Product not found</h2>
+      <p>This compound doesn't exist in our catalogue.</p>
+      <a href="products.html" class="back-link">← Back to Products</a>
+    </div>`;
+    return;
+  }
+
+  document.title = `${p.name} ${p.dose} — Research Peptides`;
+  document.getElementById('breadcrumbName').textContent = p.name;
+
+  const related = products.filter(x => x.id !== p.id && (x.catKey === p.catKey)).slice(0, 4);
+  const fallback = products.filter(x => x.id !== p.id).slice(0, 4);
+  const relatedList = related.length >= 2 ? related : fallback;
+
+  root.innerHTML = `
+    <div class="product-page">
+
+      <!-- LEFT: VISUAL -->
+      <div class="visual-panel">
+        <div class="visual-main" id="mainVisual" style="background: linear-gradient(150deg, ${p.color[0]}18 0%, ${p.color[1]}35 100%)">
+          <div class="bottle-main" id="mainBottle">${bottleSVG(p.color[0], p.color[1], 160)}</div>
+        </div>
+        <div class="visual-thumbs">
+          <div class="thumb active" style="background: linear-gradient(145deg, ${p.color[0]}18, ${p.color[1]}30)">
+            ${bottleSVG(p.color[0], p.color[1], 44)}
+          </div>
+          <div class="thumb" style="background: ${bgColor(p.color[0])}">
+            ${bottleSVG(p.color[1], p.color[0], 44)}
+          </div>
+          <div class="thumb" style="background: linear-gradient(145deg, ${p.color[1]}18, ${p.color[0]}30)">
+            ${bottleSVG(p.color[0], p.color[1], 44)}
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: INFO -->
+      <div class="info-panel">
+
+        <div>
+          <div class="product-eyebrow">
+            <span class="category-pill">${p.category}</span>
+            <span class="purity-pill">✓ Purity ${p.purity}</span>
+          </div>
+          <h1 class="product-title">${p.name}</h1>
+          <p class="product-subtitle">${p.dose} · Research Grade · Certificate of Analysis Included</p>
+        </div>
+
+        <p class="product-desc-long">${p.fullDesc}</p>
+
+        <div>
+          <div class="specs-title">Technical Specifications</div>
+          <div class="specs-grid">
+            <div class="spec-item"><div class="spec-label">Molecular Weight</div><div class="spec-value">${p.mw}</div></div>
+            <div class="spec-item"><div class="spec-label">Sequence / Type</div><div class="spec-value">${p.sequence}</div></div>
+            <div class="spec-item"><div class="spec-label">Storage</div><div class="spec-value">${p.storage}</div></div>
+            <div class="spec-item"><div class="spec-label">Solubility</div><div class="spec-value">${p.solubility}</div></div>
+          </div>
+        </div>
+
+        <div class="tags-row">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+
+        <div class="purchase-block">
+          <div class="price-row">
+            <span class="price-main">£${p.price}</span>
+            <span class="price-unit">/ vial</span>
+          </div>
+          <div class="qty-row">
+            <span class="qty-label">Quantity</span>
+            <div class="qty-controls">
+              <button class="qty-btn" onclick="changeQtyPage(-1)">−</button>
+              <span class="qty-num" id="qtyDisplay">1</span>
+              <button class="qty-btn" onclick="changeQtyPage(1)">+</button>
+            </div>
+          </div>
+          <button class="add-to-cart-btn" id="mainAddBtn" onclick="addToCartPage(${p.id})">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+            Add to Cart
+          </button>
+          <div class="trust-row">
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Third-party verified
+            </div>
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+              CoA included
+            </div>
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+              Discreet packaging
+            </div>
+          </div>
+          <p class="purchase-note"><strong>Research Use Only.</strong> This compound is sold exclusively for in vitro and laboratory research purposes. Not for human or veterinary use.</p>
+        </div>
+
+        <div class="disclaimer-section">
+          <strong>Important Disclaimer</strong>
+          All peptides sold by Research Peptides are intended solely for scientific research conducted in controlled laboratory settings. They are not approved for human administration, therapeutic use, or veterinary purposes. By purchasing, you confirm you are a qualified researcher and will use the compound in compliance with all applicable laws and regulations.
+        </div>
+
+      </div>
+
+      <!-- RELATED PRODUCTS -->
+      <div class="related-section">
+        <div class="related-title">You may also be interested in</div>
+        <div class="related-grid">
+          ${relatedList.map(r => `
+            <a href="product.html?id=${r.id}" class="related-card">
+              <div class="related-img" style="background: linear-gradient(145deg, ${r.color[0]}18, ${r.color[1]}35)">
+                ${bottleSVG(r.color[0], r.color[1], 60)}
+              </div>
+              <div class="related-body">
+                <div class="related-cat">${r.category}</div>
+                <div class="related-name">${r.name} ${r.dose}</div>
+                <div class="related-price">£${r.price} / vial</div>
+              </div>
+            </a>`).join('')}
+        </div>
+      </div>
+
+    </div>`;
+}
+
+// ── QTY ON PAGE ──
+function changeQtyPage(delta) {
+  qty = Math.max(1, qty + delta);
+  document.getElementById('qtyDisplay').textContent = qty;
+}
+
+// ── CART ──
+let cart = JSON.parse(localStorage.getItem('rp_cart') || '[]');
+function saveCart() { localStorage.setItem('rp_cart', JSON.stringify(cart)); }
+
+function addToCartPage(id) {
+  const product = products.find(p => p.id === id);
+  const existing = cart.find(i => i.id === id);
+  if (existing) { existing.qty += qty; }
+  else { cart.push({ id, name: product.name, dose: product.dose, category: product.category, price: product.price, color: product.color, qty }); }
+  saveCart();
+  updateCartUI();
+  openCart();
+
+  const btn = document.getElementById('mainAddBtn');
+  btn.classList.add('added');
+  btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Added ${qty > 1 ? '(' + qty + ')' : ''}!`;
+  setTimeout(() => {
+    btn.classList.remove('added');
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg> Add to Cart`;
+  }, 1800);
+}
+
+function removeFromCart(id) { cart = cart.filter(i => i.id !== id); saveCart(); updateCartUI(); }
+function changeQty(id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) removeFromCart(id);
+  else { saveCart(); updateCartUI(); }
+}
+function clearCart() { cart = []; saveCart(); updateCartUI(); }
+
+function updateCartUI() {
+  const total = cart.reduce((s, i) => s + i.qty, 0);
+  const countEl = document.getElementById('cartCount');
+  countEl.textContent = total;
+  countEl.classList.add('bump');
+  setTimeout(() => countEl.classList.remove('bump'), 300);
+
+  const body = document.getElementById('drawerBody');
+  const footer = document.getElementById('drawerFooter');
+
+  if (cart.length === 0) {
+    footer.style.display = 'none';
+    body.innerHTML = `<div class="cart-empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+      <p>Your cart is empty</p><small>Add some peptides to get started</small>
+    </div>`;
+    return;
+  }
+
+  footer.style.display = 'block';
+  document.getElementById('cartTotal').textContent = '£' + cart.reduce((s, i) => s + i.price * i.qty, 0).toFixed(2);
+  body.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <div class="cart-item-img" style="background:linear-gradient(145deg,${item.color[0]}22,${item.color[1]}44)">
+        ${bottleSVG(item.color[0], item.color[1], 40)}
+      </div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name} ${item.dose}</div>
+        <div class="cart-item-cat">${item.category}</div>
+        <div class="cart-item-price">£${item.price.toFixed(2)}</div>
+      </div>
+      <div class="ci-qty-controls">
+        <button class="ci-qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+        <span class="ci-qty-num">${item.qty}</span>
+        <button class="ci-qty-btn" onclick="changeQty(${item.id},1)">+</button>
+      </div>
+      <button class="remove-btn" onclick="removeFromCart(${item.id})">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>`).join('');
+}
+
+function openCart() { document.getElementById('cartDrawer').classList.add('open'); document.getElementById('drawerOverlay').classList.add('open'); }
+function closeCart() { document.getElementById('cartDrawer').classList.remove('open'); document.getElementById('drawerOverlay').classList.remove('open'); }
+function checkout() { alert('Connect your crypto payment processor here.'); }
+
+// Init
+renderPage();
+updateCartUI();
+</script>
+</body>
+</html>
