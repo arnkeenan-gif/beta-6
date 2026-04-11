@@ -1,3 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto Payment — Research Peptides</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:#081527; --blue:#2563eb; --blue-b:#1d4ed8; --blue-mid:#185FA5;
+  --text:#fff; --muted:rgba(255,255,255,0.42); --dim:rgba(255,255,255,0.2);
+  --card-bg:rgba(255,255,255,0.038); --card-bd:rgba(255,255,255,0.07); --card-hov:rgba(255,255,255,0.072);
+  --green:#22c55e; --green-b:#16a34a;
+}
+html,body { min-height:100%; background:var(--navy); color:var(--text); font-family:'DM Sans',sans-serif; }
+body { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; padding:48px 20px; position:relative; overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0; background-image:linear-gradient(rgba(37,99,235,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.03) 1px,transparent 1px); background-size:52px 52px; pointer-events:none; z-index:0; }
+#wave-canvas { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; }
+.container { position:relative; z-index:1; width:100%; max-width:500px; display:flex; flex-direction:column; align-items:center; }
+ 
+.header { display:flex; align-items:center; gap:10px; margin-bottom:5px; }
+.logo-mark { width:36px; height:36px; background:var(--blue-mid); border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.logo-mark svg { width:20px; height:20px; }
+.logo-name { font-family:'Syne',sans-serif; font-size:16px; font-weight:700; color:#fff; letter-spacing:-0.2px; }
+.tagline { font-size:12px; color:var(--muted); margin-bottom:20px; }
+ 
+/* Cart + shipping strip */
+.cart-strip { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); border-radius:13px; padding:14px 16px; margin-bottom:20px; }
+.cart-strip-title { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); margin-bottom:10px; }
+.cart-strip-items { display:flex; flex-direction:column; gap:5px; margin-bottom:8px; }
+.cart-strip-item { display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--muted); }
+.cart-strip-item-qty { color:var(--dim); margin:0 6px; }
+.cart-strip-item-price { font-weight:500; color:rgba(255,255,255,0.7); }
+.cart-strip-divider { border:none; border-top:1px solid rgba(255,255,255,0.07); margin:8px 0; }
+.cart-strip-row { display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--muted); margin-bottom:4px; }
+.cart-strip-row span:last-child { color:rgba(255,255,255,0.65); }
+.cart-strip-shipping-badge { display:inline-flex; align-items:center; gap:5px; font-size:10px; color:rgba(255,255,255,0.5); }
+.cart-strip-shipping-badge svg { width:11px; height:11px; }
+.cart-strip-total { display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.07); padding-top:10px; margin-top:4px; }
+.cart-strip-total-label { font-size:12px; color:var(--muted); }
+.cart-strip-total-val { font-family:'Syne',sans-serif; font-size:18px; font-weight:700; color:#fff; }
+ 
+.section-label { font-size:10px; font-weight:500; letter-spacing:2.5px; text-transform:uppercase; color:var(--dim); margin-bottom:11px; align-self:flex-start; }
+.conv-note { font-size:10px; color:var(--dim); margin-bottom:14px; text-align:center; }
+ 
+.screen { width:100%; display:none; flex-direction:column; align-items:center; animation:fadeUp 0.3s ease both; }
+.screen.active { display:flex; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+ 
+.currency-grid { display:grid; grid-template-columns:1fr 1fr; gap:11px; width:100%; }
+.cur-card { background:var(--card-bg); border:1px solid var(--card-bd); border-radius:15px; padding:18px 14px; cursor:pointer; transition:background 0.2s,border-color 0.2s,transform 0.18s; display:flex; align-items:center; gap:12px; }
+.cur-card:hover { background:var(--card-hov); border-color:rgba(255,255,255,0.15); transform:translateY(-2px); }
+.cur-card:active { transform:scale(0.97); }
+.cur-logo { width:42px; height:42px; border-radius:50%; flex-shrink:0; overflow:hidden; background:rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:center; }
+.cur-logo img { width:42px; height:42px; object-fit:contain; display:block; }
+.cur-info { display:flex; flex-direction:column; flex:1; min-width:0; }
+.cur-ticker { font-family:'Syne',sans-serif; font-size:14px; font-weight:700; color:#fff; line-height:1; margin-bottom:3px; }
+.cur-name-small { font-size:11px; color:var(--muted); }
+.cur-amount { font-size:11px; color:rgba(255,255,255,0.45); margin-top:3px; font-family:'Courier New',monospace; }
+.chevron { color:var(--dim); font-size:16px; transition:transform 0.2s,color 0.2s; flex-shrink:0; }
+.cur-card:hover .chevron { transform:translateX(3px); color:var(--muted); }
+ 
+.pay-card { background:var(--card-bg); border:1px solid var(--card-bd); border-radius:20px; padding:26px 22px; width:100%; display:flex; flex-direction:column; align-items:center; }
+.pay-cur-row { display:flex; align-items:center; gap:10px; align-self:flex-start; margin-bottom:3px; }
+.pay-cur-logo { width:30px; height:30px; border-radius:50%; overflow:hidden; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.pay-cur-logo img { width:30px; height:30px; object-fit:contain; display:block; }
+.pay-cur-label { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:#fff; }
+.pay-network-tag { align-self:flex-start; margin-left:40px; font-size:10px; color:var(--dim); letter-spacing:0.4px; margin-bottom:14px; }
+ 
+.amount-due { width:100%; background:rgba(37,99,235,0.1); border:1px solid rgba(37,99,235,0.2); border-radius:12px; padding:13px 16px; margin-bottom:18px; display:flex; align-items:center; justify-content:space-between; }
+.amount-due-label { font-size:11px; color:rgba(181,212,244,0.7); }
+.amount-due-gbp { font-size:11px; color:rgba(181,212,244,0.45); margin-top:2px; }
+.amount-due-crypto { font-family:'Syne',sans-serif; font-size:20px; font-weight:700; color:#fff; text-align:right; }
+.amount-due-ticker { font-size:11px; color:var(--muted); text-align:right; margin-top:2px; }
+ 
+.qr-container { background:#fff; border-radius:13px; padding:13px; margin-bottom:20px; width:168px; height:168px; display:flex; align-items:center; justify-content:center; }
+#qr-output { display:flex; align-items:center; justify-content:center; }
+#qr-output img, #qr-output canvas { border-radius:3px; display:block; }
+ 
+.addr-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); align-self:flex-start; margin-bottom:7px; }
+.addr-row { width:100%; background:rgba(0,0,0,0.22); border:1px solid rgba(255,255,255,0.06); border-radius:11px; padding:10px 12px; display:flex; align-items:flex-start; gap:9px; margin-bottom:13px; }
+.addr-value { font-family:'Courier New',monospace; font-size:10.5px; color:rgba(255,255,255,0.58); flex:1; word-break:break-all; line-height:1.65; user-select:all; }
+.copy-btn { flex-shrink:0; background:var(--blue); border:none; border-radius:8px; padding:7px 12px; font-family:'DM Sans',sans-serif; font-size:12px; font-weight:500; color:#fff; cursor:pointer; transition:background 0.15s,transform 0.1s; margin-top:1px; white-space:nowrap; }
+.copy-btn:hover { background:var(--blue-b); }
+.copy-btn:active { transform:scale(0.95); }
+.copy-btn.ok { background:var(--green-b); }
+ 
+.warn { width:100%; background:rgba(234,179,8,0.055); border:1px solid rgba(234,179,8,0.14); border-radius:10px; padding:10px 13px; font-size:11px; color:rgba(234,179,8,0.68); line-height:1.55; margin-bottom:13px; }
+ 
+.tracker-bar { width:100%; background:rgba(0,0,0,0.18); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:10px 13px; display:flex; align-items:center; gap:9px; margin-bottom:16px; }
+.tracker-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:var(--dim); transition:background 0.3s; }
+.tracker-dot.scanning { background:var(--blue); animation:tpulse 1.4s ease infinite; }
+.tracker-dot.found { background:var(--green); animation:none; }
+@keyframes tpulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(37,99,235,0.5)} 50%{opacity:.7;box-shadow:0 0 0 5px rgba(37,99,235,0)} }
+.tracker-text { font-size:11px; color:var(--muted); flex:1; line-height:1.45; }
+.tracker-text strong { color:#fff; font-weight:500; }
+ 
+.back-btn { background:transparent; border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:9px 20px; font-family:'DM Sans',sans-serif; font-size:13px; color:var(--muted); cursor:pointer; transition:background 0.18s,color 0.18s; }
+.back-btn:hover { background:rgba(255,255,255,0.05); color:#fff; }
+ 
+#screen-success { text-align:center; }
+.success-card { background:var(--card-bg); border:1px solid rgba(34,197,94,0.22); border-radius:20px; padding:36px 24px; width:100%; display:flex; flex-direction:column; align-items:center; }
+.success-icon { width:64px; height:64px; border-radius:50%; background:rgba(34,197,94,0.1); border:2px solid rgba(34,197,94,0.28); display:flex; align-items:center; justify-content:center; margin-bottom:16px; animation:popIn 0.4s cubic-bezier(0.175,0.885,0.32,1.275) both; }
+@keyframes popIn { from{opacity:0;transform:scale(0.5)} to{opacity:1;transform:scale(1)} }
+.success-icon svg { width:30px; height:30px; }
+.success-title { font-family:'Syne',sans-serif; font-size:22px; font-weight:700; color:#fff; margin-bottom:6px; }
+.success-sub { font-size:13px; color:var(--muted); margin-bottom:20px; line-height:1.6; }
+.success-tx { width:100%; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:10px 13px; font-family:'Courier New',monospace; font-size:10px; color:rgba(255,255,255,0.42); word-break:break-all; line-height:1.6; margin-bottom:16px; text-align:left; }
+.success-tx-label { font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); display:block; margin-bottom:5px; }
+.redirect-bar { width:100%; background:rgba(34,197,94,0.07); border:1px solid rgba(34,197,94,0.14); border-radius:10px; padding:11px 14px; font-size:12px; color:rgba(34,197,94,0.75); display:flex; align-items:center; gap:6px; justify-content:center; }
+.redirect-count { font-family:'Syne',sans-serif; font-size:14px; font-weight:700; color:var(--green); min-width:16px; text-align:center; }
+.explorer-link { display:inline-block; margin-top:12px; font-size:11px; color:#60a5fa; text-decoration:none; border-bottom:1px solid rgba(96,165,250,0.3); }
+.explorer-link:hover { color:#93c5fd; }
+ 
+.footer { margin-top:24px; display:flex; align-items:center; gap:7px; }
+.dot-live { width:6px; height:6px; border-radius:50%; background:var(--green); animation:livepulse 3.5s ease infinite; flex-shrink:0; }
+@keyframes livepulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,0.45)} 50%{opacity:.8;box-shadow:0 0 0 5px rgba(34,197,94,0)} }
+.footer-text { font-size:11px; color:var(--dim); }
+</style>
+</head>
+<body>
+<canvas id="wave-canvas"></canvas>
+<div class="container">
+ 
+  <div class="header">
+    <div class="logo-mark">
+      <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" fill="white"/><path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.93 4.93l2.83 2.83M12.24 12.24l2.83 2.83M4.93 15.07l2.83-2.83M12.24 7.76l2.83-2.83" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <span class="logo-name">Research Peptides</span>
+  </div>
+  <div class="tagline">Complete your order with crypto</div>
+ 
+  <!-- Cart + shipping strip -->
+  <div class="cart-strip">
+    <div class="cart-strip-title">Your order</div>
+    <div class="cart-strip-items" id="cartStripItems"></div>
+    <hr class="cart-strip-divider">
+    <div class="cart-strip-row">
+      <span>Subtotal</span>
+      <span id="stripSubtotal">£0.00</span>
+    </div>
+    <div class="cart-strip-row">
+      <span class="cart-strip-shipping-badge" id="stripShippingLabel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/></svg>
+        Standard Delivery
+      </span>
+      <span id="stripShippingPrice">£6.99</span>
+    </div>
+    <div class="cart-strip-total">
+      <div class="cart-strip-total-label">Total to pay</div>
+      <div class="cart-strip-total-val" id="cartStripTotal">£0.00</div>
+    </div>
+  </div>
+ 
+  <!-- SELECT SCREEN -->
+  <div class="screen active" id="screen-select">
+    <div class="section-label">Select currency</div>
+    <div class="conv-note" id="conv-note">Loading live rates…</div>
+    <div class="currency-grid">
+      <div class="cur-card" onclick="openPayment('btc')">
+        <div class="cur-logo"><img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/btc.png" alt="BTC" onerror="this.src='https://assets.coingecko.com/coins/images/1/large/bitcoin.png'"></div>
+        <div class="cur-info"><div class="cur-ticker">BTC</div><div class="cur-name-small">Bitcoin</div><div class="cur-amount" id="amt-btc">—</div></div>
+        <span class="chevron">›</span>
+      </div>
+      <div class="cur-card" onclick="openPayment('eth')">
+        <div class="cur-logo"><img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/eth.png" alt="ETH" onerror="this.src='https://assets.coingecko.com/coins/images/279/large/ethereum.png'"></div>
+        <div class="cur-info"><div class="cur-ticker">ETH</div><div class="cur-name-small">Ethereum</div><div class="cur-amount" id="amt-eth">—</div></div>
+        <span class="chevron">›</span>
+      </div>
+      <div class="cur-card" onclick="openPayment('sol')">
+        <div class="cur-logo"><img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/sol.png" alt="SOL" onerror="this.src='https://assets.coingecko.com/coins/images/4128/large/solana.png'"></div>
+        <div class="cur-info"><div class="cur-ticker">SOL</div><div class="cur-name-small">Solana</div><div class="cur-amount" id="amt-sol">—</div></div>
+        <span class="chevron">›</span>
+      </div>
+      <div class="cur-card" onclick="openPayment('usdc')">
+        <div class="cur-logo"><img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/usdc.png" alt="USDC" onerror="this.src='https://assets.coingecko.com/coins/images/6319/large/usdc.png'"></div>
+        <div class="cur-info"><div class="cur-ticker">USDC</div><div class="cur-name-small">USD Coin · SOL</div><div class="cur-amount" id="amt-usdc">—</div></div>
+        <span class="chevron">›</span>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- PAYMENT SCREEN -->
+  <div class="screen" id="screen-pay">
+    <div class="pay-card">
+      <div class="pay-cur-row">
+        <div class="pay-cur-logo"><img id="pay-logo-img" src="" alt=""></div>
+        <div class="pay-cur-label" id="pay-label"></div>
+      </div>
+      <div class="pay-network-tag" id="pay-network"></div>
+      <div class="amount-due">
+        <div>
+          <div class="amount-due-label">Amount to send</div>
+          <div class="amount-due-gbp" id="pay-gbp-label"></div>
+        </div>
+        <div>
+          <div class="amount-due-crypto" id="pay-crypto-amount"></div>
+          <div class="amount-due-ticker" id="pay-crypto-ticker"></div>
+        </div>
+      </div>
+      <div class="qr-container"><div id="qr-output"></div></div>
+      <div class="addr-label">Wallet address</div>
+      <div class="addr-row">
+        <div class="addr-value" id="addr-display"></div>
+        <button class="copy-btn" id="copy-btn" onclick="copyAddress()">Copy</button>
+      </div>
+      <div class="warn" id="warn-text"></div>
+      <div class="tracker-bar">
+        <div class="tracker-dot scanning" id="tracker-dot"></div>
+        <div class="tracker-text" id="tracker-text"><strong>Scanning blockchain…</strong><br>Waiting for your transaction to be detected</div>
+      </div>
+      <button class="back-btn" onclick="stopAndGoBack()">← Choose different currency</button>
+    </div>
+  </div>
+ 
+  <!-- SUCCESS SCREEN -->
+  <div class="screen" id="screen-success">
+    <div class="success-card">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="success-title">Payment Detected!</div>
+      <div class="success-sub" id="success-sub">Your transaction has been confirmed.</div>
+      <div class="success-tx"><span class="success-tx-label">Transaction ID</span><span id="success-txid"></span></div>
+      <div class="redirect-bar"><span>Redirecting to your order confirmation in</span><span class="redirect-count" id="redirect-count">5</span><span>seconds</span></div>
+      <a class="explorer-link" id="explorer-link" href="#" target="_blank" rel="noopener">View on blockchain explorer →</a>
+    </div>
+  </div>
+ 
+  <div class="footer"><div class="dot-live"></div><span class="footer-text">Verified · Secure · Worldwide</span></div>
+</div>
+ 
 <script>
 const CONFIG = {
   ETHERSCAN_KEY:'YCNIYTGQQ666ICG3R1IKTRVH7NRCWFHYSV',
@@ -6,14 +240,9 @@ const CONFIG = {
   REDIRECT_SECS:5
 };
 
-const SOLANA_HTTP_RPCS = [
+const SOLANA_RPCS = [
   'https://api.mainnet-beta.solana.com',
   'https://api.mainnet.solana.com'
-];
-
-const SOLANA_WS_RPCS = [
-  'wss://api.mainnet-beta.solana.com',
-  'wss://api.mainnet.solana.com'
 ];
 
 const currencies = {
@@ -33,13 +262,8 @@ const gbpTotal     = subtotal + shipPrice;
 let rates={}, cryptoAmounts={};
 let currentKey=null,pollTimer=null,seenTxids=new Set(),pollCount=0,sessionStart=0,currentAddr='';
 let tickTimer=null;
-
-let solWs = null;
-let solWsOpen = false;
-let solWsSubIds = { account:null, logs:null };
-let solBaselineLamports = null;
-let solLastKnownLamports = null;
-let solPendingDetection = false;
+let solBaselineLamports=null;
+let solLastLamports=null;
 
 (function renderStrip(){
   document.getElementById('cartStripTotal').textContent='£'+gbpTotal.toFixed(2);
@@ -97,9 +321,8 @@ function openPayment(key){
   sessionStart=Math.floor(Date.now()/1000);
   seenTxids.clear();
   pollCount=0;
-  solBaselineLamports = null;
-  solLastKnownLamports = null;
-  solPendingDetection = false;
+  solBaselineLamports=null;
+  solLastLamports=null;
 
   document.getElementById('pay-logo-img').src=c.logo;
   document.getElementById('pay-logo-img').alt=c.ticker;
@@ -157,25 +380,13 @@ function stopAndGoBack(){
 function startPolling(){
   stopPolling();
   tickTimer=setInterval(updateTimerDisplay,1000);
-
-  if(currentKey === 'sol' || currentKey === 'usdc'){
-    initSolRealtime();
-  }
-
   poll();
   pollTimer=setInterval(poll,CONFIG.POLL_MS);
 }
 
 function stopPolling(){
-  if(pollTimer){
-    clearInterval(pollTimer);
-    pollTimer=null;
-  }
-  if(tickTimer){
-    clearInterval(tickTimer);
-    tickTimer=null;
-  }
-  closeSolRealtime();
+  if(pollTimer){clearInterval(pollTimer);pollTimer=null;}
+  if(tickTimer){clearInterval(tickTimer);tickTimer=null;}
 }
 
 function updateTimerDisplay(){
@@ -186,175 +397,39 @@ function updateTimerDisplay(){
   setTracker('scanning',`<strong>Scanning blockchain…</strong><br>Monitoring for ${timeStr} · Check #${pollCount} · Next check in ${CONFIG.POLL_MS/1000}s`);
 }
 
-async function rpcPostWithFallback(method, params){
-  let lastErr = null;
-
-  for(const rpc of SOLANA_HTTP_RPCS){
+async function solRpc(method, params){
+  let lastErr=null;
+  for(const rpc of SOLANA_RPCS){
     try{
-      const res = await fetch(rpc, {
+      const res=await fetch(rpc,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          jsonrpc:'2.0',
-          id:1,
-          method,
-          params
-        })
+        body:JSON.stringify({jsonrpc:'2.0',id:1,method,params})
       });
-      if(!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      if(data.error) throw new Error(data.error.message || 'RPC error');
+      if(!res.ok) throw new Error('RPC HTTP '+res.status);
+      const data=await res.json();
+      if(data.error) throw new Error(data.error.message||'RPC error');
       return data.result;
-    }catch(err){
-      lastErr = err;
+    }catch(e){
+      lastErr=e;
     }
   }
-
   throw lastErr || new Error('All Solana RPCs failed');
 }
 
-async function getSolBalanceLamports(addr){
-  const result = await rpcPostWithFallback('getBalance', [addr, { commitment:'confirmed' }]);
-  return Number(result?.value || 0);
-}
-
-async function initSolRealtime(){
-  if(!(currentKey === 'sol' || currentKey === 'usdc')) return;
-
-  try{
-    solBaselineLamports = await getSolBalanceLamports(currencies.sol.addr);
-    solLastKnownLamports = solBaselineLamports;
-  }catch(e){
-    console.error('Failed to get SOL baseline balance', e);
-  }
-
-  connectSolWs();
-}
-
-function closeSolRealtime(){
-  try{
-    if(solWs && solWs.readyState === WebSocket.OPEN){
-      if(solWsSubIds.account !== null){
-        solWs.send(JSON.stringify({jsonrpc:'2.0',id:901,method:'accountUnsubscribe',params:[solWsSubIds.account]}));
-      }
-      if(solWsSubIds.logs !== null){
-        solWs.send(JSON.stringify({jsonrpc:'2.0',id:902,method:'logsUnsubscribe',params:[solWsSubIds.logs]}));
-      }
-    }
-  }catch(e){}
-
-  try{
-    if(solWs) solWs.close();
-  }catch(e){}
-
-  solWs = null;
-  solWsOpen = false;
-  solWsSubIds = { account:null, logs:null };
-}
-
-function connectSolWs(){
-  closeSolRealtime();
-
-  const wsUrl = SOLANA_WS_RPCS[0];
-  try{
-    solWs = new WebSocket(wsUrl);
-  }catch(e){
-    console.error('WS create failed', e);
-    return;
-  }
-
-  solWs.onopen = () => {
-    solWsOpen = true;
-
-    solWs.send(JSON.stringify({
-      jsonrpc:'2.0',
-      id:101,
-      method:'accountSubscribe',
-      params:[
-        currencies.sol.addr,
-        { commitment:'confirmed', encoding:'jsonParsed' }
-      ]
-    }));
-
-    solWs.send(JSON.stringify({
-      jsonrpc:'2.0',
-      id:102,
-      method:'logsSubscribe',
-      params:[
-        { mentions:[currencies.sol.addr] },
-        { commitment:'confirmed' }
-      ]
-    }));
-  };
-
-  solWs.onmessage = async (event) => {
-    try{
-      const msg = JSON.parse(event.data);
-
-      if(msg.id === 101 && typeof msg.result === 'number'){
-        solWsSubIds.account = msg.result;
-        return;
-      }
-
-      if(msg.id === 102 && typeof msg.result === 'number'){
-        solWsSubIds.logs = msg.result;
-        return;
-      }
-
-      if(msg.method === 'accountNotification'){
-        const lamports = Number(msg.params?.result?.value?.lamports || 0);
-        if(Number.isFinite(lamports)){
-          solLastKnownLamports = lamports;
-
-          if(currentKey === 'sol' && solBaselineLamports !== null && lamports > solBaselineLamports && !solPendingDetection){
-            solPendingDetection = true;
-            const result = await confirmLatestSolIncomingTx();
-            if(result) onPaymentFound(result);
-            else solPendingDetection = false;
-          }
-        }
-        return;
-      }
-
-      if(msg.method === 'logsNotification'){
-        if((currentKey === 'sol' || currentKey === 'usdc') && !solPendingDetection){
-          solPendingDetection = true;
-          const result = await confirmLatestSolIncomingTx();
-          if(result) onPaymentFound(result);
-          else solPendingDetection = false;
-        }
-      }
-    }catch(e){
-      console.error('WS message parse error', e);
-    }
-  };
-
-  solWs.onerror = (e) => {
-    console.error('Solana WS error', e);
-  };
-
-  solWs.onclose = () => {
-    solWsOpen = false;
-    if(document.getElementById('screen-pay').classList.contains('active') && (currentKey === 'sol' || currentKey === 'usdc')){
-      setTimeout(()=>{
-        if(!solWsOpen && (currentKey === 'sol' || currentKey === 'usdc')){
-          connectSolWs();
-        }
-      }, 2000);
-    }
-  };
+async function getSolBalance(addr){
+  const result=await solRpc('getBalance',[addr,{commitment:'confirmed'}]);
+  return Number(result?.value||0);
 }
 
 async function poll(){
   pollCount++;
   updateTimerDisplay();
-
   try{
     let r=null;
     if(currentKey==='btc') r=await checkBTC();
     else if(currentKey==='eth') r=await checkETH();
     else r=await checkSOL();
-
     if(r) onPaymentFound(r);
   }catch(e){
     console.error(e);
@@ -364,27 +439,17 @@ async function poll(){
 
 async function checkBTC(){
   const addr=currencies.btc.addr,base='https://mempool.space/api';
-  const[mRes,cRes]=await Promise.all([
-    fetch(`${base}/address/${addr}/txs/mempool`),
-    fetch(`${base}/address/${addr}/txs`)
-  ]);
+  const[mRes,cRes]=await Promise.all([fetch(`${base}/address/${addr}/txs/mempool`),fetch(`${base}/address/${addr}/txs`)]);
   const all=[...(mRes.ok?await mRes.json():[]),...(cRes.ok?await cRes.json():[])];
-
   for(const tx of all){
     if(seenTxids.has(tx.txid)) continue;
     const recv=(tx.vout||[]).filter(o=>o.scriptpubkey_address===addr);
     if(!recv.length) continue;
-
     const t=tx.status?.block_time||0;
-    if(t>0 && t<sessionStart-120) continue;
-
+    if(t>0&&t<sessionStart-180) continue;
     seenTxids.add(tx.txid);
     const btc=(recv.reduce((s,o)=>s+(o.value||0),0)/1e8).toFixed(8);
-    return {
-      txid:tx.txid,
-      amount:`${btc} BTC (${tx.status?.confirmed?'confirmed':'unconfirmed'})`,
-      explorer:currencies.btc.explorer(tx.txid)
-    };
+    return{txid:tx.txid,amount:`${btc} BTC (${tx.status?.confirmed?'confirmed':'unconfirmed'})`,explorer:currencies.btc.explorer(tx.txid)};
   }
   return null;
 }
@@ -393,117 +458,103 @@ async function checkETH(){
   const addr=currencies.eth.addr;
   const res=await fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${addr}&startblock=0&endblock=99999999&sort=desc&apikey=${CONFIG.ETHERSCAN_KEY}`);
   if(!res.ok) throw new Error('Etherscan');
-
   const d=await res.json();
-  if(d.status!=='1' || !Array.isArray(d.result)) return null;
-
+  if(d.status!=='1'||!Array.isArray(d.result)) return null;
   for(const tx of d.result){
     if(seenTxids.has(tx.hash)) continue;
-    if(parseInt(tx.timeStamp,10) < sessionStart-120) continue;
-    if(!tx.to || tx.to.toLowerCase()!==addr.toLowerCase()) continue;
+    if(parseInt(tx.timeStamp,10)<sessionStart-180) continue;
+    if(!tx.to||tx.to.toLowerCase()!==addr.toLowerCase()) continue;
     if(tx.isError==='1') continue;
-
     seenTxids.add(tx.hash);
-    return {
-      txid:tx.hash,
-      amount:`${(parseInt(tx.value,10)/1e18).toFixed(6)} ETH`,
-      explorer:currencies.eth.explorer(tx.hash)
-    };
+    return{txid:tx.hash,amount:`${(parseInt(tx.value,10)/1e18).toFixed(6)} ETH`,explorer:currencies.eth.explorer(tx.hash)};
   }
-  return null;
-}
-
-async function confirmLatestSolIncomingTx(){
-  const result = await checkSOL();
-  if(result) return result;
-
-  if(currentKey === 'sol' && solBaselineLamports !== null && solLastKnownLamports !== null && solLastKnownLamports > solBaselineLamports){
-    const delta = (solLastKnownLamports - solBaselineLamports) / 1e9;
-    return {
-      txid:'Balance change detected',
-      amount:`${delta.toFixed(6)} SOL`,
-      explorer:'https://solscan.io/account/' + currencies.sol.addr
-    };
-  }
-
   return null;
 }
 
 async function checkSOL(){
-  const addr = currencies.sol.addr;
-  const USDC_MINT = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
+  const addr=currencies.sol.addr;
+  const USDC='EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
 
-  const sigs = await rpcPostWithFallback(
-    'getSignaturesForAddress',
-    [addr, { limit: 20 }]
-  );
+  if(currentKey==='sol'){
+    const currentBal=await getSolBalance(addr);
+    if(solBaselineLamports===null){
+      solBaselineLamports=currentBal;
+      solLastLamports=currentBal;
+    }else{
+      if(currentBal>solLastLamports){
+        const diff=currentBal-solLastLamports;
+        solLastLamports=currentBal;
+        return {
+          txid:'Balance change detected',
+          amount:`${(diff/1e9).toFixed(6)} SOL`,
+          explorer:`https://solscan.io/account/${addr}`
+        };
+      }
+      solLastLamports=currentBal;
+    }
+  }
 
-  if(!Array.isArray(sigs) || !sigs.length) return null;
+  const sigs=await solRpc('getSignaturesForAddress',[addr,{limit:25}]);
+  if(!Array.isArray(sigs)||!sigs.length) return null;
 
   for(const sig of sigs){
     if(!sig?.signature || seenTxids.has(sig.signature) || sig.err) continue;
 
-    const bt = Number(sig.blockTime || 0);
-    if(bt > 0 && bt < sessionStart - 180) continue;
+    const bt=Number(sig.blockTime||0);
+    if(bt>0&&bt<sessionStart-300) continue;
 
-    const tx = await rpcPostWithFallback(
-      'getTransaction',
-      [sig.signature, { encoding:'jsonParsed', commitment:'confirmed', maxSupportedTransactionVersion:0 }]
-    );
-
+    const tx=await solRpc('getTransaction',[sig.signature,{encoding:'jsonParsed',commitment:'confirmed',maxSupportedTransactionVersion:0}]);
     if(!tx) continue;
 
-    let amount = null;
+    let amount=null;
+    const allIx=[
+      ...(tx.transaction?.message?.instructions||[]),
+      ...(tx.meta?.innerInstructions||[]).flatMap(x=>x.instructions||[])
+    ];
 
-    const outerIx = tx.transaction?.message?.instructions || [];
-    const innerIx = (tx.meta?.innerInstructions || []).flatMap(x => x.instructions || []);
-    const allIx = [...outerIx, ...innerIx];
-
-    if(currentKey === 'sol'){
+    if(currentKey==='sol'){
       for(const ix of allIx){
         if(
-          ix?.program === 'system' &&
-          ix?.parsed?.type === 'transfer' &&
-          ix?.parsed?.info?.destination === addr
+          ix?.program==='system' &&
+          ix?.parsed?.type==='transfer' &&
+          ix?.parsed?.info?.destination===addr
         ){
-          const lamports = Number(ix.parsed.info?.lamports || 0);
-          if(lamports > 0){
-            amount = `${(lamports/1e9).toFixed(6)} SOL`;
+          const lamports=Number(ix.parsed.info?.lamports||0);
+          if(lamports>0){
+            amount=`${(lamports/1e9).toFixed(6)} SOL`;
             break;
           }
         }
       }
 
       if(!amount){
-        const keys = tx.transaction?.message?.accountKeys || [];
-        const idx = keys.findIndex(k => (k.pubkey || k) === addr);
-        if(idx >= 0){
-          const pre = Number(tx.meta?.preBalances?.[idx] ?? 0);
-          const post = Number(tx.meta?.postBalances?.[idx] ?? 0);
-          const diff = post - pre;
-          if(diff > 0){
-            amount = `${(diff/1e9).toFixed(6)} SOL`;
+        const keys=tx.transaction?.message?.accountKeys||[];
+        const idx=keys.findIndex(k=>(k.pubkey||k)===addr);
+        if(idx>=0){
+          const pre=Number(tx.meta?.preBalances?.[idx]??0);
+          const post=Number(tx.meta?.postBalances?.[idx]??0);
+          const diff=post-pre;
+          if(diff>0){
+            amount=`${(diff/1e9).toFixed(6)} SOL`;
           }
         }
       }
-    } else if(currentKey === 'usdc'){
+    }else if(currentKey==='usdc'){
       for(const ix of allIx){
         if(
-          ix?.parsed?.type === 'transferChecked' &&
-          ix?.parsed?.info?.mint === USDC_MINT &&
-          ix?.parsed?.info?.destination === addr
+          ix?.parsed?.type==='transferChecked' &&
+          ix?.parsed?.info?.mint===USDC &&
+          ix?.parsed?.info?.destination===addr
         ){
-          const uiAmount = ix.parsed.info?.tokenAmount?.uiAmount;
-          amount = `${uiAmount ?? '?'} USDC`;
+          amount=(ix.parsed.info?.tokenAmount?.uiAmount||'?')+' USDC';
           break;
         }
-
         if(
-          ix?.program === 'spl-token' &&
-          ix?.parsed?.type === 'transfer' &&
-          ix?.parsed?.info?.destination === addr
+          ix?.program==='spl-token' &&
+          ix?.parsed?.type==='transfer' &&
+          ix?.parsed?.info?.destination===addr
         ){
-          amount = 'USDC received';
+          amount='USDC received';
           break;
         }
       }
@@ -512,32 +563,9 @@ async function checkSOL(){
     if(amount){
       seenTxids.add(sig.signature);
       return {
-        txid: sig.signature,
+        txid:sig.signature,
         amount,
-        explorer: currencies[currentKey].explorer(sig.signature)
-      };
-    }
-  }
-
-  if(currentKey === 'sol'){
-    const currentLamports = await getSolBalanceLamports(addr);
-
-    if(solBaselineLamports === null){
-      solBaselineLamports = currentLamports;
-      solLastKnownLamports = currentLamports;
-      return null;
-    }
-
-    solLastKnownLamports = currentLamports;
-
-    if(currentLamports > solBaselineLamports){
-      const delta = (currentLamports - solBaselineLamports) / 1e9;
-      solBaselineLamports = currentLamports;
-
-      return {
-        txid: 'Balance change detected',
-        amount: `${delta.toFixed(6)} SOL`,
-        explorer: 'https://solscan.io/account/' + addr
+        explorer:currencies[currentKey].explorer(sig.signature)
       };
     }
   }
@@ -547,18 +575,14 @@ async function checkSOL(){
 
 function onPaymentFound(result){
   stopPolling();
-
   const order=JSON.parse(sessionStorage.getItem('rp_order')||'{}');
   order.txid=result.txid;
   order.txAmount=result.amount;
   order.explorerUrl=result.explorer;
   sessionStorage.setItem('rp_order',JSON.stringify(order));
-
   document.getElementById('success-sub').textContent=result.amount+' received. Your order is being processed.';
   document.getElementById('success-txid').textContent=result.txid;
   document.getElementById('explorer-link').href=result.explorer;
-
-  setTracker('found','<strong>Payment detected.</strong><br>Redirecting to confirmation page');
   showScreen('screen-success');
   startCountdown();
 }
@@ -566,7 +590,6 @@ function onPaymentFound(result){
 function startCountdown(){
   let n=CONFIG.REDIRECT_SECS;
   document.getElementById('redirect-count').textContent=n;
-
   const t=setInterval(()=>{
     n--;
     document.getElementById('redirect-count').textContent=n;
@@ -577,11 +600,9 @@ function startCountdown(){
   },1000);
 }
 
+/* Waves */
 const wc=document.getElementById('wave-canvas'),wctx=wc.getContext('2d');let frame=0;
-function resize(){wc.width=window.innerWidth;wc.height=window.innerHeight;}
-resize();
-window.addEventListener('resize',resize);
-
+function resize(){wc.width=window.innerWidth;wc.height=window.innerHeight;}resize();window.addEventListener('resize',resize);
 const S=0.000065;
 const waves=[
   {yF:.20,amp:28,f1:.0045,s1:S*1.0, f2:.0072,s2:S*.75,color:'rgba(37,99,235,0.09)', lw:1.5},
@@ -591,22 +612,13 @@ const waves=[
   {yF:.77,amp:30,f1:.005, s1:S*.85, f2:.008, s2:S*.65,color:'rgba(37,99,235,0.055)',lw:1.0},
   {yF:.90,amp:15,f1:.008, s1:S*1.15,f2:.013, s2:S*.9, color:'rgba(37,99,235,0.038)',lw:0.8},
 ];
-
 function drawWaves(){
   wctx.clearRect(0,0,wc.width,wc.height);
   const W=wc.width,H=wc.height,f=frame;
-  waves.forEach(w=>{
-    wctx.beginPath();
-    wctx.strokeStyle=w.color;
-    wctx.lineWidth=w.lw;
-    for(let x=0;x<=W;x+=3){
-      const y=H*w.yF+Math.sin(x*w.f1+f*w.s1*1000)*w.amp+Math.sin(x*w.f2+f*w.s2*1000)*w.amp*.28;
-      x===0?wctx.moveTo(x,y):wctx.lineTo(x,y);
-    }
-    wctx.stroke();
-  });
-  frame++;
-  requestAnimationFrame(drawWaves);
+  waves.forEach(w=>{wctx.beginPath();wctx.strokeStyle=w.color;wctx.lineWidth=w.lw;for(let x=0;x<=W;x+=3){const y=H*w.yF+Math.sin(x*w.f1+f*w.s1*1000)*w.amp+Math.sin(x*w.f2+f*w.s2*1000)*w.amp*.28;x===0?wctx.moveTo(x,y):wctx.lineTo(x,y);}wctx.stroke();});
+  frame++;requestAnimationFrame(drawWaves);
 }
 drawWaves();
 </script>
+</body>
+</html>
