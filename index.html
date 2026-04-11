@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
+ 
   :root {
     --blue-deep: #042C53;
     --blue-strong: #0C447C;
@@ -21,16 +21,16 @@
     --gray-soft: #8EA7BE;
     --gray-text: #4A6680;
   }
-
+ 
   html { scroll-behavior: smooth; }
-
+ 
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--white);
     color: var(--blue-deep);
     overflow-x: hidden;
   }
-
+ 
   /* ── NAV ── */
   nav {
     position: fixed;
@@ -44,7 +44,7 @@
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(4,44,83,0.08);
   }
-
+ 
   .logo {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
@@ -54,8 +54,9 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    text-decoration: none;
   }
-
+ 
   .logo-mark {
     width: 34px; height: 34px;
     background: var(--blue-mid);
@@ -64,15 +65,15 @@
     align-items: center;
     justify-content: center;
   }
-
+ 
   .logo-mark svg { width: 20px; height: 20px; }
-
+ 
   nav ul {
     display: flex;
     list-style: none;
     gap: 2.5rem;
   }
-
+ 
   nav ul a {
     font-size: 0.9rem;
     font-weight: 400;
@@ -81,9 +82,9 @@
     letter-spacing: 0.01em;
     transition: color 0.2s;
   }
-
+ 
   nav ul a:hover { color: var(--blue-mid); }
-
+ 
   .nav-cta {
     background: var(--blue-mid);
     color: var(--white) !important;
@@ -91,9 +92,9 @@
     border-radius: 6px;
     font-weight: 500 !important;
   }
-
+ 
   .nav-cta:hover { background: var(--blue-strong); color: var(--white) !important; }
-
+ 
   /* ── HERO ── */
   .hero {
     position: relative;
@@ -106,23 +107,7 @@
     background: linear-gradient(160deg, var(--blue-deep) 0%, #0a3d6b 55%, #0e5494 100%);
     padding-top: 80px;
   }
-
-  /* Animated wave SVG at top */
-  .wave-container {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    z-index: 1;
-  }
-
-  .wave-container svg {
-    display: block;
-    width: 100%;
-  }
-
-  /* Subtle grid overlay */
+ 
   .hero::before {
     content: '';
     position: absolute;
@@ -133,8 +118,7 @@
     background-size: 60px 60px;
     z-index: 1;
   }
-
-  /* Glowing orb */
+ 
   .hero-orb {
     position: absolute;
     width: 600px; height: 600px;
@@ -145,12 +129,12 @@
     z-index: 1;
     animation: pulse-orb 6s ease-in-out infinite;
   }
-
+ 
   @keyframes pulse-orb {
     0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
     50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
   }
-
+ 
   .hero-content {
     position: relative;
     z-index: 2;
@@ -159,12 +143,12 @@
     padding: 0 2rem;
     animation: fade-up 1s ease both;
   }
-
+ 
   @keyframes fade-up {
     from { opacity: 0; transform: translateY(32px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
+ 
   .hero-tag {
     display: inline-flex;
     align-items: center;
@@ -180,7 +164,7 @@
     border-radius: 100px;
     margin-bottom: 2rem;
   }
-
+ 
   .hero-tag::before {
     content: '';
     width: 6px; height: 6px;
@@ -188,12 +172,12 @@
     border-radius: 50%;
     animation: blink 2s ease-in-out infinite;
   }
-
+ 
   @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.3; }
   }
-
+ 
   .hero h1 {
     font-family: 'Syne', sans-serif;
     font-size: clamp(2.8rem, 6vw, 5rem);
@@ -203,11 +187,9 @@
     letter-spacing: -0.03em;
     margin-bottom: 1.5rem;
   }
-
-  .hero h1 span {
-    color: var(--blue-pale);
-  }
-
+ 
+  .hero h1 span { color: var(--blue-pale); }
+ 
   .hero p {
     font-size: 1.15rem;
     font-weight: 300;
@@ -216,14 +198,14 @@
     max-width: 600px;
     margin: 0 auto 2.5rem;
   }
-
+ 
   .hero-btns {
     display: flex;
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
   }
-
+ 
   .btn-primary {
     background: var(--blue-light);
     color: var(--white);
@@ -238,9 +220,9 @@
     transition: background 0.2s, transform 0.15s;
     letter-spacing: 0.01em;
   }
-
+ 
   .btn-primary:hover { background: var(--blue-mid); transform: translateY(-2px); }
-
+ 
   .btn-outline {
     background: transparent;
     color: var(--blue-ghost);
@@ -254,10 +236,9 @@
     cursor: pointer;
     transition: border-color 0.2s, color 0.2s;
   }
-
+ 
   .btn-outline:hover { border-color: var(--blue-ghost); color: var(--white); }
-
-  /* Hero stats bar */
+ 
   .hero-stats {
     position: relative;
     z-index: 2;
@@ -271,41 +252,19 @@
     width: 100%;
     max-width: 640px;
   }
-
-  .stat {
-    text-align: center;
-    padding: 0.5rem 0.75rem;
-  }
-
-  .stat + .stat {
-    border-left: 1px solid rgba(133,183,235,0.15);
-  }
-
-  .stat-num {
-    font-size: 22px;
-    font-weight: 700;
-    color: #ffffff;
-    line-height: 1;
-    display: block;
-  }
-
-  .stat-label {
-    font-size: 11px;
-    color: var(--gray-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-top: 5px;
-    display: block;
-  }
-
-  /* Bottom wave for hero */
+ 
+  .stat { text-align: center; padding: 0.5rem 0.75rem; }
+  .stat + .stat { border-left: 1px solid rgba(133,183,235,0.15); }
+  .stat-num { font-size: 22px; font-weight: 700; color: #ffffff; line-height: 1; display: block; }
+  .stat-label { font-size: 11px; color: var(--gray-soft); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 5px; display: block; }
+ 
   .hero-wave-bottom {
     position: absolute;
     bottom: -2px; left: 0; right: 0;
     z-index: 2;
     line-height: 0;
   }
-
+ 
   /* ── TRUST BAR ── */
   .trust-bar {
     background: var(--off-white);
@@ -316,7 +275,7 @@
     gap: 3rem;
     border-bottom: 1px solid rgba(4,44,83,0.07);
   }
-
+ 
   .trust-item {
     display: flex;
     align-items: center;
@@ -325,17 +284,12 @@
     font-weight: 500;
     color: var(--gray-text);
   }
-
-  .trust-icon {
-    width: 18px; height: 18px;
-    color: var(--blue-mid);
-  }
-
+ 
+  .trust-icon { width: 18px; height: 18px; color: var(--blue-mid); }
+ 
   /* ── SECTIONS ── */
-  section {
-    padding: 7rem 4rem;
-  }
-
+  section { padding: 7rem 4rem; }
+ 
   .section-label {
     font-size: 0.75rem;
     font-weight: 600;
@@ -344,7 +298,7 @@
     color: var(--blue-mid);
     margin-bottom: 1rem;
   }
-
+ 
   .section-title {
     font-family: 'Syne', sans-serif;
     font-size: clamp(2rem, 3.5vw, 2.8rem);
@@ -354,7 +308,7 @@
     line-height: 1.15;
     margin-bottom: 1.25rem;
   }
-
+ 
   .section-subtitle {
     font-size: 1.05rem;
     font-weight: 300;
@@ -362,12 +316,10 @@
     line-height: 1.75;
     max-width: 540px;
   }
-
+ 
   /* ── PRODUCTS ── */
-  .products-section {
-    background: var(--white);
-  }
-
+  .products-section { background: var(--white); }
+ 
   .products-header {
     display: flex;
     justify-content: space-between;
@@ -376,13 +328,20 @@
     flex-wrap: wrap;
     gap: 1.5rem;
   }
-
+ 
   .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
   }
-
+ 
+  /* All cards are links — reset link styles */
+  a.product-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+ 
   .product-card {
     background: var(--off-white);
     border: 1px solid rgba(4,44,83,0.08);
@@ -391,16 +350,15 @@
     transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
     cursor: pointer;
   }
-
+ 
   .product-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 20px 50px rgba(4,44,83,0.12);
     border-color: rgba(55,138,221,0.25);
   }
-
-  /* Unnamed bottle illustration */
+ 
   .product-image {
-    height: 200px;
+    height: 180px;
     background: linear-gradient(145deg, var(--blue-frost) 0%, #c8dff5 100%);
     display: flex;
     align-items: center;
@@ -408,37 +366,36 @@
     position: relative;
     overflow: hidden;
   }
-
+ 
   .product-image::before {
     content: '';
     position: absolute;
     inset: 0;
     background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.4), transparent 60%);
   }
-
+ 
   .bottle-svg {
-    width: 90px;
+    width: 80px;
     filter: drop-shadow(0 8px 20px rgba(4,44,83,0.18));
     position: relative;
     z-index: 1;
     animation: float 4s ease-in-out infinite;
   }
-
+ 
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-8px); }
   }
-
+ 
   .product-card:nth-child(2) .bottle-svg { animation-delay: -1.5s; }
   .product-card:nth-child(3) .bottle-svg { animation-delay: -0.8s; }
   .product-card:nth-child(4) .bottle-svg { animation-delay: -2.2s; }
   .product-card:nth-child(5) .bottle-svg { animation-delay: -3s; }
   .product-card:nth-child(6) .bottle-svg { animation-delay: -0.4s; }
-
-  .product-body {
-    padding: 1.25rem 1.4rem 1.5rem;
-  }
-
+  .product-card:nth-child(7) .bottle-svg { animation-delay: -1.1s; }
+ 
+  .product-body { padding: 1.1rem 1.25rem 1.35rem; }
+ 
   .product-category {
     font-size: 0.72rem;
     font-weight: 600;
@@ -447,44 +404,43 @@
     color: var(--blue-mid);
     margin-bottom: 0.5rem;
   }
-
+ 
   .product-name {
     font-family: 'Syne', sans-serif;
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--blue-deep);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.45rem;
     letter-spacing: -0.01em;
   }
-
+ 
   .product-desc {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: var(--gray-text);
     font-weight: 300;
     line-height: 1.6;
     margin-bottom: 1rem;
   }
-
+ 
   .product-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-
+ 
   .product-price {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.15rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--blue-deep);
   }
-
+ 
   .product-price span {
     font-size: 0.8rem;
     font-weight: 400;
     color: var(--gray-soft);
-    font-family: 'DM Sans', sans-serif;
   }
-
+ 
   .purity-badge {
     display: inline-flex;
     align-items: center;
@@ -496,15 +452,15 @@
     padding: 0.3rem 0.7rem;
     border-radius: 100px;
   }
-
-  /* ── ABOUT / WHY ── */
+ 
+  /* ── WHY ── */
   .why-section {
     background: var(--blue-deep);
     color: var(--white);
     position: relative;
     overflow: hidden;
   }
-
+ 
   .why-section::before {
     content: '';
     position: absolute;
@@ -514,7 +470,7 @@
       linear-gradient(90deg, rgba(55,138,221,0.06) 1px, transparent 1px);
     background-size: 50px 50px;
   }
-
+ 
   .why-inner {
     position: relative;
     z-index: 1;
@@ -525,25 +481,15 @@
     max-width: 1100px;
     margin: 0 auto;
   }
-
+ 
   .why-text .section-label { color: var(--blue-pale); }
-
   .why-text .section-title { color: var(--white); max-width: 420px; }
-
   .why-text .section-subtitle { color: rgba(181,212,244,0.75); }
-
-  .why-features {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .feature-item {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-  }
-
+ 
+  .why-features { display: flex; flex-direction: column; gap: 1.5rem; }
+ 
+  .feature-item { display: flex; gap: 1rem; align-items: flex-start; }
+ 
   .feature-icon-wrap {
     width: 44px; height: 44px;
     border-radius: 10px;
@@ -554,38 +500,16 @@
     justify-content: center;
     flex-shrink: 0;
   }
-
-  .feature-icon-wrap svg {
-    width: 20px; height: 20px;
-    color: var(--blue-pale);
-  }
-
-  .feature-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--white);
-    margin-bottom: 0.3rem;
-  }
-
-  .feature-desc {
-    font-size: 0.88rem;
-    font-weight: 300;
-    color: rgba(181,212,244,0.7);
-    line-height: 1.6;
-  }
-
+ 
+  .feature-icon-wrap svg { width: 20px; height: 20px; color: var(--blue-pale); }
+ 
+  .feature-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.3rem; }
+  .feature-desc { font-size: 0.88rem; font-weight: 300; color: rgba(181,212,244,0.7); line-height: 1.6; }
+ 
   /* ── PROCESS ── */
-  .process-section {
-    background: var(--off-white);
-    text-align: center;
-  }
-
-  .process-header {
-    max-width: 580px;
-    margin: 0 auto 4rem;
-  }
-
+  .process-section { background: var(--off-white); text-align: center; }
+  .process-header { max-width: 580px; margin: 0 auto 4rem; }
+ 
   .process-steps {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -594,7 +518,7 @@
     margin: 0 auto;
     position: relative;
   }
-
+ 
   .process-steps::before {
     content: '';
     position: absolute;
@@ -602,15 +526,9 @@
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--blue-ghost), var(--blue-ghost), transparent);
   }
-
-  .step-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    position: relative;
-  }
-
+ 
+  .step-card { display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; }
+ 
   .step-number {
     width: 56px; height: 56px;
     border-radius: 50%;
@@ -627,21 +545,10 @@
     position: relative;
     z-index: 1;
   }
-
-  .step-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--blue-deep);
-    margin-bottom: 0.5rem;
-  }
-
-  .step-desc {
-    font-size: 0.82rem;
-    color: var(--gray-text);
-    line-height: 1.6;
-  }
-
+ 
+  .step-title { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 0.5rem; }
+  .step-desc { font-size: 0.82rem; color: var(--gray-text); line-height: 1.6; }
+ 
   /* ── CTA ── */
   .cta-section {
     background: linear-gradient(135deg, var(--blue-mid) 0%, var(--blue-deep) 100%);
@@ -650,7 +557,7 @@
     position: relative;
     overflow: hidden;
   }
-
+ 
   .cta-section::after {
     content: '';
     position: absolute;
@@ -661,16 +568,10 @@
     transform: translate(-50%, -50%);
     pointer-events: none;
   }
-
-  .cta-inner {
-    position: relative;
-    z-index: 1;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
+ 
+  .cta-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
   .cta-inner .section-label { color: var(--blue-pale); }
-
+ 
   .cta-inner h2 {
     font-family: 'Syne', sans-serif;
     font-size: clamp(2rem, 4vw, 3rem);
@@ -680,15 +581,9 @@
     margin-bottom: 1rem;
     line-height: 1.1;
   }
-
-  .cta-inner p {
-    font-size: 1rem;
-    font-weight: 300;
-    color: rgba(181,212,244,0.8);
-    line-height: 1.7;
-    margin-bottom: 2rem;
-  }
-
+ 
+  .cta-inner p { font-size: 1rem; font-weight: 300; color: rgba(181,212,244,0.8); line-height: 1.7; margin-bottom: 2rem; }
+ 
   /* ── FOOTER ── */
   footer {
     background: var(--blue-deep);
@@ -701,37 +596,21 @@
     gap: 1rem;
     border-top: 1px solid rgba(133,183,235,0.1);
   }
-
+ 
   footer .logo { color: var(--white); }
-
-  .footer-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    flex-wrap: wrap;
-  }
-
-  .footer-links a {
-    font-size: 0.85rem;
-    color: rgba(181,212,244,0.55);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
+ 
+  .footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+  .footer-links a { font-size: 0.85rem; color: rgba(181,212,244,0.55); text-decoration: none; transition: color 0.2s; }
   .footer-links a:hover { color: var(--blue-ghost); }
-
-  .footer-copy {
-    font-size: 0.8rem;
-    width: 100%;
-    text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(133,183,235,0.08);
-    margin-top: 1rem;
-  }
-
-  /* Container */
+ 
+  .footer-copy { font-size: 0.8rem; width: 100%; text-align: center; padding-top: 2rem; border-top: 1px solid rgba(133,183,235,0.08); margin-top: 1rem; }
+ 
   .container { max-width: 1200px; margin: 0 auto; }
-
+ 
+  @media (max-width: 1100px) {
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+ 
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
     nav ul { display: none; }
@@ -741,28 +620,28 @@
     .process-steps { grid-template-columns: 1fr 1fr; }
     .process-steps::before { display: none; }
     .products-header { flex-direction: column; }
+    .products-grid { grid-template-columns: 1fr 1fr; }
     footer { flex-direction: column; text-align: center; padding: 2rem; }
     .hero-stats { grid-template-columns: repeat(2, 1fr); max-width: 320px; }
     .stat + .stat:nth-child(3) { border-left: none; }
     .stat:nth-child(3), .stat:nth-child(4) { border-top: 1px solid rgba(133,183,235,0.15); padding-top: 1rem; margin-top: 0.5rem; }
-    .stat-num { font-size: 20px; }
-    .stat-label { font-size: 10px; }
+  }
+ 
+  @media (max-width: 480px) {
+    .products-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
-
+ 
 <!-- NAV -->
 <nav>
-  <div class="logo">
+  <a href="index.html" class="logo">
     <div class="logo-mark">
-      <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="10" cy="10" r="3" fill="white"/>
-        <path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.93 4.93l2.83 2.83M12.24 12.24l2.83 2.83M4.93 15.07l2.83-2.83M12.24 7.76l2.83-2.83" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
+      <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" fill="white"/><path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.93 4.93l2.83 2.83M12.24 12.24l2.83 2.83M4.93 15.07l2.83-2.83M12.24 7.76l2.83-2.83" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
     </div>
     Research Peptides
-  </div>
+  </a>
   <ul>
     <li><a href="#products">Products</a></li>
     <li><a href="#about">Science</a></li>
@@ -770,11 +649,9 @@
     <li><a href="#contact" class="nav-cta">Order Now</a></li>
   </ul>
 </nav>
-
+ 
 <!-- HERO -->
 <section class="hero" id="home">
-
-  <!-- Seamless canvas wave -->
   <canvas id="waveCanvas" style="position:absolute;top:0;left:0;width:100%;height:140px;z-index:1;pointer-events:none;"></canvas>
   <script>
     (function(){
@@ -790,65 +667,33 @@
       resize();
       window.addEventListener("resize", resize);
       function draw(){
-        var W = canvas.offsetWidth;
-        var H = 140;
+        var W = canvas.offsetWidth, H = 140;
         ctx.clearRect(0, 0, W, H);
-        var period = W * 1.5;
-        var off = offset % period;
-
+        var period = W * 1.5, off = offset % period;
         function sine(x, phase, amp, mid){ return mid + Math.sin(((x + off * phase) / period) * Math.PI * 2) * amp; }
-
-        // Filled wave 1
+        ctx.beginPath(); ctx.moveTo(0, 0);
+        for(var x = 0; x <= W; x += 3) ctx.lineTo(x, sine(x, 1, 28, 52));
+        ctx.lineTo(W, 0); ctx.closePath();
+        ctx.fillStyle = "rgba(55,138,221,0.20)"; ctx.fill();
+        ctx.beginPath(); ctx.moveTo(0, 0);
+        for(var x = 0; x <= W; x += 3) ctx.lineTo(x, sine(x, 0.65, 22, 42));
+        ctx.lineTo(W, 0); ctx.closePath();
+        ctx.fillStyle = "rgba(133,183,235,0.10)"; ctx.fill();
         ctx.beginPath();
-        ctx.moveTo(0, 0);
-        for(var x = 0; x <= W; x += 3){
-          ctx.lineTo(x, sine(x, 1, 28, 52));
-        }
-        ctx.lineTo(W, 0);
-        ctx.closePath();
-        ctx.fillStyle = "rgba(55,138,221,0.20)";
-        ctx.fill();
-
-        // Filled wave 2
+        for(var x = 0; x <= W; x += 3){ var y = sine(x, 1.2, 18, 72); if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); }
+        ctx.strokeStyle = "rgba(133,183,235,0.38)"; ctx.lineWidth = 1.5; ctx.stroke();
         ctx.beginPath();
-        ctx.moveTo(0, 0);
-        for(var x = 0; x <= W; x += 3){
-          ctx.lineTo(x, sine(x, 0.65, 22, 42));
-        }
-        ctx.lineTo(W, 0);
-        ctx.closePath();
-        ctx.fillStyle = "rgba(133,183,235,0.10)";
-        ctx.fill();
-
-        // Stroke line 1
-        ctx.beginPath();
-        for(var x = 0; x <= W; x += 3){
-          var y = sine(x, 1.2, 18, 72);
-          if(x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-        }
-        ctx.strokeStyle = "rgba(133,183,235,0.38)";
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-
-        // Stroke line 2
-        ctx.beginPath();
-        for(var x = 0; x <= W; x += 3){
-          var y = sine(x, 0.75, 14, 92);
-          if(x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-        }
-        ctx.strokeStyle = "rgba(55,138,221,0.22)";
-        ctx.lineWidth = 1;
-        ctx.stroke();
-
+        for(var x = 0; x <= W; x += 3){ var y = sine(x, 0.75, 14, 92); if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); }
+        ctx.strokeStyle = "rgba(55,138,221,0.22)"; ctx.lineWidth = 1; ctx.stroke();
         offset += 0.7;
         requestAnimationFrame(draw);
       }
       draw();
     })();
   </script>
-
+ 
   <div class="hero-orb"></div>
-
+ 
   <div class="hero-content">
     <div class="hero-tag">Research Grade · GMP Certified</div>
     <h1>Precision Peptides for<br><span>Advanced Research</span></h1>
@@ -858,68 +703,45 @@
       <a href="#about" class="btn-outline">Our Science</a>
     </div>
   </div>
-
+ 
   <div class="hero-stats">
-    <div class="stat">
-      <div class="stat-num">99.8%</div>
-      <div class="stat-label">Avg. Purity</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">500+</div>
-      <div class="stat-label">Compounds</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">40+</div>
-      <div class="stat-label">Countries</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">12K+</div>
-      <div class="stat-label">Researchers</div>
-    </div>
+    <div class="stat"><span class="stat-num">99.8%</span><span class="stat-label">Avg. Purity</span></div>
+    <div class="stat"><span class="stat-num">500+</span><span class="stat-label">Compounds</span></div>
+    <div class="stat"><span class="stat-num">40+</span><span class="stat-label">Countries</span></div>
+    <div class="stat"><span class="stat-num">12K+</span><span class="stat-label">Researchers</span></div>
   </div>
-
-  <!-- Bottom wave -->
+ 
   <div class="hero-wave-bottom">
     <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" height="80">
       <path d="M0,0 C360,80 1080,0 1440,80 L1440,80 L0,80 Z" fill="white"/>
     </svg>
   </div>
 </section>
-
+ 
 <!-- TRUST BAR -->
 <div class="trust-bar">
   <div class="trust-item">
-    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-    </svg>
+    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
     HPLC Verified
   </div>
   <div class="trust-item">
-    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-    </svg>
+    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
     Mass Spec Tested
   </div>
   <div class="trust-item">
-    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
-    </svg>
+    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
     COA with Every Order
   </div>
   <div class="trust-item">
-    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-    </svg>
+    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
     Discreet Packaging
   </div>
   <div class="trust-item">
-    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-    </svg>
+    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
     Worldwide Shipping
   </div>
 </div>
-
+ 
 <!-- PRODUCTS -->
 <section class="products-section container" id="products" style="padding: 7rem 2rem;">
   <div class="products-header">
@@ -929,25 +751,19 @@
     </div>
     <p class="section-subtitle" style="max-width: 360px;">Every compound synthesised to the highest standards with third-party analytical verification.</p>
   </div>
-
+ 
   <div class="products-grid">
-
-    <!-- Card 1 -->
-    <div class="product-card">
+ 
+    <!-- Card 1: BPC-157 id=4 -->
+    <a href="product.html?id=4" class="product-card">
       <div class="product-image">
-        <!-- Vial bottle SVG -->
-        <svg class="bottle-svg" viewBox="0 0 90 140" xmlns="http://www.w3.org/2000/svg">
-          <rect x="32" y="4" width="26" height="14" rx="3" fill="#0C447C" opacity="0.7"/>
-          <rect x="28" y="16" width="34" height="100" rx="10" fill="#185FA5"/>
-          <rect x="28" y="16" width="34" height="100" rx="10" fill="url(#vialGrad1)" opacity="0.8"/>
-          <rect x="30" y="18" width="10" height="96" rx="5" fill="rgba(255,255,255,0.15)"/>
-          <rect x="28" y="95" width="34" height="21" rx="0 0 10 10" fill="#0C447C" opacity="0.5"/>
-          <defs>
-            <linearGradient id="vialGrad1" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="white" stop-opacity="0.3"/>
-              <stop offset="100%" stop-color="white" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
+        <svg class="bottle-svg" viewBox="0 0 80 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="28" y="3" width="24" height="13" rx="3" fill="#0C447C" opacity="0.8"/>
+          <rect x="22" y="14" width="36" height="97" rx="11" fill="#185FA5"/>
+          <rect x="22" y="14" width="36" height="97" rx="11" fill="url(#g1)" opacity="0.7"/>
+          <rect x="24" y="16" width="10" height="93" rx="5" fill="rgba(255,255,255,0.16)"/>
+          <rect x="22" y="86" width="36" height="25" fill="#0C447C" opacity="0.45"/>
+          <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="white" stop-opacity="0.3"/><stop offset="100%" stop-color="white" stop-opacity="0"/></linearGradient></defs>
         </svg>
       </div>
       <div class="product-body">
@@ -955,55 +771,45 @@
         <div class="product-name">BPC-157 5mg</div>
         <div class="product-desc">Body protection compound — widely studied for tissue repair and recovery mechanisms.</div>
         <div class="product-footer">
-          <div class="product-price">£38.00 <span>/ vial</span></div>
+          <div class="product-price">£38 <span>/ vial</span></div>
           <div class="purity-badge">✓ 99.5% Pure</div>
         </div>
       </div>
-    </div>
-
-    <!-- Card 2 -->
-    <div class="product-card">
-      <div class="product-image">
-        <svg class="bottle-svg" viewBox="0 0 90 140" xmlns="http://www.w3.org/2000/svg">
-          <rect x="32" y="4" width="26" height="14" rx="3" fill="#185FA5" opacity="0.8"/>
-          <rect x="28" y="16" width="34" height="100" rx="10" fill="#378ADD"/>
-          <rect x="28" y="16" width="34" height="100" rx="10" fill="url(#vialGrad2)" opacity="0.7"/>
-          <rect x="30" y="18" width="10" height="96" rx="5" fill="rgba(255,255,255,0.18)"/>
-          <rect x="28" y="95" width="34" height="21" rx="0 0 10 10" fill="#185FA5" opacity="0.6"/>
-          <defs>
-            <linearGradient id="vialGrad2" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="white" stop-opacity="0.35"/>
-              <stop offset="100%" stop-color="white" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
+    </a>
+ 
+    <!-- Card 2: Semax id=7 -->
+    <a href="product.html?id=7" class="product-card">
+      <div class="product-image" style="background: linear-gradient(145deg, #d4e8f7 0%, #b8d5ef 100%);">
+        <svg class="bottle-svg" viewBox="0 0 80 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="28" y="3" width="24" height="13" rx="3" fill="#185FA5" opacity="0.8"/>
+          <rect x="22" y="14" width="36" height="97" rx="11" fill="#378ADD"/>
+          <rect x="22" y="14" width="36" height="97" rx="11" fill="url(#g2)" opacity="0.7"/>
+          <rect x="24" y="16" width="10" height="93" rx="5" fill="rgba(255,255,255,0.18)"/>
+          <rect x="22" y="86" width="36" height="25" fill="#185FA5" opacity="0.6"/>
+          <defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="white" stop-opacity="0.35"/><stop offset="100%" stop-color="white" stop-opacity="0"/></linearGradient></defs>
         </svg>
       </div>
       <div class="product-body">
         <div class="product-category">Cognitive</div>
         <div class="product-name">Semax 30mg</div>
-        <div class="product-desc">Synthetic peptide analogue of ACTH — studied for neuroprotective and nootropic properties.</div>
+        <div class="product-desc">Synthetic ACTH analogue — studied for neuroprotective and nootropic properties in CNS research.</div>
         <div class="product-footer">
-          <div class="product-price">£52.00 <span>/ vial</span></div>
+          <div class="product-price">£52 <span>/ vial</span></div>
           <div class="purity-badge">✓ 99.8% Pure</div>
         </div>
       </div>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="product-card">
-      <div class="product-image">
-        <svg class="bottle-svg" viewBox="0 0 90 170" xmlns="http://www.w3.org/2000/svg">
-          <!-- Ampoule shape -->
-          <rect x="35" y="2" width="20" height="30" rx="10" fill="#0C447C" opacity="0.7"/>
-          <path d="M28 32 Q28 50 22 80 L22 140 Q22 155 45 155 Q68 155 68 140 L68 80 Q62 50 62 32 Z" fill="#185FA5"/>
-          <path d="M28 32 Q28 50 22 80 L22 140 Q22 155 45 155 Q68 155 68 140 L68 80 Q62 50 62 32 Z" fill="url(#ampGrad)" opacity="0.7"/>
-          <ellipse cx="36" cy="70" rx="5" ry="30" fill="rgba(255,255,255,0.15)"/>
-          <defs>
-            <linearGradient id="ampGrad" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="white" stop-opacity="0.3"/>
-              <stop offset="100%" stop-color="white" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
+    </a>
+ 
+    <!-- Card 3: TB-500 id=5 -->
+    <a href="product.html?id=5" class="product-card">
+      <div class="product-image" style="background: linear-gradient(145deg, #cfe5f5 0%, #b5d4f0 100%);">
+        <svg class="bottle-svg" viewBox="0 0 80 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="28" y="3" width="24" height="13" rx="3" fill="#0C447C" opacity="0.7"/>
+          <rect x="22" y="14" width="36" height="97" rx="11" fill="#1a6db5"/>
+          <rect x="22" y="14" width="36" height="97" rx="11" fill="url(#g3)" opacity="0.75"/>
+          <rect x="24" y="16" width="10" height="93" rx="5" fill="rgba(255,255,255,0.16)"/>
+          <rect x="22" y="86" width="36" height="25" fill="#0C447C" opacity="0.5"/>
+          <defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="white" stop-opacity="0.3"/><stop offset="100%" stop-color="white" stop-opacity="0"/></linearGradient></defs>
         </svg>
       </div>
       <div class="product-body">
@@ -1011,28 +817,22 @@
         <div class="product-name">TB-500 2mg</div>
         <div class="product-desc">Thymosin Beta-4 fragment — investigated for wound healing, inflammation, and cellular migration.</div>
         <div class="product-footer">
-          <div class="product-price">£44.00 <span>/ vial</span></div>
+          <div class="product-price">£44 <span>/ vial</span></div>
           <div class="purity-badge">✓ 99.6% Pure</div>
         </div>
       </div>
-    </div>
-
-    <!-- Card 4 -->
-    <div class="product-card">
-      <div class="product-image">
-        <svg class="bottle-svg" viewBox="0 0 90 140" xmlns="http://www.w3.org/2000/svg">
-          <!-- Wider bottle -->
-          <rect x="30" y="4" width="30" height="12" rx="3" fill="#042C53" opacity="0.8"/>
-          <rect x="24" y="14" width="42" height="105" rx="12" fill="#185FA5"/>
-          <rect x="24" y="14" width="42" height="105" rx="12" fill="url(#vialGrad3)" opacity="0.7"/>
-          <rect x="26" y="16" width="12" height="101" rx="6" fill="rgba(255,255,255,0.14)"/>
-          <rect x="24" y="94" width="42" height="25" rx="0 0 12 12" fill="#042C53" opacity="0.45"/>
-          <defs>
-            <linearGradient id="vialGrad3" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="white" stop-opacity="0.3"/>
-              <stop offset="100%" stop-color="white" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
+    </a>
+ 
+    <!-- Card 4: CJC-1295 id=6 -->
+    <a href="product.html?id=6" class="product-card">
+      <div class="product-image" style="background: linear-gradient(145deg, #c8dcf0 0%, #aacae8 100%);">
+        <svg class="bottle-svg" viewBox="0 0 80 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="28" y="3" width="24" height="13" rx="3" fill="#042C53" opacity="0.8"/>
+          <rect x="22" y="14" width="36" height="97" rx="11" fill="#185FA5"/>
+          <rect x="22" y="14" width="36" height="97" rx="11" fill="url(#g4)" opacity="0.7"/>
+          <rect x="24" y="16" width="10" height="93" rx="5" fill="rgba(255,255,255,0.14)"/>
+          <rect x="22" y="86" width="36" height="25" fill="#042C53" opacity="0.45"/>
+          <defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="white" stop-opacity="0.3"/><stop offset="100%" stop-color="white" stop-opacity="0"/></linearGradient></defs>
         </svg>
       </div>
       <div class="product-body">
@@ -1040,27 +840,22 @@
         <div class="product-name">CJC-1295 2mg</div>
         <div class="product-desc">Modified GRF analogue with extended half-life — a staple in growth hormone research protocols.</div>
         <div class="product-footer">
-          <div class="product-price">£46.00 <span>/ vial</span></div>
+          <div class="product-price">£46 <span>/ vial</span></div>
           <div class="purity-badge">✓ 99.7% Pure</div>
         </div>
       </div>
-    </div>
-
-    <!-- Card 5 -->
-    <div class="product-card">
-      <div class="product-image">
-        <svg class="bottle-svg" viewBox="0 0 90 140" xmlns="http://www.w3.org/2000/svg">
-          <rect x="34" y="2" width="22" height="16" rx="4" fill="#0C447C" opacity="0.75"/>
-          <rect x="26" y="16" width="38" height="102" rx="11" fill="#1a6db5"/>
-          <rect x="26" y="16" width="38" height="102" rx="11" fill="url(#vialGrad4)" opacity="0.75"/>
-          <rect x="28" y="18" width="11" height="98" rx="5.5" fill="rgba(255,255,255,0.16)"/>
-          <rect x="26" y="90" width="38" height="28" rx="0 0 11 11" fill="#0C447C" opacity="0.5"/>
-          <defs>
-            <linearGradient id="vialGrad4" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="white" stop-opacity="0.35"/>
-              <stop offset="100%" stop-color="white" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
+    </a>
+ 
+    <!-- Card 5: Epitalon id=8 -->
+    <a href="product.html?id=8" class="product-card">
+      <div class="product-image" style="background: linear-gradient(145deg, #d0e5f8 0%, #b8d5f0 100%);">
+        <svg class="bottle-svg" viewBox="0 0 80 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="28" y="3" width="24" height="13" rx="3" fill="#0C447C" opacity="0.75"/>
+          <rect x="22" y="14" width="36" height="97" rx="11" fill="#2980b9"/>
+          <rect x="22" y="14" width="36" height="97" rx="11" fill="url(#g5)" opacity="0.75"/>
+          <rect x="24" y="16" width="10" height="93" rx="5" fill="rgba(255,255,255,0.16)"/>
+          <rect x="22" y="86" width="36" height="25" fill="#0C447C" opacity="0.5"/>
+          <defs><linearGradient id="g5" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="white" stop-opacity="0.35"/><stop offset="100%" stop-color="white" stop-opacity="0"/></linearGradient></defs>
         </svg>
       </div>
       <div class="product-body">
@@ -1068,23 +863,69 @@
         <div class="product-name">Epitalon 10mg</div>
         <div class="product-desc">Tetrapeptide studied for telomere elongation and circadian rhythm regulation in aging models.</div>
         <div class="product-footer">
-          <div class="product-price">£58.00 <span>/ vial</span></div>
+          <div class="product-price">£58 <span>/ vial</span></div>
           <div class="purity-badge">✓ 99.9% Pure</div>
         </div>
       </div>
-    </div>
-
-    <!-- Card 6 — View All -->
-    <div class="product-card" style="background: var(--blue-deep); border-color: transparent; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 340px; gap: 1rem; padding: 2rem;">
+    </a>
+ 
+    <!-- Card 6: Semaglutide id=2 -->
+    <a href="product.html?id=2" class="product-card">
+      <div class="product-image" style="background: linear-gradient(145deg, #c5ddf5 0%, #a8ccec 100%);">
+        <svg class="bottle-svg" viewBox="0 0 80 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="28" y="3" width="24" height="13" rx="3" fill="#0C447C" opacity="0.8"/>
+          <rect x="22" y="14" width="36" height="97" rx="11" fill="#378ADD"/>
+          <rect x="22" y="14" width="36" height="97" rx="11" fill="url(#g6)" opacity="0.7"/>
+          <rect x="24" y="16" width="10" height="93" rx="5" fill="rgba(255,255,255,0.18)"/>
+          <rect x="22" y="86" width="36" height="25" fill="#0C447C" opacity="0.55"/>
+          <defs><linearGradient id="g6" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="white" stop-opacity="0.3"/><stop offset="100%" stop-color="white" stop-opacity="0"/></linearGradient></defs>
+        </svg>
+      </div>
+      <div class="product-body">
+        <div class="product-category">GLP-1 / Weight Loss</div>
+        <div class="product-name">Semaglutide 5mg</div>
+        <div class="product-desc">GLP-1 receptor agonist — studied for appetite regulation, glycaemic control, and weight management.</div>
+        <div class="product-footer">
+          <div class="product-price">£72 <span>/ vial</span></div>
+          <div class="purity-badge">✓ 99.8% Pure</div>
+        </div>
+      </div>
+    </a>
+ 
+    <!-- Card 7: Ipamorelin id=9 -->
+    <a href="product.html?id=9" class="product-card">
+      <div class="product-image" style="background: linear-gradient(145deg, #cce0f4 0%, #b0cfec 100%);">
+        <svg class="bottle-svg" viewBox="0 0 80 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="28" y="3" width="24" height="13" rx="3" fill="#042C53" opacity="0.75"/>
+          <rect x="22" y="14" width="36" height="97" rx="11" fill="#185FA5"/>
+          <rect x="22" y="14" width="36" height="97" rx="11" fill="url(#g7)" opacity="0.7"/>
+          <rect x="24" y="16" width="10" height="93" rx="5" fill="rgba(255,255,255,0.15)"/>
+          <rect x="22" y="86" width="36" height="25" fill="#042C53" opacity="0.4"/>
+          <defs><linearGradient id="g7" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="white" stop-opacity="0.3"/><stop offset="100%" stop-color="white" stop-opacity="0"/></linearGradient></defs>
+        </svg>
+      </div>
+      <div class="product-body">
+        <div class="product-category">GH Secretagogue</div>
+        <div class="product-name">Ipamorelin 2mg</div>
+        <div class="product-desc">Selective ghrelin mimetic — clean GH release profile without cortisol or prolactin elevation.</div>
+        <div class="product-footer">
+          <div class="product-price">£36 <span>/ vial</span></div>
+          <div class="purity-badge">✓ 99.5% Pure</div>
+        </div>
+      </div>
+    </a>
+ 
+    <!-- Card 8: View All -->
+    <a href="products.html" class="product-card" style="background: var(--blue-deep); border-color: transparent; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 300px; gap: 1rem; padding: 2rem; text-decoration: none;">
       <div style="font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800; color: rgba(133,183,235,0.25);">500+</div>
       <div style="font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: white;">More Compounds</div>
       <p style="font-size: 0.85rem; color: rgba(181,212,244,0.6); line-height: 1.6;">Browse our complete catalogue of research peptides, amino acids, and reference standards.</p>
-      <a href="products.html" class="btn-primary" style="margin-top: 0.5rem;">View Full Catalogue</a>
-    </div>
-
+      <span class="btn-primary" style="margin-top: 0.5rem;">View Full Catalogue</span>
+    </a>
+ 
   </div>
 </section>
-
+ 
 <!-- WHY / ABOUT -->
 <section class="why-section" id="about">
   <div class="why-inner">
@@ -1096,9 +937,7 @@
     <div class="why-features">
       <div class="feature-item">
         <div class="feature-icon-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
         </div>
         <div>
           <div class="feature-title">Third-Party Analytical Testing</div>
@@ -1107,9 +946,7 @@
       </div>
       <div class="feature-item">
         <div class="feature-icon-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
         </div>
         <div>
           <div class="feature-title">GMP-Compliant Synthesis</div>
@@ -1118,9 +955,7 @@
       </div>
       <div class="feature-item">
         <div class="feature-icon-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
         </div>
         <div>
           <div class="feature-title">Cold-Chain Logistics</div>
@@ -1129,9 +964,7 @@
       </div>
       <div class="feature-item">
         <div class="feature-icon-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/></svg>
         </div>
         <div>
           <div class="feature-title">Expert Technical Support</div>
@@ -1141,7 +974,7 @@
     </div>
   </div>
 </section>
-
+ 
 <!-- PROCESS -->
 <section class="process-section" id="process">
   <div class="process-header">
@@ -1172,7 +1005,7 @@
     </div>
   </div>
 </section>
-
+ 
 <!-- CTA -->
 <section class="cta-section" id="contact">
   <div class="cta-inner">
@@ -1180,35 +1013,30 @@
     <h2>Ready to Elevate Your Research?</h2>
     <p>Join over 12,000 researchers worldwide who trust Research Peptides for their laboratory supply chain.</p>
     <div class="hero-btns">
-      <a href="#" class="btn-primary" style="background: white; color: var(--blue-deep);">Browse Catalogue</a>
+      <a href="products.html" class="btn-primary" style="background: white; color: var(--blue-deep);">Browse Catalogue</a>
       <a href="#" class="btn-outline">Request a Quote</a>
     </div>
   </div>
 </section>
-
+ 
 <!-- FOOTER -->
 <footer>
-  <div class="logo">
+  <a href="index.html" class="logo">
     <div class="logo-mark">
-      <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="10" cy="10" r="3" fill="white"/>
-        <path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.93 4.93l2.83 2.83M12.24 12.24l2.83 2.83M4.93 15.07l2.83-2.83M12.24 7.76l2.83-2.83" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
+      <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" fill="white"/><path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.93 4.93l2.83 2.83M12.24 12.24l2.83 2.83M4.93 15.07l2.83-2.83M12.24 7.76l2.83-2.83" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
     </div>
     Research Peptides
-  </div>
+  </a>
   <ul class="footer-links">
-    <li><a href="#">Products</a></li>
-    <li><a href="#">Science</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="#about">Science</a></li>
     <li><a href="#">Shipping</a></li>
     <li><a href="#">COA Library</a></li>
     <li><a href="#">Contact</a></li>
     <li><a href="#">Terms of Use</a></li>
   </ul>
-  <div class="footer-copy">
-    © 2025 Research Peptides Ltd. All compounds are sold strictly for research purposes only. Not for human consumption.
-  </div>
+  <div class="footer-copy">© 2025 Research Peptides Ltd. All compounds are sold strictly for research purposes only. Not for human consumption.</div>
 </footer>
-
+ 
 </body>
 </html>
