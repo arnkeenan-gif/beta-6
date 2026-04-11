@@ -26,7 +26,6 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
 .logo-name { font-family:'Syne',sans-serif; font-size:16px; font-weight:700; color:#fff; letter-spacing:-0.2px; }
 .tagline { font-size:12px; color:var(--muted); margin-bottom:20px; }
  
-/* Cart + shipping strip */
 .cart-strip { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); border-radius:13px; padding:14px 16px; margin-bottom:20px; }
 .cart-strip-title { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); margin-bottom:10px; }
 .cart-strip-items { display:flex; flex-direction:column; gap:5px; margin-bottom:8px; }
@@ -132,7 +131,6 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
   </div>
   <div class="tagline">Complete your order with crypto</div>
  
-  <!-- Cart + shipping strip -->
   <div class="cart-strip">
     <div class="cart-strip-title">Your order</div>
     <div class="cart-strip-items" id="cartStripItems"></div>
@@ -154,7 +152,6 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
     </div>
   </div>
  
-  <!-- SELECT SCREEN -->
   <div class="screen active" id="screen-select">
     <div class="section-label">Select currency</div>
     <div class="conv-note" id="conv-note">Loading live rates…</div>
@@ -182,7 +179,6 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
     </div>
   </div>
  
-  <!-- PAYMENT SCREEN -->
   <div class="screen" id="screen-pay">
     <div class="pay-card">
       <div class="pay-cur-row">
@@ -215,7 +211,6 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
     </div>
   </div>
  
-  <!-- SUCCESS SCREEN -->
   <div class="screen" id="screen-success">
     <div class="success-card">
       <div class="success-icon">
@@ -252,7 +247,6 @@ const gbpTotal     = subtotal + shipPrice;
 let rates={}, cryptoAmounts={};
 let currentKey=null,pollTimer=null,seenTxids=new Set(),pollCount=0,sessionStart=0,currentAddr='';
  
-/* Strip */
 (function renderStrip(){
   document.getElementById('cartStripTotal').textContent='£'+gbpTotal.toFixed(2);
   document.getElementById('stripSubtotal').textContent='£'+subtotal.toFixed(2);
@@ -268,7 +262,6 @@ let currentKey=null,pollTimer=null,seenTxids=new Set(),pollCount=0,sessionStart=
   items.innerHTML=cart.map(i=>`<div class="cart-strip-item"><span>${i.name} ${i.dose}</span><span class="cart-strip-item-qty">×${i.qty}</span><span class="cart-strip-item-price">£${(i.price*i.qty).toFixed(2)}</span></div>`).join('');
 })();
  
-/* Rates */
 async function fetchRates(){
   try{
     const res=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,usd-coin&vs_currencies=gbp');
@@ -340,9 +333,8 @@ let tickTimer=null;
  
 function startPolling(){
   stopPolling();
-  // Tick every second just to update the elapsed time display
   tickTimer=setInterval(updateTimerDisplay,1000);
-  poll(); // first poll immediately
+  poll();
   pollTimer=setInterval(poll,CONFIG.POLL_MS);
 }
  
@@ -368,7 +360,10 @@ async function poll(){
     else if(currentKey==='eth') r=await checkETH();
     else r=await checkSOL();
     if(r) onPaymentFound(r);
-  }catch(e){setTracker('scanning',`<strong>Scanning blockchain…</strong><br>Network hiccup — retrying in ${CONFIG.POLL_MS/1000}s`);}
+  }catch(e){
+    setTracker('scanning',`<strong>Scanning blockchain…</strong><br>Network hiccup — retrying in ${CONFIG.POLL_MS/1000}s`);
+    console.error(e);
+  }
 }
  
 async function checkBTC(){
@@ -406,33 +401,121 @@ async function checkETH(){
 }
  
 async function checkSOL(){
-  const addr=currencies.sol.addr,RPC='https://api.mainnet-beta.solana.com';
-  const USDC='EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
-  const sigRes=await fetch(RPC,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'getSignaturesForAddress',params:[addr,{limit:10}]})});
-  if(!sigRes.ok)throw new Error('Solana');
-  const sd=await sigRes.json();
-  if(!sd.result?.length)return null;
-  for(const sig of sd.result){
-    if(seenTxids.has(sig.signature)||sig.err)continue;
-    const bt=sig.blockTime||0;
-    if(bt>0&&bt<sessionStart)break;
-    const txRes=await fetch(RPC,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'getTransaction',params:[sig.signature,{encoding:'jsonParsed',maxSupportedTransactionVersion:0}]})});
-    const td=await txRes.json();
-    const tx=td.result;if(!tx)continue;
-    let amount=null;
-    if(currentKey==='usdc'){
-      const allIx=[...(tx.transaction?.message?.instructions||[]),...(tx.meta?.innerInstructions||[]).flatMap(g=>g.instructions||[])];
-      for(const ix of allIx){
-        if(ix.parsed?.type==='transferChecked'&&ix.parsed?.info?.mint===USDC){amount=(ix.parsed.info?.tokenAmount?.uiAmount||'?')+' USDC';break;}
-        if(ix.parsed?.type==='transfer'&&ix.program==='spl-token'){amount='USDC received';break;}
+  const addr = currencies.sol.addr;
+  const RPC = 'https://api.mainnet-beta.solana.com';
+  const USDC = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
+
+  const sigRes = await fetch(RPC, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: 1,
+      method: 'getSignaturesForAddress',
+      params: [addr, { limit: 20 }]
+    })
+  });
+
+  if (!sigRes.ok) throw new Error('Solana');
+  const sd = await sigRes.json();
+  if (!sd.result?.length) return null;
+
+  for (const sig of sd.result) {
+    if (seenTxids.has(sig.signature) || sig.err) continue;
+
+    const bt = sig.blockTime || 0;
+
+    if (bt > 0 && bt < sessionStart - 120) continue;
+
+    const txRes = await fetch(RPC, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        id: 1,
+        method: 'getTransaction',
+        params: [sig.signature, {
+          encoding: 'jsonParsed',
+          maxSupportedTransactionVersion: 0
+        }]
+      })
+    });
+
+    if (!txRes.ok) continue;
+
+    const td = await txRes.json();
+    const tx = td.result;
+    if (!tx) continue;
+
+    let amount = null;
+
+    if (currentKey === 'usdc') {
+      const allIx = [
+        ...(tx.transaction?.message?.instructions || []),
+        ...(tx.meta?.innerInstructions || []).flatMap(g => g.instructions || [])
+      ];
+
+      for (const ix of allIx) {
+        if (
+          ix.parsed?.type === 'transferChecked' &&
+          ix.parsed?.info?.mint === USDC &&
+          ix.parsed?.info?.destination === addr
+        ) {
+          amount = (ix.parsed.info?.tokenAmount?.uiAmount || '?') + ' USDC';
+          break;
+        }
+
+        if (
+          ix.parsed?.type === 'transfer' &&
+          ix.program === 'spl-token' &&
+          ix.parsed?.info?.destination === addr
+        ) {
+          amount = 'USDC received';
+          break;
+        }
       }
-    }else{
-      const keys=(tx.transaction?.message?.accountKeys||[]);
-      const idx=keys.findIndex(k=>(k.pubkey||k)===addr);
-      if(idx>=0){const diff=(tx.meta?.postBalances?.[idx]??0)-(tx.meta?.preBalances?.[idx]??0);if(diff>0)amount=(diff/1e9).toFixed(4)+' SOL';}
+    } else {
+      const allIx = [
+        ...(tx.transaction?.message?.instructions || []),
+        ...(tx.meta?.innerInstructions || []).flatMap(g => g.instructions || [])
+      ];
+
+      for (const ix of allIx) {
+        if (
+          ix.program === 'system' &&
+          ix.parsed?.type === 'transfer' &&
+          ix.parsed?.info?.destination === addr
+        ) {
+          const lamports = Number(ix.parsed.info?.lamports || 0);
+          if (lamports > 0) {
+            amount = (lamports / 1e9).toFixed(6) + ' SOL';
+            break;
+          }
+        }
+      }
+
+      if (!amount) {
+        const keys = tx.transaction?.message?.accountKeys || [];
+        const idx = keys.findIndex(k => (k.pubkey || k) === addr);
+        if (idx >= 0) {
+          const diff = (tx.meta?.postBalances?.[idx] ?? 0) - (tx.meta?.preBalances?.[idx] ?? 0);
+          if (diff > 0) {
+            amount = (diff / 1e9).toFixed(6) + ' SOL';
+          }
+        }
+      }
     }
-    if(amount){seenTxids.add(sig.signature);return{txid:sig.signature,amount,explorer:currencies[currentKey].explorer(sig.signature)};}
+
+    if (amount) {
+      seenTxids.add(sig.signature);
+      return {
+        txid: sig.signature,
+        amount,
+        explorer: currencies[currentKey].explorer(sig.signature)
+      };
+    }
   }
+
   return null;
 }
  
@@ -451,10 +534,16 @@ function onPaymentFound(result){
 function startCountdown(){
   let n=CONFIG.REDIRECT_SECS;
   document.getElementById('redirect-count').textContent=n;
-  const t=setInterval(()=>{n--;document.getElementById('redirect-count').textContent=n;if(n<=0){clearInterval(t);window.location.href=CONFIG.REDIRECT_URL;}},1000);
+  const t=setInterval(()=>{
+    n--;
+    document.getElementById('redirect-count').textContent=n;
+    if(n<=0){
+      clearInterval(t);
+      window.location.href=CONFIG.REDIRECT_URL;
+    }
+  },1000);
 }
  
-/* Waves */
 const wc=document.getElementById('wave-canvas'),wctx=wc.getContext('2d');let frame=0;
 function resize(){wc.width=window.innerWidth;wc.height=window.innerHeight;}resize();window.addEventListener('resize',resize);
 const S=0.000065;
