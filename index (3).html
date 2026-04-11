@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products — Research Peptides</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --blue-deep: #042C53;
+    --blue-strong: #0C447C;
+    --blue-mid: #185FA5;
+    --blue-light: #378ADD;
+    --blue-pale: #85B7EB;
+    --blue-ghost: #B5D4F4;
+    --blue-frost: #E6F1FB;
+    --white: #ffffff;
+    --off-white: #F4F8FD;
+    --gray-soft: #8EA7BE;
+    --gray-text: #4A6680;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--blue-deep); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(4,44,83,0.08);
+  }
+  .logo {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem;
+    color: var(--blue-deep); letter-spacing: -0.02em;
+    display: flex; align-items: center; gap: 10px; text-decoration: none;
+  }
+  .logo-mark {
+    width: 34px; height: 34px; background: var(--blue-mid); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-mark svg { width: 20px; height: 20px; }
+  nav ul { display: flex; list-style: none; gap: 2.5rem; }
+  nav ul a { font-size: 0.9rem; font-weight: 400; color: var(--gray-text); text-decoration: none; transition: color 0.2s; }
+  nav ul a:hover { color: var(--blue-mid); }
+  .nav-cta { background: var(--blue-mid); color: var(--white) !important; padding: 0.5rem 1.25rem; border-radius: 6px; font-weight: 500 !important; }
+  .nav-cta:hover { background: var(--blue-strong); }
+
+  /* Cart button in nav */
+  .cart-btn {
+    position: relative; background: none; border: 1.5px solid rgba(4,44,83,0.15);
+    border-radius: 8px; padding: 0.45rem 1rem; cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
+    color: var(--blue-deep); transition: border-color 0.2s, background 0.2s;
+  }
+  .cart-btn:hover { border-color: var(--blue-mid); background: var(--blue-frost); }
+  .cart-btn svg { width: 18px; height: 18px; }
+  .cart-count {
+    background: var(--blue-mid); color: white; font-size: 11px; font-weight: 700;
+    width: 18px; height: 18px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    position: absolute; top: -7px; right: -7px;
+    transition: transform 0.2s;
+  }
+  .cart-count.bump { transform: scale(1.4); }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    background: linear-gradient(135deg, var(--blue-deep) 0%, #0a3d6b 100%);
+    padding: 8rem 4rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .page-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(55,138,221,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(55,138,221,0.07) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  .page-header-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
+  .page-header .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue-pale); margin-bottom: 0.75rem; }
+  .page-header h1 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: white; letter-spacing: -0.03em; margin-bottom: 0.75rem; }
+  .page-header p { font-size: 1rem; font-weight: 300; color: rgba(181,212,244,0.8); max-width: 500px; line-height: 1.7; }
+
+  /* ── LAYOUT ── */
+  .page-body { max-width: 1200px; margin: 0 auto; padding: 2.5rem 2rem 6rem; display: grid; grid-template-columns: 240px 1fr; gap: 2rem; }
+
+  /* ── SIDEBAR FILTERS ── */
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+  .filter-card { background: white; border-radius: 14px; border: 1px solid rgba(4,44,83,0.08); padding: 1.25rem 1.5rem; }
+  .filter-title { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--blue-deep); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+  .filter-option { display: flex; align-items: center; gap: 10px; margin-bottom: 0.6rem; cursor: pointer; }
+  .filter-option input[type="checkbox"] { accent-color: var(--blue-mid); width: 15px; height: 15px; cursor: pointer; }
+  .filter-option label { font-size: 0.88rem; color: var(--gray-text); cursor: pointer; transition: color 0.2s; }
+  .filter-option:hover label { color: var(--blue-mid); }
+  .filter-option input:checked + label { color: var(--blue-deep); font-weight: 500; }
+  .price-range { display: flex; flex-direction: column; gap: 0.5rem; }
+  .price-range input[type="range"] { accent-color: var(--blue-mid); width: 100%; }
+  .price-range-labels { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--gray-soft); }
+
+  /* ── PRODUCTS GRID ── */
+  .products-main {}
+  .products-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+  .products-count { font-size: 0.88rem; color: var(--gray-text); }
+  .products-count strong { color: var(--blue-deep); }
+  .sort-select { border: 1px solid rgba(4,44,83,0.12); border-radius: 8px; padding: 0.45rem 0.85rem; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--blue-deep); background: white; cursor: pointer; outline: none; }
+
+  .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem; }
+
+  /* ── PRODUCT CARD ── */
+  .product-card {
+    background: white; border: 1px solid rgba(4,44,83,0.08); border-radius: 16px;
+    overflow: hidden; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    display: flex; flex-direction: column;
+  }
+  .product-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(4,44,83,0.10); border-color: rgba(55,138,221,0.2); }
+
+  .product-image {
+    height: 180px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .product-image::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 65% 30%, rgba(255,255,255,0.45), transparent 65%); }
+
+  .bottle-wrap { position: relative; z-index: 1; animation: float 4s ease-in-out infinite; }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+  .product-card:nth-child(2) .bottle-wrap{animation-delay:-1.2s}
+  .product-card:nth-child(3) .bottle-wrap{animation-delay:-2.4s}
+  .product-card:nth-child(4) .bottle-wrap{animation-delay:-0.6s}
+  .product-card:nth-child(5) .bottle-wrap{animation-delay:-1.8s}
+  .product-card:nth-child(6) .bottle-wrap{animation-delay:-3s}
+  .product-card:nth-child(7) .bottle-wrap{animation-delay:-0.3s}
+  .product-card:nth-child(8) .bottle-wrap{animation-delay:-2s}
+
+  .product-body { padding: 1.1rem 1.25rem 1.3rem; flex: 1; display: flex; flex-direction: column; }
+  .product-category { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 0.4rem; }
+  .product-name { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 0.35rem; letter-spacing: -0.01em; }
+  .product-desc { font-size: 0.82rem; color: var(--gray-text); font-weight: 300; line-height: 1.55; margin-bottom: 1rem; flex: 1; }
+  .product-footer { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+  .product-price { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--blue-deep); }
+  .product-price span { font-size: 0.75rem; font-weight: 400; color: var(--gray-soft); font-family: 'DM Sans', sans-serif; }
+  .purity-badge { display: inline-flex; align-items: center; gap: 3px; background: rgba(29,158,117,0.1); color: #0F6E56; font-size: 0.68rem; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 100px; white-space: nowrap; }
+
+  .add-btn {
+    width: 100%; margin-top: 0.85rem;
+    background: var(--blue-mid); color: white;
+    border: none; border-radius: 8px; padding: 0.7rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+  }
+  .add-btn:hover { background: var(--blue-strong); transform: translateY(-1px); }
+  .add-btn.added { background: #0F6E56; }
+  .add-btn svg { width: 15px; height: 15px; }
+
+  /* ── CART DRAWER ── */
+  .drawer-overlay {
+    position: fixed; inset: 0; background: rgba(4,44,83,0.45);
+    z-index: 300; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+    backdrop-filter: blur(2px);
+  }
+  .drawer-overlay.open { opacity: 1; pointer-events: all; }
+
+  .cart-drawer {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: 420px; max-width: 100vw;
+    background: white; z-index: 400;
+    display: flex; flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: -8px 0 40px rgba(4,44,83,0.15);
+  }
+  .cart-drawer.open { transform: translateX(0); }
+
+  .drawer-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 1.5rem 1rem;
+    border-bottom: 1px solid rgba(4,44,83,0.08);
+  }
+  .drawer-title { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--blue-deep); }
+  .drawer-close { background: none; border: none; cursor: pointer; color: var(--gray-text); padding: 4px; border-radius: 6px; transition: background 0.2s; display: flex; }
+  .drawer-close:hover { background: var(--off-white); color: var(--blue-deep); }
+  .drawer-close svg { width: 22px; height: 22px; }
+
+  .drawer-body { flex: 1; overflow-y: auto; padding: 1rem 1.5rem; }
+
+  .cart-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 1rem; color: var(--gray-text); text-align: center; padding: 3rem 0; }
+  .cart-empty svg { width: 48px; height: 48px; opacity: 0.3; }
+  .cart-empty p { font-size: 0.95rem; }
+  .cart-empty small { font-size: 0.82rem; color: var(--gray-soft); }
+
+  .cart-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 0; border-bottom: 1px solid rgba(4,44,83,0.07);
+    animation: slide-in 0.25s ease;
+  }
+  @keyframes slide-in { from{opacity:0;transform:translateX(16px)} to{opacity:1;transform:none} }
+
+  .cart-item-img {
+    width: 60px; height: 60px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .cart-item-info { flex: 1; min-width: 0; }
+  .cart-item-name { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cart-item-cat { font-size: 0.75rem; color: var(--gray-soft); }
+  .cart-item-price { font-size: 0.9rem; font-weight: 600; color: var(--blue-mid); margin-top: 4px; }
+
+  .qty-controls { display: flex; align-items: center; gap: 8px; }
+  .qty-btn { width: 28px; height: 28px; border-radius: 6px; border: 1px solid rgba(4,44,83,0.12); background: white; cursor: pointer; font-size: 1rem; font-weight: 600; color: var(--blue-deep); display: flex; align-items: center; justify-content: center; transition: background 0.15s; line-height: 1; }
+  .qty-btn:hover { background: var(--blue-frost); }
+  .qty-num { font-size: 0.9rem; font-weight: 600; min-width: 16px; text-align: center; color: var(--blue-deep); }
+  .remove-btn { background: none; border: none; cursor: pointer; color: var(--gray-soft); padding: 4px; border-radius: 4px; transition: color 0.15s; display: flex; }
+  .remove-btn:hover { color: #c0392b; }
+  .remove-btn svg { width: 16px; height: 16px; }
+
+  .drawer-footer { padding: 1.25rem 1.5rem; border-top: 1px solid rgba(4,44,83,0.08); }
+  .cart-subtotal { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+  .cart-subtotal span { font-size: 0.88rem; color: var(--gray-text); }
+  .cart-subtotal strong { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--blue-deep); }
+  .cart-note { font-size: 0.75rem; color: var(--gray-soft); margin-bottom: 1rem; }
+  .checkout-btn {
+    width: 100%; background: var(--blue-mid); color: white;
+    border: none; border-radius: 10px; padding: 1rem;
+    font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: background 0.2s, transform 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    letter-spacing: -0.01em;
+  }
+  .checkout-btn:hover { background: var(--blue-strong); transform: translateY(-1px); }
+  .checkout-btn svg { width: 18px; height: 18px; }
+  .clear-cart-btn { width: 100%; background: none; border: none; color: var(--gray-soft); font-size: 0.8rem; cursor: pointer; margin-top: 0.75rem; padding: 0.4rem; transition: color 0.2s; }
+  .clear-cart-btn:hover { color: #c0392b; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .page-body { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    nav { padding: 1rem 1.5rem; }
+    nav ul { display: none; }
+    .page-header { padding: 7rem 1.5rem 3rem; }
+    .cart-drawer { width: 100vw; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10" cy="10" r="3" fill="white"/>
+        <path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.93 4.93l2.83 2.83M12.24 12.24l2.83 2.83M4.93 15.07l2.83-2.83M12.24 7.76l2.83-2.83" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    Research Peptides
+  </a>
+  <ul>
+    <li><a href="../">Home</a></li>
+    <li><a href="#">Products</a></li>
+    <li><a href="../#about">Science</a></li>
+    <li><a href="../#process">Process</a></li>
+  </ul>
+  <button class="cart-btn" onclick="openCart()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+    Cart
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="section-label">Research Catalogue</div>
+    <h1>All Peptides</h1>
+    <p>Every compound third-party verified. Certificate of Analysis included with every order.</p>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="page-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="filter-card">
+      <div class="filter-title">Category</div>
+      <div class="filter-option"><input type="checkbox" id="f-all" checked onchange="filterCards()"><label for="f-all">All</label></div>
+      <div class="filter-option"><input type="checkbox" id="f-glp" onchange="filterCards()"><label for="f-glp">GLP-1 / Weight Loss</label></div>
+      <div class="filter-option"><input type="checkbox" id="f-growth" onchange="filterCards()"><label for="f-growth">Growth Peptides</label></div>
+      <div class="filter-option"><input type="checkbox" id="f-cog" onchange="filterCards()"><label for="f-cog">Cognitive</label></div>
+      <div class="filter-option"><input type="checkbox" id="f-met" onchange="filterCards()"><label for="f-met">Metabolic</label></div>
+      <div class="filter-option"><input type="checkbox" id="f-anti" onchange="filterCards()"><label for="f-anti">Anti-Aging</label></div>
+      <div class="filter-option"><input type="checkbox" id="f-gh" onchange="filterCards()"><label for="f-gh">GH Secretagogue</label></div>
+    </div>
+    <div class="filter-card">
+      <div class="filter-title">Max Price</div>
+      <div class="price-range">
+        <input type="range" min="20" max="200" value="200" id="priceRange" oninput="updatePrice(this.value)">
+        <div class="price-range-labels"><span>£20</span><span id="priceLabel">£200</span></div>
+      </div>
+    </div>
+    <div class="filter-card">
+      <div class="filter-title">Purity</div>
+      <div class="filter-option"><input type="checkbox" id="p-99" onchange="filterCards()"><label for="p-99">99%+</label></div>
+      <div class="filter-option"><input type="checkbox" id="p-995" onchange="filterCards()"><label for="p-995">99.5%+</label></div>
+      <div class="filter-option"><input type="checkbox" id="p-999" onchange="filterCards()"><label for="p-999">99.9%</label></div>
+    </div>
+  </aside>
+
+  <!-- PRODUCTS -->
+  <main class="products-main">
+    <div class="products-toolbar">
+      <p class="products-count">Showing <strong id="visibleCount">10</strong> compounds</p>
+      <select class="sort-select" onchange="sortCards(this.value)">
+        <option value="default">Sort: Featured</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="name">Name A–Z</option>
+      </select>
+    </div>
+
+    <div class="products-grid" id="productsGrid">
+      <!-- Cards injected by JS -->
+    </div>
+  </main>
+</div>
+
+<!-- CART OVERLAY -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeCart()"></div>
+
+<!-- CART DRAWER -->
+<div class="cart-drawer" id="cartDrawer">
+  <div class="drawer-header">
+    <span class="drawer-title">Your Cart</span>
+    <button class="drawer-close" onclick="closeCart()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-footer" id="drawerFooter" style="display:none">
+    <div class="cart-subtotal">
+      <span>Subtotal</span>
+      <strong id="cartTotal">£0.00</strong>
+    </div>
+    <p class="cart-note">Shipping calculated at checkout. For research use only.</p>
+    <button class="checkout-btn" onclick="checkout()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Proceed to Checkout
+    </button>
+    <button class="clear-cart-btn" onclick="clearCart()">Clear cart</button>
+  </div>
+</div>
+
+<script>
+// ── PRODUCT DATA ──
+const products = [
+  {
+    id: 1, name: 'Retatrutide', dose: '5mg',
+    category: 'GLP-1 / Weight Loss', catKey: 'f-glp',
+    desc: 'Triple agonist targeting GLP-1, GIP, and glucagon receptors. Studied for significant weight reduction and metabolic improvements.',
+    price: 89, purity: '99.5%',
+    color: ['#0a3d6b','#185FA5']
+  },
+  {
+    id: 2, name: 'Semaglutide', dose: '5mg',
+    category: 'GLP-1 / Weight Loss', catKey: 'f-glp',
+    desc: 'GLP-1 receptor agonist widely studied for appetite regulation, blood glucose control, and weight management.',
+    price: 72, purity: '99.8%',
+    color: ['#0C447C','#378ADD']
+  },
+  {
+    id: 3, name: 'Tirzepatide', dose: '5mg',
+    category: 'GLP-1 / Weight Loss', catKey: 'f-glp',
+    desc: 'Dual GIP and GLP-1 receptor agonist. Investigated for superior glycaemic control and weight loss outcomes.',
+    price: 78, purity: '99.6%',
+    color: ['#042C53','#185FA5']
+  },
+  {
+    id: 4, name: 'BPC-157', dose: '5mg',
+    category: 'Growth Peptides', catKey: 'f-growth',
+    desc: 'Body protection compound studied for tissue repair, gut healing, and musculoskeletal recovery mechanisms.',
+    price: 38, purity: '99.5%',
+    color: ['#0a3d6b','#1a6db5']
+  },
+  {
+    id: 5, name: 'TB-500', dose: '2mg',
+    category: 'Metabolic', catKey: 'f-met',
+    desc: 'Thymosin Beta-4 fragment investigated for wound healing, inflammation modulation, and cellular migration.',
+    price: 44, purity: '99.6%',
+    color: ['#0C447C','#2980b9']
+  },
+  {
+    id: 6, name: 'CJC-1295', dose: '2mg',
+    category: 'GH Secretagogue', catKey: 'f-gh',
+    desc: 'Modified GRF analogue with extended half-life — a foundational compound in growth hormone research.',
+    price: 46, purity: '99.7%',
+    color: ['#042C53','#0C447C']
+  },
+  {
+    id: 7, name: 'Semax', dose: '30mg',
+    category: 'Cognitive', catKey: 'f-cog',
+    desc: 'Synthetic ACTH analogue studied for neuroprotective, nootropic, and neurogenic properties in CNS research.',
+    price: 52, purity: '99.8%',
+    color: ['#0a3d6b','#185FA5']
+  },
+  {
+    id: 8, name: 'Epitalon', dose: '10mg',
+    category: 'Anti-Aging', catKey: 'f-anti',
+    desc: 'Tetrapeptide studied for telomere elongation, circadian regulation, and longevity markers in aging models.',
+    price: 58, purity: '99.9%',
+    color: ['#185FA5','#378ADD']
+  },
+  {
+    id: 9, name: 'Ipamorelin', dose: '2mg',
+    category: 'GH Secretagogue', catKey: 'f-gh',
+    desc: 'Selective growth hormone secretagogue with a clean side-effect profile. Widely used in GH release research.',
+    price: 36, purity: '99.5%',
+    color: ['#0C447C','#185FA5']
+  },
+  {
+    id: 10, name: 'Selank', dose: '5mg',
+    category: 'Cognitive', catKey: 'f-cog',
+    desc: 'Anxiolytic peptide analogue of tuftsin. Studied for anxiety reduction, immune modulation, and memory effects.',
+    price: 48, purity: '99.7%',
+    color: ['#042C53','#1a6db5']
+  }
+];
+
+// ── BOTTLE SVG ──
+function bottleSVG(c1, c2, size=80) {
+  return `<svg width="${size}" height="${Math.round(size*1.55)}" viewBox="0 0 80 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="28" y="3" width="24" height="13" rx="3" fill="${c1}" opacity="0.8"/>
+    <rect x="22" y="14" width="36" height="97" rx="11" fill="${c2}"/>
+    <rect x="22" y="14" width="36" height="97" rx="11" fill="url(#g${Math.random().toString(36).slice(2,6)})" opacity="0.7"/>
+    <rect x="24" y="16" width="10" height="93" rx="5" fill="rgba(255,255,255,0.16)"/>
+    <rect x="22" y="86" width="36" height="25" rx="0 0 11 11" fill="${c1}" opacity="0.45"/>
+    <defs><linearGradient id="g${Math.random().toString(36).slice(2,6)}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="white" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </linearGradient></defs>
+  </svg>`;
+}
+
+function bgColor(c1) {
+  return `linear-gradient(145deg, ${c1}22 0%, ${c1}44 100%)`;
+}
+
+// ── RENDER CARDS ──
+let currentProducts = [...products];
+
+function renderCards(list) {
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = '';
+  document.getElementById('visibleCount').textContent = list.length;
+  list.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.dataset.category = p.catKey;
+    card.dataset.price = p.price;
+    card.innerHTML = `
+      <div class="product-image" style="background:${bgColor(p.color[1])}">
+        <div class="bottle-wrap">${bottleSVG(p.color[0], p.color[1])}</div>
+      </div>
+      <div class="product-body">
+        <div class="product-category">${p.category}</div>
+        <div class="product-name">${p.name} ${p.dose}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-footer">
+          <div class="product-price">£${p.price}<span> / vial</span></div>
+          <div class="purity-badge">✓ ${p.purity}</div>
+        </div>
+        <button class="add-btn" onclick="addToCart(${p.id})">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          Add to Cart
+        </button>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+renderCards(currentProducts);
+
+// ── FILTER ──
+function filterCards() {
+  const allChecked = document.getElementById('f-all').checked;
+  const maxPrice = parseInt(document.getElementById('priceRange').value);
+  const cats = ['f-glp','f-growth','f-cog','f-met','f-anti','f-gh'];
+  const activeCats = cats.filter(c => document.getElementById(c).checked);
+
+  let filtered = products.filter(p => {
+    const priceOk = p.price <= maxPrice;
+    const catOk = allChecked || activeCats.length === 0 || activeCats.includes(p.catKey);
+    return priceOk && catOk;
+  });
+  currentProducts = filtered;
+  renderCards(filtered);
+}
+
+function updatePrice(val) {
+  document.getElementById('priceLabel').textContent = '£' + val;
+  filterCards();
+}
+
+// ── SORT ──
+function sortCards(val) {
+  let sorted = [...currentProducts];
+  if (val === 'price-asc') sorted.sort((a,b) => a.price - b.price);
+  else if (val === 'price-desc') sorted.sort((a,b) => b.price - a.price);
+  else if (val === 'name') sorted.sort((a,b) => a.name.localeCompare(b.name));
+  renderCards(sorted);
+}
+
+// ── CART ──
+let cart = JSON.parse(localStorage.getItem('rp_cart') || '[]');
+
+function saveCart() { localStorage.setItem('rp_cart', JSON.stringify(cart)); }
+
+function addToCart(id) {
+  const product = products.find(p => p.id === id);
+  const existing = cart.find(i => i.id === id);
+  if (existing) { existing.qty++; }
+  else { cart.push({ id, name: product.name, dose: product.dose, category: product.category, price: product.price, color: product.color, qty: 1 }); }
+  saveCart();
+  updateCartUI();
+  openCart();
+
+  // Animate button
+  const btns = document.querySelectorAll('.add-btn');
+  btns.forEach(b => {
+    if (b.getAttribute('onclick') === `addToCart(${id})`) {
+      b.classList.add('added');
+      b.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Added!`;
+      setTimeout(() => {
+        b.classList.remove('added');
+        b.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg> Add to Cart`;
+      }, 1500);
+    }
+  });
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(i => i.id !== id);
+  saveCart(); updateCartUI();
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) removeFromCart(id);
+  else { saveCart(); updateCartUI(); }
+}
+
+function clearCart() {
+  cart = []; saveCart(); updateCartUI();
+}
+
+function updateCartUI() {
+  const total = cart.reduce((s, i) => s + i.qty, 0);
+  const countEl = document.getElementById('cartCount');
+  countEl.textContent = total;
+  countEl.classList.add('bump');
+  setTimeout(() => countEl.classList.remove('bump'), 300);
+
+  const body = document.getElementById('drawerBody');
+  const footer = document.getElementById('drawerFooter');
+
+  if (cart.length === 0) {
+    footer.style.display = 'none';
+    body.innerHTML = `<div class="cart-empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+      <p>Your cart is empty</p>
+      <small>Add some peptides to get started</small>
+    </div>`;
+    return;
+  }
+
+  footer.style.display = 'block';
+  const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  document.getElementById('cartTotal').textContent = '£' + subtotal.toFixed(2);
+
+  body.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <div class="cart-item-img" style="background:linear-gradient(145deg,${item.color[0]}22,${item.color[1]}44)">
+        ${bottleSVG(item.color[0], item.color[1], 40)}
+      </div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name} ${item.dose}</div>
+        <div class="cart-item-cat">${item.category}</div>
+        <div class="cart-item-price">£${item.price.toFixed(2)}</div>
+      </div>
+      <div class="qty-controls">
+        <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+        <span class="qty-num">${item.qty}</span>
+        <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+      </div>
+      <button class="remove-btn" onclick="removeFromCart(${item.id})">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>`).join('');
+}
+
+function openCart() { document.getElementById('cartDrawer').classList.add('open'); document.getElementById('drawerOverlay').classList.add('open'); }
+function closeCart() { document.getElementById('cartDrawer').classList.remove('open'); document.getElementById('drawerOverlay').classList.remove('open'); }
+
+function checkout() {
+  // Replace this URL with your crypto payment processor link
+  alert('Connect your crypto payment processor here.');
+}
+
+// Init
+updateCartUI();
+</script>
+</body>
+</html>
