@@ -19,13 +19,13 @@ body { display:flex; flex-direction:column; align-items:center; justify-content:
 body::before { content:''; position:fixed; inset:0; background-image:linear-gradient(rgba(37,99,235,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.03) 1px,transparent 1px); background-size:52px 52px; pointer-events:none; z-index:0; }
 #wave-canvas { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; }
 .container { position:relative; z-index:1; width:100%; max-width:500px; display:flex; flex-direction:column; align-items:center; }
-
+ 
 .header { display:flex; align-items:center; gap:10px; margin-bottom:5px; }
 .logo-mark { width:36px; height:36px; background:var(--blue-mid); border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .logo-mark svg { width:20px; height:20px; }
 .logo-name { font-family:'Syne',sans-serif; font-size:16px; font-weight:700; color:#fff; letter-spacing:-0.2px; }
 .tagline { font-size:12px; color:var(--muted); margin-bottom:20px; }
-
+ 
 /* Cart + shipping strip */
 .cart-strip { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); border-radius:13px; padding:14px 16px; margin-bottom:20px; }
 .cart-strip-title { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); margin-bottom:10px; }
@@ -41,14 +41,14 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
 .cart-strip-total { display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.07); padding-top:10px; margin-top:4px; }
 .cart-strip-total-label { font-size:12px; color:var(--muted); }
 .cart-strip-total-val { font-family:'Syne',sans-serif; font-size:18px; font-weight:700; color:#fff; }
-
+ 
 .section-label { font-size:10px; font-weight:500; letter-spacing:2.5px; text-transform:uppercase; color:var(--dim); margin-bottom:11px; align-self:flex-start; }
 .conv-note { font-size:10px; color:var(--dim); margin-bottom:14px; text-align:center; }
-
+ 
 .screen { width:100%; display:none; flex-direction:column; align-items:center; animation:fadeUp 0.3s ease both; }
 .screen.active { display:flex; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
-
+ 
 .currency-grid { display:grid; grid-template-columns:1fr 1fr; gap:11px; width:100%; }
 .cur-card { background:var(--card-bg); border:1px solid var(--card-bd); border-radius:15px; padding:18px 14px; cursor:pointer; transition:background 0.2s,border-color 0.2s,transform 0.18s; display:flex; align-items:center; gap:12px; }
 .cur-card:hover { background:var(--card-hov); border-color:rgba(255,255,255,0.15); transform:translateY(-2px); }
@@ -61,24 +61,24 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
 .cur-amount { font-size:11px; color:rgba(255,255,255,0.45); margin-top:3px; font-family:'Courier New',monospace; }
 .chevron { color:var(--dim); font-size:16px; transition:transform 0.2s,color 0.2s; flex-shrink:0; }
 .cur-card:hover .chevron { transform:translateX(3px); color:var(--muted); }
-
+ 
 .pay-card { background:var(--card-bg); border:1px solid var(--card-bd); border-radius:20px; padding:26px 22px; width:100%; display:flex; flex-direction:column; align-items:center; }
 .pay-cur-row { display:flex; align-items:center; gap:10px; align-self:flex-start; margin-bottom:3px; }
 .pay-cur-logo { width:30px; height:30px; border-radius:50%; overflow:hidden; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .pay-cur-logo img { width:30px; height:30px; object-fit:contain; display:block; }
 .pay-cur-label { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:#fff; }
 .pay-network-tag { align-self:flex-start; margin-left:40px; font-size:10px; color:var(--dim); letter-spacing:0.4px; margin-bottom:14px; }
-
+ 
 .amount-due { width:100%; background:rgba(37,99,235,0.1); border:1px solid rgba(37,99,235,0.2); border-radius:12px; padding:13px 16px; margin-bottom:18px; display:flex; align-items:center; justify-content:space-between; }
 .amount-due-label { font-size:11px; color:rgba(181,212,244,0.7); }
 .amount-due-gbp { font-size:11px; color:rgba(181,212,244,0.45); margin-top:2px; }
 .amount-due-crypto { font-family:'Syne',sans-serif; font-size:20px; font-weight:700; color:#fff; text-align:right; }
 .amount-due-ticker { font-size:11px; color:var(--muted); text-align:right; margin-top:2px; }
-
+ 
 .qr-container { background:#fff; border-radius:13px; padding:13px; margin-bottom:20px; width:168px; height:168px; display:flex; align-items:center; justify-content:center; }
 #qr-output { display:flex; align-items:center; justify-content:center; }
 #qr-output img, #qr-output canvas { border-radius:3px; display:block; }
-
+ 
 .addr-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); align-self:flex-start; margin-bottom:7px; }
 .addr-row { width:100%; background:rgba(0,0,0,0.22); border:1px solid rgba(255,255,255,0.06); border-radius:11px; padding:10px 12px; display:flex; align-items:flex-start; gap:9px; margin-bottom:13px; }
 .addr-value { font-family:'Courier New',monospace; font-size:10.5px; color:rgba(255,255,255,0.58); flex:1; word-break:break-all; line-height:1.65; user-select:all; }
@@ -86,9 +86,9 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
 .copy-btn:hover { background:var(--blue-b); }
 .copy-btn:active { transform:scale(0.95); }
 .copy-btn.ok { background:var(--green-b); }
-
+ 
 .warn { width:100%; background:rgba(234,179,8,0.055); border:1px solid rgba(234,179,8,0.14); border-radius:10px; padding:10px 13px; font-size:11px; color:rgba(234,179,8,0.68); line-height:1.55; margin-bottom:13px; }
-
+ 
 .tracker-bar { width:100%; background:rgba(0,0,0,0.18); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:10px 13px; display:flex; align-items:center; gap:9px; margin-bottom:16px; }
 .tracker-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:var(--dim); transition:background 0.3s; }
 .tracker-dot.scanning { background:var(--blue); animation:tpulse 1.4s ease infinite; }
@@ -96,10 +96,10 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
 @keyframes tpulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(37,99,235,0.5)} 50%{opacity:.7;box-shadow:0 0 0 5px rgba(37,99,235,0)} }
 .tracker-text { font-size:11px; color:var(--muted); flex:1; line-height:1.45; }
 .tracker-text strong { color:#fff; font-weight:500; }
-
+ 
 .back-btn { background:transparent; border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:9px 20px; font-family:'DM Sans',sans-serif; font-size:13px; color:var(--muted); cursor:pointer; transition:background 0.18s,color 0.18s; }
 .back-btn:hover { background:rgba(255,255,255,0.05); color:#fff; }
-
+ 
 #screen-success { text-align:center; }
 .success-card { background:var(--card-bg); border:1px solid rgba(34,197,94,0.22); border-radius:20px; padding:36px 24px; width:100%; display:flex; flex-direction:column; align-items:center; }
 .success-icon { width:64px; height:64px; border-radius:50%; background:rgba(34,197,94,0.1); border:2px solid rgba(34,197,94,0.28); display:flex; align-items:center; justify-content:center; margin-bottom:16px; animation:popIn 0.4s cubic-bezier(0.175,0.885,0.32,1.275) both; }
@@ -113,7 +113,7 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
 .redirect-count { font-family:'Syne',sans-serif; font-size:14px; font-weight:700; color:var(--green); min-width:16px; text-align:center; }
 .explorer-link { display:inline-block; margin-top:12px; font-size:11px; color:#60a5fa; text-decoration:none; border-bottom:1px solid rgba(96,165,250,0.3); }
 .explorer-link:hover { color:#93c5fd; }
-
+ 
 .footer { margin-top:24px; display:flex; align-items:center; gap:7px; }
 .dot-live { width:6px; height:6px; border-radius:50%; background:var(--green); animation:livepulse 3.5s ease infinite; flex-shrink:0; }
 @keyframes livepulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,0.45)} 50%{opacity:.8;box-shadow:0 0 0 5px rgba(34,197,94,0)} }
@@ -123,7 +123,7 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
 <body>
 <canvas id="wave-canvas"></canvas>
 <div class="container">
-
+ 
   <div class="header">
     <div class="logo-mark">
       <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" fill="white"/><path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.93 4.93l2.83 2.83M12.24 12.24l2.83 2.83M4.93 15.07l2.83-2.83M12.24 7.76l2.83-2.83" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -131,7 +131,7 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
     <span class="logo-name">Research Peptides</span>
   </div>
   <div class="tagline">Complete your order with crypto</div>
-
+ 
   <!-- Cart + shipping strip -->
   <div class="cart-strip">
     <div class="cart-strip-title">Your order</div>
@@ -153,7 +153,7 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
       <div class="cart-strip-total-val" id="cartStripTotal">£0.00</div>
     </div>
   </div>
-
+ 
   <!-- SELECT SCREEN -->
   <div class="screen active" id="screen-select">
     <div class="section-label">Select currency</div>
@@ -181,7 +181,7 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
       </div>
     </div>
   </div>
-
+ 
   <!-- PAYMENT SCREEN -->
   <div class="screen" id="screen-pay">
     <div class="pay-card">
@@ -214,7 +214,7 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
       <button class="back-btn" onclick="stopAndGoBack()">← Choose different currency</button>
     </div>
   </div>
-
+ 
   <!-- SUCCESS SCREEN -->
   <div class="screen" id="screen-success">
     <div class="success-card">
@@ -228,30 +228,30 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
       <a class="explorer-link" id="explorer-link" href="#" target="_blank" rel="noopener">View on blockchain explorer →</a>
     </div>
   </div>
-
+ 
   <div class="footer"><div class="dot-live"></div><span class="footer-text">Verified · Secure · Worldwide</span></div>
 </div>
-
+ 
 <script>
 const CONFIG = { ETHERSCAN_KEY:'YCNIYTGQQ666ICG3R1IKTRVH7NRCWFHYSV', REDIRECT_URL:'confirmation.html', POLL_MS:15000, REDIRECT_SECS:5 };
-
+ 
 const currencies = {
   btc:  {ticker:'BTC', name:'Bitcoin',  network:'Bitcoin Network',            addr:'bc1q7n3vqfsy0sm8res9vltk8zcdd996ux5gdp2jfx',  logo:'https://cryptologos.cc/logos/bitcoin-btc-logo.png',   explorer:tx=>`https://mempool.space/tx/${tx}`},
   eth:  {ticker:'ETH', name:'Ethereum', network:'Ethereum Network (ERC-20)',  addr:'0xe8153fd51A3F7d52a2A8cC84A9523E195E17F5A7',  logo:'https://cryptologos.cc/logos/ethereum-eth-logo.png',  explorer:tx=>`https://etherscan.io/tx/${tx}`},
   sol:  {ticker:'SOL', name:'Solana',   network:'Solana Network',             addr:'5mcfJ1ZSvhypqt4EpMFPHkte5brgMQYLbnN6yXNRgWGb',logo:'https://cryptologos.cc/logos/solana-sol-logo.png',    explorer:tx=>`https://solscan.io/tx/${tx}`},
   usdc: {ticker:'USDC',name:'USD Coin', network:'Solana Network (SPL Token)', addr:'5mcfJ1ZSvhypqt4EpMFPHkte5brgMQYLbnN6yXNRgWGb',logo:'https://cryptologos.cc/logos/usd-coin-usdc-logo.png', explorer:tx=>`https://solscan.io/tx/${tx}`},
 };
-
+ 
 const cart         = JSON.parse(localStorage.getItem('rp_cart')||'[]');
 const shipping     = JSON.parse(sessionStorage.getItem('rp_shipping')||'{}');
 const shipMethod   = JSON.parse(sessionStorage.getItem('rp_shipping_method')||'{}');
 const subtotal     = cart.reduce((s,i)=>s+i.price*i.qty,0);
 const shipPrice    = shipMethod.price || 6.99;
 const gbpTotal     = subtotal + shipPrice;
-
+ 
 let rates={}, cryptoAmounts={};
 let currentKey=null,pollTimer=null,seenTxids=new Set(),pollCount=0,sessionStart=0,currentAddr='';
-
+ 
 /* Strip */
 (function renderStrip(){
   document.getElementById('cartStripTotal').textContent='£'+gbpTotal.toFixed(2);
@@ -267,7 +267,7 @@ let currentKey=null,pollTimer=null,seenTxids=new Set(),pollCount=0,sessionStart=
   const items=document.getElementById('cartStripItems');
   items.innerHTML=cart.map(i=>`<div class="cart-strip-item"><span>${i.name} ${i.dose}</span><span class="cart-strip-item-qty">×${i.qty}</span><span class="cart-strip-item-price">£${(i.price*i.qty).toFixed(2)}</span></div>`).join('');
 })();
-
+ 
 /* Rates */
 async function fetchRates(){
   try{
@@ -290,43 +290,43 @@ async function fetchRates(){
   }catch(e){document.getElementById('conv-note').textContent='Could not load live rates';}
 }
 fetchRates();
-
+ 
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
 function setTracker(state,html){
   document.getElementById('tracker-dot').className='tracker-dot'+(state==='scanning'?' scanning':state==='found'?' found':'');
   document.getElementById('tracker-text').innerHTML=html;
 }
-
+ 
 function openPayment(key){
   const c=currencies[key];
   currentKey=key;currentAddr=c.addr;
   sessionStart=Math.floor(Date.now()/1000);
   seenTxids.clear();pollCount=0;
-
+ 
   document.getElementById('pay-logo-img').src=c.logo;
   document.getElementById('pay-logo-img').alt=c.ticker;
   document.getElementById('pay-label').textContent=c.name+' ('+c.ticker+')';
   document.getElementById('pay-network').textContent=c.network;
   document.getElementById('addr-display').textContent=c.addr;
-
+ 
   const camt=cryptoAmounts[key]||'?';
   document.getElementById('pay-crypto-amount').textContent=camt;
   document.getElementById('pay-crypto-ticker').textContent=c.ticker;
   document.getElementById('pay-gbp-label').textContent='£'+gbpTotal.toFixed(2)+' GBP (incl. shipping)';
   document.getElementById('warn-text').innerHTML='⚠ Send exactly <strong>'+camt+' '+c.ticker+'</strong> to this address. Only send <strong>'+c.ticker+'</strong> — wrong assets result in permanent loss.';
-
+ 
   const btn=document.getElementById('copy-btn');
   btn.textContent='Copy';btn.className='copy-btn';
   document.getElementById('qr-output').innerHTML='';
   new QRCode(document.getElementById('qr-output'),{text:c.addr,width:142,height:142,colorDark:'#000000',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
-
+ 
   sessionStorage.setItem('rp_order',JSON.stringify({cart,shipping,shipMethod,subtotal,shipPrice,gbpTotal,cryptoKey:key,cryptoAmount:camt,cryptoTicker:c.ticker}));
-
+ 
   setTracker('scanning','<strong>Scanning blockchain…</strong><br>Waiting for your transaction to be detected');
   showScreen('screen-pay');
   startPolling();
 }
-
+ 
 function copyAddress(){
   navigator.clipboard.writeText(currentAddr).then(()=>{
     const btn=document.getElementById('copy-btn');
@@ -335,14 +335,33 @@ function copyAddress(){
   });
 }
 function stopAndGoBack(){stopPolling();showScreen('screen-select');}
-function startPolling(){stopPolling();poll();pollTimer=setInterval(poll,CONFIG.POLL_MS);}
-function stopPolling(){if(pollTimer){clearInterval(pollTimer);pollTimer=null;}}
-
-async function poll(){
-  pollCount++;
+ 
+let tickTimer=null;
+ 
+function startPolling(){
+  stopPolling();
+  // Tick every second just to update the elapsed time display
+  tickTimer=setInterval(updateTimerDisplay,1000);
+  poll(); // first poll immediately
+  pollTimer=setInterval(poll,CONFIG.POLL_MS);
+}
+ 
+function stopPolling(){
+  if(pollTimer){clearInterval(pollTimer);pollTimer=null;}
+  if(tickTimer){clearInterval(tickTimer);tickTimer=null;}
+}
+ 
+function updateTimerDisplay(){
+  if(!sessionStart) return;
   const elapsed=Math.floor(Date.now()/1000-sessionStart);
   const mins=Math.floor(elapsed/60),secs=elapsed%60;
-  setTracker('scanning',`<strong>Scanning blockchain…</strong><br>Monitoring for ${mins>0?mins+'m ':''}${secs}s · Check #${pollCount}`);
+  const timeStr=(mins>0?mins+'m ':'')+secs+'s';
+  setTracker('scanning',`<strong>Scanning blockchain…</strong><br>Monitoring for ${timeStr} · Check #${pollCount} · Next check in ${CONFIG.POLL_MS/1000}s`);
+}
+ 
+async function poll(){
+  pollCount++;
+  updateTimerDisplay();
   try{
     let r=null;
     if(currentKey==='btc') r=await checkBTC();
@@ -351,7 +370,7 @@ async function poll(){
     if(r) onPaymentFound(r);
   }catch(e){setTracker('scanning',`<strong>Scanning blockchain…</strong><br>Network hiccup — retrying in ${CONFIG.POLL_MS/1000}s`);}
 }
-
+ 
 async function checkBTC(){
   const addr=currencies.btc.addr,base='https://mempool.space/api';
   const[mRes,cRes]=await Promise.all([fetch(`${base}/address/${addr}/txs/mempool`),fetch(`${base}/address/${addr}/txs`)]);
@@ -368,7 +387,7 @@ async function checkBTC(){
   }
   return null;
 }
-
+ 
 async function checkETH(){
   const addr=currencies.eth.addr;
   const res=await fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${addr}&startblock=0&endblock=99999999&sort=desc&apikey=${CONFIG.ETHERSCAN_KEY}`);
@@ -385,7 +404,7 @@ async function checkETH(){
   }
   return null;
 }
-
+ 
 async function checkSOL(){
   const addr=currencies.sol.addr,RPC='https://api.mainnet-beta.solana.com';
   const USDC='EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
@@ -416,7 +435,7 @@ async function checkSOL(){
   }
   return null;
 }
-
+ 
 function onPaymentFound(result){
   stopPolling();
   const order=JSON.parse(sessionStorage.getItem('rp_order')||'{}');
@@ -428,13 +447,13 @@ function onPaymentFound(result){
   showScreen('screen-success');
   startCountdown();
 }
-
+ 
 function startCountdown(){
   let n=CONFIG.REDIRECT_SECS;
   document.getElementById('redirect-count').textContent=n;
   const t=setInterval(()=>{n--;document.getElementById('redirect-count').textContent=n;if(n<=0){clearInterval(t);window.location.href=CONFIG.REDIRECT_URL;}},1000);
 }
-
+ 
 /* Waves */
 const wc=document.getElementById('wave-canvas'),wctx=wc.getContext('2d');let frame=0;
 function resize(){wc.width=window.innerWidth;wc.height=window.innerHeight;}resize();window.addEventListener('resize',resize);
