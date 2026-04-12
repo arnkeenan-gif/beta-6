@@ -57,7 +57,7 @@ body::before{
 .cart-strip-row span:last-child{color:rgba(255,255,255,0.7)}
 .cart-strip-total{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.1);padding-top:10px;margin-top:4px}
 .cart-strip-total-label{font-size:12px;color:var(--muted)}
-.cart-strip-total-val{font-family:'DM Sans',sans-serif;font-size:20px;font-weight:700;color:#fff;letter-spacing:-0.5px}
+.cart-strip-total-val{font-family:'DM Sans',sans-serif;font-size:20px;font-weight:700;color:#fff;}
 
 /* ── Screens ── */
 .screen{width:100%;display:none;flex-direction:column;align-items:center;animation:fadeUp 0.3s ease both}
@@ -132,8 +132,8 @@ body::before{
 .pay-network-tag{align-self:flex-start;margin-left:40px;font-size:10px;color:var(--dim);letter-spacing:0.4px;margin-bottom:14px}
 .amount-due{width:100%;background:rgba(41,128,212,0.12);border:1px solid rgba(41,128,212,0.25);border-radius:12px;padding:13px 16px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between}
 .amount-due-label{font-size:11px;color:rgba(181,212,244,0.7)}
-.amount-due-gbp{font-size:11px;color:rgba(181,212,244,0.45);margin-top:2px}
-.amount-due-crypto{font-family:'DM Sans',sans-serif;font-size:20px;font-weight:700;color:#fff;text-align:right;letter-spacing:-0.5px}
+.amount-due-eur{font-size:11px;color:rgba(181,212,244,0.45);margin-top:2px}
+.amount-due-crypto{font-family:'DM Sans',sans-serif;font-size:20px;font-weight:700;color:#fff;text-align:right}
 .amount-due-ticker{font-size:11px;color:var(--muted);text-align:right;margin-top:2px}
 .qr-container{background:#fff;border-radius:13px;padding:13px;margin-bottom:20px;width:168px;height:168px;display:flex;align-items:center;justify-content:center}
 #qr-output{display:flex;align-items:center;justify-content:center}
@@ -191,11 +191,11 @@ body::before{
     <div class="cart-strip-title">Your order</div>
     <div class="cart-strip-items" id="cartStripItems"></div>
     <hr class="cart-strip-divider">
-    <div class="cart-strip-row"><span>Subtotal</span><span id="stripSubtotal">£0.00</span></div>
-    <div class="cart-strip-row"><span id="stripShippingLabel">Standard Delivery</span><span id="stripShippingPrice">£6.99</span></div>
+    <div class="cart-strip-row"><span>Subtotal</span><span id="stripSubtotal">€0.00</span></div>
+    <div class="cart-strip-row"><span id="stripShippingLabel">Standard Delivery</span><span id="stripShippingPrice">€6.99</span></div>
     <div class="cart-strip-total">
       <div class="cart-strip-total-label">Total to pay</div>
-      <div class="cart-strip-total-val" id="cartStripTotal">£0.00</div>
+      <div class="cart-strip-total-val" id="cartStripTotal">€0.00</div>
     </div>
   </div>
 
@@ -256,7 +256,7 @@ body::before{
       <div class="amount-due">
         <div>
           <div class="amount-due-label">Amount to send</div>
-          <div class="amount-due-gbp" id="pay-gbp-label"></div>
+          <div class="amount-due-eur" id="pay-eur-label"></div>
         </div>
         <div>
           <div class="amount-due-crypto" id="pay-crypto-amount"></div>
@@ -311,7 +311,7 @@ const shipping   = JSON.parse(sessionStorage.getItem('rp_shipping')||'{}');
 const shipMethod = JSON.parse(sessionStorage.getItem('rp_shipping_method')||'{}');
 const subtotal   = cart.reduce((s,i)=>s+i.price*i.qty, 0);
 const shipPrice  = shipMethod.price || 6.99;
-const gbpTotal   = subtotal + shipPrice;
+const eurTotal   = subtotal + shipPrice;
 
 let pollTimer=null, tickTimer=null, sessionStart=0;
 let currentKey=null, currentAddr='', paymentId=null;
@@ -319,15 +319,15 @@ let selectedKey = 'eth';
 
 /* ── Cart strip ── */
 (function(){
-  document.getElementById('cartStripTotal').textContent     = '£'+gbpTotal.toFixed(2);
-  document.getElementById('stripSubtotal').textContent      = '£'+subtotal.toFixed(2);
-  document.getElementById('stripShippingPrice').textContent = '£'+shipPrice.toFixed(2);
+  document.getElementById('cartStripTotal').textContent     = '€'+eurTotal.toFixed(2);
+  document.getElementById('stripSubtotal').textContent      = '€'+subtotal.toFixed(2);
+  document.getElementById('stripShippingPrice').textContent = '€'+shipPrice.toFixed(2);
   document.getElementById('stripShippingLabel').textContent = shipMethod.label || 'Standard Delivery';
   document.getElementById('cartStripItems').innerHTML = cart.map(i=>
     `<div class="cart-strip-item">
       <span class="cart-strip-item-name">${i.name} ${i.dose}</span>
       <span class="cart-strip-item-qty">×${i.qty}</span>
-      <span class="cart-strip-item-price">£${(i.price*i.qty).toFixed(2)}</span>
+      <span class="cart-strip-item-price">€${(i.price*i.qty).toFixed(2)}</span>
     </div>`
   ).join('');
 })();
@@ -379,8 +379,8 @@ async function openPayment(key){
   showScreen('screen-loading');
 
   try{
-    const gbpRate   = 1.27;
-    const usdAmount = (gbpTotal * gbpRate).toFixed(2);
+    const eurRate   = 1.27;
+    const usdAmount = (eurTotal * eurRate).toFixed(2);
 
     const res = await fetch('https://api.nowpayments.io/v1/invoice', {
       method: 'POST',
@@ -403,7 +403,7 @@ async function openPayment(key){
     if(invoice.invoice_url){
       // Use localStorage so data survives the redirect away to NOWPayments and back
       localStorage.setItem('rp_order', JSON.stringify({
-        cart, shipping, shipMethod, subtotal, shipPrice, gbpTotal,
+        cart, shipping, shipMethod, subtotal, shipPrice, eurTotal,
         cryptoKey: key, cryptoTicker: c.ticker, invoiceId: invoice.id,
       }));
       window.location.href = invoice.invoice_url;
@@ -420,8 +420,8 @@ async function openPayment(key){
 async function openPaymentDirect(key){
   const c = currencies[key];
   try{
-    const gbpRate   = 1.27;
-    const usdAmount = (gbpTotal * gbpRate).toFixed(2);
+    const eurRate   = 1.27;
+    const usdAmount = (eurTotal * eurRate).toFixed(2);
 
     const res = await fetch('https://api.nowpayments.io/v1/payment', {
       method: 'POST',
@@ -449,7 +449,7 @@ async function openPaymentDirect(key){
     document.getElementById('addr-display').textContent    = payment.pay_address;
     document.getElementById('pay-crypto-amount').textContent = payment.pay_amount;
     document.getElementById('pay-crypto-ticker').textContent  = c.ticker.toUpperCase();
-    document.getElementById('pay-gbp-label').textContent      = '£'+gbpTotal.toFixed(2)+' GBP';
+    document.getElementById('pay-eur-label').textContent      = '€'+eurTotal.toFixed(2)+' EUR';
     document.getElementById('warn-text').innerHTML =
       '⚠ Send exactly <strong>'+payment.pay_amount+' '+c.ticker.toUpperCase()+'</strong> to this address. Wrong asset = permanent loss.';
 
@@ -462,7 +462,7 @@ async function openPaymentDirect(key){
     });
 
     localStorage.setItem('rp_order', JSON.stringify({
-      cart, shipping, shipMethod, subtotal, shipPrice, gbpTotal,
+      cart, shipping, shipMethod, subtotal, shipPrice, eurTotal,
       cryptoKey:key, cryptoAmount:payment.pay_amount, cryptoTicker:c.ticker,
       paymentId:payment.payment_id,
     }));
