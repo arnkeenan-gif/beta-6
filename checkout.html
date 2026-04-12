@@ -13,14 +13,13 @@
   --blue-frost: #E6F1FB; --white: #ffffff; --off-white: #F4F8FD;
   --gray-soft: #8EA7BE; --gray-text: #4A6680;
 }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; background: var(--blue-mid); }
 body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--blue-deep); overflow-x: hidden; }
 
 nav {
-  position: fixed; top: 28px; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 1.2rem 4rem;
-  background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+  background: #ffffff; 
   border-bottom: 1px solid rgba(4,44,83,0.08);
 }
 .logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.25rem; color:var(--blue-deep); letter-spacing:-0.02em; display:flex; align-items:center; gap:10px; text-decoration:none; }
@@ -129,13 +128,12 @@ nav {
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 201;
     white-space: nowrap;
     overflow: hidden;
     height: 28px;
-    line-height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .shipping-banner span { opacity: 0.75; margin: 0 8px; }
 
@@ -164,7 +162,7 @@ nav {
   @media (max-width: 768px) { .site-footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; } }
 
   /* Mobile menu */
-  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
+  .hamburger { display:flex; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
   .hamburger span { display:block; width:22px; height:2px; background:var(--blue-deep); border-radius:2px; transition:all 0.3s; }
   .hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
   .hamburger.open span:nth-child(2) { opacity:0; }
@@ -185,7 +183,6 @@ nav {
   .mobile-menu a:after { content:'›'; font-size:1.2rem; color:var(--blue-mid); }
   .mobile-menu a:last-child { border-bottom:none; }
   .mobile-menu-footer { margin-top:auto; font-size:0.8rem; color:var(--gray-soft); text-align:center; }
-  @media (max-width: 768px) { .hamburger { display:flex; } }
 
 </style>
 </head>
