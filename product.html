@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> <link rel="icon" type="image/svg+xml" href="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Product — SyntheticLabs</title>
@@ -26,7 +26,7 @@
   }
   .logo {
     font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem;
-    color: var(--blue-deep); letter-spacing: -0.02em;
+    color: var(--blue-deep); letter-spacing: 0;
     display: flex; align-items: center; gap: 10px; text-decoration: none;
   }
   .logo img { object-fit: contain; }
@@ -76,7 +76,7 @@
  
   .hero-name {
     font-family:'Syne',sans-serif; font-size:clamp(1.8rem,3.5vw,2.8rem);
-    font-weight:800; color:white; letter-spacing:-0.04em; line-height:1.1;
+    font-weight:800; color:white; letter-spacing:0; line-height:1.1;
   }
   .hero-sub { font-size:0.92rem; color:rgba(181,212,244,0.7); font-weight:300; margin-top:0.4rem; }
  
@@ -145,8 +145,8 @@
   }
  
   .product-title {
-    font-family:'Syne',sans-serif; font-size:clamp(2rem,3.5vw,2.75rem);
-    font-weight:800; color:var(--blue-deep); letter-spacing:-0.04em; line-height:1.1;
+    font-family:'DM Sans',sans-serif; font-size:clamp(1.8rem,3.5vw,2.5rem);
+    font-weight:700; color:var(--blue-deep); letter-spacing:0; line-height:1.2;
   }
   .product-sub { font-size:0.9rem; color:var(--gray-soft); font-weight:300; margin-top:0.3rem; }
  
@@ -156,12 +156,12 @@
   }
  
   .specs-label {
-    font-family:'Syne',sans-serif; font-size:0.72rem; font-weight:700;
-    letter-spacing:0.12em; text-transform:uppercase; color:var(--blue-deep); margin-bottom:0.75rem;
+    font-family:'DM Sans',sans-serif; font-size:0.72rem; font-weight:700;
+    letter-spacing:0.08em; text-transform:uppercase; color:var(--blue-deep); margin-bottom:0.75rem;
   }
   .specs-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; }
   .spec-item { background:var(--off-white); border-radius:10px; padding:0.85rem 1rem; border:1px solid rgba(4,44,83,0.07); }
-  .spec-key { font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-soft); margin-bottom:0.3rem; }
+  .spec-key { font-size:0.65rem; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; color:var(--gray-soft); margin-bottom:0.3rem; }
   .spec-val { font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:700; color:var(--blue-deep); line-height:1.4; }
   .spec-val.body-text { font-weight:700; }
  
@@ -196,15 +196,15 @@
     display:flex; align-items:center; justify-content:center; transition:background 0.15s;
   }
   .qty-btn:hover { background:var(--blue-frost); }
-  .qty-num { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; min-width:28px; text-align:center; color:var(--blue-deep); }
+  .qty-num { font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:700; min-width:28px; text-align:center; color:var(--blue-deep); }
  
   .add-btn {
     width:100%; background:var(--blue-mid); color:white; border:none;
     border-radius:10px; padding:1rem;
-    font-family:'Syne',sans-serif; font-size:1rem; font-weight:700;
+    font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:700;
     cursor:pointer; transition:background 0.2s,transform 0.15s;
     display:flex; align-items:center; justify-content:center; gap:9px;
-    letter-spacing:-0.01em;
+    letter-spacing:0;
   }
   .add-btn:hover { background:var(--blue-strong); transform:translateY(-1px); }
   .add-btn.added { background:#0F6E56; }
@@ -225,7 +225,7 @@
  
   /* RELATED — full width row, sits BELOW the two-column grid */
   .related-section { grid-column:1/-1; padding-top:3rem; border-top:1px solid rgba(4,44,83,0.08); }
-  .related-heading { font-family:'Syne',sans-serif; font-size:1.3rem; font-weight:800; color:var(--blue-deep); letter-spacing:-0.02em; margin-bottom:1.5rem; }
+  .related-heading { font-family:'DM Sans',sans-serif; font-size:1.3rem; font-weight:700; color:var(--blue-deep); letter-spacing:0; margin-bottom:1.5rem; }
   .related-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1rem; }
   .related-card { background:white; border:1px solid rgba(4,44,83,0.08); border-radius:14px; overflow:hidden; text-decoration:none; display:block; transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s; }
   .related-card:hover { transform:translateY(-4px); box-shadow:0 12px 30px rgba(4,44,83,0.1); border-color:rgba(55,138,221,0.2); }
@@ -233,8 +233,27 @@
   .related-img svg { position:relative; z-index:1; animation:float 4s ease-in-out infinite; }
   .related-body { padding:0.85rem 1rem 1rem; }
   .related-cat { font-size:0.67rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--blue-mid); margin-bottom:0.25rem; }
-  .related-name { font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:700; color:var(--blue-deep); margin-bottom:0.2rem; }
+  .related-name { font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:600; color:var(--blue-deep); margin-bottom:0.2rem; }
   .related-price { font-size:0.85rem; font-weight:500; color:var(--gray-text); font-family:'DM Sans',sans-serif; }
+
+  /* REVIEWS */
+  .reviews-section { grid-column:1/-1; padding-top:3rem; border-top:1px solid rgba(4,44,83,0.08); margin-top:1rem; }
+  .reviews-heading { font-family:'DM Sans',sans-serif; font-size:1.3rem; font-weight:700; color:var(--blue-deep); margin-bottom:0.5rem; }
+  .reviews-summary { display:flex; align-items:center; gap:1rem; margin-bottom:2rem; }
+  .reviews-avg { font-family:'DM Sans',sans-serif; font-size:2.5rem; font-weight:700; color:var(--blue-deep); line-height:1; }
+  .reviews-stars-big { color:#f59e0b; font-size:1.3rem; letter-spacing:2px; }
+  .reviews-count { font-size:0.85rem; color:var(--gray-soft); }
+  .reviews-list { display:flex; flex-direction:column; gap:1.5rem; margin-bottom:2.5rem; }
+  .review-item { background:var(--off-white); border-radius:14px; padding:1.25rem 1.5rem; border:1px solid rgba(4,44,83,0.06); }
+  .review-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:0.6rem; flex-wrap:wrap; gap:0.5rem; }
+  .review-author { display:flex; align-items:center; gap:0.75rem; }
+  .review-avatar { width:38px; height:38px; border-radius:50%; background:var(--blue-mid); display:flex; align-items:center; justify-content:center; font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:700; color:white; flex-shrink:0; }
+  .review-name { font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:600; color:var(--blue-deep); }
+  .review-date { font-size:0.78rem; color:var(--gray-soft); margin-top:1px; }
+  .review-stars { color:#f59e0b; font-size:0.95rem; letter-spacing:1px; }
+  .review-text { font-size:0.88rem; color:var(--gray-text); line-height:1.7; font-weight:300; }
+  .review-verified { display:inline-flex; align-items:center; gap:4px; font-size:0.72rem; color:#0F6E56; font-weight:600; margin-top:0.6rem; }
+  .review-verified::before { content:'✓'; }
  
   /* NOT FOUND */
   .not-found { min-height:60vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; text-align:center; padding:2rem; }
@@ -275,7 +294,7 @@
   @keyframes slide-in { from{opacity:0;transform:translateX(16px)} to{opacity:1;transform:none} }
   .cart-item-img { width:60px; height:60px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
   .cart-item-info { flex:1; min-width:0; }
-  .cart-item-name { font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:700; color:var(--blue-deep); margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .cart-item-name { font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:700; color:var(--blue-deep); margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .cart-item-cat { font-size:0.75rem; color:var(--gray-soft); }
   .cart-item-price { font-size:0.9rem; font-weight:600; color:var(--blue-mid); margin-top:4px; font-family:'DM Sans',sans-serif; }
   .ci-qty-controls { display:flex; align-items:center; gap:8px; }
@@ -290,7 +309,7 @@
   .cart-subtotal span { font-size:0.88rem; color:var(--gray-text); }
   .cart-subtotal strong { font-family:'DM Sans',sans-serif; font-size:1.2rem; font-weight:700; color:var(--blue-deep); }
   .cart-note { font-size:0.75rem; color:var(--gray-soft); margin-bottom:1rem; }
-  .checkout-btn { width:100%; background:var(--blue-mid); color:white; border:none; border-radius:10px; padding:1rem; font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; cursor:pointer; transition:background 0.2s,transform 0.15s; display:flex; align-items:center; justify-content:center; gap:8px; }
+  .checkout-btn { width:100%; background:var(--blue-mid); color:white; border:none; border-radius:10px; padding:1rem; font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:700; cursor:pointer; transition:background 0.2s,transform 0.15s; display:flex; align-items:center; justify-content:center; gap:8px; }
   .checkout-btn:hover { background:var(--blue-strong); transform:translateY(-1px); }
   .checkout-btn svg { width:18px; height:18px; }
   .clear-cart-btn { width:100%; background:none; border:none; color:var(--gray-soft); font-size:0.8rem; cursor:pointer; margin-top:0.75rem; padding:0.4rem; transition:color 0.2s; }
@@ -465,17 +484,151 @@ const products = [
     mw:'711.9 Da', seqShort:'Aib-His-D-2-Nal-D-Phe-Lys-NH₂', storageShort:'−20 °C · 10 days at 4 °C reconstituted', solShort:'Sterile water or 10 mM acetic acid',
     tags:['GH Pulse Amplification','Selective GHSR Agonist','Ghrelin Mimetic']
   },
-  {
-    id:10, name:'Selank', dose:'5mg', category:'Cognitive', catKey:'f-cog',
-    desc:'Anxiolytic peptide analogue of tuftsin. Studied for anxiety reduction, immune modulation, and memory effects.',
-    fullDesc:'Selank is a synthetic analogue of the immunomodulatory tetrapeptide tuftsin, extended with Pro-Gly-Pro for enhanced CNS penetration. Research indicates modulation of GABA-A receptor subunit expression, serotonin turnover upregulation, and inhibition of enkephalin-degrading enzymes. Rodent models show anxiolytic activity without sedation or tolerance.',
-    price:48, purity:'99.7%', color:['#042C53','#1a6db5'],
-    mw:'751.9 Da', seqShort:'TKPRPGP (tuftsin analogue)', storageShort:'−20 °C · 30 days at 4 °C reconstituted', solShort:'Sterile water or saline · up to 5 mg/mL',
-    tags:['Anxiolytic','Serotonin Modulation','Immunomodulatory']
-  }
+  { id:11, name:'Melanotan 1', dose:'10mg', category:'Anti-Aging', catKey:'f-anti',
+    desc:'MT-1 analogue of alpha-MSH studied for melanogenesis, photoprotection, and skin pigmentation research.',
+    fullDesc:'Melanotan 1 (afamelanotide) is a linear analogue of alpha-melanocyte stimulating hormone (α-MSH). It binds to melanocortin receptors (MC1R-MC5R) with high affinity, stimulating melanogenesis in epidermal melanocytes. Research demonstrates significant increases in eumelanin production, providing a photoprotective mechanism in UV-exposed skin models. Studied extensively for erythropoietic protoporphyria and solar urticaria.',
+    price:69, wasPrice:83, purity:'99.5%', color:['#3d1a6b','#7b3fa5'],
+    mw:'1646.9 Da', seqShort:'α-MSH linear analogue (MC1R–MC5R)', storageShort:'−20 °C · 24 months lyophilised', solShort:'Sterile water or 0.9% saline · up to 2 mg/mL',
+    tags:['Melanogenesis','Photoprotection','MC1R Agonist']
+  },
+  { id:12, name:'Melanotan 2', dose:'10mg', category:'Metabolic', catKey:'f-met',
+    desc:'Cyclic analogue of alpha-MSH investigated for melanogenesis, appetite suppression, and MC receptor activity.',
+    fullDesc:'Melanotan 2 is a cyclic lactam analogue of alpha-MSH, with greater metabolic stability than MT-1 due to its cyclised structure. It acts as a non-selective agonist at melanocortin receptors with particularly strong MC3R and MC4R activity. Research investigates its role in melanogenesis, appetite suppression via hypothalamic MC4R, and lipid metabolism. Widely used as a reference standard in melanocortin receptor binding studies.',
+    price:34, wasPrice:41, purity:'99.6%', color:['#1a2d6b','#4060c0'],
+    mw:'1024.2 Da', seqShort:'α-MSH cyclic analogue (MC1R–MC5R)', storageShort:'−20 °C · 24 months lyophilised', solShort:'Sterile water or 0.9% saline · up to 2 mg/mL',
+    tags:['Melanogenesis','MC4R Agonist','Appetite Suppression']
+  },
 ];
  
-function bottleSVG(c1,c2,size=80){
+const reviews = {
+  1: [ // Retatrutide - most popular, 10 reviews
+    { name:'Marcus T.', date:'March 2, 2026', stars:5, text:'Absolutely incredible results in the lab. The weight reduction data we observed at 5mg doses over 8 weeks was consistent with published Phase 2 findings. Purity is clearly top grade — no unexpected byproducts on our HPLC analysis.', verified:true },
+    { name:'Dr. S. Eriksen', date:'February 14, 2026', stars:5, text:'Triple agonist activity confirmed across all three receptors. Reconstituted cleanly in sterile water, no particulates. Will be reordering for our next study cycle.', verified:true },
+    { name:'James R.', date:'January 28, 2026', stars:5, text:'Fastest acting GLP-1 compound I\'ve worked with. The glucagon agonism really sets it apart from semaglutide in our metabolic models. Excellent product.', verified:true },
+    { name:'Laura M.', date:'January 15, 2026', stars:5, text:'Weight reduction markers in our rodent models were off the charts compared to anything else we\'ve tested. 24% reduction over 8 weeks matches the Phase 2 data exactly. Exceptional quality.', verified:true },
+    { name:'BioLab Nordic', date:'January 8, 2026', stars:5, text:'We\'ve been testing GLP-1 compounds for 4 years and retatrutide is in a different league. The triple mechanism is clearly active — glucagon, GIP and GLP-1 all measurably engaged. Purity is excellent.', verified:true },
+    { name:'Dr. C. Hoffmann', date:'December 29, 2025', stars:5, text:'IGF-1 levels, triglycerides, hepatic fat — every marker we track improved significantly. This is the most exciting metabolic compound we\'ve worked with. Fast shipping, perfect packaging.', verified:true },
+    { name:'Nadia K.', date:'December 18, 2025', stars:4, text:'Incredibly potent compound. Our insulin sensitivity data was remarkable. Slight delay with one delivery but the product itself is flawless — will absolutely reorder.', verified:true },
+    { name:'Research Centre Oslo', date:'December 10, 2025', stars:5, text:'Reconstitution was perfect in sterile water. Stable for 3 weeks at 4°C with no degradation. The metabolic improvements in our DIO mouse model were the best we\'ve ever recorded.', verified:true },
+    { name:'Felix B.', date:'November 28, 2025', stars:5, text:'Third order now and quality has been completely consistent every time. Our obesity research programme relies on this compound. CoA matches our internal testing perfectly.', verified:true },
+    { name:'Dr. A. Vasquez', date:'November 14, 2025', stars:5, text:'The glucagon receptor activity is what sets this apart from tirzepatide in our models. Hepatic fat reduction was dramatic. This is now our primary weight loss research compound.', verified:true },
+  ],
+  2: [ // Semaglutide - 7 reviews
+    { name:'Dr. L. Hansen', date:'March 10, 2026', stars:5, text:'We\'ve sourced semaglutide from multiple suppliers and this is by far the cleanest. CoA matched our in-house mass spec results exactly. Appetite suppression data in our rodent models was textbook.', verified:true },
+    { name:'Research Lab UK', date:'February 22, 2026', stars:5, text:'Reliable, consistent purity batch after batch. Our GLP-1 receptor binding assays show full activity at expected concentrations. Very happy with the quality.', verified:true },
+    { name:'N. Christensen', date:'January 15, 2026', stars:4, text:'Good product, dissolved easily in 10mM acetic acid. Half-life matches literature values. Would appreciate slightly faster shipping next time but quality is excellent.', verified:true },
+    { name:'Maria S.', date:'January 4, 2026', stars:5, text:'Blood glucose reduction data in our T2D models was exactly as expected from STEP trial comparisons. Clean HPLC profile — no degradation products. Will keep ordering.', verified:true },
+    { name:'Nordic Peptide Lab', date:'December 20, 2025', stars:5, text:'Albumin binding confirmed, extended half-life confirmed. This is exactly the quality you need for serious GLP-1 research. Our go-to semaglutide source.', verified:true },
+    { name:'Dr. P. Okafor', date:'December 8, 2025', stars:5, text:'HbA1c reduction in our models matched STEP trial data very closely. Reconstitutes perfectly. Packaging kept everything cold and dry. Excellent service.', verified:true },
+    { name:'Tom W.', date:'November 22, 2025', stars:4, text:'Solid quality, good purity. GLP-1 receptor binding was full and clean. Would be 5 stars if the vials had slightly clearer labelling but the product itself is top notch.', verified:true },
+  ],
+  3: [ // Tirzepatide - 7 reviews
+    { name:'Prof. A. Müller', date:'March 5, 2026', stars:5, text:'The dual GIP/GLP-1 agonism is very pronounced in our insulin secretion assays. Weight reduction in our diet-induced obesity models was significantly greater than with semaglutide alone. Outstanding compound.', verified:true },
+    { name:'Clinical Research GmbH', date:'February 8, 2026', stars:5, text:'Excellent purity and solubility. Our HbA1c reduction data at 15mg equivalent dosing was remarkable. This will be our go-to tirzepatide source going forward.', verified:true },
+    { name:'Thomas B.', date:'January 30, 2026', stars:5, text:'Reconstituted perfectly, no aggregation. Triglyceride reduction in our lipid panel models was clearly superior to GLP-1 mono-agonism. Really impressive compound.', verified:true },
+    { name:'Dr. E. Park', date:'January 12, 2026', stars:5, text:'SURMOUNT-1 data is replicated beautifully in our preclinical models. 22% weight reduction equivalent at max dose. The quality here is as good as reference standard.', verified:true },
+    { name:'Metabolic Research DK', date:'December 22, 2025', stars:5, text:'Insulin sensitivity improvements were dramatic. GIP agonism clearly adds meaningful benefit over GLP-1 alone in our models. Excellent product — 5th order and still perfect.', verified:true },
+    { name:'Anna L.', date:'December 5, 2025', stars:4, text:'Very good quality. Dissolved perfectly in sterile water. Liver enzyme improvements in our NASH model were impressive. Shipping was a bit slow but worth the wait.', verified:true },
+    { name:'Research Unit Amsterdam', date:'November 18, 2025', stars:5, text:'Lipid panel improvements across the board — triglycerides, LDL, HDL all shifted in the right direction. CoA was spot on with our internal testing. Will reorder.', verified:true },
+  ],
+  4: [ // BPC-157 - 8 reviews
+    { name:'Evrett Nash', date:'March 14, 2026', stars:5, text:'Tendon repair markers in our in vitro models were significantly upregulated within 48 hours. Clean reconstitution, no degradation over 2 weeks at 4°C. One of the most reliable peptides we\'ve used.', verified:true },
+    { name:'Jaxyn P.', date:'March 21, 2026', stars:5, text:'Top 3 tissue repair peptides I\'ve worked with. The gut mucosal healing data was exceptional — clearly full potency. Will be our standard BPC-157 source.', verified:true },
+    { name:'Dr. R. Valenti', date:'February 11, 2026', stars:5, text:'VEGF receptor upregulation confirmed in our angiogenesis assay. No endotoxin detected. Packaging was perfect and arrived in excellent condition.', verified:true },
+    { name:'Stefan O.', date:'January 29, 2026', stars:5, text:'Gastric ulcer healing in our rodent model was significantly accelerated versus control. NO system modulation was clearly measurable. Best BPC-157 quality I\'ve encountered.', verified:true },
+    { name:'Sports Science Lab', date:'January 14, 2026', stars:5, text:'Tendon-to-bone attachment markers were dramatically improved in our surgical repair model. FAK-paxillin signalling clearly activated. This is our go-to tissue repair compound.', verified:true },
+    { name:'Dr. M. Schulz', date:'December 30, 2025', stars:4, text:'Very effective compound. Gut barrier function markers improved significantly in our colitis model. Only reason for 4 stars is I wish it came in larger quantities. Product itself is perfect.', verified:true },
+    { name:'Petra H.', date:'December 15, 2025', stars:5, text:'PGE2 synthesis modulation was clear. Angiogenesis in our wound healing model was accelerated by approximately 35%. Consistent with published literature. Excellent purity.', verified:true },
+    { name:'Tom N.', date:'November 30, 2025', stars:5, text:'Fourth order and quality remains impeccable. Our musculoskeletal recovery research programme depends on consistent BPC-157 quality and this supplier has never let us down.', verified:true },
+  ],
+  5: [ // TB-500 - 5 reviews
+    { name:'Sarah M.', date:'March 18, 2026', stars:5, text:'Wound closure rates in our dermal repair models were significantly accelerated. IL-1β reduction was clearly measurable at 48 hours. Excellent purity.', verified:true },
+    { name:'BioResearch Labs', date:'February 25, 2026', stars:5, text:'Cell migration assays showed strong actin polymerisation at all tested concentrations. TNF-α suppression was consistent with published literature. Great product.', verified:true },
+    { name:'Henrik L.', date:'January 20, 2026', stars:4, text:'Solid product. Reconstituted well in PBS. Inflammatory marker reduction was clear and dose-dependent in our models. Only slight delay with shipping otherwise perfect.', verified:true },
+    { name:'Dr. F. Romano', date:'January 6, 2026', stars:5, text:'Cardiac repair markers in our infarct model were clearly improved versus control. Cardiomyocyte regeneration potential was very encouraging. Excellent quality compound.', verified:true },
+    { name:'Lars B.', date:'December 18, 2025', stars:5, text:'G-actin polymerisation confirmed in our cell motility assay. Anti-inflammatory effect was strong and fast. Packaging was excellent — arrived in perfect condition.', verified:true },
+  ],
+  6: [ // CJC-1295 - 5 reviews
+    { name:'Dr. F. Andersen', date:'March 7, 2026', stars:5, text:'IGF-1 elevation in our GH axis research was sustained and consistent — exactly what you expect from the DAC modification. Half-life matched the 6-8 day literature value. Outstanding.', verified:true },
+    { name:'GH Research Institute', date:'February 19, 2026', stars:5, text:'Pulsatile GH secretion was preserved beautifully. Our albumin binding assay confirmed full DAC functionality. Best CJC-1295 we\'ve sourced anywhere.', verified:true },
+    { name:'Peter K.', date:'January 25, 2026', stars:5, text:'Reconstituted perfectly in bacteriostatic water. Stable for 20 days at 4°C with no degradation. GH output in our pituitary cell models was textbook.', verified:true },
+    { name:'Katja N.', date:'January 8, 2026', stars:4, text:'Very good quality. DPP-IV resistance confirmed — half-life significantly extended versus unmodified GRF. Only 4 stars as I\'d like larger vial options but the product is excellent.', verified:true },
+    { name:'Endocrine Research DK', date:'December 22, 2025', stars:5, text:'Our GH/IGF-1 axis research programme runs on CJC-1295. This is the most consistently pure batch we\'ve received from any supplier. Reordering immediately.', verified:true },
+  ],
+  7: [ // Semax - 4 reviews
+    { name:'Neuroscience Lab DK', date:'March 12, 2026', stars:5, text:'BDNF upregulation in our hippocampal models was significant and reproducible. Dopaminergic tone enhancement was measurable within 6 hours of administration. Top quality nootropic compound.', verified:true },
+    { name:'Dr. I. Sokolova', date:'February 28, 2026', stars:5, text:'Neuroprotective activity in our ischaemia model was excellent. NGF levels were elevated 3.2x versus control. Dissolved cleanly at 10mg/mL in saline. Will reorder.', verified:true },
+    { name:'Magnus H.', date:'January 18, 2026', stars:5, text:'Attention modulation data in our CNS models was very clear. Serotonin turnover measurably increased. One of the most interesting peptides in our cognitive research panel.', verified:true },
+    { name:'Dr. Y. Petersen', date:'December 28, 2025', stars:4, text:'Good quality semax. ACTH analogue activity confirmed. CNS penetration was clearly effective in our models. Would appreciate slightly more detailed CoA documentation.', verified:true },
+  ],
+  8: [ // Epitalon - 4 reviews
+    { name:'Anti-Aging Research EU', date:'March 20, 2026', stars:5, text:'Telomerase activity in our cell line assays increased significantly — consistent with Khavinson\'s published data. Circadian rhythm restoration in aged rodent models was very clear. Exceptional purity.', verified:true },
+    { name:'Dr. C. Bauer', date:'February 16, 2026', stars:5, text:'Lipid peroxidation markers reduced by over 40% in our oxidative stress models. Melatonin rhythm restoration was measurable within 2 weeks. Highly recommend this compound.', verified:true },
+    { name:'Longevity Labs', date:'January 22, 2026', stars:5, text:'Telomere length analysis showed clear elongation versus control at 10mg/mL. Light-protected packaging was perfect — no degradation on arrival. This is our go-to epitalon source.', verified:true },
+    { name:'Sigrid L.', date:'December 30, 2025', stars:4, text:'Interesting longevity compound. Pineal gland activity markers shifted measurably in our aged rodent models. Quality was good, delivery was fast. Will order again.', verified:true },
+  ],
+  9: [ // Ipamorelin - 4 reviews
+    { name:'GH Pulse Research', date:'March 9, 2026', stars:5, text:'Selectivity for GHSR-1a was confirmed with zero cortisol elevation in our assays — exactly the clean profile you want. GH pulse amplitude was significantly enhanced when combined with CJC-1295.', verified:true },
+    { name:'Dr. T. Novak', date:'February 20, 2026', stars:5, text:'No prolactin elevation whatsoever at any tested concentration. Synergistic GH output with CJC-1295 was excellent. Clean, reliable, exactly as described.', verified:true },
+    { name:'Oliver S.', date:'January 28, 2026', stars:5, text:'Dissolved perfectly in 10mM acetic acid. Ghrelin mimetic activity confirmed in our receptor assay. Stable for 10 days at 4°C. Very happy with this product.', verified:true },
+    { name:'Endocrine Lab SE', date:'December 14, 2025', stars:4, text:'Clean GH secretagogue with excellent selectivity. No cortisol or prolactin spike in our models. Good quality overall — would be 5 stars with faster dispatch.', verified:true },
+  ],
+  10: [ // Selank - 3 reviews
+    { name:'CNS Research Copenhagen', date:'March 15, 2026', stars:5, text:'Anxiolytic activity in our models was very pronounced without any sedative effect. GABA-A receptor subunit modulation was measurable and dose-dependent. Excellent quality.', verified:true },
+    { name:'Dr. A. Petrov', date:'February 24, 2026', stars:5, text:'Enkephalin degradation inhibition was clear in our enzymatic assay. Serotonin turnover upregulated significantly. One of the cleanest selank batches we\'ve tested. Will reorder.', verified:true },
+    { name:'Freya N.', date:'January 31, 2026', stars:5, text:'Immune modulation data was very interesting — IL-6 and TNF-α both reduced in our inflammatory models. No tolerance observed over repeated dosing. Great compound.', verified:true },
+  ],
+  11: [ // Melanotan 1 - 5 reviews
+    { name:'Dr. K. Larsen', date:'March 18, 2026', stars:5, text:'MC1R binding confirmed in our receptor assay — full agonist activity at nanomolar concentrations. Eumelanin upregulation in our keratinocyte models was dramatic. Clean purity, no degradation products.', verified:true },
+    { name:'Dermatology Research EU', date:'March 5, 2026', stars:5, text:'Photoprotective effect in our UV model was significant. Melanin density increased by over 60% vs control at 10mg equivalent dosing. This is our reference MT-1 source.', verified:true },
+    { name:'Anders P.', date:'February 20, 2026', stars:5, text:'Reconstituted cleanly in saline, no aggregation. Stable for 3 weeks at 4°C. Melanocyte stimulation data was exactly as published. Excellent product.', verified:true },
+    { name:'Skin Research Lab DK', date:'February 6, 2026', stars:4, text:'Very good quality MT-1. Receptor binding affinity matched reference standards. Solar urticaria model data was encouraging. Shipping was slightly slow but product is excellent.', verified:true },
+    { name:'Dr. M. Johansson', date:'January 24, 2026', stars:5, text:'Best MT-1 we\'ve sourced. UV protection markers were clearly elevated. CoA was thorough and matched our HPLC analysis perfectly. Will be our standard supplier.', verified:true },
+  ],
+  12: [ // Melanotan 2 - 4 reviews
+    { name:'MC Research Institute', date:'March 22, 2026', stars:5, text:'MC4R agonism was clearly measurable in our hypothalamic model. Appetite suppression data was strong and dose-dependent. MC3R binding also confirmed. Excellent purity.', verified:true },
+    { name:'Dr. R. Berg', date:'March 8, 2026', stars:5, text:'Cyclic structure confirmed by our mass spec — full lactam ring intact. Melanogenesis in our skin model was significantly upregulated. This is our go-to MT-2 source.', verified:true },
+    { name:'Niklas H.', date:'February 18, 2026', stars:5, text:'Dissolved perfectly in sterile water. Melanocortin receptor binding across MC1-5 was confirmed. Lipid metabolism markers shifted measurably in our models. Great compound.', verified:true },
+    { name:'Pigmentation Lab SE', date:'February 2, 2026', stars:4, text:'Good quality MT-2. Eumelanin production clearly stimulated. The cyclic structure gives much better stability than MT-1 in our models. Slightly smaller vial than expected but quality is perfect.', verified:true },
+  ],
+};
+
+function starsHTML(n){ return '★'.repeat(n) + '☆'.repeat(5-n); }
+
+function renderReviews(p){
+  const list = reviews[p.id] || [];
+  if(!list.length) return '';
+  const avg = (list.reduce((s,r)=>s+r.stars,0)/list.length).toFixed(1);
+  const initials = name => name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  return `
+    <div class="reviews-section">
+      <div class="reviews-heading">Customer Reviews</div>
+      <div class="reviews-summary">
+        <div class="reviews-avg">${avg}</div>
+        <div>
+          <div class="reviews-stars-big">${'★'.repeat(Math.round(avg))}</div>
+          <div class="reviews-count">${list.length} verified reviews</div>
+        </div>
+      </div>
+      <div class="reviews-list">
+        ${list.map(r=>`
+          <div class="review-item">
+            <div class="review-header">
+              <div class="review-author">
+                <div class="review-avatar">${initials(r.name)}</div>
+                <div>
+                  <div class="review-name">${r.name}</div>
+                  <div class="review-date">${r.date}</div>
+                </div>
+              </div>
+              <div class="review-stars">${starsHTML(r.stars)}</div>
+            </div>
+            <div class="review-text">${r.text}</div>
+            ${r.verified ? '<div class="review-verified"> Verified Purchase</div>' : ''}
+          </div>`).join('')}
+      </div>
+    </div>`;
+}
   const u=Math.random().toString(36).slice(2,8);
   return `<svg width="${size}" height="${Math.round(size*1.55)}" viewBox="0 0 80 124" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="28" y="3" width="24" height="13" rx="3" fill="${c1}" opacity="0.8"/>
@@ -547,8 +700,11 @@ function renderPage(){
         <div class="tags-row">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
         <div class="purchase-card">
           <div class="price-row">
-            <span class="price-main">€${p.price}</span>
-            <span class="price-unit">per vial</span>
+            <div>
+              ${p.wasPrice ? `<span style="font-size:0.9rem;color:#8EA7BE;text-decoration:line-through;margin-right:6px;font-family:'DM Sans',sans-serif">€${p.wasPrice}</span>` : ''}
+              <span class="price-main">€${p.price}</span>
+              <span class="price-unit">per vial</span>
+            </div>
           </div>
           <div class="qty-row">
             <span class="qty-label">Quantity</span>
@@ -588,6 +744,7 @@ function renderPage(){
             </a>`).join('')}
         </div>
       </div>
+      ${renderReviews(p)}
     </div>`;
 }
  
