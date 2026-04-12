@@ -17,7 +17,7 @@ html { scroll-behavior: smooth; }
 body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--blue-deep); overflow-x: hidden; }
 
 nav {
-  position: fixed; top: 32px; left: 0; right: 0; z-index: 100;
+  position: fixed; top: 28px; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 1.2rem 4rem;
   background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
@@ -166,6 +166,8 @@ nav {
     z-index: 201;
     white-space: nowrap;
     overflow: hidden;
+    height: 28px;
+    line-height: 28px;
   }
   .shipping-banner span { opacity: 0.75; margin: 0 8px; }
 
@@ -512,5 +514,16 @@ if (order.cryptoAmount && order.cryptoTic
 </footer>
 
 </script>
+
+<script>
+function toggleMobileMenu() {
+  var menu = document.getElementById('mobileMenu');
+  var ham = document.getElementById('hamburger');
+  if (!menu) return;
+  menu.classList.toggle('open');
+  if (ham) ham.classList.toggle('open');
+}
+</script>
+
 </body>
 </html>
