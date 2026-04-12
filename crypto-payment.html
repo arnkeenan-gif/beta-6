@@ -207,7 +207,7 @@ body::before{
     <div class="cur-dropdown" id="curDropdown">
       <div class="cur-dropdown-btn" id="dropdownBtn" onclick="toggleDropdown()">
         <div class="cur-dropdown-logo">
-          <img id="selectedLogo" src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH">
+          <img id="selectedLogo" src="https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/eth.png" alt="ETH">
         </div>
         <div class="cur-dropdown-info">
           <div class="cur-dropdown-ticker" id="selectedTicker">ETH</div>
@@ -217,15 +217,15 @@ body::before{
       </div>
       <div class="cur-dropdown-menu" id="dropdownMenu">
         <div class="cur-option selected" onclick="selectCurrency('eth')">
-          <div class="cur-option-logo"><img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH"></div>
+          <div class="cur-option-logo"><img src="https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/eth.png" alt="ETH"></div>
           <div><div class="cur-option-ticker">ETH</div><div class="cur-option-name">Ethereum</div></div>
         </div>
         <div class="cur-option" onclick="selectCurrency('sol')">
-          <div class="cur-option-logo"><img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="SOL"></div>
+          <div class="cur-option-logo"><img src="https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/sol.png" alt="SOL"></div>
           <div><div class="cur-option-ticker">SOL</div><div class="cur-option-name">Solana</div></div>
         </div>
         <div class="cur-option" onclick="selectCurrency('btc')">
-          <div class="cur-option-logo"><img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC"></div>
+          <div class="cur-option-logo"><img src="https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png" alt="BTC"></div>
           <div><div class="cur-option-ticker">BTC</div><div class="cur-option-name">Bitcoin</div></div>
         </div>
       </div>
@@ -301,9 +301,9 @@ const REDIRECT_SECS = 5;
 const POLL_MS       = 8000;
 
 const currencies = {
-  eth: { ticker:'ETH', name:'Ethereum', network:'Ethereum Network (ERC-20)', logo:'https://cryptologos.cc/logos/ethereum-eth-logo.png' },
-  sol: { ticker:'SOL', name:'Solana',   network:'Solana Network',            logo:'https://cryptologos.cc/logos/solana-sol-logo.png' },
-  btc: { ticker:'BTC', name:'Bitcoin',  network:'Bitcoin Network',           logo:'https://cryptologos.cc/logos/bitcoin-btc-logo.png' },
+  eth: { ticker:'ETH', name:'Ethereum', network:'Ethereum Network (ERC-20)', logo:'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/eth.png' },
+  sol: { ticker:'SOL', name:'Solana',   network:'Solana Network',            logo:'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/sol.png' },
+  btc: { ticker:'BTC', name:'Bitcoin',  network:'Bitcoin Network',           logo:'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png' },
 };
 
 const cart       = JSON.parse(localStorage.getItem('rp_cart')||'[]');
