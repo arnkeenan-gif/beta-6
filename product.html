@@ -364,15 +364,15 @@
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="logo">
+  <a href="/" class="logo">
     <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs" style="width:52px;height:52px;object-fit:contain">
     <span><span style="color:#185FA5">Synthetic</span><span style="color:#042C53">Labs</span></span>
   </a>
   <ul>
-    <li><a href="products.html">Products</a></li>
+    <li><a href="/products">Products</a></li>
     <li><a href="index.html#about">Science</a></li>
     <li><a href="index.html#process">Process</a></li>
-    <li><a href="checkout.html" class="nav-cta">Order Now</a></li>
+    <li><a href="/checkout" class="nav-cta">Order Now</a></li>
   </ul>
   <button class="cart-btn" onclick="openCart()">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
@@ -384,9 +384,9 @@
 <div class="page-hero">
   <div class="page-hero-inner">
     <div class="breadcrumb">
-      <a href="index.html">Home</a>
+      <a href="/>Home</a>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-      <a href="products.html">Products</a>
+      <a href="/products">Products</a>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
       <span id="breadcrumbName" style="color:rgba(181,212,244,0.9)">—</span>
     </div>
@@ -413,12 +413,12 @@
     SyntheticLabs
   </div>
   <ul class="footer-links">
-    <li><a href="products.html">Products</a></li>
+    <li><a href="/products">Products</a></li>
     <li><a href="index.html#about">Science</a></li>
-    <li><a href="shipping.html">Shipping</a></li>
+    <li><a href="/shipping">Shipping</a></li>
     <li><a href="#">COA Library</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="terms.html">Terms of Use</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li><a href="/terms">Terms of Use</a></li>
   </ul>
   <div class="footer-copy">© 2025 SyntheticLabs. All compounds are sold strictly for research purposes only. Not for human consumption.</div>
 </footer>
@@ -671,7 +671,7 @@ function renderPage(){
   const p=products.find(x=>x.id===parseInt(new URLSearchParams(window.location.search).get('id')));
   const root=document.getElementById('pageRoot');
   if(!p){
-    root.innerHTML=`<div class="not-found"><h2>Product not found</h2><p>This compound doesn't exist in our catalogue.</p><a href="products.html" class="back-link">← Back to Products</a></div>`;
+    root.innerHTML=`<div class="not-found"><h2>Product not found</h2><p>This compound doesn't exist in our catalogue.</p><a href="/products" class="back-link">← Back to Products</a></div>`;
     return;
   }
   document.title=`${p.name} ${p.dose} — SyntheticLabs`;
@@ -761,7 +761,7 @@ function renderPage(){
         <div class="related-heading">You may also be interested in</div>
         <div class="related-grid">
           ${relList.map(r=>`
-            <a href="product.html?id=${r.id}" class="related-card">
+            <a href="/product?id=${r.id}" class="related-card">
               <div class="related-img">${productImages[r.id] ? '<img src="'+productImages[r.id]+'" alt="'+r.name+'">' : '<div style="background:linear-gradient(145deg,'+r.color[0]+'18,'+r.color[1]+'35);width:100%;height:100%;display:flex;align-items:center;justify-content:center">'+bottleSVG(r.color[0],r.color[1],55)+'</div>'}</div>
               <div class="related-body">
                 <div class="related-cat">${r.category}</div>
