@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Product — Research Peptides</title>
+<title>Product — SyntheticLabs</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,8 +29,7 @@
     color: var(--blue-deep); letter-spacing: -0.02em;
     display: flex; align-items: center; gap: 10px; text-decoration: none;
   }
-  .logo-mark { width:34px; height:34px; background:var(--blue-mid); border-radius:8px; display:flex; align-items:center; justify-content:center; }
-  .logo-mark svg { width:20px; height:20px; }
+  .logo img { object-fit: contain; }
   nav ul { display:flex; list-style:none; gap:2.5rem; }
   nav ul a { font-size:0.9rem; font-weight:400; color:var(--gray-text); text-decoration:none; letter-spacing:0.01em; transition:color 0.2s; }
   nav ul a:hover { color:var(--blue-mid); }
@@ -235,7 +234,7 @@
   .related-body { padding:0.85rem 1rem 1rem; }
   .related-cat { font-size:0.67rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--blue-mid); margin-bottom:0.25rem; }
   .related-name { font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:700; color:var(--blue-deep); margin-bottom:0.2rem; }
-  .related-price { font-size:0.85rem; font-weight:500; color:var(--gray-text); }
+  .related-price { font-size:0.85rem; font-weight:500; color:var(--gray-text); font-family:'DM Sans',sans-serif; }
  
   /* NOT FOUND */
   .not-found { min-height:60vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; text-align:center; padding:2rem; }
@@ -278,7 +277,7 @@
   .cart-item-info { flex:1; min-width:0; }
   .cart-item-name { font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:700; color:var(--blue-deep); margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .cart-item-cat { font-size:0.75rem; color:var(--gray-soft); }
-  .cart-item-price { font-size:0.9rem; font-weight:600; color:var(--blue-mid); margin-top:4px; }
+  .cart-item-price { font-size:0.9rem; font-weight:600; color:var(--blue-mid); margin-top:4px; font-family:'DM Sans',sans-serif; }
   .ci-qty-controls { display:flex; align-items:center; gap:8px; }
   .ci-qty-btn { width:28px; height:28px; border-radius:6px; border:1px solid rgba(4,44,83,0.12); background:white; cursor:pointer; font-size:1rem; font-weight:600; color:var(--blue-deep); display:flex; align-items:center; justify-content:center; transition:background 0.15s; }
   .ci-qty-btn:hover { background:var(--blue-frost); }
@@ -289,7 +288,7 @@
   .drawer-footer { padding:1.25rem 1.5rem; border-top:1px solid rgba(4,44,83,0.08); }
   .cart-subtotal { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; }
   .cart-subtotal span { font-size:0.88rem; color:var(--gray-text); }
-  .cart-subtotal strong { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:700; color:var(--blue-deep); }
+  .cart-subtotal strong { font-family:'DM Sans',sans-serif; font-size:1.2rem; font-weight:700; color:var(--blue-deep); }
   .cart-note { font-size:0.75rem; color:var(--gray-soft); margin-bottom:1rem; }
   .checkout-btn { width:100%; background:var(--blue-mid); color:white; border:none; border-radius:10px; padding:1rem; font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; cursor:pointer; transition:background 0.2s,transform 0.15s; display:flex; align-items:center; justify-content:center; gap:8px; }
   .checkout-btn:hover { background:var(--blue-strong); transform:translateY(-1px); }
@@ -314,16 +313,14 @@
  
 <!-- NAV -->
 <nav>
-  <a href="../" class="logo">
-    <div class="logo-mark">
-      <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" fill="white"/><path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.93 4.93l2.83 2.83M12.24 12.24l2.83 2.83M4.93 15.07l2.83-2.83M12.24 7.76l2.83-2.83" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </div>
-    Research Peptides
+  <a href="index.html" class="logo">
+    <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs" style="width:52px;height:52px;object-fit:contain">
+    <span><span style="color:#185FA5">Synthetic</span><span style="color:#042C53">Labs</span></span>
   </a>
   <ul>
     <li><a href="products.html">Products</a></li>
-    <li><a href="../#about">Science</a></li>
-    <li><a href="../#process">Process</a></li>
+    <li><a href="index.html#about">Science</a></li>
+    <li><a href="index.html#process">Process</a></li>
     <li><a href="checkout.html" class="nav-cta">Order Now</a></li>
   </ul>
   <button class="cart-btn" onclick="openCart()">
@@ -336,7 +333,7 @@
 <div class="page-hero">
   <div class="page-hero-inner">
     <div class="breadcrumb">
-      <a href="../">Home</a>
+      <a href="index.html">Home</a>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
       <a href="products.html">Products</a>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
@@ -361,20 +358,18 @@
 <!-- FOOTER -->
 <footer>
   <div class="logo">
-    <div class="logo-mark">
-      <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" fill="white"/><path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.93 4.93l2.83 2.83M12.24 12.24l2.83 2.83M4.93 15.07l2.83-2.83M12.24 7.76l2.83-2.83" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </div>
-    Research Peptides
+    <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs" style="width:52px;height:52px;object-fit:contain">
+    SyntheticLabs
   </div>
   <ul class="footer-links">
     <li><a href="products.html">Products</a></li>
-    <li><a href="../#about">Science</a></li>
+    <li><a href="index.html#about">Science</a></li>
     <li><a href="#">Shipping</a></li>
     <li><a href="#">COA Library</a></li>
     <li><a href="#">Contact</a></li>
     <li><a href="#">Terms of Use</a></li>
   </ul>
-  <div class="footer-copy">© 2025 Research Peptides Ltd. All compounds are sold strictly for research purposes only. Not for human consumption.</div>
+  <div class="footer-copy">© 2025 SyntheticLabs. All compounds are sold strictly for research purposes only. Not for human consumption.</div>
 </footer>
  
 <!-- CART -->
@@ -386,7 +381,7 @@
   </div>
   <div class="drawer-body" id="drawerBody"></div>
   <div class="drawer-footer" id="drawerFooter" style="display:none">
-    <div class="cart-subtotal"><span>Subtotal</span><strong id="cartTotal">£0.00</strong></div>
+    <div class="cart-subtotal"><span>Subtotal</span><strong id="cartTotal">€0.00</strong></div>
     <p class="cart-note">Shipping calculated at checkout. For research use only.</p>
     <button class="checkout-btn" onclick="checkout()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -504,7 +499,7 @@ function renderPage(){
     root.innerHTML=`<div class="not-found"><h2>Product not found</h2><p>This compound doesn't exist in our catalogue.</p><a href="products.html" class="back-link">← Back to Products</a></div>`;
     return;
   }
-  document.title=`${p.name} ${p.dose} — Research Peptides`;
+  document.title=`${p.name} ${p.dose} — SyntheticLabs`;
   document.getElementById('breadcrumbName').textContent=p.name;
   document.getElementById('heroTitle').textContent=p.name;
   document.getElementById('heroSub').textContent=`${p.dose} · ${p.category} · Research Grade`;
@@ -552,7 +547,7 @@ function renderPage(){
         <div class="tags-row">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
         <div class="purchase-card">
           <div class="price-row">
-            <span class="price-main">£${p.price}</span>
+            <span class="price-main">€${p.price}</span>
             <span class="price-unit">per vial</span>
           </div>
           <div class="qty-row">
@@ -576,7 +571,7 @@ function renderPage(){
         </div>
         <div class="disclaimer">
           <strong>Important Disclaimer</strong>
-          All peptides sold by Research Peptides are intended solely for scientific research in controlled laboratory settings. Not approved for human administration or therapeutic use. By purchasing you confirm compliance with all applicable laws and regulations.
+          All peptides sold by SyntheticLabs are intended solely for scientific research in controlled laboratory settings. Not approved for human administration or therapeutic use. By purchasing you confirm compliance with all applicable laws and regulations.
         </div>
       </div>
       <div class="related-section">
@@ -588,7 +583,7 @@ function renderPage(){
               <div class="related-body">
                 <div class="related-cat">${r.category}</div>
                 <div class="related-name">${r.name} ${r.dose}</div>
-                <div class="related-price">£${r.price} / vial</div>
+                <div class="related-price">€${r.price} / vial</div>
               </div>
             </a>`).join('')}
         </div>
@@ -623,8 +618,8 @@ function updateCartUI(){
   const body=document.getElementById('drawerBody'),footer=document.getElementById('drawerFooter');
   if(!cart.length){footer.style.display='none';body.innerHTML=`<div class="cart-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg><p>Your cart is empty</p><small>Add some peptides to get started</small></div>`;return;}
   footer.style.display='block';
-  document.getElementById('cartTotal').textContent='£'+cart.reduce((s,i)=>s+i.price*i.qty,0).toFixed(2);
-  body.innerHTML=cart.map(item=>`<div class="cart-item"><div class="cart-item-img" style="background:linear-gradient(145deg,${item.color[0]}22,${item.color[1]}44)">${bottleSVG(item.color[0],item.color[1],40)}</div><div class="cart-item-info"><div class="cart-item-name">${item.name} ${item.dose}</div><div class="cart-item-cat">${item.category}</div><div class="cart-item-price">£${item.price.toFixed(2)}</div></div><div class="ci-qty-controls"><button class="ci-qty-btn" onclick="changeQty(${item.id},-1)">−</button><span class="ci-qty-num">${item.qty}</span><button class="ci-qty-btn" onclick="changeQty(${item.id},1)">+</button></div><button class="remove-btn" onclick="removeFromCart(${item.id})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>`).join('');
+  document.getElementById('cartTotal').textContent='€'+cart.reduce((s,i)=>s+i.price*i.qty,0).toFixed(2);
+  body.innerHTML=cart.map(item=>`<div class="cart-item"><div class="cart-item-img" style="background:linear-gradient(145deg,${item.color[0]}22,${item.color[1]}44)">${bottleSVG(item.color[0],item.color[1],40)}</div><div class="cart-item-info"><div class="cart-item-name">${item.name} ${item.dose}</div><div class="cart-item-cat">${item.category}</div><div class="cart-item-price">€${item.price.toFixed(2)}</div></div><div class="ci-qty-controls"><button class="ci-qty-btn" onclick="changeQty(${item.id},-1)">−</button><span class="ci-qty-num">${item.qty}</span><button class="ci-qty-btn" onclick="changeQty(${item.id},1)">+</button></div><button class="remove-btn" onclick="removeFromCart(${item.id})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>`).join('');
 }
  
 function openCart(){document.getElementById('cartDrawer').classList.add('open');document.getElementById('drawerOverlay').classList.add('open');}
