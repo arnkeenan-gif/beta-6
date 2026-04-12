@@ -77,7 +77,7 @@ nav {
 .order-item-name { font-family:'Syne',sans-serif; font-size:0.92rem; font-weight:700; color:var(--blue-deep); }
 .order-item-sub { font-size:0.78rem; color:var(--gray-text); margin-top:3px; }
 .order-item-qty { font-size:0.8rem; color:var(--gray-soft); margin-top:1px; }
-.order-item-price { font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--blue-deep); flex-shrink:0; }
+.order-item-price { font-family:'DM Sans',sans-serif; font-size:0.95rem; font-weight:700; color:var(--blue-deep); flex-shrink:0; }
 
 /* Shipping method badge */
 .shipping-method-box {
@@ -93,7 +93,7 @@ nav {
 .shipping-method-info { flex:1; }
 .shipping-method-name { font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:700; color:var(--blue-deep); }
 .shipping-method-eta { font-size:0.8rem; color:var(--gray-text); margin-top:2px; }
-.shipping-method-price { font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; color:var(--blue-deep); }
+.shipping-method-price { font-family:'DM Sans',sans-serif; font-size:0.95rem; font-weight:700; color:var(--blue-deep); }
 
 /* Shipping address */
 .shipping-address { font-size:0.88rem; color:var(--gray-text); line-height:1.85; margin-top:1rem; }
@@ -131,7 +131,7 @@ nav {
 /* Amount summary */
 .amount-row { display:flex; justify-content:space-between; align-items:center; padding:0.5rem 0; font-size:0.88rem; color:var(--gray-text); border-bottom:1px solid rgba(4,44,83,0.06); }
 .amount-row:last-child { border-bottom:none; }
-.amount-row.total-row { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; color:var(--blue-deep); border-top:1.5px solid rgba(4,44,83,0.1); padding-top:0.75rem; margin-top:0.25rem; border-bottom:none; }
+.amount-row.total-row { font-family:'DM Sans',sans-serif; font-size:1rem; font-weight:700; color:var(--blue-deep); border-top:1.5px solid rgba(4,44,83,0.1); padding-top:0.75rem; margin-top:0.25rem; border-bottom:none; }
 .amount-row span:last-child { font-weight:500; color:var(--blue-deep); }
 .crypto-val { font-family:'Courier New',monospace; font-size:0.8rem; color:var(--blue-mid); font-weight:400 !important; }
 
@@ -208,7 +208,7 @@ nav {
           <div class="shipping-method-name" id="shippingMethodName">Standard Delivery</div>
           <div class="shipping-method-eta" id="shippingMethodEta">1–2 weeks · Tracked shipping</div>
         </div>
-        <div class="shipping-method-price" id="shippingMethodPrice">£6.99</div>
+        <div class="shipping-method-price" id="shippingMethodPrice">€6.99</div>
       </div>
 
       <!-- Address -->
@@ -336,7 +336,7 @@ const shipPrice  = order.shipPrice  || shipMethod.price  || 6.99;
 const shipLabel  = order.shipMethod?.label || shipMethod.label || 'Standard Delivery';
 const shipEta    = order.shipMethod?.eta   || shipMethod.eta   || '1–2 weeks';
 const shipKey    = order.shipMethod?.key   || shipMethod.key   || 'standard';
-const gbpTotal   = order.gbpTotal   || (subtotal + shipPrice);
+const eurTotal   = order.eurTotal   || (subtotal + shipPrice);
 
 // ── Header personalisation ──
 if (shipping.firstName) {
@@ -356,7 +356,7 @@ if (cart.length) {
         <div class="order-item-sub">${i.category} · Research Grade · CoA Included</div>
         <div class="order-item-qty">Quantity: ${i.qty}</div>
       </div>
-      <div class="order-item-price">£${(i.price * i.qty).toFixed(2)}</div>
+      <div class="order-item-price">€${(i.price * i.qty).toFixed(2)}</div>
     </div>
   `).join('');
 } else {
@@ -366,7 +366,7 @@ if (cart.length) {
 // ── Shipping method ──
 document.getElementById('shippingMethodName').textContent  = shipLabel;
 document.getElementById('shippingMethodEta').textContent   = shipEta + ' · Tracked shipping · Discreet packaging';
-document.getElementById('shippingMethodPrice').textContent = '£' + Number(shipPrice).toFixed(2);
+document.getElementById('shippingMethodPrice').textContent = '€' + Number(shipPrice).toFixed(2);
 document.getElementById('timeline-eta').textContent        = shipEta + ' estimated delivery';
 
 // Swap icon for express
@@ -402,11 +402,11 @@ if (txid) {
 
 // ── Payment summary ──
 let summaryHTML = `
-  <div class="amount-row"><span>Subtotal</span><span>£${subtotal.toFixed(2)}</span></div>
+  <div class="amount-row"><span>Subtotal</span><span>€${subtotal.toFixed(2)}</span></div>
   <div class="amount-row">
     <span>${shipLabel}</span>
-    <span>£${Number(shipPrice).toFixed(2)}</span>
+    <span>€${Number(shipPrice).toFixed(2)}</span>
   </div>
-  <div class="amount-row total-row"><span>Total Paid</span><span>£${gbpTotal.toFixed(2)}</span></div>
+  <div class="amount-row total-row"><span>Total Paid</span><span>€${eurTotal.toFixed(2)}</span></div>
 `;
 if (order.cryptoAmount && order.cryptoTic
