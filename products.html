@@ -22,41 +22,76 @@
     --gray-text: #4A6680;
   }
 
-  html { scroll-behavior: smooth; background: var(--blue-mid); }
+  html { scroll-behavior: smooth; }
   body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--blue-deep); overflow-x: hidden; }
 
 
   /* Free shipping banner */
   .shipping-banner {
-    background: var(--blue-deep);
+    background: #185FA5;
     color: white;
     text-align: center;
-    padding: 0.35rem 1rem;
-    font-size: 0.7rem;
+    padding: 0;
+    height: 28px;
+    line-height: 28px;
+    font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 201;
     white-space: nowrap;
     overflow: hidden;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
   .shipping-banner span { opacity: 0.75; margin: 0 6px; }
-  @media (max-width: 768px) { .shipping-banner { font-size: 0.62rem; padding: 0.25rem 0.5rem; letter-spacing: 0.02em; } }
-  @media (max-width: 768px) { .shipping-banner { font-size: 0.62rem; padding: 0.25rem 0.5rem; letter-spacing: 0.02em; } }
+  @media (max-width: 768px) { .shipping-banner {
+    background: #185FA5;
+    color: white;
+    text-align: center;
+    padding: 0;
+    height: 28px;
+    line-height: 28px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 201;
+    white-space: nowrap;
+    overflow: hidden;
+  } }
+  @media (max-width: 768px) { .shipping-banner {
+    background: #185FA5;
+    color: white;
+    text-align: center;
+    padding: 0;
+    height: 28px;
+    line-height: 28px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 201;
+    white-space: nowrap;
+    overflow: hidden;
+  } }
   /* ── NAV ── */
   nav {
+    position: fixed; top: 28px; left: 0; right: 0; z-index: 200;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 1.2rem 2.5rem;
-    background: #ffffff;
+    padding: 1.2rem 4rem;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(4,44,83,0.08);
   }
   .logo {
     font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem;
     color: var(--blue-deep); letter-spacing: -0.02em;
-    display: flex; align-items: center; gap: 10px; text-decoration: none; margin-right: auto;
+    display: flex; align-items: center; gap: 10px; text-decoration: none;
   }
   .logo img { object-fit: contain; }
   .logo-mark {
@@ -64,7 +99,7 @@
     display: flex; align-items: center; justify-content: center;
   }
   .logo-mark svg { width: 20px; height: 20px; }
-  nav ul { display: none; list-style: none; gap: 2.5rem; }
+  nav ul { display: flex; list-style: none; gap: 2.5rem; }
   nav ul a { font-size: 0.9rem; font-weight: 400; color: var(--gray-text); text-decoration: none; transition: color 0.2s; }
   nav ul a:hover { color: var(--blue-mid); }
   .nav-cta { background: var(--blue-mid); color: var(--white) !important; padding: 0.5rem 1.25rem; border-radius: 6px; font-weight: 500 !important; }
@@ -92,7 +127,7 @@
   /* ── PAGE HEADER ── */
   .page-header {
     background: linear-gradient(135deg, var(--blue-deep) 0%, #0a3d6b 100%);
-    padding: 1.5rem 4rem 3rem;
+    padding: 11rem 4rem 4rem;
     position: relative; overflow: hidden;
   }
   .page-header::before {
@@ -264,7 +299,8 @@
     .page-body { grid-template-columns: 1fr; }
     .sidebar { display: none; }
     nav { padding: 1rem 1.5rem; }
-    .page-header { padding: 1.2rem 1.5rem 2.5rem; }
+    nav ul { display: none; }
+    .page-header { padding: 9rem 1.5rem 3rem; }
     .cart-drawer { width: 100vw; }
   }
 
@@ -283,7 +319,7 @@
   }
   .site-footer .footer-logo {
     font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem;
-    color: white; display: flex; align-items: center; gap: 10px; text-decoration: none; margin-right: auto;
+    color: white; display: flex; align-items: center; gap: 10px; text-decoration: none;
   }
   .site-footer .footer-logo img { width: 38px; height: 38px; object-fit: contain; }
   .site-footer .footer-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
@@ -293,7 +329,7 @@
   @media (max-width: 768px) { .site-footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; } }
 
   /* Mobile menu */
-  .hamburger { display:flex; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; margin-left:10px; }
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
   .hamburger span { display:block; width:22px; height:2px; background:var(--blue-deep); border-radius:2px; transition:all 0.3s; }
   .hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
   .hamburger.open span:nth-child(2) { opacity:0; }
@@ -314,7 +350,7 @@
   .mobile-menu a:after { content:'›'; font-size:1.2rem; color:var(--blue-mid); }
   .mobile-menu a:last-child { border-bottom:none; }
   .mobile-menu-footer { margin-top:auto; font-size:0.8rem; color:var(--gray-soft); text-align:center; }
-
+  @media (max-width: 768px) { .hamburger { display:flex; } }
 
 </style>
 </head>
@@ -329,7 +365,10 @@
 <nav>
   <a href="/" class="logo">
     <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs" style="width:52px;height:52px;object-fit:contain">
-    <span style="display:flex;flex-direction:column;line-height:1.1;"><span style="color:#185FA5;font-size:1rem;">Synthetic</span><span style="color:#042C53;font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;">Labs</span></span>
+    <div style="display:flex;flex-direction:column;line-height:1.15;">
+      <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#185FA5;letter-spacing:-0.01em">Synthetic</span>
+      <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:0.72rem;color:#042C53;letter-spacing:0.15em;text-transform:uppercase">Labs</span>
+    </div>
   </a>
   <ul>
     <li><a href="/>Home</a></li>
@@ -337,7 +376,9 @@
     <li><a href="index.html#about">Science</a></li>
     <li><a href="index.html#process">Process</a></li>
   </ul>
-  <button class="cart-btn" onclick="openCart()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+  <button class="cart-btn" onclick="openCart()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+    Cart
     <span class="cart-count" id="cartCount">0</span>
   </button>
 <!-- Mobile Menu -->
@@ -683,16 +724,5 @@ updateCartUI();
   </ul>
   <div class="footer-copy">© 2025 SyntheticLabs. All compounds are sold strictly for research purposes only. Not for human consumption.</div>
 </footer>
-
-<script>
-function toggleMobileMenu() {
-  var menu = document.getElementById('mobileMenu');
-  var ham = document.getElementById('hamburger');
-  if (!menu) return;
-  menu.classList.toggle('open');
-  if (ham) ham.classList.toggle('open');
-}
-</script>
-
 </body>
 </html>
