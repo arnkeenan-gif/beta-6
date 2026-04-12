@@ -13,13 +13,13 @@
     --blue-frost: #E6F1FB; --white: #ffffff; --off-white: #F4F8FD;
     --gray-soft: #8EA7BE; --gray-text: #4A6680;
   }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; background: var(--blue-mid); }
   body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--blue-deep); overflow-x: hidden; }
  
 
   /* Free shipping banner */
   .shipping-banner {
-    background: var(--blue-mid);
+    background: var(--blue-deep);
     color: white;
     text-align: center;
     padding: 0.35rem 1rem;
@@ -30,7 +30,9 @@
     white-space: nowrap;
     overflow: hidden;
     height: 28px;
-    line-height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .shipping-banner span { opacity: 0.75; margin: 0 6px; }
   @media (max-width: 768px) { .shipping-banner { font-size: 0.62rem; padding: 0.25rem 0.5rem; letter-spacing: 0.02em; } }
@@ -45,10 +47,10 @@
   .logo {
     font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem;
     color: var(--blue-deep); letter-spacing: 0;
-    display: flex; align-items: center; gap: 10px; text-decoration: none;
+    display: flex; align-items: center; gap: 10px; text-decoration: none; margin-right: auto;
   }
   .logo img { object-fit: contain; }
-  nav ul { display:flex; list-style:none; gap:2.5rem; }
+  nav ul { display:none; list-style:none; gap:2.5rem; }
   nav ul a { font-size:0.9rem; font-weight:400; color:var(--gray-text); text-decoration:none; letter-spacing:0.01em; transition:color 0.2s; }
   nav ul a:hover { color:var(--blue-mid); }
   .nav-cta { background:var(--blue-mid); color:var(--white) !important; padding:0.5rem 1.25rem; border-radius:6px; font-weight:500 !important; }
@@ -73,7 +75,7 @@
   /* HERO BAND */
   .page-hero {
     background: linear-gradient(160deg, var(--blue-deep) 0%, #0a3d6b 55%, #0e5494 100%);
-    padding: 8.5rem 4rem 3rem;
+    padding: 1.5rem 4rem 3rem;
     position: relative; overflow: hidden;
   }
   .page-hero::before {
@@ -293,7 +295,7 @@
  
   /* FOOTER */
   footer {
-    background:var(--blue-deep); color:rgba(181,212,244,0.6);
+    background:#ffffff; color:rgba(181,212,244,0.6);
     padding:3rem 4rem;
     display:flex; justify-content:space-between; align-items:center;
     flex-wrap:wrap; gap:1rem; border-top:1px solid rgba(133,183,235,0.1);
@@ -346,8 +348,7 @@
  
   @media (max-width:900px) {
     nav { padding:1rem 1.5rem; }
-    nav ul { display:none; }
-    .page-hero { padding:6rem 1.5rem 2.5rem; }
+    .page-hero { padding:1.2rem 1.5rem 2.5rem; }
     .product-page { grid-template-columns:1fr; padding:2rem 1.5rem 4rem; gap:2rem; }
     .visual-sticky { position:static; }
     .visual-main { height:280px; }
@@ -357,7 +358,7 @@
   }
 
   /* Mobile menu */
-  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
+  .hamburger { display:flex; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
   .hamburger span { display:block; width:22px; height:2px; background:var(--blue-deep); border-radius:2px; transition:all 0.3s; }
   .hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
   .hamburger.open span:nth-child(2) { opacity:0; }
@@ -378,7 +379,6 @@
   .mobile-menu a:after { content:'›'; font-size:1.2rem; color:var(--blue-mid); }
   .mobile-menu a:last-child { border-bottom:none; }
   .mobile-menu-footer { margin-top:auto; font-size:0.8rem; color:var(--gray-soft); text-align:center; }
-  @media (max-width: 768px) { .hamburger { display:flex; } }
 
 </style>
 </head>
