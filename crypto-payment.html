@@ -92,7 +92,7 @@ body::before{
   display:none;
 }
 .cur-dropdown-menu.open{display:block}
-.cur-dropdown{position:relative;z-index:998}
+.cur-dropdown{position:relative;z-index:998;isolation:isolate}
 .footer{margin-top:24px;display:flex;align-items:center;gap:7px;position:relative;z-index:1}
 .cur-option{
   display:flex;align-items:center;gap:13px;padding:13px 18px;cursor:pointer;
@@ -207,7 +207,7 @@ body::before{
     <div class="cur-dropdown" id="curDropdown">
       <div class="cur-dropdown-btn" id="dropdownBtn" onclick="toggleDropdown()">
         <div class="cur-dropdown-logo">
-          <img id="selectedLogo" src="https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/eth.png" alt="ETH">
+          <img id="selectedLogo" src="https://assets.coingecko.com/coins/images/279/small/ethereum.png" alt="ETH">
         </div>
         <div class="cur-dropdown-info">
           <div class="cur-dropdown-ticker" id="selectedTicker">ETH</div>
@@ -217,15 +217,15 @@ body::before{
       </div>
       <div class="cur-dropdown-menu" id="dropdownMenu">
         <div class="cur-option selected" onclick="selectCurrency('eth')">
-          <div class="cur-option-logo"><img src="https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/eth.png" alt="ETH"></div>
+          <div class="cur-option-logo"><img src="https://assets.coingecko.com/coins/images/279/small/ethereum.png" alt="ETH"></div>
           <div><div class="cur-option-ticker">ETH</div><div class="cur-option-name">Ethereum</div></div>
         </div>
         <div class="cur-option" onclick="selectCurrency('sol')">
-          <div class="cur-option-logo"><img src="https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/sol.png" alt="SOL"></div>
+          <div class="cur-option-logo"><img src="https://assets.coingecko.com/coins/images/4128/small/solana.png" alt="SOL"></div>
           <div><div class="cur-option-ticker">SOL</div><div class="cur-option-name">Solana</div></div>
         </div>
         <div class="cur-option" onclick="selectCurrency('btc')">
-          <div class="cur-option-logo"><img src="https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png" alt="BTC"></div>
+          <div class="cur-option-logo"><img src="https://assets.coingecko.com/coins/images/1/small/bitcoin.png" alt="BTC"></div>
           <div><div class="cur-option-ticker">BTC</div><div class="cur-option-name">Bitcoin</div></div>
         </div>
       </div>
@@ -291,7 +291,7 @@ body::before{
     </div>
   </div>
 
-  <div class="footer"><div class="dot-live"></div><span class="footer-text">Verified · Secure · Worldwide</span></div>
+  <div class="footer" id="pageFooter"><div class="dot-live"></div><span class="footer-text">Verified · Secure · Worldwide</span></div>
 </div>
 
 <script>
@@ -301,9 +301,9 @@ const REDIRECT_SECS = 5;
 const POLL_MS       = 8000;
 
 const currencies = {
-  eth: { ticker:'ETH', name:'Ethereum', network:'Ethereum Network (ERC-20)', logo:'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/eth.png' },
-  sol: { ticker:'SOL', name:'Solana',   network:'Solana Network',            logo:'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/sol.png' },
-  btc: { ticker:'BTC', name:'Bitcoin',  network:'Bitcoin Network',           logo:'https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png' },
+  eth: { ticker:'ETH', name:'Ethereum', network:'Ethereum Network (ERC-20)', logo:'https://assets.coingecko.com/coins/images/279/small/ethereum.png' },
+  sol: { ticker:'SOL', name:'Solana',   network:'Solana Network',            logo:'https://assets.coingecko.com/coins/images/4128/small/solana.png' },
+  btc: { ticker:'BTC', name:'Bitcoin',  network:'Bitcoin Network',           logo:'https://assets.coingecko.com/coins/images/1/small/bitcoin.png' },
 };
 
 const cart       = JSON.parse(localStorage.getItem('rp_cart')||'[]');
@@ -334,30 +334,36 @@ let selectedKey = 'eth';
 
 /* ── Dropdown ── */
 function toggleDropdown(){
-  const btn  = document.getElementById('dropdownBtn');
-  const menu = document.getElementById('dropdownMenu');
-  btn.classList.toggle('open');
-  menu.classList.toggle('open');
+  const btn    = document.getElementById('dropdownBtn');
+  const menu   = document.getElementById('dropdownMenu');
+  const footer = document.getElementById('pageFooter');
+  const isOpen = menu.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  footer.style.visibility = isOpen ? 'hidden' : 'visible';
 }
+
+document.addEventListener('click', function(e){
+  if(!document.getElementById('curDropdown').contains(e.target)){
+    document.getElementById('dropdownBtn').classList.remove('open');
+    document.getElementById('dropdownMenu').classList.remove('open');
+    document.getElementById('pageFooter').style.visibility = 'visible';
+  }
+});
 
 function selectCurrency(key){
   selectedKey = key;
   const c = currencies[key];
-  document.getElementById('selectedLogo').src        = c.logo;
+  document.getElementById('selectedLogo').src           = c.logo;
   document.getElementById('selectedTicker').textContent = c.ticker;
   document.getElementById('selectedName').textContent   = c.name;
   document.querySelectorAll('.cur-option').forEach(o=>o.classList.remove('selected'));
   event.currentTarget.classList.add('selected');
   document.getElementById('dropdownBtn').classList.remove('open');
   document.getElementById('dropdownMenu').classList.remove('open');
+  document.getElementById('pageFooter').style.visibility = 'visible';
 }
 
-document.addEventListener('click', e=>{
-  if(!document.getElementById('curDropdown').contains(e.target)){
-    document.getElementById('dropdownBtn').classList.remove('open');
-    document.getElementById('dropdownMenu').classList.remove('open');
-  }
-});
+
 
 /* ── Screens ── */
 function showScreen(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
