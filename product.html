@@ -16,9 +16,25 @@
   html { scroll-behavior: smooth; }
   body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--blue-deep); overflow-x: hidden; }
  
+
+  /* Free shipping banner */
+  .shipping-banner {
+    background: var(--blue-mid);
+    color: white;
+    text-align: center;
+    padding: 0.6rem 1rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 201;
+  }
+  .shipping-banner span { opacity: 0.75; margin: 0 8px; }
   /* NAV */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    position: fixed; top: 32px; left: 0; right: 0; z-index: 200;
     display: flex; align-items: center; justify-content: space-between;
     padding: 1.2rem 4rem;
     background: rgba(255,255,255,0.85); backdrop-filter: blur(12px);
@@ -55,7 +71,7 @@
   /* HERO BAND */
   .page-hero {
     background: linear-gradient(160deg, var(--blue-deep) 0%, #0a3d6b 55%, #0e5494 100%);
-    padding: 7.5rem 4rem 3rem;
+    padding: 8.5rem 4rem 3rem;
     position: relative; overflow: hidden;
   }
   .page-hero::before {
@@ -97,7 +113,7 @@
  
   .visual-sticky {
     position: sticky;
-    top: 6rem;
+    top: 8rem;
   }
  
   .visual-main {
@@ -330,6 +346,11 @@
 </head>
 <body>
  
+<!-- SHIPPING BANNER -->
+<div class="shipping-banner" id="shippingBanner">
+  🚚 <span>·</span> FREE SHIPPING ON ORDERS OVER €200 <span>·</span> 🚚
+</div>
+
 <!-- NAV -->
 <nav>
   <a href="index.html" class="logo">
@@ -412,92 +433,25 @@
  
 <script>
 const products = [
-  {
-    id:1, name:'Retatrutide', dose:'5mg', category:'GLP-1 / Weight Loss', catKey:'f-glp',
-    desc:'Triple agonist targeting GLP-1, GIP, and glucagon receptors. Studied for significant weight reduction and metabolic improvements.',
-    fullDesc:'Retatrutide (LY3437943) is a novel triple hormone receptor agonist simultaneously targeting GLP-1, GIP, and glucagon receptors. Phase 2 clinical data demonstrated a mean body weight reduction of up to 24.2% at 48 weeks at the 12 mg dose. Research also indicates improvements in fasting insulin, triglycerides, and hepatic fat fraction.',
-    price:89, purity:'99.5%', color:['#0a3d6b','#185FA5'],
-    mw:'4,731.4 Da', seqShort:'GLP-1 / GIP / Glucagon', storageShort:'−20 °C · 24 months', solShort:'Sterile water or 1× PBS (pH 7.4)',
-    tags:['Triple Agonist','Metabolic','Weight Loss']
-  },
-  {
-    id:2, name:'Semaglutide', dose:'5mg', category:'GLP-1 / Weight Loss', catKey:'f-glp',
-    desc:'GLP-1 receptor agonist widely studied for appetite regulation, blood glucose control, and weight management.',
-    fullDesc:'Semaglutide shares 94% sequence homology with native GLP-1(7-36) amide. Its C-18 fatty diacid modification confers albumin binding and extends plasma half-life to approximately 165–184 hours. STEP trial data demonstrates 14.9% mean weight loss at 68 weeks alongside significant reductions in HbA1c and systolic blood pressure.',
-    price:72, purity:'99.8%', color:['#0C447C','#378ADD'],
-    mw:'4,113.6 Da', seqShort:'GLP-1 Analogue (C-18 DAC)', storageShort:'−20 °C · do not refreeze once reconstituted', solShort:'Sterile water or 10 mM acetic acid',
-    tags:['GLP-1 Agonist','Glycaemic Control','Appetite Regulation']
-  },
-  {
-    id:3, name:'Tirzepatide', dose:'5mg', category:'GLP-1 / Weight Loss', catKey:'f-glp',
-    desc:'Dual GIP and GLP-1 receptor agonist. Investigated for superior glycaemic control and weight loss outcomes.',
-    fullDesc:'Tirzepatide is a synthetic 39-amino acid peptide acting as a dual agonist at both GIP and GLP-1 receptors. SURMOUNT-1 trial data showed 22.5% mean weight reduction over 72 weeks at 15 mg, with parallel improvements in insulin sensitivity, lipid panels, and liver enzyme profiles.',
-    price:78, purity:'99.6%', color:['#042C53','#185FA5'],
-    mw:'4,813.5 Da', seqShort:'GIP / GLP-1 Dual Agonist', storageShort:'−20 °C · use within 21 days reconstituted', solShort:'Sterile water for injection',
-    tags:['Dual Agonist','Glycaemic Control','Metabolic Research']
-  },
-  {
-    id:4, name:'BPC-157', dose:'5mg', category:'Growth Peptides', catKey:'f-growth',
-    desc:'Body protection compound studied for tissue repair, gut healing, and musculoskeletal recovery mechanisms.',
-    fullDesc:'BPC-157 is a synthetic pentadecapeptide derived from human gastric juice. Research in rodent models shows it accelerates tendon-to-bone healing by upregulating VEGF receptor and FAK-paxillin signalling. Additional studies indicate gastroprotective activity through NO-system modulation and PGE2 synthesis.',
-    price:38, purity:'99.5%', color:['#0a3d6b','#1a6db5'],
-    mw:'1,419.5 Da', seqShort:'GEPPPGKPADDAGLV', storageShort:'−20 °C · 36 months lyophilised', solShort:'Bacteriostatic water or 0.9% saline',
-    tags:['Tissue Repair','Gut Mucosal Health','Angiogenesis']
-  },
-  {
-    id:5, name:'TB-500', dose:'2mg', category:'Metabolic', catKey:'f-met',
-    desc:'Thymosin Beta-4 fragment investigated for wound healing, inflammation modulation, and cellular migration.',
-    fullDesc:'TB-500 is a synthetic analogue of the actin-sequestering region of Thymosin Beta-4. It promotes G-actin polymerisation essential for cell motility and wound closure. Preclinical data shows accelerated dermal repair, reduced IL-1β and TNF-α expression, and potential cardiomyocyte regeneration in infarct models.',
-    price:44, purity:'99.6%', color:['#0C447C','#2980b9'],
-    mw:'1,895.2 Da', seqShort:'Thymosin β4 fragment (Ac-LKKTETQ)', storageShort:'−20 °C · 14 days at 4 °C reconstituted', solShort:'Sterile water or PBS (pH 7.4)',
-    tags:['Wound Healing','Anti-Inflammatory','Actin Polymerisation']
-  },
-  {
-    id:6, name:'CJC-1295', dose:'2mg', category:'GH Secretagogue', catKey:'f-gh',
-    desc:'Modified GRF analogue with extended half-life — a foundational compound in growth hormone research.',
-    fullDesc:'CJC-1295 is a GHRH(1–29) analogue with four amino acid substitutions to resist DPP-IV proteolysis, plus a maleimidoproprionic acid DAC that covalently binds circulating albumin. This extends plasma half-life from under 10 minutes to 6–8 days, producing sustained GH and IGF-1 elevation without disrupting pulsatile secretion.',
-    price:46, purity:'99.7%', color:['#042C53','#0C447C'],
-    mw:'3,647.3 Da', seqShort:'GHRH(1–29) Analogue + DAC', storageShort:'−20 °C · 20 days at 4 °C reconstituted', solShort:'Bacteriostatic water (0.9% benzyl alcohol)',
-    tags:['GH Secretagogue','IGF-1 Elevation','Extended Half-Life']
-  },
-  {
-    id:7, name:'Semax', dose:'30mg', category:'Cognitive', catKey:'f-cog',
-    desc:'Synthetic ACTH analogue studied for neuroprotective, nootropic, and neurogenic properties in CNS research.',
-    fullDesc:'Semax is a synthetic heptapeptide derived from ACTH(4–10), extended with Pro-Gly-Pro for stability. Russian CNS research demonstrates BDNF and NGF upregulation in hippocampus and cortex, along with potentiation of dopaminergic and serotonergic tone. Investigated for cognitive enhancement, ischaemic neuroprotection, and attention modulation.',
-    price:52, purity:'99.8%', color:['#0a3d6b','#185FA5'],
-    mw:'813.9 Da', seqShort:'MEHFPGP (ACTH 4–10 analogue)', storageShort:'−20 °C · 30 days at 4 °C reconstituted', solShort:'Sterile water or saline · up to 10 mg/mL',
-    tags:['Neuroprotective','BDNF Upregulation','Nootropic']
-  },
-  {
-    id:8, name:'Epitalon', dose:'10mg', category:'Anti-Aging', catKey:'f-anti',
-    desc:'Tetrapeptide studied for telomere elongation, circadian regulation, and longevity markers in aging models.',
-    fullDesc:'Epitalon (Ala-Glu-Asp-Gly) is a synthetic analogue of Epithalamin isolated from the bovine pineal gland. Research by Khavinson et al. found telomerase activation in somatic cell lines with measurable telomere lengthening. Studies in aged rats show restoration of circadian melatonin rhythms and reduction in lipid peroxidation markers.',
-    price:58, purity:'99.9%', color:['#185FA5','#378ADD'],
-    mw:'390.3 Da', seqShort:'AEDG (Epithalamin analogue)', storageShort:'−20 °C · 36 months · light-protected', solShort:'Sterile water or saline · up to 10 mg/mL',
-    tags:['Telomerase Activation','Circadian Regulation','Longevity Research']
-  },
-  {
-    id:9, name:'Ipamorelin', dose:'2mg', category:'GH Secretagogue', catKey:'f-gh',
-    desc:'Selective growth hormone secretagogue with a clean side-effect profile. Widely used in GH release research.',
-    fullDesc:'Ipamorelin is a selective pentapeptide ghrelin mimetic and GHSR-1a agonist. Unlike GHRP-2 and GHRP-6, it does not significantly stimulate cortisol or prolactin at research-relevant concentrations, providing a cleaner GH pulse. Frequently co-administered with CJC-1295 to amplify pulsatile GH output synergistically.',
-    price:36, purity:'99.5%', color:['#0C447C','#185FA5'],
-    mw:'711.9 Da', seqShort:'Aib-His-D-2-Nal-D-Phe-Lys-NH₂', storageShort:'−20 °C · 10 days at 4 °C reconstituted', solShort:'Sterile water or 10 mM acetic acid',
-    tags:['GH Pulse Amplification','Selective GHSR Agonist','Ghrelin Mimetic']
-  },
-  { id:11, name:'Melanotan 1', dose:'10mg', category:'Anti-Aging', catKey:'f-anti',
-    desc:'MT-1 analogue of alpha-MSH studied for melanogenesis, photoprotection, and skin pigmentation research.',
-    fullDesc:'Melanotan 1 (afamelanotide) is a linear analogue of alpha-melanocyte stimulating hormone (α-MSH). It binds to melanocortin receptors (MC1R-MC5R) with high affinity, stimulating melanogenesis in epidermal melanocytes. Research demonstrates significant increases in eumelanin production, providing a photoprotective mechanism in UV-exposed skin models. Studied extensively for erythropoietic protoporphyria and solar urticaria.',
-    price:69, wasPrice:83, purity:'99.5%', color:['#3d1a6b','#7b3fa5'],
-    mw:'1646.9 Da', seqShort:'α-MSH linear analogue (MC1R–MC5R)', storageShort:'−20 °C · 24 months lyophilised', solShort:'Sterile water or 0.9% saline · up to 2 mg/mL',
-    tags:['Melanogenesis','Photoprotection','MC1R Agonist']
-  },
-  { id:12, name:'Melanotan 2', dose:'10mg', category:'Metabolic', catKey:'f-met',
-    desc:'Cyclic analogue of alpha-MSH investigated for melanogenesis, appetite suppression, and MC receptor activity.',
-    fullDesc:'Melanotan 2 is a cyclic lactam analogue of alpha-MSH, with greater metabolic stability than MT-1 due to its cyclised structure. It acts as a non-selective agonist at melanocortin receptors with particularly strong MC3R and MC4R activity. Research investigates its role in melanogenesis, appetite suppression via hypothalamic MC4R, and lipid metabolism. Widely used as a reference standard in melanocortin receptor binding studies.',
-    price:34, wasPrice:41, purity:'99.6%', color:['#1a2d6b','#4060c0'],
-    mw:'1024.2 Da', seqShort:'α-MSH cyclic analogue (MC1R–MC5R)', storageShort:'−20 °C · 24 months lyophilised', solShort:'Sterile water or 0.9% saline · up to 2 mg/mL',
-    tags:['Melanogenesis','MC4R Agonist','Appetite Suppression']
-  },
+  { id:1, name:'Retatrutide', dose:'10mg', category:'GLP-1 / Weight Loss', catKey:'f-glp', desc:'Triple agonist targeting GLP-1, GIP, and glucagon receptors. Studied for significant weight reduction and metabolic improvements.', fullDesc:'Retatrutide (LY3437943) is a novel triple hormone receptor agonist simultaneously targeting GLP-1, GIP, and glucagon receptors. Phase 2 clinical data demonstrated a mean body weight reduction of up to 24.2% at 48 weeks at the 12 mg dose. Research also indicates improvements in fasting insulin, triglycerides, and hepatic fat fraction.', price:89, wasPrice:99, purity:'99.5%', color:['#0a3d6b','#185FA5'], mw:'4,731.4 Da', seqShort:'GLP-1 / GIP / Glucagon', storageShort:'−20 °C · 24 months', solShort:'Sterile water or 1× PBS (pH 7.4)', tags:['Triple Agonist','Metabolic','Weight Loss'] },
+  { id:101, name:'Retatrutide', dose:'20mg', category:'GLP-1 / Weight Loss', catKey:'f-glp', desc:'Triple agonist targeting GLP-1, GIP, and glucagon receptors. 20mg bulk vial — better value for extended research protocols.', fullDesc:'Retatrutide 20mg bulk vial — same pharmaceutical-grade compound as our 10mg vial but optimised for extended research programmes. Triple hormone receptor agonist targeting GLP-1, GIP, and glucagon receptors simultaneously. Phase 2 clinical data demonstrated mean body weight reduction of up to 24.2% at 48 weeks. Ideal for longitudinal studies requiring larger quantities.', price:159, wasPrice:178, purity:'99.5%', color:['#0a3d6b','#185FA5'], mw:'4,731.4 Da', seqShort:'GLP-1 / GIP / Glucagon', storageShort:'−20 °C · 24 months', solShort:'Sterile water or 1× PBS (pH 7.4)', tags:['Triple Agonist','Bulk Vial','Best Value'] },
+  { id:2, name:'Semaglutide', dose:'10mg', category:'GLP-1 / Weight Loss', catKey:'f-glp', desc:'GLP-1 receptor agonist widely studied for appetite regulation, blood glucose control, and weight management.', fullDesc:'Semaglutide shares 94% sequence homology with native GLP-1(7-36) amide. Its C-18 fatty diacid modification confers albumin binding and extends plasma half-life to approximately 165–184 hours. STEP trial data demonstrates 14.9% mean weight loss at 68 weeks alongside significant reductions in HbA1c and systolic blood pressure.', price:72, wasPrice:84, purity:'99.8%', color:['#0C447C','#378ADD'], mw:'4,113.6 Da', seqShort:'GLP-1 Analogue (C-18 DAC)', storageShort:'−20 °C · do not refreeze once reconstituted', solShort:'Sterile water or 10 mM acetic acid', tags:['GLP-1 Agonist','Glycaemic Control','Appetite Regulation'] },
+  { id:3, name:'Tirzepatide', dose:'10mg', category:'GLP-1 / Weight Loss', catKey:'f-glp', desc:'Dual GIP and GLP-1 receptor agonist. Investigated for superior glycaemic control and weight loss outcomes.', fullDesc:'Tirzepatide is a synthetic 39-amino acid peptide acting as a dual agonist at both GIP and GLP-1 receptors. SURMOUNT-1 trial data showed 22.5% mean weight reduction over 72 weeks at 15 mg, with parallel improvements in insulin sensitivity, lipid panels, and liver enzyme profiles.', price:78, wasPrice:89, purity:'99.6%', color:['#042C53','#185FA5'], mw:'4,813.5 Da', seqShort:'GIP / GLP-1 Dual Agonist', storageShort:'−20 °C · use within 21 days reconstituted', solShort:'Sterile water for injection', tags:['Dual Agonist','Glycaemic Control','Metabolic Research'] },
+  { id:4, name:'BPC-157', dose:'10mg', category:'Growth Peptides', catKey:'f-growth', desc:'Body protection compound studied for tissue repair, gut healing, and musculoskeletal recovery mechanisms.', fullDesc:'BPC-157 is a synthetic pentadecapeptide derived from human gastric juice. Research in rodent models shows it accelerates tendon-to-bone healing by upregulating VEGF receptor and FAK-paxillin signalling. Additional studies indicate gastroprotective activity through NO-system modulation and PGE2 synthesis.', price:44, wasPrice:53, purity:'99.5%', color:['#0a3d6b','#1a6db5'], mw:'1,419.5 Da', seqShort:'GEPPPGKPADDAGLV', storageShort:'−20 °C · 36 months lyophilised', solShort:'Bacteriostatic water or 0.9% saline', tags:['Tissue Repair','Gut Mucosal Health','Angiogenesis'] },
+  { id:5, name:'TB-500', dose:'10mg', category:'Metabolic', catKey:'f-met', desc:'Thymosin Beta-4 fragment investigated for wound healing, inflammation modulation, and cellular migration.', fullDesc:'TB-500 is a synthetic analogue of the actin-sequestering region of Thymosin Beta-4. It promotes G-actin polymerisation essential for cell motility and wound closure. Preclinical data shows accelerated dermal repair, reduced IL-1β and TNF-α expression, and potential cardiomyocyte regeneration in infarct models.', price:44, wasPrice:53, purity:'99.6%', color:['#0C447C','#2980b9'], mw:'1,895.2 Da', seqShort:'Thymosin β4 fragment (Ac-LKKTETQ)', storageShort:'−20 °C · 14 days at 4 °C reconstituted', solShort:'Sterile water or PBS (pH 7.4)', tags:['Wound Healing','Anti-Inflammatory','Actin Polymerisation'] },
+  { id:6, name:'CJC-1295', dose:'10mg', category:'GH Secretagogue', catKey:'f-gh', desc:'Modified GRF analogue with extended half-life — a foundational compound in growth hormone research.', fullDesc:'CJC-1295 is a GHRH(1–29) analogue with four amino acid substitutions to resist DPP-IV proteolysis, plus a maleimidoproprionic acid DAC that covalently binds circulating albumin. This extends plasma half-life from under 10 minutes to 6–8 days, producing sustained GH and IGF-1 elevation without disrupting pulsatile secretion.', price:46, wasPrice:56, purity:'99.7%', color:['#042C53','#0C447C'], mw:'3,647.3 Da', seqShort:'GHRH(1–29) Analogue + DAC', storageShort:'−20 °C · 20 days at 4 °C reconstituted', solShort:'Bacteriostatic water (0.9% benzyl alcohol)', tags:['GH Secretagogue','IGF-1 Elevation','Extended Half-Life'] },
+  { id:7, name:'Semax', dose:'30mg', category:'Cognitive', catKey:'f-cog', desc:'Synthetic ACTH analogue studied for neuroprotective, nootropic, and neurogenic properties in CNS research.', fullDesc:'Semax is a synthetic heptapeptide derived from ACTH(4–10), extended with Pro-Gly-Pro for stability. Russian CNS research demonstrates BDNF and NGF upregulation in hippocampus and cortex, along with potentiation of dopaminergic and serotonergic tone. Investigated for cognitive enhancement, ischaemic neuroprotection, and attention modulation.', price:52, wasPrice:62, purity:'99.8%', color:['#0a3d6b','#185FA5'], mw:'813.9 Da', seqShort:'MEHFPGP (ACTH 4–10 analogue)', storageShort:'−20 °C · 30 days at 4 °C reconstituted', solShort:'Sterile water or saline · up to 10 mg/mL', tags:['Neuroprotective','BDNF Upregulation','Nootropic'] },
+  { id:8, name:'Epitalon', dose:'10mg', category:'Anti-Aging', catKey:'f-anti', desc:'Tetrapeptide studied for telomere elongation, circadian regulation, and longevity markers in aging models.', fullDesc:'Epitalon (Ala-Glu-Asp-Gly) is a synthetic analogue of Epithalamin isolated from the bovine pineal gland. Research by Khavinson et al. found telomerase activation in somatic cell lines with measurable telomere lengthening. Studies in aged rats show restoration of circadian melatonin rhythms and reduction in lipid peroxidation markers.', price:58, wasPrice:68, purity:'99.9%', color:['#185FA5','#378ADD'], mw:'390.3 Da', seqShort:'AEDG (Epithalamin analogue)', storageShort:'−20 °C · 36 months · light-protected', solShort:'Sterile water or saline · up to 10 mg/mL', tags:['Telomerase Activation','Circadian Regulation','Longevity Research'] },
+  { id:9, name:'Ipamorelin', dose:'10mg', category:'GH Secretagogue', catKey:'f-gh', desc:'Selective growth hormone secretagogue with a clean side-effect profile. Widely used in GH release research.', fullDesc:'Ipamorelin is a selective pentapeptide ghrelin mimetic and GHSR-1a agonist. Unlike GHRP-2 and GHRP-6, it does not significantly stimulate cortisol or prolactin at research-relevant concentrations, providing a cleaner GH pulse. Frequently co-administered with CJC-1295 to amplify pulsatile GH output synergistically.', price:36, wasPrice:44, purity:'99.5%', color:['#0C447C','#185FA5'], mw:'711.9 Da', seqShort:'Aib-His-D-2-Nal-D-Phe-Lys-NH₂', storageShort:'−20 °C · 10 days at 4 °C reconstituted', solShort:'Sterile water or 10 mM acetic acid', tags:['GH Pulse Amplification','Selective GHSR Agonist','Ghrelin Mimetic'] },
+  { id:10, name:'Selank', dose:'10mg', category:'Cognitive', catKey:'f-cog', desc:'Anxiolytic peptide analogue of tuftsin. Studied for anxiety reduction, immune modulation, and memory effects.', fullDesc:'Selank is a synthetic analogue of the immunomodulatory tetrapeptide tuftsin, extended with Pro-Gly-Pro for enhanced CNS penetration. Research indicates modulation of GABA-A receptor subunit expression, serotonin turnover upregulation, and inhibition of enkephalin-degrading enzymes. Rodent models show anxiolytic activity without sedation or tolerance.', price:48, wasPrice:58, purity:'99.7%', color:['#042C53','#1a6db5'], mw:'751.9 Da', seqShort:'TKPRPGP (tuftsin analogue)', storageShort:'−20 °C · 30 days at 4 °C reconstituted', solShort:'Sterile water or saline · up to 5 mg/mL', tags:['Anxiolytic','Serotonin Modulation','Immunomodulatory'] },
+  { id:11, name:'Melanotan 1', dose:'10mg', category:'Anti-Aging', catKey:'f-anti', desc:'MT-1 analogue of alpha-MSH studied for melanogenesis, photoprotection, and skin pigmentation research.', fullDesc:'Melanotan 1 (afamelanotide) is a linear analogue of alpha-melanocyte stimulating hormone (α-MSH). It binds to melanocortin receptors (MC1R-MC5R) with high affinity, stimulating melanogenesis in epidermal melanocytes. Research demonstrates significant increases in eumelanin production, providing a photoprotective mechanism in UV-exposed skin models.', price:69, wasPrice:83, purity:'99.5%', color:['#3d1a6b','#7b3fa5'], mw:'1646.9 Da', seqShort:'α-MSH linear analogue (MC1R–MC5R)', storageShort:'−20 °C · 24 months lyophilised', solShort:'Sterile water or 0.9% saline · up to 2 mg/mL', tags:['Melanogenesis','Photoprotection','MC1R Agonist'] },
+  { id:12, name:'Melanotan 2', dose:'10mg', category:'Metabolic', catKey:'f-met', desc:'Cyclic analogue of alpha-MSH investigated for melanogenesis, appetite suppression, and MC receptor activity.', fullDesc:'Melanotan 2 is a cyclic lactam analogue of alpha-MSH, with greater metabolic stability than MT-1 due to its cyclised structure. It acts as a non-selective agonist at melanocortin receptors with particularly strong MC3R and MC4R activity. Research investigates its role in melanogenesis, appetite suppression via hypothalamic MC4R, and lipid metabolism.', price:34, wasPrice:41, purity:'99.6%', color:['#1a2d6b','#4060c0'], mw:'1024.2 Da', seqShort:'α-MSH cyclic analogue (MC1R–MC5R)', storageShort:'−20 °C · 24 months lyophilised', solShort:'Sterile water or 0.9% saline · up to 2 mg/mL', tags:['Melanogenesis','MC4R Agonist','Appetite Suppression'] },
+  { id:13, name:'GHK-Cu', dose:'50mg', category:'Anti-Aging', catKey:'f-anti', desc:'Copper peptide studied for skin regeneration, collagen synthesis, wound healing, and anti-inflammatory properties.', fullDesc:'GHK-Cu (glycyl-L-histidyl-L-lysine copper complex) is a naturally occurring plasma tripeptide with strong affinity for copper ions. Research demonstrates upregulation of collagen and elastin synthesis, activation of wound healing pathways, and potent antioxidant activity. Studies show modulation of over 4,000 genes involved in skin remodelling, anti-inflammatory signalling, and nerve regeneration.', price:44, wasPrice:54, purity:'99.5%', color:['#1a4d3a','#2d8a5e'], mw:'340.4 Da (free peptide)', seqShort:'Gly-His-Lys copper complex', storageShort:'−20 °C · 24 months · avoid light', solShort:'Sterile water · up to 5 mg/mL', tags:['Collagen Synthesis','Skin Regeneration','Antioxidant'] },
+  { id:14, name:'Tesamorelin', dose:'2mg', category:'GH Secretagogue', catKey:'f-gh', desc:'Synthetic GHRH analogue studied for GH secretion, visceral fat reduction, and metabolic improvements.', fullDesc:'Tesamorelin is a synthetic analogue of human growth hormone-releasing hormone (GHRH) consisting of the full 44-amino acid sequence with a trans-3-hexenoic acid modification for stability. FDA-approved reference compound extensively studied for visceral adipose tissue reduction, GH/IGF-1 axis stimulation, and cognitive function improvements in aging models.', price:28, wasPrice:36, purity:'99.6%', color:['#4d2a1a','#a05c2d'], mw:'5135.8 Da', seqShort:'GHRH(1–44) analogue + trans-3-hexenoic acid', storageShort:'−20 °C · 24 months lyophilised', solShort:'Sterile water · reconstitute gently', tags:['GHRH Analogue','Visceral Fat Reduction','GH Axis'] },
+  { id:15, name:'Tesamorelin', dose:'5mg', category:'GH Secretagogue', catKey:'f-gh', desc:'Synthetic GHRH analogue studied for GH secretion, visceral fat reduction, and metabolic improvements.', fullDesc:'Tesamorelin is a synthetic analogue of human growth hormone-releasing hormone (GHRH) consisting of the full 44-amino acid sequence with a trans-3-hexenoic acid modification for stability. FDA-approved reference compound extensively studied for visceral adipose tissue reduction, GH/IGF-1 axis stimulation, and cognitive function improvements in aging models.', price:52, wasPrice:64, purity:'99.6%', color:['#4d2a1a','#a05c2d'], mw:'5135.8 Da', seqShort:'GHRH(1–44) analogue + trans-3-hexenoic acid', storageShort:'−20 °C · 24 months lyophilised', solShort:'Sterile water · reconstitute gently', tags:['GHRH Analogue','Visceral Fat Reduction','GH Axis'] },
+  { id:16, name:'Tesamorelin', dose:'10mg', category:'GH Secretagogue', catKey:'f-gh', desc:'Synthetic GHRH analogue studied for GH secretion, visceral fat reduction, and metabolic improvements.', fullDesc:'Tesamorelin is a synthetic analogue of human growth hormone-releasing hormone (GHRH) consisting of the full 44-amino acid sequence with a trans-3-hexenoic acid modification for stability. FDA-approved reference compound extensively studied for visceral adipose tissue reduction, GH/IGF-1 axis stimulation, and cognitive function improvements in aging models.', price:89, wasPrice:108, purity:'99.6%', color:['#4d2a1a','#a05c2d'], mw:'5135.8 Da', seqShort:'GHRH(1–44) analogue + trans-3-hexenoic acid', storageShort:'−20 °C · 24 months lyophilised', solShort:'Sterile water · reconstitute gently', tags:['GHRH Analogue','Visceral Fat Reduction','GH Axis'] },
+  { id:18, name:'Bacteriostatic Water', dose:'10ml', category:'Metabolic', catKey:'f-met', desc:'Sterile bacteriostatic water containing 0.9% benzyl alcohol. Essential reconstitution solvent for lyophilised research peptides.', fullDesc:'Bacteriostatic water for injection (BWFI) containing 0.9% benzyl alcohol as a preservative. Benzyl alcohol inhibits microbial growth allowing the vial to be accessed multiple times safely. The standard reconstitution solvent for lyophilised peptides including CJC-1295, Ipamorelin, BPC-157, and Semaglutide. Each 10ml vial provides sufficient volume for reconstituting multiple peptide vials. Sterile-filtered to 0.22μm.', price:14.99, wasPrice:19.99, purity:'99.9%', color:['#1a3d4d','#2d7a9a'], mw:'N/A', seqShort:'0.9% benzyl alcohol in WFI', storageShort:'Room temperature · discard 28 days after first use', solShort:'N/A — reconstitution solvent', tags:['Reconstitution','Bacteriostatic','0.9% Benzyl Alcohol'] },
+  { id:17, name:'Tesamorelin', dose:'20mg', category:'GH Secretagogue', catKey:'f-gh', desc:'Synthetic GHRH analogue — 20mg bulk vial for extended research protocols. Best value per mg.', fullDesc:'Tesamorelin 20mg bulk vial — the most economical option for extended research programmes. Same pharmaceutical-grade compound as smaller vials with a trans-3-hexenoic acid modification for superior stability. Ideal for longitudinal GH axis studies, visceral fat reduction research, or multi-subject protocols.', price:158, wasPrice:190, purity:'99.6%', color:['#4d2a1a','#a05c2d'], mw:'5135.8 Da', seqShort:'GHRH(1–44) analogue + trans-3-hexenoic acid', storageShort:'−20 °C · 24 months lyophilised', solShort:'Sterile water · reconstitute gently', tags:['GHRH Analogue','Bulk Vial','Best Value'] },
 ];
  
 const reviews = {
@@ -591,6 +545,45 @@ const reviews = {
     { name:'Niklas H.', date:'February 18, 2026', stars:5, text:'Dissolved perfectly in sterile water. Melanocortin receptor binding across MC1-5 was confirmed. Lipid metabolism markers shifted measurably in our models. Great compound.', verified:true },
     { name:'Pigmentation Lab SE', date:'February 2, 2026', stars:4, text:'Good quality MT-2. Eumelanin production clearly stimulated. The cyclic structure gives much better stability than MT-1 in our models. Slightly smaller vial than expected but quality is perfect.', verified:true },
   ],
+  101: [ // Retatrutide 20mg - 4 reviews
+    { name:'Prof. D. Hartmann', date:'March 25, 2026', stars:5, text:'The 20mg bulk vial is a game changer for our longitudinal study. Same outstanding purity as the 10mg vial but significantly better value per mg. Reconstituted perfectly across multiple aliquots.', verified:true },
+    { name:'Metabolic Research NL', date:'March 10, 2026', stars:5, text:'Running a 12-week protocol and the 20mg vial is exactly what we needed. Quality is identical to smaller vials — full triple agonist activity confirmed. Great value.', verified:true },
+    { name:'Dr. L. Vermeer', date:'February 22, 2026', stars:5, text:'Excellent bulk option. We split across 4 study subjects and activity was consistent across all aliquots. HPLC matched our reference standards. Will be our standard retatrutide source.', verified:true },
+    { name:'Frederik B.', date:'February 5, 2026', stars:5, text:'Much better value than buying two 10mg vials. Quality is impeccable, purity confirmed. For any extended GLP-1 research this is the obvious choice.', verified:true },
+  ],
+  13: [ // GHK-Cu - 5 reviews
+    { name:'Dr. S. Vandermeer', date:'March 28, 2026', stars:5, text:'Collagen type I and III synthesis upregulation was dramatic in our fibroblast model — over 200% increase versus control. Copper complexation confirmed by our spectrometry. Outstanding quality.', verified:true },
+    { name:'Skin Research Lab Amsterdam', date:'March 14, 2026', stars:5, text:'Gene expression analysis showed modulation of over 3,800 genes involved in skin remodelling — consistent with published data. Antioxidant activity was clearly measurable. Excellent compound.', verified:true },
+    { name:'Ingrid L.', date:'February 28, 2026', stars:5, text:'Wound closure rate in our dermal model was significantly accelerated. Elastin upregulation was also very clear. The 50mg vial is great value for our research programme.', verified:true },
+    { name:'Dr. P. Kessler', date:'February 12, 2026', stars:5, text:'Nerve regeneration markers were clearly elevated in our neural model. Anti-inflammatory signalling was measurable within 24 hours. Best GHK-Cu we\'ve tested from any supplier.', verified:true },
+    { name:'Bioactive Peptides Lab', date:'January 30, 2026', stars:4, text:'Very good quality copper peptide. Collagen synthesis clearly stimulated, antioxidant activity confirmed. Dissolved easily in sterile water. Would be 5 stars with slightly faster shipping.', verified:true },
+  ],
+  14: [ // Tesamorelin 2mg
+    { name:'Dr. M. Claes', date:'March 20, 2026', stars:5, text:'GH pulse amplitude clearly increased in our pituitary model at the 2mg dose level. GHRH receptor binding was full and clean. Great entry-level option for dose-finding studies.', verified:true },
+    { name:'Endocrine Lab BE', date:'March 5, 2026', stars:5, text:'IGF-1 elevation confirmed at 2mg equivalent. The trans-3-hexenoic acid modification clearly improves stability versus native GHRH. Excellent purity.', verified:true },
+    { name:'Roos V.', date:'February 18, 2026', stars:4, text:'Good quality for pilot studies. GH secretion clearly stimulated. Will move to the 5mg vial for our main protocol but this was perfect for dose optimisation.', verified:true },
+  ],
+  15: [ // Tesamorelin 5mg
+    { name:'Visceral Fat Research NL', date:'March 22, 2026', stars:5, text:'Visceral adipose tissue reduction markers were clearly measurable in our model — consistent with the published clinical data. GH/IGF-1 axis stimulation was excellent. Our standard Tesamorelin dose.', verified:true },
+    { name:'Dr. T. Willems', date:'March 8, 2026', stars:5, text:'GHRH receptor binding kinetics confirmed. GH pulse frequency and amplitude both increased significantly. 5mg is the sweet spot for our research protocol. Excellent compound.', verified:true },
+    { name:'Anne-Sophie K.', date:'February 24, 2026', stars:5, text:'Cognitive function markers also improved in our aging model alongside the expected GH elevation. Reconstituted gently as recommended — no aggregation. Very happy.', verified:true },
+    { name:'GH Research Institute NL', date:'February 8, 2026', stars:5, text:'Consistent quality across multiple orders. Visceral fat reduction was our primary endpoint and the data was very clear. This is our go-to Tesamorelin source.', verified:true },
+  ],
+  16: [ // Tesamorelin 10mg
+    { name:'Dr. H. Dijkstra', date:'March 26, 2026', stars:5, text:'10mg vial is perfect for our 8-week protocol. GH axis stimulation was sustained and measurable throughout. IGF-1 levels elevated significantly from week 2. Outstanding purity.', verified:true },
+    { name:'Metabolic Research Rotterdam', date:'March 12, 2026', stars:5, text:'Excellent value at 10mg. Visceral fat reduction data in our model was dramatic — over 15% reduction in measured area. GHRH analogue activity fully confirmed by binding assay.', verified:true },
+    { name:'Erik V.', date:'February 26, 2026', stars:5, text:'Stable across the full 24 months lyophilised storage period we tested. Reconstitution was perfect. GH elevation data was consistent and dose-dependent. Will reorder.', verified:true },
+  ],
+  18: [ // Bacteriostatic Water
+    { name:'Dr. J. van Houten', date:'March 28, 2026', stars:5, text:'Essential product for our peptide research programme. 0.9% benzyl alcohol concentration is perfect for multi-draw vials. Sterile-filtered and clean — no contamination issues across 20+ uses per vial.', verified:true },
+    { name:'Research Lab Utrecht', date:'March 15, 2026', stars:5, text:'We order this with every peptide purchase. Reconstitution of CJC-1295 and Ipamorelin was perfect — no aggregation, crystal clear solution. Good value for 10ml.', verified:true },
+    { name:'Lotte M.', date:'February 28, 2026', stars:5, text:'Exactly what you need for peptide reconstitution. Stable, sterile, and the benzyl alcohol preservative means you can use the same vial across multiple reconstitutions. Great product.', verified:true },
+  ],
+  17: [ // Tesamorelin 20mg
+    { name:'Longitudinal Study Group NL', date:'March 30, 2026', stars:5, text:'The 20mg bulk vial is exactly what our 16-week multi-subject study needed. Quality is identical to smaller vials — GH axis stimulation confirmed across all subjects. Exceptional value per mg.', verified:true },
+    { name:'Dr. C. van den Berg', date:'March 16, 2026', stars:5, text:'Split across 10 aliquots for our group study — activity was perfectly consistent across all of them. This is the most cost-effective way to run extended Tesamorelin research. Highly recommend.', verified:true },
+    { name:'Research Institute Leiden', date:'February 28, 2026', stars:5, text:'Visceral fat reduction was our primary outcome and the 20mg vial covered our entire 12-week protocol. Purity matched our HPLC analysis exactly. This is now our standard bulk option.', verified:true },
+  ],
 };
 
 function starsHTML(n){ return '★'.repeat(n) + '☆'.repeat(5-n); }
@@ -643,6 +636,22 @@ function renderReviews(p){
   </svg>`;
 }
  
+
+const productImages = {
+  1:'images/retatrutide.png', 101:'images/retatrutide.png',
+  2:'images/semaglutide.png', 3:'images/Tirzepatide.png',
+  4:'images/bpc.png', 5:'images/tb500.png', 6:'images/CJC1295.png',
+  7:'images/semax.png', 8:'images/ghk.png', 9:'images/ipamorelin.png',
+  10:'images/selank.png', 11:'images/mt1.png', 12:'images/mt2.png',
+  13:'images/ghk.png', 14:'images/retatrutide.png', 15:'images/retatrutide.png',
+  16:'images/retatrutide.png', 17:'images/retatrutide.png', 18:'images/bacwater.png'
+};
+const labResults = {
+  1:'images/reta-testresults.png', 101:'images/reta-testresults.png',
+  4:'images/bpc157-testresults.png', 5:'images/tb500-testresults.png',
+  12:'images/mt2-testresults.png', 13:'images/ghk-testresults.png'
+};
+
 let qty=1;
  
 function renderPage(){
@@ -668,13 +677,25 @@ function renderPage(){
     <div class="product-page">
       <div class="visual-panel">
         <div class="visual-sticky">
-          <div class="visual-main" style="background:linear-gradient(150deg,${p.color[0]}18 0%,${p.color[1]}35 100%)">
-            <div class="bottle-main">${bottleSVG(p.color[0],p.color[1],160)}</div>
+          <div class="visual-main" style="background:linear-gradient(150deg,${p.color[0]}18 0%,${p.color[1]}35 100%)" id="mainImgWrap">
+            ${productImages[p.id]
+              ? `<img src="${productImages[p.id]}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;padding:20px" id="mainImg">`
+              : `<div class="bottle-main">${bottleSVG(p.color[0],p.color[1],160)}</div>`}
           </div>
           <div class="visual-thumbs">
-            <div class="thumb active" style="background:linear-gradient(145deg,${p.color[0]}18,${p.color[1]}30)">${bottleSVG(p.color[0],p.color[1],44)}</div>
-            <div class="thumb" style="background:linear-gradient(145deg,${p.color[1]}18,${p.color[0]}30)">${bottleSVG(p.color[1],p.color[0],44)}</div>
-            <div class="thumb" style="background:linear-gradient(145deg,${p.color[0]}25,${p.color[1]}18)">${bottleSVG(p.color[0],p.color[1],44)}</div>
+            <div class="thumb active" style="background:linear-gradient(145deg,${p.color[0]}18,${p.color[1]}30)" onclick="switchImg('${productImages[p.id]||''}','${p.color[0]}','${p.color[1]}',this)">
+              ${productImages[p.id] ? `<img src="${productImages[p.id]}" style="width:100%;height:100%;object-fit:contain;padding:6px">` : bottleSVG(p.color[0],p.color[1],44)}
+            </div>
+            ${labResults[p.id] ? `
+            <div class="thumb" style="background:#f8f9fa" onclick="switchImg('${labResults[p.id]||''}','${p.color[0]}','${p.color[1]}',this)">
+              <img src="${labResults[p.id]}" style="width:100%;height:100%;object-fit:contain;padding:4px">
+            </div>` : `
+            <div class="thumb" style="background:linear-gradient(145deg,${p.color[1]}18,${p.color[0]}30)" onclick="switchImg('${productImages[p.id]||''}','${p.color[0]}','${p.color[1]}',this)">
+              ${productImages[p.id] ? `<img src="${productImages[p.id]}" style="width:100%;height:100%;object-fit:contain;padding:6px">` : bottleSVG(p.color[1],p.color[0],44)}
+            </div>`}
+            <div class="thumb" style="background:linear-gradient(145deg,${p.color[0]}25,${p.color[1]}18)" onclick="switchImg('${productImages[p.id]||''}','${p.color[0]}','${p.color[1]}',this)">
+              ${productImages[p.id] ? `<img src="${productImages[p.id]}" style="width:100%;height:100%;object-fit:contain;padding:6px">` : bottleSVG(p.color[0],p.color[1],44)}
+            </div>
           </div>
         </div>
       </div>
@@ -748,6 +769,16 @@ function renderPage(){
     </div>`;
 }
  
+function switchImg(src, c1, c2, el){
+  document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  const wrap = document.getElementById('mainImgWrap');
+  if(src){
+    wrap.innerHTML = `<img src="${src}" alt="" style="width:100%;height:100%;object-fit:contain;padding:20px" id="mainImg">`;
+    wrap.style.background = '';
+  }
+}
+
 function changeQtyPage(d){qty=Math.max(1,qty+d);document.getElementById('qtyDisplay').textContent=qty;}
  
 let cart=JSON.parse(localStorage.getItem('rp_cart')||'[]');
@@ -775,7 +806,10 @@ function updateCartUI(){
   const body=document.getElementById('drawerBody'),footer=document.getElementById('drawerFooter');
   if(!cart.length){footer.style.display='none';body.innerHTML=`<div class="cart-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg><p>Your cart is empty</p><small>Add some peptides to get started</small></div>`;return;}
   footer.style.display='block';
-  document.getElementById('cartTotal').textContent='€'+cart.reduce((s,i)=>s+i.price*i.qty,0).toFixed(2);
+  const sub2=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  document.getElementById('cartTotal').textContent='€'+sub2.toFixed(2);
+  const cn=document.querySelector('.cart-note');
+  if(cn){ if(sub2>=200){ cn.innerHTML='<span style="color:#0F6E56;font-weight:600">✓ Free shipping applied!</span>'; } else { cn.innerHTML=`Spend <strong>€${(200-sub2).toFixed(2)}</strong> more for free shipping!`; } }
   body.innerHTML=cart.map(item=>`<div class="cart-item"><div class="cart-item-img" style="background:linear-gradient(145deg,${item.color[0]}22,${item.color[1]}44)">${bottleSVG(item.color[0],item.color[1],40)}</div><div class="cart-item-info"><div class="cart-item-name">${item.name} ${item.dose}</div><div class="cart-item-cat">${item.category}</div><div class="cart-item-price">€${item.price.toFixed(2)}</div></div><div class="ci-qty-controls"><button class="ci-qty-btn" onclick="changeQty(${item.id},-1)">−</button><span class="ci-qty-num">${item.qty}</span><button class="ci-qty-btn" onclick="changeQty(${item.id},1)">+</button></div><button class="remove-btn" onclick="removeFromCart(${item.id})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>`).join('');
 }
  
