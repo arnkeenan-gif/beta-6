@@ -31,16 +31,20 @@
     background: var(--blue-mid);
     color: white;
     text-align: center;
-    padding: 0.6rem 1rem;
-    font-size: 0.78rem;
+    padding: 0.35rem 1rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 201;
+    white-space: nowrap;
+    overflow: hidden;
   }
-  .shipping-banner span { opacity: 0.75; margin: 0 8px; }
+  .shipping-banner span { opacity: 0.75; margin: 0 6px; }
+  @media (max-width: 768px) { .shipping-banner { font-size: 0.62rem; padding: 0.25rem 0.5rem; letter-spacing: 0.02em; } }
+  @media (max-width: 768px) { .shipping-banner { font-size: 0.62rem; padding: 0.25rem 0.5rem; letter-spacing: 0.02em; } }
   /* ── NAV ── */
   nav {
     position: fixed; top: 32px; left: 0; right: 0; z-index: 200;
@@ -289,6 +293,31 @@
   .site-footer .footer-links a:hover { color: rgba(181,212,244,0.9); }
   .site-footer .footer-copy { font-size: 0.75rem; width: 100%; text-align: center; padding-top: 1.5rem; border-top: 1px solid rgba(133,183,235,0.08); margin-top: 0.5rem; }
   @media (max-width: 768px) { .site-footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; } }
+
+  /* Mobile menu */
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
+  .hamburger span { display:block; width:22px; height:2px; background:var(--blue-deep); border-radius:2px; transition:all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+  .hamburger.open span:nth-child(2) { opacity:0; }
+  .hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+  .mobile-menu {
+    display:none; position:fixed; top:0; left:0; right:0; bottom:0;
+    background:white; z-index:999; flex-direction:column;
+    padding:5rem 2rem 2rem;
+  }
+  .mobile-menu.open { display:flex; }
+  .mobile-menu-close { position:absolute; top:1.5rem; right:1.5rem; background:none; border:none; font-size:1.8rem; cursor:pointer; color:var(--blue-deep); line-height:1; }
+  .mobile-menu a {
+    font-family:'DM Sans',sans-serif; font-size:1.4rem; font-weight:600;
+    color:var(--blue-deep); text-decoration:none; padding:0.9rem 0;
+    border-bottom:1px solid rgba(4,44,83,0.07);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .mobile-menu a:after { content:'›'; font-size:1.2rem; color:var(--blue-mid); }
+  .mobile-menu a:last-child { border-bottom:none; }
+  .mobile-menu-footer { margin-top:auto; font-size:0.8rem; color:var(--gray-soft); text-align:center; }
+  @media (max-width: 768px) { .hamburger { display:flex; } }
+
 </style>
 </head>
 <body>
@@ -315,7 +344,23 @@
     Cart
     <span class="cart-count" id="cartCount">0</span>
   </button>
+<!-- Mobile Menu -->
+<button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+  <span></span><span></span><span></span>
+</button>
 </nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="toggleMobileMenu()">×</button>
+  <a href="/" onclick="toggleMobileMenu()">Home</a>
+  <a href="/products" onclick="toggleMobileMenu()">All Products</a>
+  <a href="/shipping" onclick="toggleMobileMenu()">Shipping</a>
+  <a href="/contact" onclick="toggleMobileMenu()">Contact</a>
+  <a href="/terms" onclick="toggleMobileMenu()">Terms of Use</a>
+  <div class="mobile-menu-footer">© 2025 SyntheticLabs · Research Use Only</div>
+</div>
+
 
 <!-- PAGE HEADER -->
 <div class="page-header">
@@ -443,6 +488,8 @@ function bgColor(c1) {
   return `linear-gradient(145deg, ${c1}22 0%, ${c1}44 100%)`;
 }
 
+const productImages = {1:'images/retatrutide.png',101:'images/retatrutide.png',2:'images/semaglutide.png',3:'images/Tirzepatide.png',4:'images/bpc.png',5:'images/tb500.png',6:'images/CJC1295.png',7:'images/semax.png',8:'images/ghk.png',9:'images/ipamorelin.png',10:'images/selank.png',11:'images/mt1.png',12:'images/mt2.png',13:'images/ghk.png',14:'images/retatrutide.png',15:'images/retatrutide.png',16:'images/retatrutide.png',17:'images/retatrutide.png',18:'images/bacwater.png'};
+
 // ── RENDER CARDS ──
 let currentProducts = [...products];
 
@@ -451,7 +498,6 @@ function renderCards(list) {
   grid.innerHTML = '';
   document.getElementById('visibleCount').textContent = list.length;
   list.forEach(p => {
-    const productImages = {1:'images/retatrutide.png',101:'images/retatrutide.png',2:'images/semaglutide.png',3:'images/Tirzepatide.png',4:'images/bpc.png',5:'images/tb500.png',6:'images/CJC1295.png',7:'images/semax.png',8:'images/ghk.png',9:'images/ipamorelin.png',10:'images/selank.png',11:'images/mt1.png',12:'images/mt2.png',13:'images/ghk.png',14:'images/retatrutide.png',15:'images/retatrutide.png',16:'images/retatrutide.png',17:'images/retatrutide.png',18:'images/bacwater.png'};
     const card = document.createElement('div');
     card.className = 'product-card';
     card.dataset.category = p.catKey;
@@ -596,8 +642,8 @@ function updateCartUI() {
 
   body.innerHTML = cart.map(item => `
     <div class="cart-item">
-      <div class="cart-item-img" style="background:linear-gradient(145deg,${item.color[0]}22,${item.color[1]}44)">
-        ${bottleSVG(item.color[0], item.color[1], 40)}
+      <div class="cart-item-img" style="background:linear-gradient(145deg,${item.color[0]}22,${item.color[1]}44);overflow:hidden">
+        ${productImages[item.id] ? `<img src="${productImages[item.id]}" style="width:100%;height:100%;object-fit:cover">` : bottleSVG(item.color[0], item.color[1], 40)}
       </div>
       <div class="cart-item-info">
         <div class="cart-item-name">${item.name} ${item.dose}</div>
