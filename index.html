@@ -637,7 +637,8 @@
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; top: 24px; }
     nav ul { display: none; }
-    .hero { padding-top: 60px !important; min-height: 100svh; }
+    .hero { padding-top: 56px !important; min-height: 100svh; }
+    #waveCanvas { height: 180px !important; }
     section { padding: 5rem 1.5rem; }
     .trust-bar { flex-wrap: wrap; gap: 1rem; padding: 1.5rem; }
     .why-inner { grid-template-columns: 1fr; gap: 3rem; }
@@ -654,6 +655,31 @@
   @media (max-width: 480px) {
     .products-grid { grid-template-columns: 1fr; }
   }
+
+  /* Mobile menu */
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
+  .hamburger span { display:block; width:22px; height:2px; background:var(--blue-deep); border-radius:2px; transition:all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+  .hamburger.open span:nth-child(2) { opacity:0; }
+  .hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+  .mobile-menu {
+    display:none; position:fixed; top:0; left:0; right:0; bottom:0;
+    background:white; z-index:999; flex-direction:column;
+    padding:5rem 2rem 2rem;
+  }
+  .mobile-menu.open { display:flex; }
+  .mobile-menu-close { position:absolute; top:1.5rem; right:1.5rem; background:none; border:none; font-size:1.8rem; cursor:pointer; color:var(--blue-deep); line-height:1; }
+  .mobile-menu a {
+    font-family:'DM Sans',sans-serif; font-size:1.4rem; font-weight:600;
+    color:var(--blue-deep); text-decoration:none; padding:0.9rem 0;
+    border-bottom:1px solid rgba(4,44,83,0.07);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .mobile-menu a:after { content:'›'; font-size:1.2rem; color:var(--blue-mid); }
+  .mobile-menu a:last-child { border-bottom:none; }
+  .mobile-menu-footer { margin-top:auto; font-size:0.8rem; color:var(--gray-soft); text-align:center; }
+  @media (max-width: 768px) { .hamburger { display:flex; } }
+
 </style>
 </head>
 <body>
@@ -675,11 +701,27 @@
     <li><a href="#process">Process</a></li>
     <li><a href="#contact" class="nav-cta">Order Now</a></li>
   </ul>
+<!-- Mobile Menu -->
+<button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+  <span></span><span></span><span></span>
+</button>
 </nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="toggleMobileMenu()">×</button>
+  <a href="/" onclick="toggleMobileMenu()">Home</a>
+  <a href="/products" onclick="toggleMobileMenu()">All Products</a>
+  <a href="/shipping" onclick="toggleMobileMenu()">Shipping</a>
+  <a href="/contact" onclick="toggleMobileMenu()">Contact</a>
+  <a href="/terms" onclick="toggleMobileMenu()">Terms of Use</a>
+  <div class="mobile-menu-footer">© 2025 SyntheticLabs · Research Use Only</div>
+</div>
+
  
 <!-- HERO -->
 <section class="hero" id="home">
-  <canvas id="waveCanvas" style="position:absolute;top:0;left:0;width:100%;height:140px;z-index:1;pointer-events:none;"></canvas>
+  <canvas id="waveCanvas" style="position:absolute;top:0;left:0;width:100%;height:220px;z-index:1;pointer-events:none;"></canvas>
   <script>
     (function(){
       var canvas = document.getElementById("waveCanvas");
@@ -701,17 +743,17 @@
         ctx.beginPath(); ctx.moveTo(0, 0);
         for(var x = 0; x <= W; x += 3) ctx.lineTo(x, sine(x, 1, 28, 52));
         ctx.lineTo(W, 0); ctx.closePath();
-        ctx.fillStyle = "rgba(55,138,221,0.45)"; ctx.fill();
+        ctx.fillStyle = "rgba(55,138,221,0.6)"; ctx.fill();
         ctx.beginPath(); ctx.moveTo(0, 0);
         for(var x = 0; x <= W; x += 3) ctx.lineTo(x, sine(x, 0.65, 22, 42));
         ctx.lineTo(W, 0); ctx.closePath();
-        ctx.fillStyle = "rgba(133,183,235,0.28)"; ctx.fill();
+        ctx.fillStyle = "rgba(133,183,235,0.4)"; ctx.fill();
         ctx.beginPath();
         for(var x = 0; x <= W; x += 3){ var y = sine(x, 1.2, 18, 72); if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); }
-        ctx.strokeStyle = "rgba(133,183,235,0.75)"; ctx.lineWidth = 2; ctx.stroke();
+        ctx.strokeStyle = "rgba(133,183,235,0.9)"; ctx.lineWidth = 2.5; ctx.stroke();
         ctx.beginPath();
         for(var x = 0; x <= W; x += 3){ var y = sine(x, 0.75, 14, 92); if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); }
-        ctx.strokeStyle = "rgba(55,138,221,0.55)"; ctx.lineWidth = 1.5; ctx.stroke();
+        ctx.strokeStyle = "rgba(55,138,221,0.7)"; ctx.lineWidth = 2; ctx.stroke();
         offset += 0.7;
         requestAnimationFrame(draw);
       }
