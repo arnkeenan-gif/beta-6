@@ -153,17 +153,19 @@ nav {
   .right-col { order:-1; }
 }
   .shipping-banner {
-    background: #185FA5;
+    background: var(--blue-mid);
     color: white;
     text-align: center;
-    padding: 0.6rem 1rem;
-    font-size: 0.78rem;
+    padding: 0.35rem 1rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 201;
+    white-space: nowrap;
+    overflow: hidden;
   }
   .shipping-banner span { opacity: 0.75; margin: 0 8px; }
 
@@ -190,6 +192,31 @@ nav {
   .site-footer .footer-links a:hover { color: rgba(181,212,244,0.9); }
   .site-footer .footer-copy { font-size: 0.75rem; width: 100%; text-align: center; padding-top: 1.5rem; border-top: 1px solid rgba(133,183,235,0.08); margin-top: 0.5rem; }
   @media (max-width: 768px) { .site-footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; } }
+
+  /* Mobile menu */
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
+  .hamburger span { display:block; width:22px; height:2px; background:var(--blue-deep); border-radius:2px; transition:all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+  .hamburger.open span:nth-child(2) { opacity:0; }
+  .hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+  .mobile-menu {
+    display:none; position:fixed; top:0; left:0; right:0; bottom:0;
+    background:white; z-index:999; flex-direction:column;
+    padding:5rem 2rem 2rem;
+  }
+  .mobile-menu.open { display:flex; }
+  .mobile-menu-close { position:absolute; top:1.5rem; right:1.5rem; background:none; border:none; font-size:1.8rem; cursor:pointer; color:var(--blue-deep); line-height:1; }
+  .mobile-menu a {
+    font-family:'DM Sans',sans-serif; font-size:1.4rem; font-weight:600;
+    color:var(--blue-deep); text-decoration:none; padding:0.9rem 0;
+    border-bottom:1px solid rgba(4,44,83,0.07);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .mobile-menu a:after { content:'›'; font-size:1.2rem; color:var(--blue-mid); }
+  .mobile-menu a:last-child { border-bottom:none; }
+  .mobile-menu-footer { margin-top:auto; font-size:0.8rem; color:var(--gray-soft); text-align:center; }
+  @media (max-width: 768px) { .hamburger { display:flex; } }
+
 </style>
 </head>
 <body>
@@ -203,7 +230,23 @@ nav {
     <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs" style="width:68px;height:68px;object-fit:contain">
     SyntheticLabs
   </a>
+<!-- Mobile Menu -->
+<button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+  <span></span><span></span><span></span>
+</button>
 </nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="toggleMobileMenu()">×</button>
+  <a href="/" onclick="toggleMobileMenu()">Home</a>
+  <a href="/products" onclick="toggleMobileMenu()">All Products</a>
+  <a href="/shipping" onclick="toggleMobileMenu()">Shipping</a>
+  <a href="/contact" onclick="toggleMobileMenu()">Contact</a>
+  <a href="/terms" onclick="toggleMobileMenu()">Terms of Use</a>
+  <div class="mobile-menu-footer">© 2025 SyntheticLabs · Research Use Only</div>
+</div>
+
 
 <div class="page-header">
   <div class="page-header-inner">
