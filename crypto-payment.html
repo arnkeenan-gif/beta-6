@@ -7,117 +7,102 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --navy:#081527; --blue:#2563eb; --blue-b:#1d4ed8; --blue-mid:#185FA5;
-  --text:#fff; --muted:rgba(255,255,255,0.42); --dim:rgba(255,255,255,0.2);
-  --card-bg:rgba(255,255,255,0.038); --card-bd:rgba(255,255,255,0.07); --card-hov:rgba(255,255,255,0.072);
-  --green:#22c55e; --green-b:#16a34a;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#081527;--blue:#2563eb;--blue-b:#1d4ed8;--blue-mid:#185FA5;
+  --text:#fff;--muted:rgba(255,255,255,0.42);--dim:rgba(255,255,255,0.2);
+  --card-bg:rgba(255,255,255,0.038);--card-bd:rgba(255,255,255,0.07);--card-hov:rgba(255,255,255,0.072);
+  --green:#22c55e;--green-b:#16a34a;
 }
-html,body { min-height:100%; background:var(--navy); color:var(--text); font-family:'DM Sans',sans-serif; }
-body { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; padding:48px 20px; position:relative; overflow-x:hidden; }
-body::before { content:''; position:fixed; inset:0; background-image:linear-gradient(rgba(37,99,235,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.03) 1px,transparent 1px); background-size:52px 52px; pointer-events:none; z-index:0; }
-#wave-canvas { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; }
-.container { position:relative; z-index:1; width:100%; max-width:500px; display:flex; flex-direction:column; align-items:center; }
- 
-.header { display:flex; align-items:center; gap:10px; margin-bottom:5px; }
-.logo-mark { width:36px; height:36px; background:var(--blue-mid); border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.logo-mark svg { width:20px; height:20px; }
-.logo-name { font-family:'Syne',sans-serif; font-size:16px; font-weight:700; color:#fff; letter-spacing:-0.2px; }
-.tagline { font-size:12px; color:var(--muted); margin-bottom:20px; }
- 
-/* Cart + shipping strip */
-.cart-strip { width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); border-radius:13px; padding:14px 16px; margin-bottom:20px; }
-.cart-strip-title { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); margin-bottom:10px; }
-.cart-strip-items { display:flex; flex-direction:column; gap:5px; margin-bottom:8px; }
-.cart-strip-item { display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--muted); }
-.cart-strip-item-qty { color:var(--dim); margin:0 6px; }
-.cart-strip-item-price { font-weight:500; color:rgba(255,255,255,0.7); }
-.cart-strip-divider { border:none; border-top:1px solid rgba(255,255,255,0.07); margin:8px 0; }
-.cart-strip-row { display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--muted); margin-bottom:4px; }
-.cart-strip-row span:last-child { color:rgba(255,255,255,0.65); }
-.cart-strip-shipping-badge { display:inline-flex; align-items:center; gap:5px; font-size:10px; color:rgba(255,255,255,0.5); }
-.cart-strip-shipping-badge svg { width:11px; height:11px; }
-.cart-strip-total { display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.07); padding-top:10px; margin-top:4px; }
-.cart-strip-total-label { font-size:12px; color:var(--muted); }
-.cart-strip-total-val { font-family:'Syne',sans-serif; font-size:18px; font-weight:700; color:#fff; }
- 
-.section-label { font-size:10px; font-weight:500; letter-spacing:2.5px; text-transform:uppercase; color:var(--dim); margin-bottom:11px; align-self:flex-start; }
-.conv-note { font-size:10px; color:var(--dim); margin-bottom:14px; text-align:center; }
- 
-.screen { width:100%; display:none; flex-direction:column; align-items:center; animation:fadeUp 0.3s ease both; }
-.screen.active { display:flex; }
-@keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
- 
-.currency-grid { display:grid; grid-template-columns:1fr 1fr; gap:11px; width:100%; }
-.cur-card { background:var(--card-bg); border:1px solid var(--card-bd); border-radius:15px; padding:18px 14px; cursor:pointer; transition:background 0.2s,border-color 0.2s,transform 0.18s; display:flex; align-items:center; gap:12px; }
-.cur-card:hover { background:var(--card-hov); border-color:rgba(255,255,255,0.15); transform:translateY(-2px); }
-.cur-card:active { transform:scale(0.97); }
-.cur-logo { width:42px; height:42px; border-radius:50%; flex-shrink:0; overflow:hidden; background:rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:center; }
-.cur-logo img { width:42px; height:42px; object-fit:contain; display:block; }
-.cur-info { display:flex; flex-direction:column; flex:1; min-width:0; }
-.cur-ticker { font-family:'Syne',sans-serif; font-size:14px; font-weight:700; color:#fff; line-height:1; margin-bottom:3px; }
-.cur-name-small { font-size:11px; color:var(--muted); }
-.cur-amount { font-size:11px; color:rgba(255,255,255,0.45); margin-top:3px; font-family:'Courier New',monospace; }
-.chevron { color:var(--dim); font-size:16px; transition:transform 0.2s,color 0.2s; flex-shrink:0; }
-.cur-card:hover .chevron { transform:translateX(3px); color:var(--muted); }
- 
-.pay-card { background:var(--card-bg); border:1px solid var(--card-bd); border-radius:20px; padding:26px 22px; width:100%; display:flex; flex-direction:column; align-items:center; }
-.pay-cur-row { display:flex; align-items:center; gap:10px; align-self:flex-start; margin-bottom:3px; }
-.pay-cur-logo { width:30px; height:30px; border-radius:50%; overflow:hidden; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.pay-cur-logo img { width:30px; height:30px; object-fit:contain; display:block; }
-.pay-cur-label { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:#fff; }
-.pay-network-tag { align-self:flex-start; margin-left:40px; font-size:10px; color:var(--dim); letter-spacing:0.4px; margin-bottom:14px; }
- 
-.amount-due { width:100%; background:rgba(37,99,235,0.1); border:1px solid rgba(37,99,235,0.2); border-radius:12px; padding:13px 16px; margin-bottom:18px; display:flex; align-items:center; justify-content:space-between; }
-.amount-due-label { font-size:11px; color:rgba(181,212,244,0.7); }
-.amount-due-gbp { font-size:11px; color:rgba(181,212,244,0.45); margin-top:2px; }
-.amount-due-crypto { font-family:'Syne',sans-serif; font-size:20px; font-weight:700; color:#fff; text-align:right; }
-.amount-due-ticker { font-size:11px; color:var(--muted); text-align:right; margin-top:2px; }
- 
-.qr-container { background:#fff; border-radius:13px; padding:13px; margin-bottom:20px; width:168px; height:168px; display:flex; align-items:center; justify-content:center; }
-#qr-output { display:flex; align-items:center; justify-content:center; }
-#qr-output img, #qr-output canvas { border-radius:3px; display:block; }
- 
-.addr-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); align-self:flex-start; margin-bottom:7px; }
-.addr-row { width:100%; background:rgba(0,0,0,0.22); border:1px solid rgba(255,255,255,0.06); border-radius:11px; padding:10px 12px; display:flex; align-items:flex-start; gap:9px; margin-bottom:13px; }
-.addr-value { font-family:'Courier New',monospace; font-size:10.5px; color:rgba(255,255,255,0.58); flex:1; word-break:break-all; line-height:1.65; user-select:all; }
-.copy-btn { flex-shrink:0; background:var(--blue); border:none; border-radius:8px; padding:7px 12px; font-family:'DM Sans',sans-serif; font-size:12px; font-weight:500; color:#fff; cursor:pointer; transition:background 0.15s,transform 0.1s; margin-top:1px; white-space:nowrap; }
-.copy-btn:hover { background:var(--blue-b); }
-.copy-btn:active { transform:scale(0.95); }
-.copy-btn.ok { background:var(--green-b); }
- 
-.warn { width:100%; background:rgba(234,179,8,0.055); border:1px solid rgba(234,179,8,0.14); border-radius:10px; padding:10px 13px; font-size:11px; color:rgba(234,179,8,0.68); line-height:1.55; margin-bottom:13px; }
- 
-.tracker-bar { width:100%; background:rgba(0,0,0,0.18); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:10px 13px; display:flex; align-items:center; gap:9px; margin-bottom:16px; }
-.tracker-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; background:var(--dim); transition:background 0.3s; }
-.tracker-dot.scanning { background:var(--blue); animation:tpulse 1.4s ease infinite; }
-.tracker-dot.found { background:var(--green); animation:none; }
-@keyframes tpulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(37,99,235,0.5)} 50%{opacity:.7;box-shadow:0 0 0 5px rgba(37,99,235,0)} }
-.tracker-text { font-size:11px; color:var(--muted); flex:1; line-height:1.45; }
-.tracker-text strong { color:#fff; font-weight:500; }
- 
-.back-btn { background:transparent; border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:9px 20px; font-family:'DM Sans',sans-serif; font-size:13px; color:var(--muted); cursor:pointer; transition:background 0.18s,color 0.18s; }
-.back-btn:hover { background:rgba(255,255,255,0.05); color:#fff; }
- 
-#screen-success { text-align:center; }
-.success-card { background:var(--card-bg); border:1px solid rgba(34,197,94,0.22); border-radius:20px; padding:36px 24px; width:100%; display:flex; flex-direction:column; align-items:center; }
-.success-icon { width:64px; height:64px; border-radius:50%; background:rgba(34,197,94,0.1); border:2px solid rgba(34,197,94,0.28); display:flex; align-items:center; justify-content:center; margin-bottom:16px; animation:popIn 0.4s cubic-bezier(0.175,0.885,0.32,1.275) both; }
-@keyframes popIn { from{opacity:0;transform:scale(0.5)} to{opacity:1;transform:scale(1)} }
-.success-icon svg { width:30px; height:30px; }
-.success-title { font-family:'Syne',sans-serif; font-size:22px; font-weight:700; color:#fff; margin-bottom:6px; }
-.success-sub { font-size:13px; color:var(--muted); margin-bottom:20px; line-height:1.6; }
-.success-tx { width:100%; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:10px 13px; font-family:'Courier New',monospace; font-size:10px; color:rgba(255,255,255,0.42); word-break:break-all; line-height:1.6; margin-bottom:16px; text-align:left; }
-.success-tx-label { font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); display:block; margin-bottom:5px; }
-.redirect-bar { width:100%; background:rgba(34,197,94,0.07); border:1px solid rgba(34,197,94,0.14); border-radius:10px; padding:11px 14px; font-size:12px; color:rgba(34,197,94,0.75); display:flex; align-items:center; gap:6px; justify-content:center; }
-.redirect-count { font-family:'Syne',sans-serif; font-size:14px; font-weight:700; color:var(--green); min-width:16px; text-align:center; }
-.explorer-link { display:inline-block; margin-top:12px; font-size:11px; color:#60a5fa; text-decoration:none; border-bottom:1px solid rgba(96,165,250,0.3); }
-.explorer-link:hover { color:#93c5fd; }
- 
-.footer { margin-top:24px; display:flex; align-items:center; gap:7px; }
-.dot-live { width:6px; height:6px; border-radius:50%; background:var(--green); animation:livepulse 3.5s ease infinite; flex-shrink:0; }
-@keyframes livepulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,0.45)} 50%{opacity:.8;box-shadow:0 0 0 5px rgba(34,197,94,0)} }
-.footer-text { font-size:11px; color:var(--dim); }
+html,body{min-height:100%;background:var(--navy);color:var(--text);font-family:'DM Sans',sans-serif}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:48px 20px;position:relative;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(37,99,235,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.03) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0}
+#wave-canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.container{position:relative;z-index:1;width:100%;max-width:500px;display:flex;flex-direction:column;align-items:center}
+.header{display:flex;align-items:center;gap:10px;margin-bottom:5px}
+.logo-mark{width:36px;height:36px;background:var(--blue-mid);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-mark svg{width:20px;height:20px}
+.logo-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#fff;letter-spacing:-0.2px}
+.tagline{font-size:12px;color:var(--muted);margin-bottom:20px}
+.cart-strip{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:13px;padding:14px 16px;margin-bottom:20px}
+.cart-strip-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+.cart-strip-items{display:flex;flex-direction:column;gap:5px;margin-bottom:8px}
+.cart-strip-item{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
+.cart-strip-item-qty{color:var(--dim);margin:0 6px}
+.cart-strip-item-price{font-weight:500;color:rgba(255,255,255,0.7)}
+.cart-strip-divider{border:none;border-top:1px solid rgba(255,255,255,0.07);margin:8px 0}
+.cart-strip-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);margin-bottom:4px}
+.cart-strip-row span:last-child{color:rgba(255,255,255,0.65)}
+.cart-strip-shipping-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:rgba(255,255,255,0.5)}
+.cart-strip-shipping-badge svg{width:11px;height:11px}
+.cart-strip-total{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.07);padding-top:10px;margin-top:4px}
+.cart-strip-total-label{font-size:12px;color:var(--muted)}
+.cart-strip-total-val{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#fff}
+.section-label{font-size:10px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);margin-bottom:11px;align-self:flex-start}
+.conv-note{font-size:10px;color:var(--dim);margin-bottom:14px;text-align:center}
+.screen{width:100%;display:none;flex-direction:column;align-items:center;animation:fadeUp 0.3s ease both}
+.screen.active{display:flex}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.currency-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;width:100%}
+.cur-card{background:var(--card-bg);border:1px solid var(--card-bd);border-radius:15px;padding:18px 14px;cursor:pointer;transition:background 0.2s,border-color 0.2s,transform 0.18s;display:flex;align-items:center;gap:12px}
+.cur-card:hover{background:var(--card-hov);border-color:rgba(255,255,255,0.15);transform:translateY(-2px)}
+.cur-card:active{transform:scale(0.97)}
+.cur-logo{width:42px;height:42px;border-radius:50%;flex-shrink:0;overflow:hidden;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center}
+.cur-logo img{width:42px;height:42px;object-fit:contain;display:block}
+.cur-info{display:flex;flex-direction:column;flex:1;min-width:0}
+.cur-ticker{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;line-height:1;margin-bottom:3px}
+.cur-name-small{font-size:11px;color:var(--muted)}
+.cur-amount{font-size:11px;color:rgba(255,255,255,0.45);margin-top:3px;font-family:'Courier New',monospace}
+.chevron{color:var(--dim);font-size:16px;transition:transform 0.2s,color 0.2s;flex-shrink:0}
+.cur-card:hover .chevron{transform:translateX(3px);color:var(--muted)}
+.pay-card{background:var(--card-bg);border:1px solid var(--card-bd);border-radius:20px;padding:26px 22px;width:100%;display:flex;flex-direction:column;align-items:center}
+.pay-cur-row{display:flex;align-items:center;gap:10px;align-self:flex-start;margin-bottom:3px}
+.pay-cur-logo{width:30px;height:30px;border-radius:50%;overflow:hidden;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pay-cur-logo img{width:30px;height:30px;object-fit:contain;display:block}
+.pay-cur-label{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff}
+.pay-network-tag{align-self:flex-start;margin-left:40px;font-size:10px;color:var(--dim);letter-spacing:0.4px;margin-bottom:14px}
+.amount-due{width:100%;background:rgba(37,99,235,0.1);border:1px solid rgba(37,99,235,0.2);border-radius:12px;padding:13px 16px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between}
+.amount-due-label{font-size:11px;color:rgba(181,212,244,0.7)}
+.amount-due-gbp{font-size:11px;color:rgba(181,212,244,0.45);margin-top:2px}
+.amount-due-crypto{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#fff;text-align:right}
+.amount-due-ticker{font-size:11px;color:var(--muted);text-align:right;margin-top:2px}
+.qr-container{background:#fff;border-radius:13px;padding:13px;margin-bottom:20px;width:168px;height:168px;display:flex;align-items:center;justify-content:center}
+#qr-output{display:flex;align-items:center;justify-content:center}
+#qr-output img,#qr-output canvas{border-radius:3px;display:block}
+.addr-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);align-self:flex-start;margin-bottom:7px}
+.addr-row{width:100%;background:rgba(0,0,0,0.22);border:1px solid rgba(255,255,255,0.06);border-radius:11px;padding:10px 12px;display:flex;align-items:flex-start;gap:9px;margin-bottom:13px}
+.addr-value{font-family:'Courier New',monospace;font-size:10.5px;color:rgba(255,255,255,0.58);flex:1;word-break:break-all;line-height:1.65;user-select:all}
+.copy-btn{flex-shrink:0;background:var(--blue);border:none;border-radius:8px;padding:7px 12px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:#fff;cursor:pointer;transition:background 0.15s,transform 0.1s;margin-top:1px;white-space:nowrap}
+.copy-btn:hover{background:var(--blue-b)}
+.copy-btn:active{transform:scale(0.95)}
+.copy-btn.ok{background:var(--green-b)}
+.warn{width:100%;background:rgba(234,179,8,0.055);border:1px solid rgba(234,179,8,0.14);border-radius:10px;padding:10px 13px;font-size:11px;color:rgba(234,179,8,0.68);line-height:1.55;margin-bottom:13px}
+.tracker-bar{width:100%;background:rgba(0,0,0,0.18);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px 13px;display:flex;align-items:center;gap:9px;margin-bottom:16px}
+.tracker-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:var(--dim);transition:background 0.3s}
+.tracker-dot.scanning{background:var(--blue);animation:tpulse 1.4s ease infinite}
+.tracker-dot.found{background:var(--green);animation:none}
+@keyframes tpulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(37,99,235,0.5)}50%{opacity:.7;box-shadow:0 0 0 5px rgba(37,99,235,0)}}
+.tracker-text{font-size:11px;color:var(--muted);flex:1;line-height:1.45}
+.tracker-text strong{color:#fff;font-weight:500}
+.back-btn{background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:9px 20px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--muted);cursor:pointer;transition:background 0.18s,color 0.18s}
+.back-btn:hover{background:rgba(255,255,255,0.05);color:#fff}
+#screen-success{text-align:center}
+.success-card{background:var(--card-bg);border:1px solid rgba(34,197,94,0.22);border-radius:20px;padding:36px 24px;width:100%;display:flex;flex-direction:column;align-items:center}
+.success-icon{width:64px;height:64px;border-radius:50%;background:rgba(34,197,94,0.1);border:2px solid rgba(34,197,94,0.28);display:flex;align-items:center;justify-content:center;margin-bottom:16px;animation:popIn 0.4s cubic-bezier(0.175,0.885,0.32,1.275) both}
+@keyframes popIn{from{opacity:0;transform:scale(0.5)}to{opacity:1;transform:scale(1)}}
+.success-icon svg{width:30px;height:30px}
+.success-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:6px}
+.success-sub{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6}
+.success-tx{width:100%;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px 13px;font-family:'Courier New',monospace;font-size:10px;color:rgba(255,255,255,0.42);word-break:break-all;line-height:1.6;margin-bottom:16px;text-align:left}
+.success-tx-label{font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:5px}
+.redirect-bar{width:100%;background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.14);border-radius:10px;padding:11px 14px;font-size:12px;color:rgba(34,197,94,0.75);display:flex;align-items:center;gap:6px;justify-content:center}
+.redirect-count{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--green);min-width:16px;text-align:center}
+.explorer-link{display:inline-block;margin-top:12px;font-size:11px;color:#60a5fa;text-decoration:none;border-bottom:1px solid rgba(96,165,250,0.3)}
+.explorer-link:hover{color:#93c5fd}
+.footer{margin-top:24px;display:flex;align-items:center;gap:7px}
+.dot-live{width:6px;height:6px;border-radius:50%;background:var(--green);animation:livepulse 3.5s ease infinite;flex-shrink:0}
+@keyframes livepulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,0.45)}50%{opacity:.8;box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+.footer-text{font-size:11px;color:var(--dim)}
 </style>
 </head>
 <body>
@@ -132,15 +117,11 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
   </div>
   <div class="tagline">Complete your order with crypto</div>
  
-  <!-- Cart + shipping strip -->
   <div class="cart-strip">
     <div class="cart-strip-title">Your order</div>
     <div class="cart-strip-items" id="cartStripItems"></div>
     <hr class="cart-strip-divider">
-    <div class="cart-strip-row">
-      <span>Subtotal</span>
-      <span id="stripSubtotal">£0.00</span>
-    </div>
+    <div class="cart-strip-row"><span>Subtotal</span><span id="stripSubtotal">£0.00</span></div>
     <div class="cart-strip-row">
       <span class="cart-strip-shipping-badge" id="stripShippingLabel">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/></svg>
@@ -154,35 +135,30 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
     </div>
   </div>
  
-  <!-- SELECT SCREEN -->
+  <!-- SELECT -->
   <div class="screen active" id="screen-select">
     <div class="section-label">Select currency</div>
     <div class="conv-note" id="conv-note">Loading live rates…</div>
     <div class="currency-grid">
       <div class="cur-card" onclick="openPayment('btc')">
-        <div class="cur-logo"><img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/btc.png" alt="BTC" onerror="this.src='https://assets.coingecko.com/coins/images/1/large/bitcoin.png'"></div>
+        <div class="cur-logo"><img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/btc.png" alt="BTC"></div>
         <div class="cur-info"><div class="cur-ticker">BTC</div><div class="cur-name-small">Bitcoin</div><div class="cur-amount" id="amt-btc">—</div></div>
         <span class="chevron">›</span>
       </div>
       <div class="cur-card" onclick="openPayment('eth')">
-        <div class="cur-logo"><img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/eth.png" alt="ETH" onerror="this.src='https://assets.coingecko.com/coins/images/279/large/ethereum.png'"></div>
+        <div class="cur-logo"><img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/eth.png" alt="ETH"></div>
         <div class="cur-info"><div class="cur-ticker">ETH</div><div class="cur-name-small">Ethereum</div><div class="cur-amount" id="amt-eth">—</div></div>
         <span class="chevron">›</span>
       </div>
       <div class="cur-card" onclick="openPayment('sol')">
-        <div class="cur-logo"><img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/sol.png" alt="SOL" onerror="this.src='https://assets.coingecko.com/coins/images/4128/large/solana.png'"></div>
+        <div class="cur-logo"><img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/sol.png" alt="SOL"></div>
         <div class="cur-info"><div class="cur-ticker">SOL</div><div class="cur-name-small">Solana</div><div class="cur-amount" id="amt-sol">—</div></div>
-        <span class="chevron">›</span>
-      </div>
-      <div class="cur-card" onclick="openPayment('usdc')">
-        <div class="cur-logo"><img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/usdc.png" alt="USDC" onerror="this.src='https://assets.coingecko.com/coins/images/6319/large/usdc.png'"></div>
-        <div class="cur-info"><div class="cur-ticker">USDC</div><div class="cur-name-small">USD Coin · SOL</div><div class="cur-amount" id="amt-usdc">—</div></div>
         <span class="chevron">›</span>
       </div>
     </div>
   </div>
  
-  <!-- PAYMENT SCREEN -->
+  <!-- PAYMENT -->
   <div class="screen" id="screen-pay">
     <div class="pay-card">
       <div class="pay-cur-row">
@@ -209,13 +185,13 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
       <div class="warn" id="warn-text"></div>
       <div class="tracker-bar">
         <div class="tracker-dot scanning" id="tracker-dot"></div>
-        <div class="tracker-text" id="tracker-text"><strong>Scanning blockchain…</strong><br>Waiting for your transaction to be detected</div>
+        <div class="tracker-text" id="tracker-text"><strong>Waiting for payment…</strong><br>You will be redirected automatically once detected</div>
       </div>
       <button class="back-btn" onclick="stopAndGoBack()">← Choose different currency</button>
     </div>
   </div>
  
-  <!-- SUCCESS SCREEN -->
+  <!-- SUCCESS -->
   <div class="screen" id="screen-success">
     <div class="success-card">
       <div class="success-icon">
@@ -224,7 +200,7 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
       <div class="success-title">Payment Detected!</div>
       <div class="success-sub" id="success-sub">Your transaction has been confirmed.</div>
       <div class="success-tx"><span class="success-tx-label">Transaction ID</span><span id="success-txid"></span></div>
-      <div class="redirect-bar"><span>Redirecting to your order confirmation in</span><span class="redirect-count" id="redirect-count">5</span><span>seconds</span></div>
+      <div class="redirect-bar"><span>Redirecting to your order in</span><span class="redirect-count" id="redirect-count">5</span><span>seconds</span></div>
       <a class="explorer-link" id="explorer-link" href="#" target="_blank" rel="noopener">View on blockchain explorer →</a>
     </div>
   </div>
@@ -233,121 +209,141 @@ body::before { content:''; position:fixed; inset:0; background-image:linear-grad
 </div>
  
 <script>
-const CONFIG = { ETHERSCAN_KEY:'YCNIYTGQQ666ICG3R1IKTRVH7NRCWFHYSV', REDIRECT_URL:'confirmation.html', POLL_MS:5000, REDIRECT_SECS:5 };
- 
-const currencies = {
-  btc:  {ticker:'BTC', name:'Bitcoin',  network:'Bitcoin Network',            addr:'bc1q7n3vqfsy0sm8res9vltk8zcdd996ux5gdp2jfx',  logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/btc.png',  explorer:tx=>`https://mempool.space/tx/${tx}`},
-  eth:  {ticker:'ETH', name:'Ethereum', network:'Ethereum Network (ERC-20)',  addr:'0xe8153fd51A3F7d52a2A8cC84A9523E195E17F5A7',  logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/eth.png',  explorer:tx=>`https://etherscan.io/tx/${tx}`},
-  sol:  {ticker:'SOL', name:'Solana',   network:'Solana Network',             addr:'5mcfJ1ZSvhypqt4EpMFPHkte5brgMQYLbnN6yXNRgWGb',logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/sol.png',  explorer:tx=>`https://solscan.io/tx/${tx}`},
-  usdc: {ticker:'USDC',name:'USD Coin', network:'Solana Network (SPL Token)', addr:'5mcfJ1ZSvhypqt4EpMFPHkte5brgMQYLbnN6yXNRgWGb',logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/usdc.png', explorer:tx=>`https://solscan.io/tx/${tx}`},
+/* ── Config ── */
+const CONFIG = {
+  ETHERSCAN_KEY: 'YCNIYTGQQ666ICG3R1IKTRVH7NRCWFHYSV',
+  REDIRECT_URL:  'confirmation.html',
+  POLL_MS:       5000,
+  REDIRECT_SECS: 5,
 };
  
-const cart         = JSON.parse(localStorage.getItem('rp_cart')||'[]');
-const shipping     = JSON.parse(sessionStorage.getItem('rp_shipping')||'{}');
-const shipMethod   = JSON.parse(sessionStorage.getItem('rp_shipping_method')||'{}');
-const subtotal     = cart.reduce((s,i)=>s+i.price*i.qty,0);
-const shipPrice    = shipMethod.price || 6.99;
-const gbpTotal     = subtotal + shipPrice;
+const currencies = {
+  btc: { ticker:'BTC', name:'Bitcoin',  network:'Bitcoin Network',           addr:'bc1q7n3vqfsy0sm8res9vltk8zcdd996ux5gdp2jfx', logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/btc.png', explorer:tx=>`https://mempool.space/tx/${tx}` },
+  eth: { ticker:'ETH', name:'Ethereum', network:'Ethereum Network (ERC-20)', addr:'0xe8153fd51A3F7d52a2A8cC84A9523E195E17F5A7', logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/eth.png', explorer:tx=>`https://etherscan.io/tx/${tx}` },
+  sol: { ticker:'SOL', name:'Solana',   network:'Solana Network',            addr:'5mcfJ1ZSvhypqt4EpMFPHkte5brgMQYLbnN6yXNRgWGb', logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/sol.png', explorer:tx=>`https://solscan.io/tx/${tx}` },
+};
  
+/* ── Read cart & shipping ── */
+const cart       = JSON.parse(localStorage.getItem('rp_cart')||'[]');
+const shipping   = JSON.parse(sessionStorage.getItem('rp_shipping')||'{}');
+const shipMethod = JSON.parse(sessionStorage.getItem('rp_shipping_method')||'{}');
+const subtotal   = cart.reduce((s,i)=>s+i.price*i.qty, 0);
+const shipPrice  = shipMethod.price || 6.99;
+const gbpTotal   = subtotal + shipPrice;
+ 
+/* ── State ── */
 let rates={}, cryptoAmounts={};
-let currentKey=null,pollTimer=null,tickTimer=null,pollCount=0,sessionStart=0,currentAddr='';
+let currentKey=null, pollTimer=null, tickTimer=null;
+let pollCount=0, sessionStart=0, currentAddr='';
  
-/* ── Cart strip ── */
-(function renderStrip(){
-  document.getElementById('cartStripTotal').textContent='£'+gbpTotal.toFixed(2);
-  document.getElementById('stripSubtotal').textContent='£'+subtotal.toFixed(2);
-  document.getElementById('stripShippingPrice').textContent='£'+shipPrice.toFixed(2);
+/* ── Render cart strip ── */
+(function(){
+  document.getElementById('cartStripTotal').textContent = '£'+gbpTotal.toFixed(2);
+  document.getElementById('stripSubtotal').textContent  = '£'+subtotal.toFixed(2);
+  document.getElementById('stripShippingPrice').textContent = '£'+shipPrice.toFixed(2);
   if(shipMethod.label){
-    document.getElementById('stripShippingLabel').innerHTML=`
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px">
-        ${shipMethod.key==='express'?'<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>':'<path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/>'}
-      </svg> ${shipMethod.label}`;
+    const icon = shipMethod.key==='express'
+      ? '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>'
+      : '<path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/>';
+    document.getElementById('stripShippingLabel').innerHTML =
+      `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:11px;height:11px">${icon}</svg> ${shipMethod.label}`;
   }
-  document.getElementById('cartStripItems').innerHTML=cart.map(i=>
+  document.getElementById('cartStripItems').innerHTML = cart.map(i=>
     `<div class="cart-strip-item"><span>${i.name} ${i.dose}</span><span class="cart-strip-item-qty">×${i.qty}</span><span class="cart-strip-item-price">£${(i.price*i.qty).toFixed(2)}</span></div>`
   ).join('');
 })();
  
-/* ── Live rates from CoinGecko ── */
+/* ── Fetch live rates ── */
 async function fetchRates(){
   try{
-    const res=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,usd-coin&vs_currencies=gbp');
-    const d=await res.json();
-    rates={btc:d.bitcoin?.gbp||0,eth:d.ethereum?.gbp||0,sol:d.solana?.gbp||0,usdc:d['usd-coin']?.gbp||0.79};
-    if(gbpTotal>0&&rates.btc>0){
-      cryptoAmounts={
+    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=gbp');
+    const d   = await res.json();
+    rates = { btc:d.bitcoin?.gbp||0, eth:d.ethereum?.gbp||0, sol:d.solana?.gbp||0 };
+    if(gbpTotal>0 && rates.btc>0){
+      cryptoAmounts = {
         btc: (gbpTotal/rates.btc).toFixed(6),
         eth: (gbpTotal/rates.eth).toFixed(5),
         sol: (gbpTotal/rates.sol).toFixed(3),
-        usdc:(gbpTotal/rates.usdc).toFixed(2),
       };
-      document.getElementById('amt-btc').textContent =cryptoAmounts.btc +' BTC';
-      document.getElementById('amt-eth').textContent =cryptoAmounts.eth +' ETH';
-      document.getElementById('amt-sol').textContent =cryptoAmounts.sol +' SOL';
-      document.getElementById('amt-usdc').textContent=cryptoAmounts.usdc+' USDC';
-      document.getElementById('conv-note').textContent='Live rates · Includes shipping · Refresh for latest';
+      document.getElementById('amt-btc').textContent = cryptoAmounts.btc+' BTC';
+      document.getElementById('amt-eth').textContent = cryptoAmounts.eth+' ETH';
+      document.getElementById('amt-sol').textContent = cryptoAmounts.sol+' SOL';
+      document.getElementById('conv-note').textContent = 'Live rates · Includes shipping · Refresh for latest';
     }
-  }catch(e){document.getElementById('conv-note').textContent='Could not load live rates';}
+  } catch(e){
+    document.getElementById('conv-note').textContent = 'Could not load live rates — amounts shown are estimates';
+  }
 }
 fetchRates();
  
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
-function setTracker(state,html){
-  document.getElementById('tracker-dot').className='tracker-dot'+(state==='scanning'?' scanning':state==='found'?' found':'');
-  document.getElementById('tracker-text').innerHTML=html;
+/* ── Helpers ── */
+function showScreen(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+function setTracker(state, html){
+  document.getElementById('tracker-dot').className = 'tracker-dot'+(state==='scanning'?' scanning':state==='found'?' found':'');
+  document.getElementById('tracker-text').innerHTML = html;
 }
  
+/* ── Open payment screen ── */
 function openPayment(key){
-  const c=currencies[key];
-  currentKey=key; currentAddr=c.addr;
-  sessionStart=Math.floor(Date.now()/1000);
-  pollCount=0;
+  const c = currencies[key];
+  currentKey  = key;
+  currentAddr = c.addr;
+  sessionStart = Math.floor(Date.now()/1000);
+  pollCount   = 0;
  
-  document.getElementById('pay-logo-img').src=c.logo;
-  document.getElementById('pay-logo-img').alt=c.ticker;
-  document.getElementById('pay-label').textContent=c.name+' ('+c.ticker+')';
-  document.getElementById('pay-network').textContent=c.network;
-  document.getElementById('addr-display').textContent=c.addr;
+  document.getElementById('pay-logo-img').src = c.logo;
+  document.getElementById('pay-logo-img').alt = c.ticker;
+  document.getElementById('pay-label').textContent   = c.name+' ('+c.ticker+')';
+  document.getElementById('pay-network').textContent  = c.network;
+  document.getElementById('addr-display').textContent = c.addr;
  
-  const camt=cryptoAmounts[key]||'?';
-  document.getElementById('pay-crypto-amount').textContent=camt;
-  document.getElementById('pay-crypto-ticker').textContent=c.ticker;
-  document.getElementById('pay-gbp-label').textContent='£'+gbpTotal.toFixed(2)+' GBP (incl. shipping)';
-  document.getElementById('warn-text').innerHTML='⚠ Send exactly <strong>'+camt+' '+c.ticker+'</strong> to this address. Only send <strong>'+c.ticker+'</strong> — wrong assets result in permanent loss.';
+  const camt = cryptoAmounts[key] || '?';
+  document.getElementById('pay-crypto-amount').textContent = camt;
+  document.getElementById('pay-crypto-ticker').textContent  = c.ticker;
+  document.getElementById('pay-gbp-label').textContent      = '£'+gbpTotal.toFixed(2)+' GBP (incl. shipping)';
+  document.getElementById('warn-text').innerHTML =
+    '⚠ Send exactly <strong>'+camt+' '+c.ticker+'</strong> to this address. Only send <strong>'+c.ticker+'</strong> — wrong assets result in permanent loss.';
  
-  const btn=document.getElementById('copy-btn');
-  btn.textContent='Copy'; btn.className='copy-btn';
-  document.getElementById('qr-output').innerHTML='';
-  new QRCode(document.getElementById('qr-output'),{text:c.addr,width:142,height:142,colorDark:'#000000',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
+  const btn = document.getElementById('copy-btn');
+  btn.textContent = 'Copy'; btn.className = 'copy-btn';
  
-  sessionStorage.setItem('rp_order',JSON.stringify({cart,shipping,shipMethod,subtotal,shipPrice,gbpTotal,cryptoKey:key,cryptoAmount:camt,cryptoTicker:c.ticker}));
+  document.getElementById('qr-output').innerHTML = '';
+  new QRCode(document.getElementById('qr-output'), {
+    text:c.addr, width:142, height:142, colorDark:'#000000', colorLight:'#ffffff', correctLevel:QRCode.CorrectLevel.M
+  });
  
-  setTracker('scanning','<strong>Waiting for payment…</strong><br>You will be redirected automatically once detected');
+  sessionStorage.setItem('rp_order', JSON.stringify({
+    cart, shipping, shipMethod, subtotal, shipPrice, gbpTotal,
+    cryptoKey:key, cryptoAmount:camt, cryptoTicker:c.ticker
+  }));
+ 
+  setTracker('scanning', '<strong>Waiting for payment…</strong><br>You will be redirected automatically once detected');
   showScreen('screen-pay');
   startPolling();
 }
  
 function copyAddress(){
   navigator.clipboard.writeText(currentAddr).then(()=>{
-    const btn=document.getElementById('copy-btn');
-    btn.textContent='Copied!'; btn.className='copy-btn ok';
-    setTimeout(()=>{btn.textContent='Copy';btn.className='copy-btn';},2400);
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = 'Copied!'; btn.className = 'copy-btn ok';
+    setTimeout(()=>{ btn.textContent='Copy'; btn.className='copy-btn'; }, 2400);
   });
 }
  
 function stopAndGoBack(){ stopPolling(); showScreen('screen-select'); }
  
-/* ══════════════════════════════════════════════════════
-   WEBHOOK-BASED POLLING
-   The page polls /api/webhook (your Vercel serverless function)
-   every 5 seconds. Alchemy/Blockonomics push to that endpoint
-   the instant a payment arrives on-chain.
-   This is far more reliable than hitting blockchain APIs directly.
-══════════════════════════════════════════════════════ */
- 
+/* ── Polling — hits our Vercel webhook endpoint every 5s ── */
 function startPolling(){
   stopPolling();
-  tickTimer = setInterval(updateTimerDisplay, 1000);
+  // Tick every second to update the timer display
+  tickTimer = setInterval(()=>{
+    if(!sessionStart) return;
+    const elapsed = Math.floor(Date.now()/1000 - sessionStart);
+    const m = Math.floor(elapsed/60), s = elapsed%60;
+    const t = (m>0?m+'m ':'')+s+'s';
+    setTracker('scanning', `<strong>Waiting for payment…</strong><br>Monitoring for ${t}`);
+  }, 1000);
+  // Poll webhook every 5 seconds
   poll();
   pollTimer = setInterval(poll, CONFIG.POLL_MS);
 }
@@ -357,142 +353,56 @@ function stopPolling(){
   if(tickTimer){ clearInterval(tickTimer); tickTimer=null; }
 }
  
-function updateTimerDisplay(){
-  if(!sessionStart) return;
-  const elapsed=Math.floor(Date.now()/1000-sessionStart);
-  const mins=Math.floor(elapsed/60), secs=elapsed%60;
-  const t=(mins>0?mins+'m ':'')+secs+'s';
-  setTracker('scanning',`<strong>Waiting for payment…</strong><br>Monitoring for ${t} · Checks every ${CONFIG.POLL_MS/1000}s`);
-}
- 
 async function poll(){
   pollCount++;
-  updateTimerDisplay();
   try{
-    // Poll our own Vercel serverless endpoint — it gets notified by Alchemy/Blockonomics
-    const res = await fetch(`/api/webhook?since=${sessionStart}`);
-    if(!res.ok) throw new Error('Endpoint error '+res.status);
+    const res  = await fetch('/api/webhook?since='+sessionStart);
+    if(!res.ok) return; // silent — don't show error to customer
     const data = await res.json();
- 
-    if(data.payments && data.payments.length > 0){
-      // Filter to the currency the customer selected
-      const match = data.payments.find(p =>
-        p.ticker === currencies[currentKey].ticker
-      );
-      if(match) onPaymentFound({
-        txid:    match.txid,
-        amount:  match.amount + ' ' + match.ticker,
-        explorer: match.explorer || currencies[currentKey].explorer(match.txid),
-      });
-    }
+    if(!data.payments || !data.payments.length) return;
+    const match = data.payments.find(p => p.ticker === currencies[currentKey].ticker);
+    if(match) onPaymentFound({
+      txid:    match.txid,
+      amount:  match.amount+' '+match.ticker,
+      explorer: match.explorer || currencies[currentKey].explorer(match.txid),
+    });
   } catch(e){
-    // Endpoint not reachable — fall back to direct blockchain check
-    console.warn('Webhook endpoint not available, falling back to direct check:', e.message);
-    try{
-      let r=null;
-      if(currentKey==='btc')      r=await fallbackBTC();
-      else if(currentKey==='eth') r=await fallbackETH();
-      else                        r=await fallbackSOL();
-      if(r) onPaymentFound(r);
-    }catch(e2){
-      console.warn('Fallback also failed:', e2.message);
-    }
+    // Silent — network blip, Alchemy webhook still detects payments server-side
+    console.warn('Poll failed silently:', e.message);
   }
 }
  
-/* ── Fallback: direct blockchain checks (used if webhook endpoint is unreachable) ── */
-async function fallbackBTC(){
-  const addr=currencies.btc.addr, base='https://mempool.space/api';
-  const seen=JSON.parse(sessionStorage.getItem('rp_seen_btc')||'[]');
-  const[mRes,cRes]=await Promise.all([fetch(`${base}/address/${addr}/txs/mempool`),fetch(`${base}/address/${addr}/txs`)]);
-  const all=[...(mRes.ok?await mRes.json():[]),...(cRes.ok?await cRes.json():[])];
-  for(const tx of all){
-    if(seen.includes(tx.txid)) continue;
-    const recv=(tx.vout||[]).filter(o=>o.scriptpubkey_address===addr);
-    if(!recv.length) continue;
-    const t=tx.status?.block_time||0;
-    if(t>0&&t<sessionStart) continue;
-    seen.push(tx.txid); sessionStorage.setItem('rp_seen_btc',JSON.stringify(seen));
-    const btc=(recv.reduce((s,o)=>s+(o.value||0),0)/1e8).toFixed(8);
-    return{txid:tx.txid,amount:btc+' BTC',explorer:currencies.btc.explorer(tx.txid)};
-  }
-  return null;
-}
- 
-async function fallbackETH(){
-  const addr=currencies.eth.addr;
-  const seen=JSON.parse(sessionStorage.getItem('rp_seen_eth')||'[]');
-  const res=await fetch(`https://api.etherscan.io/api?module=account&action=txlist&address=${addr}&startblock=0&endblock=99999999&sort=desc&apikey=${CONFIG.ETHERSCAN_KEY}`);
-  if(!res.ok) throw new Error('Etherscan');
-  const d=await res.json();
-  if(d.status!=='1'||!Array.isArray(d.result)) return null;
-  for(const tx of d.result){
-    if(seen.includes(tx.hash)) continue;
-    if(parseInt(tx.timeStamp,10)<sessionStart) break;
-    if(!tx.to||tx.to.toLowerCase()!==addr.toLowerCase()) continue;
-    if(tx.isError==='1') continue;
-    seen.push(tx.hash); sessionStorage.setItem('rp_seen_eth',JSON.stringify(seen));
-    return{txid:tx.hash,amount:(parseInt(tx.value,10)/1e18).toFixed(6)+' ETH',explorer:currencies.eth.explorer(tx.hash)};
-  }
-  return null;
-}
- 
-async function fallbackSOL(){
-  const addr=currencies.sol.addr, RPC='https://api.mainnet-beta.solana.com';
-  const USDC_MINT='EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
-  const seen=JSON.parse(sessionStorage.getItem('rp_seen_sol')||'[]');
-  const sigRes=await fetch(RPC,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'getSignaturesForAddress',params:[addr,{limit:10}]})});
-  if(!sigRes.ok) throw new Error('Solana RPC');
-  const sd=await sigRes.json();
-  if(!sd.result?.length) return null;
-  for(const sig of sd.result){
-    if(seen.includes(sig.signature)||sig.err) continue;
-    const bt=sig.blockTime||0;
-    if(bt>0&&bt<sessionStart) break;
-    const txRes=await fetch(RPC,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:'getTransaction',params:[sig.signature,{encoding:'jsonParsed',maxSupportedTransactionVersion:0}]})});
-    const td=await txRes.json();
-    const tx=td.result; if(!tx) continue;
-    let amount=null;
-    if(currentKey==='usdc'){
-      const allIx=[...(tx.transaction?.message?.instructions||[]),...(tx.meta?.innerInstructions||[]).flatMap(g=>g.instructions||[])];
-      for(const ix of allIx){
-        if(ix.parsed?.type==='transferChecked'&&ix.parsed?.info?.mint===USDC_MINT){amount=(ix.parsed.info?.tokenAmount?.uiAmount||'?')+' USDC';break;}
-        if(ix.parsed?.type==='transfer'&&ix.program==='spl-token'){amount='USDC received';break;}
-      }
-    }else{
-      const keys=tx.transaction?.message?.accountKeys||[];
-      const idx=keys.findIndex(k=>(k.pubkey||k)===addr);
-      if(idx>=0){const diff=(tx.meta?.postBalances?.[idx]??0)-(tx.meta?.preBalances?.[idx]??0);if(diff>0)amount=(diff/1e9).toFixed(4)+' SOL';}
-    }
-    if(amount){
-      seen.push(sig.signature); sessionStorage.setItem('rp_seen_sol',JSON.stringify(seen));
-      return{txid:sig.signature,amount,explorer:currencies[currentKey].explorer(sig.signature)};
-    }
-  }
-  return null;
-}
- 
+/* ── Payment found ── */
 function onPaymentFound(result){
   stopPolling();
-  const order=JSON.parse(sessionStorage.getItem('rp_order')||'{}');
-  order.txid=result.txid;order.txAmount=result.amount;order.explorerUrl=result.explorer;
-  sessionStorage.setItem('rp_order',JSON.stringify(order));
-  document.getElementById('success-sub').textContent=result.amount+' received. Your order is being processed.';
-  document.getElementById('success-txid').textContent=result.txid;
-  document.getElementById('explorer-link').href=result.explorer;
+  const order = JSON.parse(sessionStorage.getItem('rp_order')||'{}');
+  order.txid       = result.txid;
+  order.txAmount   = result.amount;
+  order.explorerUrl= result.explorer;
+  sessionStorage.setItem('rp_order', JSON.stringify(order));
+ 
+  document.getElementById('success-sub').textContent  = result.amount+' received. Your order is being processed.';
+  document.getElementById('success-txid').textContent = result.txid;
+  document.getElementById('explorer-link').href        = result.explorer;
   showScreen('screen-success');
   startCountdown();
 }
  
 function startCountdown(){
-  let n=CONFIG.REDIRECT_SECS;
-  document.getElementById('redirect-count').textContent=n;
-  const t=setInterval(()=>{n--;document.getElementById('redirect-count').textContent=n;if(n<=0){clearInterval(t);window.location.href=CONFIG.REDIRECT_URL;}},1000);
+  let n = CONFIG.REDIRECT_SECS;
+  document.getElementById('redirect-count').textContent = n;
+  const t = setInterval(()=>{
+    n--;
+    document.getElementById('redirect-count').textContent = n;
+    if(n<=0){ clearInterval(t); window.location.href = CONFIG.REDIRECT_URL; }
+  }, 1000);
 }
  
-/* Waves */
-const wc=document.getElementById('wave-canvas'),wctx=wc.getContext('2d');let frame=0;
-function resize(){wc.width=window.innerWidth;wc.height=window.innerHeight;}resize();window.addEventListener('resize',resize);
+/* ── Waves ── */
+const wc=document.getElementById('wave-canvas'), wctx=wc.getContext('2d');
+let frame=0;
+function resize(){ wc.width=window.innerWidth; wc.height=window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
 const S=0.000065;
 const waves=[
   {yF:.20,amp:28,f1:.0045,s1:S*1.0, f2:.0072,s2:S*.75,color:'rgba(37,99,235,0.09)', lw:1.5},
@@ -505,8 +415,15 @@ const waves=[
 function drawWaves(){
   wctx.clearRect(0,0,wc.width,wc.height);
   const W=wc.width,H=wc.height,f=frame;
-  waves.forEach(w=>{wctx.beginPath();wctx.strokeStyle=w.color;wctx.lineWidth=w.lw;for(let x=0;x<=W;x+=3){const y=H*w.yF+Math.sin(x*w.f1+f*w.s1*1000)*w.amp+Math.sin(x*w.f2+f*w.s2*1000)*w.amp*.28;x===0?wctx.moveTo(x,y):wctx.lineTo(x,y);}wctx.stroke();});
-  frame++;requestAnimationFrame(drawWaves);
+  waves.forEach(w=>{
+    wctx.beginPath(); wctx.strokeStyle=w.color; wctx.lineWidth=w.lw;
+    for(let x=0;x<=W;x+=3){
+      const y=H*w.yF+Math.sin(x*w.f1+f*w.s1*1000)*w.amp+Math.sin(x*w.f2+f*w.s2*1000)*w.amp*.28;
+      x===0?wctx.moveTo(x,y):wctx.lineTo(x,y);
+    }
+    wctx.stroke();
+  });
+  frame++; requestAnimationFrame(drawWaves);
 }
 drawWaves();
 </script>
