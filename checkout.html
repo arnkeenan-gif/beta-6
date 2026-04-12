@@ -167,11 +167,11 @@ nav {
 
 
 <nav>
-  <a href="index.html" class="logo">
+  <a href="/" class="logo">
     <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs" style="width:52px;height:52px;object-fit:contain">
     Research Peptides
   </a>
-  <a href="products.html" class="nav-back">
+  <a href="/products" class="nav-back">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
     Continue shopping
   </a>
@@ -324,7 +324,7 @@ function renderSummary() {
   const btn    = document.getElementById('proceedBtn');
 
   if (!cart.length) {
-    items.innerHTML = `<div class="summary-empty">Your cart is empty.<br><a href="products.html">Browse products →</a></div>`;
+    items.innerHTML = `<div class="summary-empty">Your cart is empty.<br><a href="/products">Browse products →</a></div>`;
     btn.disabled = true;
     return;
   }
@@ -390,17 +390,17 @@ renderSummary();
 </script>
 
 <footer class="site-footer">
-  <a href="index.html" class="footer-logo">
+  <a href="/" class="footer-logo">
     <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs">
     SyntheticLabs
   </a>
   <ul class="footer-links">
-    <li><a href="products.html">Products</a></li>
+    <li><a href="/products">Products</a></li>
     <li><a href="index.html#about">Science</a></li>
     <li><a href="index.html#process">Process</a></li>
-    <li><a href="#shipping.html">Shipping</a></li>
-    <li><a href="#contact.html">Contact</a></li>
-    <li><a href="#terms.html">Terms of Use</a></li>
+    <li><a href="/shipping">Shipping</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li><a href="/terms">Terms of Use</a></li>
   </ul>
   <div class="footer-copy">© 2025 SyntheticLabs. All compounds are sold strictly for research purposes only. Not for human consumption.</div>
 </footer>
