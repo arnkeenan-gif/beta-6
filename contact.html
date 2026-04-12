@@ -15,19 +15,22 @@ body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--bl
     color: white;
     text-align: center;
     padding: 0.35rem 1rem;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 201;
     white-space: nowrap;
     overflow: hidden;
     height: 28px;
-    line-height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-nav{position:fixed;top:28px;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 4rem;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(4,44,83,0.08)}
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2.5rem;background:#ffffff;border-bottom:1px solid rgba(4,44,83,0.08)}
 .logo{font-family:'DM Sans',sans-serif;font-weight:700;font-size:1.2rem;color:var(--blue-deep);display:flex;align-items:center;gap:10px;text-decoration:none}
 .logo img{width:52px;height:52px;object-fit:contain}
 .page-header{background:linear-gradient(135deg,var(--blue-deep) 0%,#0a3d6b 100%);padding:9rem 4rem 3.5rem;position:relative;overflow:hidden}
@@ -68,7 +71,7 @@ nav{position:fixed;top:28px;left:0;right:0;z-index:200;display:flex;align-items:
 @media(max-width:768px){nav{padding:1rem 1.5rem}.page-header{padding:8rem 1.5rem 2.5rem}.form-row{grid-template-columns:1fr}.site-footer{padding:2rem 1.5rem;flex-direction:column;text-align:center}}
 
   /* Mobile menu */
-  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
+  .hamburger { display:flex; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
   .hamburger span { display:block; width:22px; height:2px; background:var(--blue-deep); border-radius:2px; transition:all 0.3s; }
   .hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
   .hamburger.open span:nth-child(2) { opacity:0; }
@@ -89,7 +92,6 @@ nav{position:fixed;top:28px;left:0;right:0;z-index:200;display:flex;align-items:
   .mobile-menu a:after { content:'›'; font-size:1.2rem; color:var(--blue-mid); }
   .mobile-menu a:last-child { border-bottom:none; }
   .mobile-menu-footer { margin-top:auto; font-size:0.8rem; color:var(--gray-soft); text-align:center; }
-  @media (max-width: 768px) { .hamburger { display:flex; } }
 
 </style>
 </head>
@@ -244,3 +246,13 @@ function submitForm(){
   }
   document.getElementById('successMsg').style.display = 'block';
   document.getElementById('fir
+
+<script>
+function toggleMobileMenu() {
+  var menu = document.getElementById('mobileMenu');
+  var ham = document.getElementById('hamburger');
+  if (!menu) return;
+  menu.classList.toggle('open');
+  if (ham) ham.classList.toggle('open');
+}
+</script>
