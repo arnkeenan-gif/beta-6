@@ -265,6 +265,30 @@
     .page-header { padding: 7rem 1.5rem 3rem; }
     .cart-drawer { width: 100vw; }
   }
+
+  /* Footer */
+  .site-footer {
+    background: #042C53;
+    color: rgba(181,212,244,0.6);
+    padding: 2.5rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-top: 1px solid rgba(133,183,235,0.1);
+    margin-top: auto;
+  }
+  .site-footer .footer-logo {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem;
+    color: white; display: flex; align-items: center; gap: 10px; text-decoration: none;
+  }
+  .site-footer .footer-logo img { width: 38px; height: 38px; object-fit: contain; }
+  .site-footer .footer-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
+  .site-footer .footer-links a { font-size: 0.82rem; color: rgba(181,212,244,0.55); text-decoration: none; transition: color 0.2s; }
+  .site-footer .footer-links a:hover { color: rgba(181,212,244,0.9); }
+  .site-footer .footer-copy { font-size: 0.75rem; width: 100%; text-align: center; padding-top: 1.5rem; border-top: 1px solid rgba(133,183,235,0.08); margin-top: 0.5rem; }
+  @media (max-width: 768px) { .site-footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; } }
 </style>
 </head>
 <body>
@@ -601,5 +625,21 @@ function checkout() {
 // Init
 updateCartUI();
 </script>
+
+<footer class="site-footer">
+  <a href="index.html" class="footer-logo">
+    <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs">
+    SyntheticLabs
+  </a>
+  <ul class="footer-links">
+    <li><a href="products.html">Products</a></li>
+    <li><a href="index.html#about">Science</a></li>
+    <li><a href="index.html#process">Process</a></li>
+    <li><a href="#">Shipping</a></li>
+    <li><a href="#">Contact</a></li>
+    <li><a href="#">Terms of Use</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 SyntheticLabs. All compounds are sold strictly for research purposes only. Not for human consumption.</div>
+</footer>
 </body>
 </html>
