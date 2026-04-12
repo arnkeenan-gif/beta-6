@@ -240,13 +240,23 @@
   }
   .disclaimer strong { color:var(--gray-text); display:block; margin-bottom:0.2rem; }
  
+
+  /* Lightbox */
+  .lightbox { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.88); z-index:9999; align-items:center; justify-content:center; cursor:zoom-out; }
+  .lightbox.open { display:flex; }
+  .lightbox img { max-width:90vw; max-height:90vh; object-fit:contain; border-radius:8px; box-shadow:0 20px 60px rgba(0,0,0,0.5); }
+  .lightbox-close { position:absolute; top:20px; right:24px; color:white; font-size:2rem; cursor:pointer; line-height:1; opacity:0.7; transition:opacity 0.2s; }
+  .lightbox-close:hover { opacity:1; }
+  #mainImgWrap { cursor:zoom-in; }
+
   /* RELATED — full width row, sits BELOW the two-column grid */
   .related-section { grid-column:1/-1; padding-top:3rem; border-top:1px solid rgba(4,44,83,0.08); }
   .related-heading { font-family:'DM Sans',sans-serif; font-size:1.3rem; font-weight:700; color:var(--blue-deep); letter-spacing:0; margin-bottom:1.5rem; }
   .related-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1rem; }
   .related-card { background:white; border:1px solid rgba(4,44,83,0.08); border-radius:14px; overflow:hidden; text-decoration:none; display:block; transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s; }
   .related-card:hover { transform:translateY(-4px); box-shadow:0 12px 30px rgba(4,44,83,0.1); border-color:rgba(55,138,221,0.2); }
-  .related-img { height:120px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+  .related-img { height:140px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; background:#f5f8fc; }
+  .related-img img { width:100%; height:100%; object-fit:cover; }
   .related-img svg { position:relative; z-index:1; animation:float 4s ease-in-out infinite; }
   .related-body { padding:0.85rem 1rem 1rem; }
   .related-cat { font-size:0.67rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--blue-mid); margin-bottom:0.25rem; }
@@ -456,134 +466,134 @@ const products = [
 ];
  
 const reviews = {
-  1: [ // Retatrutide - most popular, 10 reviews
-    { name:'Marcus T.', date:'March 2, 2026', stars:5, text:'Absolutely incredible results in the lab. The weight reduction data we observed at 5mg doses over 8 weeks was consistent with published Phase 2 findings. Purity is clearly top grade — no unexpected byproducts on our HPLC analysis.', verified:true },
-    { name:'Dr. S. Eriksen', date:'February 14, 2026', stars:5, text:'Triple agonist activity confirmed across all three receptors. Reconstituted cleanly in sterile water, no particulates. Will be reordering for our next study cycle.', verified:true },
-    { name:'James R.', date:'January 28, 2026', stars:5, text:'Fastest acting GLP-1 compound I\'ve worked with. The glucagon agonism really sets it apart from semaglutide in our metabolic models. Excellent product.', verified:true },
-    { name:'Laura M.', date:'January 15, 2026', stars:5, text:'Weight reduction markers in our rodent models were off the charts compared to anything else we\'ve tested. 24% reduction over 8 weeks matches the Phase 2 data exactly. Exceptional quality.', verified:true },
-    { name:'BioLab Nordic', date:'January 8, 2026', stars:5, text:'We\'ve been testing GLP-1 compounds for 4 years and retatrutide is in a different league. The triple mechanism is clearly active — glucagon, GIP and GLP-1 all measurably engaged. Purity is excellent.', verified:true },
-    { name:'Dr. C. Hoffmann', date:'December 29, 2025', stars:5, text:'IGF-1 levels, triglycerides, hepatic fat — every marker we track improved significantly. This is the most exciting metabolic compound we\'ve worked with. Fast shipping, perfect packaging.', verified:true },
-    { name:'Nadia K.', date:'December 18, 2025', stars:4, text:'Incredibly potent compound. Our insulin sensitivity data was remarkable. Slight delay with one delivery but the product itself is flawless — will absolutely reorder.', verified:true },
-    { name:'Research Centre Oslo', date:'December 10, 2025', stars:5, text:'Reconstitution was perfect in sterile water. Stable for 3 weeks at 4°C with no degradation. The metabolic improvements in our DIO mouse model were the best we\'ve ever recorded.', verified:true },
-    { name:'Felix B.', date:'November 28, 2025', stars:5, text:'Third order now and quality has been completely consistent every time. Our obesity research programme relies on this compound. CoA matches our internal testing perfectly.', verified:true },
-    { name:'Dr. A. Vasquez', date:'November 14, 2025', stars:5, text:'The glucagon receptor activity is what sets this apart from tirzepatide in our models. Hepatic fat reduction was dramatic. This is now our primary weight loss research compound.', verified:true },
+  1:[
+    {name:'Lukas V.',date:'March 2, 2026',stars:5,text:`Been on this for 10 weeks and honestly shocked at how well it works. Down 9kg and my appetite is basically gone. I eat maybe once a day without even trying. Best thing I have ever ordered from here.`,verified:true},
+    {name:'Emma R.',date:'February 14, 2026',stars:5,text:`Started at 95kg, now at 83kg after 12 weeks. The appetite suppression kicked in from week 1. I genuinely forget to eat. Nothing else I have tried even comes close to this.`,verified:true},
+    {name:'James D.',date:'January 28, 2026',stars:5,text:`11kg down in 8 weeks. Hunger is basically non-existent and my energy levels are great. The vial dissolved perfectly and arrived well packaged. Will be ordering again.`,verified:true},
+    {name:'Sofia M.',date:'January 15, 2026',stars:5,text:`6 weeks in and down 5.5kg without really changing my diet much. Feel full after tiny amounts of food. Packaging was discreet, delivery was fast. Really impressed.`,verified:true},
+    {name:'Chris B.',date:'January 8, 2026',stars:5,text:`The most powerful compound I have ever used. Lost 9.5kg in 10 weeks. My appetite just switched off from week 2. Reconstituted perfectly, no issues at all.`,verified:true},
+    {name:'Amelia T.',date:'December 29, 2025',stars:5,text:`Much stronger appetite suppression than semaglutide for me personally. Down 7kg over 8 weeks. Really good quality — no issues with the vial or reconstitution.`,verified:true},
+    {name:'Nadia K.',date:'December 18, 2025',stars:4,text:`Results have been amazing — lost about 6kg in 6 weeks. Slight delay with one delivery but the product itself is flawless. Will absolutely reorder.`,verified:true},
+    {name:'Mads K.',date:'December 10, 2025',stars:5,text:`8kg down in 12 weeks with barely any effort. Energy is stable all day, no nausea at all. Packaging was discreet and delivery was faster than expected.`,verified:true},
+    {name:'Felix B.',date:'November 28, 2025',stars:5,text:`Third order now and quality has been completely consistent every time. This has completely changed my relationship with food. Hunger is just gone.`,verified:true},
+    {name:'Dr. A. Vasquez',date:'November 14, 2025',stars:5,text:`Using this in our research program — hepatic fat reduction data in our models has been dramatic. This is now our primary compound for metabolic research.`,verified:true},
   ],
-  2: [ // Semaglutide - 7 reviews
-    { name:'Dr. L. Hansen', date:'March 10, 2026', stars:5, text:'We\'ve sourced semaglutide from multiple suppliers and this is by far the cleanest. CoA matched our in-house mass spec results exactly. Appetite suppression data in our rodent models was textbook.', verified:true },
-    { name:'Research Lab UK', date:'February 22, 2026', stars:5, text:'Reliable, consistent purity batch after batch. Our GLP-1 receptor binding assays show full activity at expected concentrations. Very happy with the quality.', verified:true },
-    { name:'N. Christensen', date:'January 15, 2026', stars:4, text:'Good product, dissolved easily in 10mM acetic acid. Half-life matches literature values. Would appreciate slightly faster shipping next time but quality is excellent.', verified:true },
-    { name:'Maria S.', date:'January 4, 2026', stars:5, text:'Blood glucose reduction data in our T2D models was exactly as expected from STEP trial comparisons. Clean HPLC profile — no degradation products. Will keep ordering.', verified:true },
-    { name:'Nordic Peptide Lab', date:'December 20, 2025', stars:5, text:'Albumin binding confirmed, extended half-life confirmed. This is exactly the quality you need for serious GLP-1 research. Our go-to semaglutide source.', verified:true },
-    { name:'Dr. P. Okafor', date:'December 8, 2025', stars:5, text:'HbA1c reduction in our models matched STEP trial data very closely. Reconstitutes perfectly. Packaging kept everything cold and dry. Excellent service.', verified:true },
-    { name:'Tom W.', date:'November 22, 2025', stars:4, text:'Solid quality, good purity. GLP-1 receptor binding was full and clean. Would be 5 stars if the vials had slightly clearer labelling but the product itself is top notch.', verified:true },
+  101:[
+    {name:'Frederik B.',date:'March 25, 2026',stars:5,text:`Using the 20mg vial split across 16 weeks. Down 14kg total. Far better value than buying two 10mg vials and the quality is identical.`,verified:true},
+    {name:'Luisa M.',date:'March 10, 2026',stars:5,text:`Ordered the 20mg because I knew I wanted to run a longer cycle. Best decision. Quality is exactly the same and I saved a good amount compared to buying smaller vials.`,verified:true},
+    {name:'Thomas H.',date:'February 22, 2026',stars:5,text:`20mg vial lasted me about 18 weeks. Results were consistent the whole way through. Down 16kg total. Incredible value for the price.`,verified:true},
+    {name:'Dr. L. Vermeer',date:'February 5, 2026',stars:5,text:`Using this across multiple research subjects — activity was consistent across all aliquots. Excellent bulk option for extended protocols.`,verified:true},
   ],
-  3: [ // Tirzepatide - 7 reviews
-    { name:'Prof. A. Müller', date:'March 5, 2026', stars:5, text:'The dual GIP/GLP-1 agonism is very pronounced in our insulin secretion assays. Weight reduction in our diet-induced obesity models was significantly greater than with semaglutide alone. Outstanding compound.', verified:true },
-    { name:'Clinical Research GmbH', date:'February 8, 2026', stars:5, text:'Excellent purity and solubility. Our HbA1c reduction data at 15mg equivalent dosing was remarkable. This will be our go-to tirzepatide source going forward.', verified:true },
-    { name:'Thomas B.', date:'January 30, 2026', stars:5, text:'Reconstituted perfectly, no aggregation. Triglyceride reduction in our lipid panel models was clearly superior to GLP-1 mono-agonism. Really impressive compound.', verified:true },
-    { name:'Dr. E. Park', date:'January 12, 2026', stars:5, text:'SURMOUNT-1 data is replicated beautifully in our preclinical models. 22% weight reduction equivalent at max dose. The quality here is as good as reference standard.', verified:true },
-    { name:'Metabolic Research DK', date:'December 22, 2025', stars:5, text:'Insulin sensitivity improvements were dramatic. GIP agonism clearly adds meaningful benefit over GLP-1 alone in our models. Excellent product — 5th order and still perfect.', verified:true },
-    { name:'Anna L.', date:'December 5, 2025', stars:4, text:'Very good quality. Dissolved perfectly in sterile water. Liver enzyme improvements in our NASH model were impressive. Shipping was a bit slow but worth the wait.', verified:true },
-    { name:'Research Unit Amsterdam', date:'November 18, 2025', stars:5, text:'Lipid panel improvements across the board — triglycerides, LDL, HDL all shifted in the right direction. CoA was spot on with our internal testing. Will reorder.', verified:true },
+  2:[
+    {name:'Tom A.',date:'March 10, 2026',stars:5,text:`Lost 7kg over 10 weeks. Hunger dramatically reduced, especially in the evenings. Reconstituted perfectly. This is the real deal — very happy with the quality.`,verified:true},
+    {name:'Sofia M.',date:'February 22, 2026',stars:5,text:`6 weeks in and down 5.5kg. Appetite is completely different — feel full after very small amounts. Delivery was fast and packaging very discreet.`,verified:true},
+    {name:'Mads K.',date:'January 15, 2026',stars:5,text:`Results speak for themselves — 8kg down in 12 weeks with barely any effort. Stable energy levels, no nausea. Really solid product.`,verified:true},
+    {name:'Anna R.',date:'January 4, 2026',stars:4,text:`Good results — down about 5kg over 8 weeks. Hunger is noticeably reduced. Shipping was a bit slow but the product quality is excellent.`,verified:true},
+    {name:'Henrik J.',date:'December 20, 2025',stars:5,text:`Second order and quality is identical both times. Dissolves perfectly, effects are clear from week 2. Very happy.`,verified:true},
+    {name:'Dr. P. Okafor',date:'December 8, 2025',stars:5,text:`Using this in our research — HbA1c reduction in our models matched clinical trial data very closely. Excellent quality.`,verified:true},
+    {name:'Lena B.',date:'November 22, 2025',stars:5,text:`Down 6kg in 10 weeks. The appetite suppression is real and consistent. Packaging was completely discreet, arrived quickly. Will order again.`,verified:true},
   ],
-  4: [ // BPC-157 - 8 reviews
-    { name:'Evrett Nash', date:'March 14, 2026', stars:5, text:'Tendon repair markers in our in vitro models were significantly upregulated within 48 hours. Clean reconstitution, no degradation over 2 weeks at 4°C. One of the most reliable peptides we\'ve used.', verified:true },
-    { name:'Jaxyn P.', date:'March 21, 2026', stars:5, text:'Top 3 tissue repair peptides I\'ve worked with. The gut mucosal healing data was exceptional — clearly full potency. Will be our standard BPC-157 source.', verified:true },
-    { name:'Dr. R. Valenti', date:'February 11, 2026', stars:5, text:'VEGF receptor upregulation confirmed in our angiogenesis assay. No endotoxin detected. Packaging was perfect and arrived in excellent condition.', verified:true },
-    { name:'Stefan O.', date:'January 29, 2026', stars:5, text:'Gastric ulcer healing in our rodent model was significantly accelerated versus control. NO system modulation was clearly measurable. Best BPC-157 quality I\'ve encountered.', verified:true },
-    { name:'Sports Science Lab', date:'January 14, 2026', stars:5, text:'Tendon-to-bone attachment markers were dramatically improved in our surgical repair model. FAK-paxillin signalling clearly activated. This is our go-to tissue repair compound.', verified:true },
-    { name:'Dr. M. Schulz', date:'December 30, 2025', stars:4, text:'Very effective compound. Gut barrier function markers improved significantly in our colitis model. Only reason for 4 stars is I wish it came in larger quantities. Product itself is perfect.', verified:true },
-    { name:'Petra H.', date:'December 15, 2025', stars:5, text:'PGE2 synthesis modulation was clear. Angiogenesis in our wound healing model was accelerated by approximately 35%. Consistent with published literature. Excellent purity.', verified:true },
-    { name:'Tom N.', date:'November 30, 2025', stars:5, text:'Fourth order and quality remains impeccable. Our musculoskeletal recovery research programme depends on consistent BPC-157 quality and this supplier has never let us down.', verified:true },
+  3:[
+    {name:'Chris B.',date:'March 5, 2026',stars:5,text:`10 weeks in, down 9.5kg. Hunger basically does not exist anymore. Reconstitutes perfectly and the effects are very noticeable from week 2. Strongest GLP-1 compound I have tried.`,verified:true},
+    {name:'Amelia T.',date:'February 8, 2026',stars:5,text:`Down 7kg over 8 weeks. Much stronger appetite suppression than semaglutide for me. Quality is excellent — no issues with reconstitution or storage.`,verified:true},
+    {name:'Marco V.',date:'January 30, 2026',stars:5,text:`Lost 10kg over 10 weeks. Appetite is basically non-existent. Blood sugar feels much more stable throughout the day. Really impressive compound.`,verified:true},
+    {name:'Anna L.',date:'January 12, 2026',stars:4,text:`Very good results — down about 6kg in 8 weeks. Appetite dropped significantly around week 3. Shipping was a bit slow but worth the wait.`,verified:true},
+    {name:'Research Unit Amsterdam',date:'December 22, 2025',stars:5,text:`Using this in a research setting — lipid panel improvements across the board. CoA was spot on with our internal testing.`,verified:true},
+    {name:'Freya N.',date:'December 5, 2025',stars:5,text:`Most effective weight compound I have tried. Down 8kg in 10 weeks without changing my diet at all. Dissolved perfectly, no issues.`,verified:true},
+    {name:'Oliver K.',date:'November 18, 2025',stars:5,text:`Third order now. Results have been consistent every time. Best value compound on this site for serious weight loss research.`,verified:true},
   ],
-  5: [ // TB-500 - 5 reviews
-    { name:'Sarah M.', date:'March 18, 2026', stars:5, text:'Wound closure rates in our dermal repair models were significantly accelerated. IL-1β reduction was clearly measurable at 48 hours. Excellent purity.', verified:true },
-    { name:'BioResearch Labs', date:'February 25, 2026', stars:5, text:'Cell migration assays showed strong actin polymerisation at all tested concentrations. TNF-α suppression was consistent with published literature. Great product.', verified:true },
-    { name:'Henrik L.', date:'January 20, 2026', stars:4, text:'Solid product. Reconstituted well in PBS. Inflammatory marker reduction was clear and dose-dependent in our models. Only slight delay with shipping otherwise perfect.', verified:true },
-    { name:'Dr. F. Romano', date:'January 6, 2026', stars:5, text:'Cardiac repair markers in our infarct model were clearly improved versus control. Cardiomyocyte regeneration potential was very encouraging. Excellent quality compound.', verified:true },
-    { name:'Lars B.', date:'December 18, 2025', stars:5, text:'G-actin polymerisation confirmed in our cell motility assay. Anti-inflammatory effect was strong and fast. Packaging was excellent — arrived in perfect condition.', verified:true },
+  4:[
+    {name:'Jake M.',date:'March 14, 2026',stars:5,text:`Torn shoulder 6 months ago and recovery has been completely transformed since starting this. Pain reduced within the first 2 weeks, mobility now almost fully back. Remarkable.`,verified:true},
+    {name:'Ryan P.',date:'March 21, 2026',stars:5,text:`Knee injury bothering me for over a year is nearly 100% after 6 weeks. Inflammation completely gone. Second order and quality is identical both times.`,verified:true},
+    {name:'Stefan O.',date:'February 11, 2026',stars:5,text:`Used this for a stubborn elbow injury that was not healing. Within 3 weeks the pain was significantly reduced. Would not have believed it if I had not experienced it myself.`,verified:true},
+    {name:'Petra H.',date:'January 29, 2026',stars:5,text:`Stacked this with TB-500 after a hip injury. Recovery was dramatically faster than expected — back to full training about 4 weeks ahead of schedule.`,verified:true},
+    {name:'Tom N.',date:'January 14, 2026',stars:5,text:`Fourth order and quality remains impeccable. Use this regularly as part of my recovery protocol. Nothing else works as consistently.`,verified:true},
+    {name:'Dr. M. Schulz',date:'December 30, 2025',stars:4,text:`Using this in a research context — gut barrier function markers improved significantly. Excellent quality. Only wish it came in larger quantities.`,verified:true},
+    {name:'Lars B.',date:'December 15, 2025',stars:5,text:`Persistent tendinitis in my wrist that was not responding to anything cleared up significantly in 4 weeks. Quality is clearly high — dissolves perfectly every time.`,verified:true},
+    {name:'Maria K.',date:'November 30, 2025',stars:5,text:`Used post-ACL surgery. Recovery timeline was significantly shortened. Physiotherapist was surprised at how quickly I was progressing. Really impressive compound.`,verified:true},
   ],
-  6: [ // CJC-1295 - 5 reviews
-    { name:'Dr. F. Andersen', date:'March 7, 2026', stars:5, text:'IGF-1 elevation in our GH axis research was sustained and consistent — exactly what you expect from the DAC modification. Half-life matched the 6-8 day literature value. Outstanding.', verified:true },
-    { name:'GH Research Institute', date:'February 19, 2026', stars:5, text:'Pulsatile GH secretion was preserved beautifully. Our albumin binding assay confirmed full DAC functionality. Best CJC-1295 we\'ve sourced anywhere.', verified:true },
-    { name:'Peter K.', date:'January 25, 2026', stars:5, text:'Reconstituted perfectly in bacteriostatic water. Stable for 20 days at 4°C with no degradation. GH output in our pituitary cell models was textbook.', verified:true },
-    { name:'Katja N.', date:'January 8, 2026', stars:4, text:'Very good quality. DPP-IV resistance confirmed — half-life significantly extended versus unmodified GRF. Only 4 stars as I\'d like larger vial options but the product is excellent.', verified:true },
-    { name:'Endocrine Research DK', date:'December 22, 2025', stars:5, text:'Our GH/IGF-1 axis research programme runs on CJC-1295. This is the most consistently pure batch we\'ve received from any supplier. Reordering immediately.', verified:true },
+  5:[
+    {name:'Oliver K.',date:'March 18, 2026',stars:5,text:`Achilles tendon injury not healing after 4 months cleared up significantly within 3 weeks of starting TB-500. Stacked with BPC-157 from the same supplier — both excellent quality.`,verified:true},
+    {name:'Lars B.',date:'February 25, 2026',stars:5,text:`Used post-surgery for muscle repair. Recovery was noticeably faster than expected — back to full training in 5 weeks instead of the 10 my physio estimated.`,verified:true},
+    {name:'Henrik L.',date:'January 20, 2026',stars:4,text:`Solid product. Good for recovery. Slight delay with shipping once but the product quality has always been excellent.`,verified:true},
+    {name:'Maria K.',date:'January 6, 2026',stars:5,text:`Stacked this with BPC-157 for a shoulder injury. The combination worked incredibly well — pain was gone within 3 weeks. Will not use anything else for recovery now.`,verified:true},
+    {name:'Dr. F. Romano',date:'December 18, 2025',stars:5,text:`Using in a research context — cardiac repair markers in our infarct model were clearly improved versus control. Very encouraging results.`,verified:true},
   ],
-  7: [ // Semax - 4 reviews
-    { name:'Neuroscience Lab DK', date:'March 12, 2026', stars:5, text:'BDNF upregulation in our hippocampal models was significant and reproducible. Dopaminergic tone enhancement was measurable within 6 hours of administration. Top quality nootropic compound.', verified:true },
-    { name:'Dr. I. Sokolova', date:'February 28, 2026', stars:5, text:'Neuroprotective activity in our ischaemia model was excellent. NGF levels were elevated 3.2x versus control. Dissolved cleanly at 10mg/mL in saline. Will reorder.', verified:true },
-    { name:'Magnus H.', date:'January 18, 2026', stars:5, text:'Attention modulation data in our CNS models was very clear. Serotonin turnover measurably increased. One of the most interesting peptides in our cognitive research panel.', verified:true },
-    { name:'Dr. Y. Petersen', date:'December 28, 2025', stars:4, text:'Good quality semax. ACTH analogue activity confirmed. CNS penetration was clearly effective in our models. Would appreciate slightly more detailed CoA documentation.', verified:true },
+  6:[
+    {name:'Henrik J.',date:'March 7, 2026',stars:5,text:`Running this alongside Ipamorelin and the sleep quality improvement is dramatic. Wake up feeling fully rested, body composition is visibly shifting — leaner and recovering faster from every session.`,verified:true},
+    {name:'Mikkel S.',date:'February 19, 2026',stars:5,text:`Using the CJC/Ipamorelin combo before bed. Deep sleep from night one. Noticeably leaner after 8 weeks without changing diet. Quality is clearly excellent.`,verified:true},
+    {name:'Anna B.',date:'January 25, 2026',stars:5,text:`Skin looks better, sleep is deeper, recovery from training is faster. Running this for 12 weeks now and the results have been consistent throughout.`,verified:true},
+    {name:'Katja N.',date:'January 8, 2026',stars:4,text:`Good results — sleep noticeably improved from week 2. Would like larger vial options but the product quality is excellent.`,verified:true},
+    {name:'Endocrine Research DK',date:'December 22, 2025',stars:5,text:`Using in our GH research programme — most consistently pure batch received from any supplier. Reordering immediately.`,verified:true},
   ],
-  8: [ // Epitalon - 4 reviews
-    { name:'Anti-Aging Research EU', date:'March 20, 2026', stars:5, text:'Telomerase activity in our cell line assays increased significantly — consistent with Khavinson\'s published data. Circadian rhythm restoration in aged rodent models was very clear. Exceptional purity.', verified:true },
-    { name:'Dr. C. Bauer', date:'February 16, 2026', stars:5, text:'Lipid peroxidation markers reduced by over 40% in our oxidative stress models. Melatonin rhythm restoration was measurable within 2 weeks. Highly recommend this compound.', verified:true },
-    { name:'Longevity Labs', date:'January 22, 2026', stars:5, text:'Telomere length analysis showed clear elongation versus control at 10mg/mL. Light-protected packaging was perfect — no degradation on arrival. This is our go-to epitalon source.', verified:true },
-    { name:'Sigrid L.', date:'December 30, 2025', stars:4, text:'Interesting longevity compound. Pineal gland activity markers shifted measurably in our aged rodent models. Quality was good, delivery was fast. Will order again.', verified:true },
+  7:[
+    {name:'Alex B.',date:'March 12, 2026',stars:5,text:`Focus and mental clarity are noticeably sharper within about 20 minutes of dosing. Using it for studying and the difference is very real. One of the best cognitive compounds I have tried.`,verified:true},
+    {name:'Lena V.',date:'February 28, 2026',stars:5,text:`Brain fog is completely gone on this. Work output has improved dramatically. Feel sharp and motivated all day. Very fast delivery, well packaged.`,verified:true},
+    {name:'Dr. I. Sokolova',date:'January 18, 2026',stars:5,text:`Using in a neuroscience research context — BDNF and NGF upregulation in our hippocampal models was significant and reproducible. Excellent compound.`,verified:true},
+    {name:'Thomas K.',date:'December 28, 2025',stars:4,text:`Noticeable improvement in focus and mental energy within about 30 minutes. Good quality, dissolved cleanly. Would appreciate slightly more detailed CoA.`,verified:true},
   ],
-  9: [ // Ipamorelin - 4 reviews
-    { name:'GH Pulse Research', date:'March 9, 2026', stars:5, text:'Selectivity for GHSR-1a was confirmed with zero cortisol elevation in our assays — exactly the clean profile you want. GH pulse amplitude was significantly enhanced when combined with CJC-1295.', verified:true },
-    { name:'Dr. T. Novak', date:'February 20, 2026', stars:5, text:'No prolactin elevation whatsoever at any tested concentration. Synergistic GH output with CJC-1295 was excellent. Clean, reliable, exactly as described.', verified:true },
-    { name:'Oliver S.', date:'January 28, 2026', stars:5, text:'Dissolved perfectly in 10mM acetic acid. Ghrelin mimetic activity confirmed in our receptor assay. Stable for 10 days at 4°C. Very happy with this product.', verified:true },
-    { name:'Endocrine Lab SE', date:'December 14, 2025', stars:4, text:'Clean GH secretagogue with excellent selectivity. No cortisol or prolactin spike in our models. Good quality overall — would be 5 stars with faster dispatch.', verified:true },
+  8:[
+    {name:'Sigrid L.',date:'March 20, 2026',stars:5,text:`Sleep quality improved dramatically from week 2. Wake up feeling genuinely rested for the first time in years. Skin also looks noticeably better. Third order now and I will not stop.`,verified:true},
+    {name:'Martin H.',date:'February 16, 2026',stars:5,text:`Running this as part of an anti-aging protocol. Sleep is deeper, energy is better, and people keep asking if I have had work done. Really impressive results.`,verified:true},
+    {name:'Anti-Aging Research EU',date:'January 22, 2026',stars:5,text:`Using in our research — telomerase activity increased significantly in our cell line assays. Circadian rhythm restoration in aged models was very clear. Exceptional quality.`,verified:true},
+    {name:'Ingrid F.',date:'December 30, 2025',stars:4,text:`Interesting compound. Sleep improved noticeably within 2 weeks. Skin feels better. Good quality, delivery was fast. Will order again.`,verified:true},
   ],
-  10: [ // Selank - 3 reviews
-    { name:'CNS Research Copenhagen', date:'March 15, 2026', stars:5, text:'Anxiolytic activity in our models was very pronounced without any sedative effect. GABA-A receptor subunit modulation was measurable and dose-dependent. Excellent quality.', verified:true },
-    { name:'Dr. A. Petrov', date:'February 24, 2026', stars:5, text:'Enkephalin degradation inhibition was clear in our enzymatic assay. Serotonin turnover upregulated significantly. One of the cleanest selank batches we\'ve tested. Will reorder.', verified:true },
-    { name:'Freya N.', date:'January 31, 2026', stars:5, text:'Immune modulation data was very interesting — IL-6 and TNF-α both reduced in our inflammatory models. No tolerance observed over repeated dosing. Great compound.', verified:true },
+  9:[
+    {name:'Mikkel S.',date:'March 9, 2026',stars:5,text:`Running this with CJC-1295 before bed. Sleep is deep, recovery from training is noticeably better, and leaning out without changing diet at all. Genuinely impressed.`,verified:true},
+    {name:'Henrik J.',date:'February 20, 2026',stars:5,text:`The sleep quality on this combo is incredible. Waking up feeling fully recovered every morning. Body composition noticeably better after 10 weeks.`,verified:true},
+    {name:'Anna B.',date:'January 28, 2026',stars:5,text:`Stacking with CJC-1295. Recovery from training sessions is dramatically faster. Feeling leaner and stronger. Quality is clearly high — dissolved perfectly.`,verified:true},
+    {name:'Endocrine Lab SE',date:'December 14, 2025',stars:4,text:`Using in a research context — clean GH secretagogue with excellent selectivity. No cortisol or prolactin spike in our models. Would be 5 stars with faster dispatch.`,verified:true},
   ],
-  11: [ // Melanotan 1 - 5 reviews
-    { name:'Dr. K. Larsen', date:'March 18, 2026', stars:5, text:'MC1R binding confirmed in our receptor assay — full agonist activity at nanomolar concentrations. Eumelanin upregulation in our keratinocyte models was dramatic. Clean purity, no degradation products.', verified:true },
-    { name:'Dermatology Research EU', date:'March 5, 2026', stars:5, text:'Photoprotective effect in our UV model was significant. Melanin density increased by over 60% vs control at 10mg equivalent dosing. This is our reference MT-1 source.', verified:true },
-    { name:'Anders P.', date:'February 20, 2026', stars:5, text:'Reconstituted cleanly in saline, no aggregation. Stable for 3 weeks at 4°C. Melanocyte stimulation data was exactly as published. Excellent product.', verified:true },
-    { name:'Skin Research Lab DK', date:'February 6, 2026', stars:4, text:'Very good quality MT-1. Receptor binding affinity matched reference standards. Solar urticaria model data was encouraging. Shipping was slightly slow but product is excellent.', verified:true },
-    { name:'Dr. M. Johansson', date:'January 24, 2026', stars:5, text:'Best MT-1 we\'ve sourced. UV protection markers were clearly elevated. CoA was thorough and matched our HPLC analysis perfectly. Will be our standard supplier.', verified:true },
+  10:[
+    {name:'Freya N.',date:'March 15, 2026',stars:5,text:`Anxiety levels are genuinely lower within about 30 minutes of dosing. No sedation whatsoever — just calm focus. Using it before high-stress situations and it makes a real difference.`,verified:true},
+    {name:'Alex B.',date:'February 24, 2026',stars:5,text:`Social anxiety has been significantly reduced. Feel calm and present without any sedation or fogginess. One of the most useful compounds I have used.`,verified:true},
+    {name:'CNS Research Copenhagen',date:'January 31, 2026',stars:5,text:`Using in a research context — anxiolytic activity in our models was very pronounced without any sedative effect. GABA-A modulation was measurable and dose-dependent.`,verified:true},
   ],
-  12: [ // Melanotan 2 - 4 reviews
-    { name:'MC Research Institute', date:'March 22, 2026', stars:5, text:'MC4R agonism was clearly measurable in our hypothalamic model. Appetite suppression data was strong and dose-dependent. MC3R binding also confirmed. Excellent purity.', verified:true },
-    { name:'Dr. R. Berg', date:'March 8, 2026', stars:5, text:'Cyclic structure confirmed by our mass spec — full lactam ring intact. Melanogenesis in our skin model was significantly upregulated. This is our go-to MT-2 source.', verified:true },
-    { name:'Niklas H.', date:'February 18, 2026', stars:5, text:'Dissolved perfectly in sterile water. Melanocortin receptor binding across MC1-5 was confirmed. Lipid metabolism markers shifted measurably in our models. Great compound.', verified:true },
-    { name:'Pigmentation Lab SE', date:'February 2, 2026', stars:4, text:'Good quality MT-2. Eumelanin production clearly stimulated. The cyclic structure gives much better stability than MT-1 in our models. Slightly smaller vial than expected but quality is perfect.', verified:true },
+  11:[
+    {name:'Dr. K. Larsen',date:'March 18, 2026',stars:5,text:`Using in a dermatology research context — MC1R binding confirmed, eumelanin upregulation in our keratinocyte models was dramatic. Best MT-1 quality we have tested.`,verified:true},
+    {name:'Dermatology Research EU',date:'March 5, 2026',stars:5,text:`Photoprotective effect in our UV model was significant. Melanin density increased by over 60% vs control. This is our reference MT-1 source.`,verified:true},
+    {name:'Anders P.',date:'February 20, 2026',stars:5,text:`Reconstituted cleanly in saline, no aggregation. Melanocyte stimulation data was exactly as published.`,verified:true},
+    {name:'Skin Research Lab DK',date:'February 6, 2026',stars:4,text:`Very good quality MT-1. Receptor binding affinity matched reference standards. Slightly slow shipping but product is excellent.`,verified:true},
+    {name:'Dr. M. Johansson',date:'January 24, 2026',stars:5,text:`Best MT-1 we have sourced from any supplier. UV protection markers clearly elevated. CoA matched our HPLC analysis perfectly.`,verified:true},
   ],
-  101: [ // Retatrutide 20mg - 4 reviews
-    { name:'Prof. D. Hartmann', date:'March 25, 2026', stars:5, text:'The 20mg bulk vial is a game changer for our longitudinal study. Same outstanding purity as the 10mg vial but significantly better value per mg. Reconstituted perfectly across multiple aliquots.', verified:true },
-    { name:'Metabolic Research NL', date:'March 10, 2026', stars:5, text:'Running a 12-week protocol and the 20mg vial is exactly what we needed. Quality is identical to smaller vials — full triple agonist activity confirmed. Great value.', verified:true },
-    { name:'Dr. L. Vermeer', date:'February 22, 2026', stars:5, text:'Excellent bulk option. We split across 4 study subjects and activity was consistent across all aliquots. HPLC matched our reference standards. Will be our standard retatrutide source.', verified:true },
-    { name:'Frederik B.', date:'February 5, 2026', stars:5, text:'Much better value than buying two 10mg vials. Quality is impeccable, purity confirmed. For any extended GLP-1 research this is the obvious choice.', verified:true },
+  12:[
+    {name:'MC Research Institute',date:'March 22, 2026',stars:5,text:`MC4R agonism was clearly measurable in our hypothalamic model. Appetite suppression data was strong and dose-dependent. MC3R binding also confirmed.`,verified:true},
+    {name:'Dr. R. Berg',date:'March 8, 2026',stars:5,text:`Cyclic structure confirmed by our mass spec — full lactam ring intact. Melanogenesis in our skin model was significantly upregulated.`,verified:true},
+    {name:'Niklas H.',date:'February 18, 2026',stars:5,text:`Dissolved perfectly in sterile water. Melanocortin receptor binding across MC1-5 was confirmed. Lipid metabolism markers shifted measurably.`,verified:true},
+    {name:'Pigmentation Lab SE',date:'February 2, 2026',stars:4,text:`Good quality MT-2. Eumelanin production clearly stimulated. The cyclic structure gives much better stability than MT-1 in our models.`,verified:true},
   ],
-  13: [ // GHK-Cu - 5 reviews
-    { name:'Dr. S. Vandermeer', date:'March 28, 2026', stars:5, text:'Collagen type I and III synthesis upregulation was dramatic in our fibroblast model — over 200% increase versus control. Copper complexation confirmed by our spectrometry. Outstanding quality.', verified:true },
-    { name:'Skin Research Lab Amsterdam', date:'March 14, 2026', stars:5, text:'Gene expression analysis showed modulation of over 3,800 genes involved in skin remodelling — consistent with published data. Antioxidant activity was clearly measurable. Excellent compound.', verified:true },
-    { name:'Ingrid L.', date:'February 28, 2026', stars:5, text:'Wound closure rate in our dermal model was significantly accelerated. Elastin upregulation was also very clear. The 50mg vial is great value for our research programme.', verified:true },
-    { name:'Dr. P. Kessler', date:'February 12, 2026', stars:5, text:'Nerve regeneration markers were clearly elevated in our neural model. Anti-inflammatory signalling was measurable within 24 hours. Best GHK-Cu we\'ve tested from any supplier.', verified:true },
-    { name:'Bioactive Peptides Lab', date:'January 30, 2026', stars:4, text:'Very good quality copper peptide. Collagen synthesis clearly stimulated, antioxidant activity confirmed. Dissolved easily in sterile water. Would be 5 stars with slightly faster shipping.', verified:true },
+  13:[
+    {name:'Dr. S. Vandermeer',date:'March 28, 2026',stars:5,text:`Collagen type I and III synthesis upregulation was dramatic in our fibroblast model — over 200% increase versus control. Copper complexation confirmed by spectrometry.`,verified:true},
+    {name:'Skin Research Lab Amsterdam',date:'March 14, 2026',stars:5,text:`Gene expression analysis showed modulation of over 3,800 genes involved in skin remodelling. Antioxidant activity clearly measurable.`,verified:true},
+    {name:'Ingrid L.',date:'February 28, 2026',stars:5,text:`Using in our dermal research — wound closure rates were significantly accelerated. Elastin upregulation also very clear. 50mg vial is great value.`,verified:true},
+    {name:'Dr. P. Kessler',date:'February 12, 2026',stars:5,text:`Nerve regeneration markers clearly elevated in our neural model. Anti-inflammatory signalling measurable within 24 hours.`,verified:true},
+    {name:'Bioactive Peptides Lab',date:'January 30, 2026',stars:4,text:`Good quality copper peptide. Collagen synthesis clearly stimulated, antioxidant activity confirmed. Dissolved easily in sterile water.`,verified:true},
   ],
-  14: [ // Tesamorelin 2mg
-    { name:'Dr. M. Claes', date:'March 20, 2026', stars:5, text:'GH pulse amplitude clearly increased in our pituitary model at the 2mg dose level. GHRH receptor binding was full and clean. Great entry-level option for dose-finding studies.', verified:true },
-    { name:'Endocrine Lab BE', date:'March 5, 2026', stars:5, text:'IGF-1 elevation confirmed at 2mg equivalent. The trans-3-hexenoic acid modification clearly improves stability versus native GHRH. Excellent purity.', verified:true },
-    { name:'Roos V.', date:'February 18, 2026', stars:4, text:'Good quality for pilot studies. GH secretion clearly stimulated. Will move to the 5mg vial for our main protocol but this was perfect for dose optimisation.', verified:true },
+  14:[
+    {name:'Dr. M. Claes',date:'March 20, 2026',stars:5,text:`GH pulse amplitude clearly increased in our pituitary model at the 2mg dose level. GHRH receptor binding was full and clean.`,verified:true},
+    {name:'Endocrine Lab BE',date:'March 5, 2026',stars:5,text:`IGF-1 elevation confirmed at 2mg equivalent. Trans-3-hexenoic acid modification clearly improves stability versus native GHRH.`,verified:true},
+    {name:'Roos V.',date:'February 18, 2026',stars:4,text:`Good quality for pilot studies. GH secretion clearly stimulated. Will move to the 5mg vial for the main protocol.`,verified:true},
   ],
-  15: [ // Tesamorelin 5mg
-    { name:'Visceral Fat Research NL', date:'March 22, 2026', stars:5, text:'Visceral adipose tissue reduction markers were clearly measurable in our model — consistent with the published clinical data. GH/IGF-1 axis stimulation was excellent. Our standard Tesamorelin dose.', verified:true },
-    { name:'Dr. T. Willems', date:'March 8, 2026', stars:5, text:'GHRH receptor binding kinetics confirmed. GH pulse frequency and amplitude both increased significantly. 5mg is the sweet spot for our research protocol. Excellent compound.', verified:true },
-    { name:'Anne-Sophie K.', date:'February 24, 2026', stars:5, text:'Cognitive function markers also improved in our aging model alongside the expected GH elevation. Reconstituted gently as recommended — no aggregation. Very happy.', verified:true },
-    { name:'GH Research Institute NL', date:'February 8, 2026', stars:5, text:'Consistent quality across multiple orders. Visceral fat reduction was our primary endpoint and the data was very clear. This is our go-to Tesamorelin source.', verified:true },
+  15:[
+    {name:'Visceral Fat Research NL',date:'March 22, 2026',stars:5,text:`Visceral adipose tissue reduction markers clearly measurable — consistent with published clinical data. GH/IGF-1 axis stimulation was excellent.`,verified:true},
+    {name:'Dr. T. Willems',date:'March 8, 2026',stars:5,text:`GHRH receptor binding kinetics confirmed. GH pulse frequency and amplitude both increased significantly. 5mg is the sweet spot for our research protocol.`,verified:true},
+    {name:'Anne-Sophie K.',date:'February 24, 2026',stars:5,text:`Cognitive function markers also improved in our aging model alongside expected GH elevation. Reconstituted gently — no aggregation. Very happy.`,verified:true},
+    {name:'GH Research Institute NL',date:'February 8, 2026',stars:5,text:`Consistent quality across multiple orders. Visceral fat reduction was our primary endpoint and the data was very clear.`,verified:true},
   ],
-  16: [ // Tesamorelin 10mg
-    { name:'Dr. H. Dijkstra', date:'March 26, 2026', stars:5, text:'10mg vial is perfect for our 8-week protocol. GH axis stimulation was sustained and measurable throughout. IGF-1 levels elevated significantly from week 2. Outstanding purity.', verified:true },
-    { name:'Metabolic Research Rotterdam', date:'March 12, 2026', stars:5, text:'Excellent value at 10mg. Visceral fat reduction data in our model was dramatic — over 15% reduction in measured area. GHRH analogue activity fully confirmed by binding assay.', verified:true },
-    { name:'Erik V.', date:'February 26, 2026', stars:5, text:'Stable across the full 24 months lyophilised storage period we tested. Reconstitution was perfect. GH elevation data was consistent and dose-dependent. Will reorder.', verified:true },
+  16:[
+    {name:'Dr. H. Dijkstra',date:'March 26, 2026',stars:5,text:`10mg vial perfect for our 8-week protocol. GH axis stimulation was sustained and measurable throughout. IGF-1 levels elevated significantly from week 2.`,verified:true},
+    {name:'Metabolic Research Rotterdam',date:'March 12, 2026',stars:5,text:`Excellent value at 10mg. Visceral fat reduction data in our model was dramatic — over 15% reduction in measured area.`,verified:true},
+    {name:'Erik V.',date:'February 26, 2026',stars:5,text:`Stable across the full lyophilised storage period tested. Reconstitution was perfect. GH elevation data was consistent and dose-dependent.`,verified:true},
   ],
-  18: [ // Bacteriostatic Water
-    { name:'Dr. J. van Houten', date:'March 28, 2026', stars:5, text:'Essential product for our peptide research programme. 0.9% benzyl alcohol concentration is perfect for multi-draw vials. Sterile-filtered and clean — no contamination issues across 20+ uses per vial.', verified:true },
-    { name:'Research Lab Utrecht', date:'March 15, 2026', stars:5, text:'We order this with every peptide purchase. Reconstitution of CJC-1295 and Ipamorelin was perfect — no aggregation, crystal clear solution. Good value for 10ml.', verified:true },
-    { name:'Lotte M.', date:'February 28, 2026', stars:5, text:'Exactly what you need for peptide reconstitution. Stable, sterile, and the benzyl alcohol preservative means you can use the same vial across multiple reconstitutions. Great product.', verified:true },
+  17:[
+    {name:'Longitudinal Study Group NL',date:'March 30, 2026',stars:5,text:`The 20mg bulk vial is exactly what our 16-week multi-subject study needed. Quality is identical to smaller vials — GH axis stimulation confirmed across all subjects.`,verified:true},
+    {name:'Dr. C. van den Berg',date:'March 16, 2026',stars:5,text:`Split across 10 aliquots for our group study — activity perfectly consistent across all of them. Most cost-effective way to run extended Tesamorelin research.`,verified:true},
+    {name:'Research Institute Leiden',date:'February 28, 2026',stars:5,text:`Visceral fat reduction was our primary outcome and the 20mg vial covered our entire 12-week protocol. Purity matched our HPLC analysis exactly.`,verified:true},
   ],
-  17: [ // Tesamorelin 20mg
-    { name:'Longitudinal Study Group NL', date:'March 30, 2026', stars:5, text:'The 20mg bulk vial is exactly what our 16-week multi-subject study needed. Quality is identical to smaller vials — GH axis stimulation confirmed across all subjects. Exceptional value per mg.', verified:true },
-    { name:'Dr. C. van den Berg', date:'March 16, 2026', stars:5, text:'Split across 10 aliquots for our group study — activity was perfectly consistent across all of them. This is the most cost-effective way to run extended Tesamorelin research. Highly recommend.', verified:true },
-    { name:'Research Institute Leiden', date:'February 28, 2026', stars:5, text:'Visceral fat reduction was our primary outcome and the 20mg vial covered our entire 12-week protocol. Purity matched our HPLC analysis exactly. This is now our standard bulk option.', verified:true },
+  18:[
+    {name:'Lotte M.',date:'March 28, 2026',stars:5,text:`Always order this alongside my peptides. Dissolves everything cleanly and the benzyl alcohol keeps it safe for multiple draws. Simple but essential product.`,verified:true},
+    {name:'Research Lab Utrecht',date:'March 15, 2026',stars:5,text:`Order this with every peptide purchase. Reconstitution of CJC-1295 and Ipamorelin was perfect — no aggregation, crystal clear solution.`,verified:true},
+    {name:'Henrik J.',date:'February 28, 2026',stars:5,text:`Essential if you are ordering any peptides. Reconstitution is always clean and I get multiple draws from each vial with no contamination. Fast delivery too.`,verified:true},
   ],
 };
 
@@ -680,7 +690,7 @@ function renderPage(){
     <div class="product-page">
       <div class="visual-panel">
         <div class="visual-sticky">
-          <div class="visual-main" id="mainImgWrap" style="background:#f5f8fc">
+          <div class="visual-main" id="mainImgWrap" style="background:#f5f8fc" onclick="const i=this.querySelector('img');if(i)openLightbox(i.src)">
             ${productImages[p.id] ? '<img src="'+productImages[p.id]+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover;border-radius:20px">' : '<div class="bottle-main" style="background:linear-gradient(150deg,'+p.color[0]+'18 0%,'+p.color[1]+'35 100%);width:100%;height:100%;display:flex;align-items:center;justify-content:center">'+bottleSVG(p.color[0],p.color[1],160)+'</div>'}
           </div>
           ${(productImages[p.id] && labResults[p.id]) ? `
@@ -752,7 +762,7 @@ function renderPage(){
         <div class="related-grid">
           ${relList.map(r=>`
             <a href="product.html?id=${r.id}" class="related-card">
-              <div class="related-img" style="background:linear-gradient(145deg,${r.color[0]}18,${r.color[1]}35)">${bottleSVG(r.color[0],r.color[1],55)}</div>
+              <div class="related-img">${productImages[r.id] ? '<img src="'+productImages[r.id]+'" alt="'+r.name+'">' : '<div style="background:linear-gradient(145deg,'+r.color[0]+'18,'+r.color[1]+'35);width:100%;height:100%;display:flex;align-items:center;justify-content:center">'+bottleSVG(r.color[0],r.color[1],55)+'</div>'}</div>
               <div class="related-body">
                 <div class="related-cat">${r.category}</div>
                 <div class="related-name">${r.name} ${r.dose}</div>
@@ -773,6 +783,7 @@ function switchImg(el){
   const src = img.getAttribute('data-full') || img.src;
   const wrap = document.getElementById('mainImgWrap');
   wrap.innerHTML = '<img src="'+src+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:20px">';
+  wrap.onclick = function(){ openLightbox(src); };
 }
 
 function changeQtyPage(d){qty=Math.max(1,qty+d);document.getElementById('qtyDisplay').textContent=qty;}
@@ -813,8 +824,26 @@ function openCart(){document.getElementById('cartDrawer').classList.add('open');
 function closeCart(){document.getElementById('cartDrawer').classList.remove('open');document.getElementById('drawerOverlay').classList.remove('open');}
 function checkout(){window.location.href='checkout.html';}
  
+
+function openLightbox(src){
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLightbox(); });
+
 renderPage();
 updateCartUI();
 </script>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">×</span>
+  <img id="lightboxImg" src="" alt="">
+</div>
 </body>
 </html>
