@@ -33,11 +33,13 @@
  
   /* Shipping banner */
   .shipping-banner {
-    background: var(--blue-mid);
+    background: #185FA5;
     color: white;
     text-align: center;
-    padding: 0.35rem 1rem;
-    font-size: 0.7rem;
+    padding: 0;
+    height: 28px;
+    line-height: 28px;
+    font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -46,12 +48,8 @@
     z-index: 101;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
   }
   .shipping-banner span { opacity: 0.75; margin: 0 6px; }
-  @media (max-width: 768px) {
-    .shipping-banner { font-size: 0.62rem; padding: 0.28rem 0.5rem; letter-spacing: 0.03em; }
-  }
 
   /* ── NAV ── */
   nav {
@@ -1056,15 +1054,6 @@
   </ul>
   <div class="footer-copy">© 2025 SyntheticLabs. All compounds are sold strictly for research purposes only. Not for human consumption.</div>
 </footer>
-
-<script>
-function toggleMobileMenu() {
-  var menu = document.getElementById('mobileMenu');
-  var ham = document.getElementById('hamburger');
-  menu.classList.toggle('open');
-  ham.classList.toggle('open');
-}
-</script>
  
 </body>
 </html>
