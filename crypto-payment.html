@@ -22,14 +22,15 @@
   --card-hov:rgba(255,255,255,0.1);
   --green:#22c55e;--green-b:#16a34a;
 }
-html,body{min-height:100%;color:var(--text);font-family:'DM Sans',sans-serif}
+html{min-height:100%;background:#041e3a}body{min-height:100%;color:var(--text);font-family:'DM Sans',sans-serif}
 body{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  min-height:100vh;padding:48px 20px;position:relative;overflow-x:hidden;
+  min-height:100vh;min-height:100svh;padding:48px 20px;position:relative;overflow-x:hidden;
   background:linear-gradient(160deg, var(--bg-top) 0%, #083561 45%, var(--bg-bot) 100%);
+  background-attachment:fixed;
 }
 body::before{
-  content:'';position:fixed;inset:0;
+  content:'';position:fixed;inset:0;z-index:0;
   background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
   background-size:52px 52px;pointer-events:none;z-index:0;
 }
