@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> <link rel="icon" type="image/svg+xml" href="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Order Confirmed — SyntheticLabs</title>
@@ -17,7 +17,7 @@ html { scroll-behavior: smooth; }
 body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--blue-deep); overflow-x: hidden; }
 
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  position: fixed; top: 32px; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 1.2rem 4rem;
   background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
@@ -152,9 +152,27 @@ nav {
   .confirm-wrap { grid-template-columns:1fr; padding:1.5rem 1rem 4rem; }
   .right-col { order:-1; }
 }
+  .shipping-banner {
+    background: #185FA5;
+    color: white;
+    text-align: center;
+    padding: 0.6rem 1rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 201;
+  }
+  .shipping-banner span { opacity: 0.75; margin: 0 8px; }
 </style>
 </head>
 <body>
+<div class="shipping-banner">
+  🚚 <span>·</span> FREE SHIPPING ON ORDERS OVER €200 <span>·</span> 🚚
+</div>
+
 
 <nav>
   <a href="index.html" class="logo">
