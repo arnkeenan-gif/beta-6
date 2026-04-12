@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Order Confirmed — Research Peptides</title>
+<title>Order Confirmed — SyntheticLabs</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,9 +23,19 @@ nav {
   background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(4,44,83,0.08);
 }
-.logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.25rem; color:var(--blue-deep); letter-spacing:-0.02em; display:flex; align-items:center; gap:10px; text-decoration:none; }
-.logo-mark { width:34px; height:34px; background:var(--blue-mid); border-radius:8px; display:flex; align-items:center; justify-content:center; }
-.logo-mark svg { width:20px; height:20px; }
+.logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.25rem; color:#0C4B83; letter-spacing:-0.02em; display:flex; align-items:center; gap:10px; text-decoration:none; }
+
+
+/* Animated checkmark */
+@keyframes drawCheck {
+  from { stroke-dashoffset: 50; }
+  to   { stroke-dashoffset: 0; }
+}
+.success-badge svg path, .success-badge svg polyline {
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: drawCheck 0.5s ease 0.4s forwards;
+}
 
 /* Green header */
 .page-header {
@@ -148,10 +158,8 @@ nav {
 
 <nav>
   <a href="index.html" class="logo">
-    <div class="logo-mark">
-      <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="3" fill="white"/><path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.93 4.93l2.83 2.83M12.24 12.24l2.83 2.83M4.93 15.07l2.83-2.83M12.24 7.76l2.83-2.83" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </div>
-    Research Peptides
+    <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs" style="width:68px;height:68px;object-fit:contain">
+    SyntheticLabs
   </a>
 </nav>
 
@@ -287,21 +295,21 @@ nav {
     <div class="help-box">
       <div class="help-title">Questions about your order?</div>
       <div class="help-text">
-        Email us at <a href="mailto:support@researchpeptides.com">support@researchpeptides.com</a> quoting your transaction ID and we'll get back to you within 24 hours.
+        Email us at <a href="/cdn-cgi/l/email-protection#cdbeb8bdbda2bfb98dbeb4a3b9a5a8b9a4aea1acafbee3aea2a0"><span class="__cf_email__" data-cfemail="e2919792928d9096a2919b8c968a87968b818e838091cc818d8f">[email&#160;protected]</span></a> quoting your transaction ID and we'll get back to you within 24 hours.
       </div>
     </div>
 
-    <a href="products.html" class="browse-btn">Continue Browsing →</a>
+    <a href="index.html" class="browse-btn">Continue Browsing →</a>
 
     <div class="legal-note">
       All compounds are sold strictly for research purposes only. Not for human consumption.<br>
-      © 2025 Research Peptides Ltd.
+      © 2025 SyntheticLabs. All rights reserved.
     </div>
 
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function bottleSVG(c1,c2,s){
   const id='g'+Math.random().toString(36).slice(2,6);
   return`<svg width="${s}" height="${Math.round(s*1.55)}" viewBox="0 0 80 124" fill="none">
@@ -317,17 +325,17 @@ function bottleSVG(c1,c2,s){
   </svg>`;
 }
 
-// Read all order data from sessionStorage
-const order      = JSON.parse(sessionStorage.getItem('rp_order')      || '{}');
-const shipMethod = JSON.parse(sessionStorage.getItem('rp_shipping_method') || '{}');
-const shipping   = JSON.parse(sessionStorage.getItem('rp_shipping')   || '{}');
+// Read all order data — use localStorage so it survives redirect from NOWPayments
+const order      = JSON.parse(localStorage.getItem('rp_order') || sessionStorage.getItem('rp_order') || '{}');
+const shipMethod = order.shipMethod || JSON.parse(sessionStorage.getItem('rp_shipping_method') || '{}');
+const shipping   = order.shipping   || JSON.parse(sessionStorage.getItem('rp_shipping') || '{}');
 
 const cart       = order.cart       || JSON.parse(localStorage.getItem('rp_cart') || '[]');
 const subtotal   = order.subtotal   || cart.reduce((s,i)=>s+i.price*i.qty, 0);
 const shipPrice  = order.shipPrice  || shipMethod.price  || 6.99;
-const shipLabel  = shipMethod.label || order.shipMethod?.label || 'Standard Delivery';
-const shipEta    = shipMethod.eta   || order.shipMethod?.eta   || '1–2 weeks';
-const shipKey    = shipMethod.key   || order.shipMethod?.key   || 'standard';
+const shipLabel  = order.shipMethod?.label || shipMethod.label || 'Standard Delivery';
+const shipEta    = order.shipMethod?.eta   || shipMethod.eta   || '1–2 weeks';
+const shipKey    = order.shipMethod?.key   || shipMethod.key   || 'standard';
 const gbpTotal   = order.gbpTotal   || (subtotal + shipPrice);
 
 // ── Header personalisation ──
@@ -401,17 +409,4 @@ let summaryHTML = `
   </div>
   <div class="amount-row total-row"><span>Total Paid</span><span>£${gbpTotal.toFixed(2)}</span></div>
 `;
-if (order.cryptoAmount && order.cryptoTicker) {
-  summaryHTML += `
-    <div class="amount-row" style="margin-top:0.6rem;padding-top:0.6rem;border-top:1px dashed rgba(4,44,83,0.08)">
-      <span style="font-size:0.8rem;color:var(--gray-soft)">Paid in crypto</span>
-      <span class="crypto-val">${order.cryptoAmount} ${order.cryptoTicker}</span>
-    </div>`;
-}
-document.getElementById('amountSummary').innerHTML = summaryHTML;
-
-// ── Clear cart once confirmed ──
-localStorage.removeItem('rp_cart');
-</script>
-</body>
-</html>
+if (order.cryptoAmount && order.cryptoTic
