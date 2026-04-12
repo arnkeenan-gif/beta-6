@@ -35,15 +35,15 @@ body::before{
 }
 #wave-canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
 .container{position:relative;z-index:1;width:100%;max-width:480px;display:flex;flex-direction:column;align-items:center}
-
+ 
 /* ── Header / Logo ── */
 .header{display:flex;align-items:center;gap:12px;margin-bottom:4px}
-.logo-img{width:38px;height:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.3))}
-.logo-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-0.3px;line-height:1}
+.logo-img{width:68px;height:68px;object-fit:contain;flex-shrink:0;filter:none}
+.logo-name{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.3px;line-height:1}
 .logo-name .syn{color:#5baef5}
 .logo-name .labs{color:#ffffff}
 .tagline{font-size:12px;color:var(--muted);margin-bottom:22px;letter-spacing:0.2px}
-
+ 
 /* ── Cart strip ── */
 .cart-strip{width:100%;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:14px 16px;margin-bottom:20px}
 .cart-strip-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
@@ -58,15 +58,15 @@ body::before{
 .cart-strip-total{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.1);padding-top:10px;margin-top:4px}
 .cart-strip-total-label{font-size:12px;color:var(--muted)}
 .cart-strip-total-val{font-family:'DM Sans',sans-serif;font-size:20px;font-weight:700;color:#fff;letter-spacing:-0.5px}
-
+ 
 /* ── Screens ── */
 .screen{width:100%;display:none;flex-direction:column;align-items:center;animation:fadeUp 0.3s ease both}
 .screen.active{display:flex}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-
+ 
 /* ── Currency dropdown ── */
 .section-label{font-size:10px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);margin-bottom:10px;align-self:flex-start}
-
+ 
 .cur-dropdown{width:100%;position:relative;margin-bottom:14px}
 .cur-dropdown-btn{
   width:100%;background:var(--card-bg);border:1px solid var(--card-bd);
@@ -83,15 +83,16 @@ body::before{
 .cur-dropdown-name{font-size:11px;color:var(--muted)}
 .cur-dropdown-arrow{color:var(--muted);transition:transform 0.2s;font-size:18px;line-height:1}
 .cur-dropdown-btn.open .cur-dropdown-arrow{transform:rotate(180deg)}
-
+ 
 .cur-dropdown-menu{
-  position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:10;
+  position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:100;
   background:#0d3a68;border:1px solid rgba(255,255,255,0.12);
   border-radius:14px;overflow:hidden;
   animation:fadeUp 0.18s ease both;
   display:none;
 }
 .cur-dropdown-menu.open{display:block}
+.footer{margin-top:24px;display:flex;align-items:center;gap:7px;position:relative;z-index:0}
 .cur-option{
   display:flex;align-items:center;gap:13px;padding:13px 18px;cursor:pointer;
   transition:background 0.15s;border-bottom:1px solid rgba(255,255,255,0.06);
@@ -103,7 +104,7 @@ body::before{
 .cur-option-ticker{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;line-height:1;margin-bottom:2px}
 .cur-option-name{font-size:11px;color:var(--muted)}
 .cur-option.selected{background:rgba(41,128,212,0.15)}
-
+ 
 .pay-now-btn{
   width:100%;background:var(--blue);border:none;border-radius:12px;
   padding:14px;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;
@@ -114,13 +115,13 @@ body::before{
 .pay-now-btn:hover{background:var(--blue-b);transform:translateY(-1px)}
 .pay-now-btn:active{transform:scale(0.98)}
 .pay-now-btn svg{width:16px;height:16px}
-
+ 
 /* ── Loading ── */
 .spinner-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;padding:40px 0}
 .spinner{width:36px;height:36px;border:3px solid rgba(255,255,255,0.12);border-top-color:var(--blue);border-radius:50%;animation:spin 0.8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .spinner-text{font-size:13px;color:var(--muted)}
-
+ 
 /* ── Pay card ── */
 .pay-card{background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:26px 22px;width:100%;display:flex;flex-direction:column;align-items:center}
 .pay-cur-row{display:flex;align-items:center;gap:10px;align-self:flex-start;margin-bottom:3px}
@@ -152,7 +153,7 @@ body::before{
 .tracker-text strong{color:#fff;font-weight:500}
 .back-btn{background:transparent;border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:9px 20px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--muted);cursor:pointer;transition:background 0.18s,color 0.18s}
 .back-btn:hover{background:rgba(255,255,255,0.07);color:#fff}
-
+ 
 /* ── Success ── */
 #screen-success{text-align:center}
 .success-card{background:rgba(0,0,0,0.2);border:1px solid rgba(34,197,94,0.25);border-radius:20px;padding:36px 24px;width:100%;display:flex;flex-direction:column;align-items:center}
@@ -165,7 +166,7 @@ body::before{
 .success-tx-label{font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:5px}
 .redirect-bar{width:100%;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.16);border-radius:10px;padding:11px 14px;font-size:12px;color:rgba(34,197,94,0.8);display:flex;align-items:center;gap:6px;justify-content:center}
 .redirect-count{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--green);min-width:16px;text-align:center}
-
+ 
 /* ── Footer ── */
 .footer{margin-top:24px;display:flex;align-items:center;gap:7px}
 .dot-live{width:6px;height:6px;border-radius:50%;background:var(--green);animation:livepulse 3.5s ease infinite;flex-shrink:0}
@@ -176,14 +177,14 @@ body::before{
 <body>
 <canvas id="wave-canvas"></canvas>
 <div class="container">
-
+ 
   <!-- Logo -->
   <div class="header">
-    <img class="logo-img" src="1776007100701_image.png" alt="SyntheticLabs Logo">
+    <img class="logo-img" src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs">
     <div class="logo-name"><span class="syn">Synthetic</span><span class="labs">Labs</span></div>
   </div>
   <div class="tagline">Complete your order with crypto</div>
-
+ 
   <!-- Cart strip -->
   <div class="cart-strip">
     <div class="cart-strip-title">Your order</div>
@@ -196,11 +197,11 @@ body::before{
       <div class="cart-strip-total-val" id="cartStripTotal">£0.00</div>
     </div>
   </div>
-
+ 
   <!-- SELECT SCREEN -->
   <div class="screen active" id="screen-select">
     <div class="section-label">Select currency</div>
-
+ 
     <!-- Dropdown -->
     <div class="cur-dropdown" id="curDropdown">
       <div class="cur-dropdown-btn" id="dropdownBtn" onclick="toggleDropdown()">
@@ -228,13 +229,13 @@ body::before{
         </div>
       </div>
     </div>
-
+ 
     <button class="pay-now-btn" onclick="openPayment(selectedKey)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       Pay Now
     </button>
   </div>
-
+ 
   <!-- LOADING SCREEN -->
   <div class="screen" id="screen-loading">
     <div class="spinner-wrap">
@@ -242,7 +243,7 @@ body::before{
       <div class="spinner-text">Creating your payment invoice…</div>
     </div>
   </div>
-
+ 
   <!-- PAYMENT SCREEN -->
   <div class="screen" id="screen-pay">
     <div class="pay-card">
@@ -275,7 +276,7 @@ body::before{
       <button class="back-btn" onclick="stopAndGoBack()">← Choose different currency</button>
     </div>
   </div>
-
+ 
   <!-- SUCCESS SCREEN -->
   <div class="screen" id="screen-success">
     <div class="success-card">
@@ -288,33 +289,33 @@ body::before{
       <div class="redirect-bar"><span>Redirecting to your order in</span><span class="redirect-count" id="redirect-count">5</span><span>seconds</span></div>
     </div>
   </div>
-
+ 
   <div class="footer"><div class="dot-live"></div><span class="footer-text">Verified · Secure · Worldwide</span></div>
 </div>
-
+ 
 <script>
 const NP_API_KEY    = 'J17RX1W-KG3MMGB-JTGHXWB-EEEF456';
 const REDIRECT_URL  = 'confirmation.html';
 const REDIRECT_SECS = 5;
 const POLL_MS       = 8000;
-
+ 
 const currencies = {
   eth: { ticker:'ETH', name:'Ethereum', network:'Ethereum Network (ERC-20)', logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/eth.png' },
   sol: { ticker:'SOL', name:'Solana',   network:'Solana Network',            logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/sol.png' },
   btc: { ticker:'BTC', name:'Bitcoin',  network:'Bitcoin Network',           logo:'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/128/color/btc.png' },
 };
-
+ 
 const cart       = JSON.parse(localStorage.getItem('rp_cart')||'[]');
 const shipping   = JSON.parse(sessionStorage.getItem('rp_shipping')||'{}');
 const shipMethod = JSON.parse(sessionStorage.getItem('rp_shipping_method')||'{}');
 const subtotal   = cart.reduce((s,i)=>s+i.price*i.qty, 0);
 const shipPrice  = shipMethod.price || 6.99;
 const gbpTotal   = subtotal + shipPrice;
-
+ 
 let pollTimer=null, tickTimer=null, sessionStart=0;
 let currentKey=null, currentAddr='', paymentId=null;
 let selectedKey = 'eth';
-
+ 
 /* ── Cart strip ── */
 (function(){
   document.getElementById('cartStripTotal').textContent     = '£'+gbpTotal.toFixed(2);
@@ -329,7 +330,7 @@ let selectedKey = 'eth';
     </div>`
   ).join('');
 })();
-
+ 
 /* ── Dropdown ── */
 function toggleDropdown(){
   const btn  = document.getElementById('dropdownBtn');
@@ -337,7 +338,7 @@ function toggleDropdown(){
   btn.classList.toggle('open');
   menu.classList.toggle('open');
 }
-
+ 
 function selectCurrency(key){
   selectedKey = key;
   const c = currencies[key];
@@ -349,31 +350,31 @@ function selectCurrency(key){
   document.getElementById('dropdownBtn').classList.remove('open');
   document.getElementById('dropdownMenu').classList.remove('open');
 }
-
+ 
 document.addEventListener('click', e=>{
   if(!document.getElementById('curDropdown').contains(e.target)){
     document.getElementById('dropdownBtn').classList.remove('open');
     document.getElementById('dropdownMenu').classList.remove('open');
   }
 });
-
+ 
 /* ── Screens ── */
 function showScreen(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
 function setTracker(state,html){
   document.getElementById('tracker-dot').className='tracker-dot'+(state==='scanning'?' scanning':state==='found'?' found':'');
   document.getElementById('tracker-text').innerHTML=html;
 }
-
+ 
 /* ── Create NOWPayments invoice ── */
 async function openPayment(key){
   currentKey = key;
   const c    = currencies[key];
   showScreen('screen-loading');
-
+ 
   try{
     const gbpRate   = 1.27;
     const usdAmount = (gbpTotal * gbpRate).toFixed(2);
-
+ 
     const res = await fetch('https://api.nowpayments.io/v1/invoice', {
       method: 'POST',
       headers: { 'x-api-key': NP_API_KEY, 'Content-Type': 'application/json' },
@@ -388,12 +389,13 @@ async function openPayment(key){
         ipn_callback_url:  'https://beta-6-dstn.vercel.app/api/webhook',
       })
     });
-
+ 
     if(!res.ok) throw new Error('Invoice failed');
     const invoice = await res.json();
-
+ 
     if(invoice.invoice_url){
-      sessionStorage.setItem('rp_order', JSON.stringify({
+      // Use localStorage so data survives the redirect away to NOWPayments and back
+      localStorage.setItem('rp_order', JSON.stringify({
         cart, shipping, shipMethod, subtotal, shipPrice, gbpTotal,
         cryptoKey: key, cryptoTicker: c.ticker, invoiceId: invoice.id,
       }));
@@ -406,14 +408,14 @@ async function openPayment(key){
     await openPaymentDirect(key);
   }
 }
-
+ 
 /* ── Direct payment fallback ── */
 async function openPaymentDirect(key){
   const c = currencies[key];
   try{
     const gbpRate   = 1.27;
     const usdAmount = (gbpTotal * gbpRate).toFixed(2);
-
+ 
     const res = await fetch('https://api.nowpayments.io/v1/payment', {
       method: 'POST',
       headers: { 'x-api-key': NP_API_KEY, 'Content-Type': 'application/json' },
@@ -425,14 +427,14 @@ async function openPaymentDirect(key){
         ipn_callback_url:'https://beta-6-dstn.vercel.app/api/webhook',
       })
     });
-
+ 
     if(!res.ok) throw new Error('Payment API failed');
     const payment = await res.json();
-
+ 
     paymentId    = payment.payment_id;
     currentAddr  = payment.pay_address;
     sessionStart = Math.floor(Date.now()/1000);
-
+ 
     document.getElementById('pay-logo-img').src            = c.logo;
     document.getElementById('pay-logo-img').alt            = c.ticker;
     document.getElementById('pay-label').textContent       = c.name+' ('+c.ticker+')';
@@ -443,7 +445,7 @@ async function openPaymentDirect(key){
     document.getElementById('pay-gbp-label').textContent      = '£'+gbpTotal.toFixed(2)+' GBP';
     document.getElementById('warn-text').innerHTML =
       '⚠ Send exactly <strong>'+payment.pay_amount+' '+c.ticker.toUpperCase()+'</strong> to this address. Wrong asset = permanent loss.';
-
+ 
     document.getElementById('copy-btn').textContent = 'Copy';
     document.getElementById('copy-btn').className   = 'copy-btn';
     document.getElementById('qr-output').innerHTML  = '';
@@ -451,13 +453,13 @@ async function openPaymentDirect(key){
       text:payment.pay_address, width:142, height:142,
       colorDark:'#000000', colorLight:'#ffffff', correctLevel:QRCode.CorrectLevel.M
     });
-
-    sessionStorage.setItem('rp_order', JSON.stringify({
+ 
+    localStorage.setItem('rp_order', JSON.stringify({
       cart, shipping, shipMethod, subtotal, shipPrice, gbpTotal,
       cryptoKey:key, cryptoAmount:payment.pay_amount, cryptoTicker:c.ticker,
       paymentId:payment.payment_id,
     }));
-
+ 
     setTracker('scanning','<strong>Waiting for payment…</strong><br>You will be redirected automatically once detected');
     showScreen('screen-pay');
     startPolling();
@@ -467,7 +469,7 @@ async function openPaymentDirect(key){
     showScreen('screen-select');
   }
 }
-
+ 
 function copyAddress(){
   navigator.clipboard.writeText(currentAddr).then(()=>{
     const btn=document.getElementById('copy-btn');
@@ -475,9 +477,9 @@ function copyAddress(){
     setTimeout(()=>{btn.textContent='Copy';btn.className='copy-btn';},2400);
   });
 }
-
+ 
 function stopAndGoBack(){ stopPolling(); showScreen('screen-select'); }
-
+ 
 function startPolling(){
   stopPolling();
   tickTimer=setInterval(()=>{
@@ -489,12 +491,12 @@ function startPolling(){
   poll();
   pollTimer=setInterval(poll,POLL_MS);
 }
-
+ 
 function stopPolling(){
   if(pollTimer){clearInterval(pollTimer);pollTimer=null;}
   if(tickTimer){clearInterval(tickTimer);tickTimer=null;}
 }
-
+ 
 async function poll(){
   if(!paymentId) return;
   try{
@@ -510,18 +512,18 @@ async function poll(){
     }
   }catch(e){ console.warn('Poll silent fail:', e.message); }
 }
-
+ 
 function onPaymentFound(result){
   stopPolling();
-  const order=JSON.parse(sessionStorage.getItem('rp_order')||'{}');
+  const order=JSON.parse(localStorage.getItem('rp_order')||'{}');
   order.txid=result.txid; order.txAmount=result.amount;
-  sessionStorage.setItem('rp_order',JSON.stringify(order));
+  localStorage.setItem('rp_order',JSON.stringify(order));
   document.getElementById('success-sub').textContent  = result.amount+' received. Your order is being processed.';
   document.getElementById('success-txid').textContent = result.txid;
   showScreen('screen-success');
   startCountdown();
 }
-
+ 
 function startCountdown(){
   let n=REDIRECT_SECS;
   document.getElementById('redirect-count').textContent=n;
@@ -530,7 +532,7 @@ function startCountdown(){
     if(n<=0){clearInterval(t);window.location.href=REDIRECT_URL;}
   },1000);
 }
-
+ 
 /* ── Very slow waves ── */
 const wc=document.getElementById('wave-canvas'),wctx=wc.getContext('2d');let frame=0;
 function resize(){wc.width=window.innerWidth;wc.height=window.innerHeight;}
