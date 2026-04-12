@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> <link rel="icon" type="image/svg+xml" href="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Products — SyntheticLabs</title>
@@ -93,7 +93,7 @@
   /* ── SIDEBAR FILTERS ── */
   .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
   .filter-card { background: white; border-radius: 14px; border: 1px solid rgba(4,44,83,0.08); padding: 1.25rem 1.5rem; }
-  .filter-title { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--blue-deep); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+  .filter-title { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--blue-deep); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
   .filter-option { display: flex; align-items: center; gap: 10px; margin-bottom: 0.6rem; cursor: pointer; }
   .filter-option input[type="checkbox"] { accent-color: var(--blue-mid); width: 15px; height: 15px; cursor: pointer; }
   .filter-option label { font-size: 0.88rem; color: var(--gray-text); cursor: pointer; transition: color 0.2s; }
@@ -106,7 +106,7 @@
   /* ── PRODUCTS GRID ── */
   .products-main {}
   .products-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
-  .products-count { font-size: 0.88rem; color: var(--gray-text); }
+  .products-count { font-size: 0.88rem; color: var(--gray-text); font-family: 'DM Sans', sans-serif; }
   .products-count strong { color: var(--blue-deep); }
   .sort-select { border: 1px solid rgba(4,44,83,0.12); border-radius: 8px; padding: 0.45rem 0.85rem; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--blue-deep); background: white; cursor: pointer; outline: none; }
 
@@ -138,11 +138,13 @@
   .product-card:nth-child(8) .bottle-wrap{animation-delay:-2s}
 
   .product-body { padding: 1.1rem 1.25rem 1.3rem; flex: 1; display: flex; flex-direction: column; }
-  .product-category { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 0.4rem; }
-  .product-name { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 0.35rem; letter-spacing: -0.01em; }
-  .product-desc { font-size: 0.82rem; color: var(--gray-text); font-weight: 300; line-height: 1.55; margin-bottom: 1rem; flex: 1; }
+  .product-category { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 0.4rem; font-family: 'DM Sans', sans-serif; }
+  .product-name { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; color: var(--blue-deep); margin-bottom: 0.35rem; letter-spacing: 0; }
+  .product-desc { font-size: 0.82rem; color: var(--gray-text); font-weight: 400; line-height: 1.55; margin-bottom: 1rem; flex: 1; font-family: 'DM Sans', sans-serif; }
   .product-footer { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
   .product-price { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--blue-deep); }
+  .price-was { font-size: 0.82rem; font-weight: 400; color: var(--gray-soft); text-decoration: line-through; margin-right: 4px; }
+  .price-sale { color: #c0392b; }
   .product-price span { font-size: 0.75rem; font-weight: 400; color: var(--gray-soft); font-family: 'DM Sans', sans-serif; }
   .purity-badge { display: inline-flex; align-items: center; gap: 3px; background: rgba(29,158,117,0.1); color: #0F6E56; font-size: 0.68rem; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 100px; white-space: nowrap; }
 
@@ -183,7 +185,7 @@
     padding: 1.5rem 1.5rem 1rem;
     border-bottom: 1px solid rgba(4,44,83,0.08);
   }
-  .drawer-title { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--blue-deep); }
+  .drawer-title { font-family: 'DM Sans', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--blue-deep); }
   .drawer-close { background: none; border: none; cursor: pointer; color: var(--gray-text); padding: 4px; border-radius: 6px; transition: background 0.2s; display: flex; }
   .drawer-close:hover { background: var(--off-white); color: var(--blue-deep); }
   .drawer-close svg { width: 22px; height: 22px; }
@@ -208,7 +210,7 @@
     flex-shrink: 0;
   }
   .cart-item-info { flex: 1; min-width: 0; }
-  .cart-item-name { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cart-item-name { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .cart-item-cat { font-size: 0.75rem; color: var(--gray-soft); }
   .cart-item-price { font-size: 0.9rem; font-weight: 600; color: var(--blue-mid); margin-top: 4px; font-family: 'DM Sans', sans-serif; }
 
@@ -356,76 +358,18 @@
 <script>
 // ── PRODUCT DATA ──
 const products = [
-  {
-    id: 1, name: 'Retatrutide', dose: '5mg',
-    category: 'GLP-1 / Weight Loss', catKey: 'f-glp',
-    desc: 'Triple agonist targeting GLP-1, GIP, and glucagon receptors. Studied for significant weight reduction and metabolic improvements.',
-    price: 89, purity: '99.5%',
-    color: ['#0a3d6b','#185FA5']
-  },
-  {
-    id: 2, name: 'Semaglutide', dose: '5mg',
-    category: 'GLP-1 / Weight Loss', catKey: 'f-glp',
-    desc: 'GLP-1 receptor agonist widely studied for appetite regulation, blood glucose control, and weight management.',
-    price: 72, purity: '99.8%',
-    color: ['#0C447C','#378ADD']
-  },
-  {
-    id: 3, name: 'Tirzepatide', dose: '5mg',
-    category: 'GLP-1 / Weight Loss', catKey: 'f-glp',
-    desc: 'Dual GIP and GLP-1 receptor agonist. Investigated for superior glycaemic control and weight loss outcomes.',
-    price: 78, purity: '99.6%',
-    color: ['#042C53','#185FA5']
-  },
-  {
-    id: 4, name: 'BPC-157', dose: '5mg',
-    category: 'Growth Peptides', catKey: 'f-growth',
-    desc: 'Body protection compound studied for tissue repair, gut healing, and musculoskeletal recovery mechanisms.',
-    price: 38, purity: '99.5%',
-    color: ['#0a3d6b','#1a6db5']
-  },
-  {
-    id: 5, name: 'TB-500', dose: '2mg',
-    category: 'Metabolic', catKey: 'f-met',
-    desc: 'Thymosin Beta-4 fragment investigated for wound healing, inflammation modulation, and cellular migration.',
-    price: 44, purity: '99.6%',
-    color: ['#0C447C','#2980b9']
-  },
-  {
-    id: 6, name: 'CJC-1295', dose: '2mg',
-    category: 'GH Secretagogue', catKey: 'f-gh',
-    desc: 'Modified GRF analogue with extended half-life — a foundational compound in growth hormone research.',
-    price: 46, purity: '99.7%',
-    color: ['#042C53','#0C447C']
-  },
-  {
-    id: 7, name: 'Semax', dose: '30mg',
-    category: 'Cognitive', catKey: 'f-cog',
-    desc: 'Synthetic ACTH analogue studied for neuroprotective, nootropic, and neurogenic properties in CNS research.',
-    price: 52, purity: '99.8%',
-    color: ['#0a3d6b','#185FA5']
-  },
-  {
-    id: 8, name: 'Epitalon', dose: '10mg',
-    category: 'Anti-Aging', catKey: 'f-anti',
-    desc: 'Tetrapeptide studied for telomere elongation, circadian regulation, and longevity markers in aging models.',
-    price: 58, purity: '99.9%',
-    color: ['#185FA5','#378ADD']
-  },
-  {
-    id: 9, name: 'Ipamorelin', dose: '2mg',
-    category: 'GH Secretagogue', catKey: 'f-gh',
-    desc: 'Selective growth hormone secretagogue with a clean side-effect profile. Widely used in GH release research.',
-    price: 36, purity: '99.5%',
-    color: ['#0C447C','#185FA5']
-  },
-  {
-    id: 10, name: 'Selank', dose: '5mg',
-    category: 'Cognitive', catKey: 'f-cog',
-    desc: 'Anxiolytic peptide analogue of tuftsin. Studied for anxiety reduction, immune modulation, and memory effects.',
-    price: 48, purity: '99.7%',
-    color: ['#042C53','#1a6db5']
-  }
+  { id:1, name:'Retatrutide', dose:'5mg', category:'GLP-1 / Weight Loss', catKey:'f-glp', desc:'Triple agonist targeting GLP-1, GIP, and glucagon receptors. Studied for significant weight reduction and metabolic improvements.', price:89, wasPrice:99, purity:'99.5%', color:['#0a3d6b','#185FA5'] },
+  { id:2, name:'Semaglutide', dose:'5mg', category:'GLP-1 / Weight Loss', catKey:'f-glp', desc:'GLP-1 receptor agonist widely studied for appetite regulation, blood glucose control, and weight management.', price:72, wasPrice:84, purity:'99.8%', color:['#0C447C','#378ADD'] },
+  { id:3, name:'Tirzepatide', dose:'5mg', category:'GLP-1 / Weight Loss', catKey:'f-glp', desc:'Dual GIP and GLP-1 receptor agonist. Investigated for superior glycaemic control and weight loss outcomes.', price:78, wasPrice:89, purity:'99.6%', color:['#042C53','#185FA5'] },
+  { id:4, name:'BPC-157', dose:'5mg', category:'Growth Peptides', catKey:'f-growth', desc:'Body protection compound studied for tissue repair, gut healing, and musculoskeletal recovery mechanisms.', price:44, wasPrice:53, purity:'99.5%', color:['#0a3d6b','#1a6db5'] },
+  { id:5, name:'TB-500', dose:'2mg', category:'Metabolic', catKey:'f-met', desc:'Thymosin Beta-4 fragment investigated for wound healing, inflammation modulation, and cellular migration.', price:44, wasPrice:53, purity:'99.6%', color:['#0C447C','#2980b9'] },
+  { id:6, name:'CJC-1295', dose:'2mg', category:'GH Secretagogue', catKey:'f-gh', desc:'Modified GRF analogue with extended half-life — a foundational compound in growth hormone research.', price:46, wasPrice:56, purity:'99.7%', color:['#042C53','#0C447C'] },
+  { id:7, name:'Semax', dose:'30mg', category:'Cognitive', catKey:'f-cog', desc:'Synthetic ACTH analogue studied for neuroprotective, nootropic, and neurogenic properties in CNS research.', price:52, wasPrice:62, purity:'99.8%', color:['#0a3d6b','#185FA5'] },
+  { id:8, name:'Epitalon', dose:'10mg', category:'Anti-Aging', catKey:'f-anti', desc:'Tetrapeptide studied for telomere elongation, circadian regulation, and longevity markers in aging models.', price:58, wasPrice:68, purity:'99.9%', color:['#185FA5','#378ADD'] },
+  { id:9, name:'Ipamorelin', dose:'2mg', category:'GH Secretagogue', catKey:'f-gh', desc:'Selective growth hormone secretagogue with a clean side-effect profile. Widely used in GH release research.', price:36, wasPrice:44, purity:'99.5%', color:['#0C447C','#185FA5'] },
+  { id:10, name:'Selank', dose:'5mg', category:'Cognitive', catKey:'f-cog', desc:'Anxiolytic peptide analogue of tuftsin. Studied for anxiety reduction, immune modulation, and memory effects.', price:48, wasPrice:58, purity:'99.7%', color:['#042C53','#1a6db5'] },
+  { id:11, name:'Melanotan 1', dose:'10mg', category:'Anti-Aging', catKey:'f-anti', desc:'MT-1 analogue of alpha-MSH studied for melanogenesis, photoprotection, and skin pigmentation research.', price:69, wasPrice:83, purity:'99.5%', color:['#3d1a6b','#7b3fa5'] },
+  { id:12, name:'Melanotan 2', dose:'10mg', category:'Metabolic', catKey:'f-met', desc:'Cyclic analogue of alpha-MSH investigated for melanogenesis, appetite suppression, and MC receptor activity.', price:34, wasPrice:41, purity:'99.6%', color:['#1a2d6b','#4060c0'] },
 ];
 
 // ── BOTTLE SVG ──
@@ -469,7 +413,11 @@ function renderCards(list) {
         <div class="product-name">${p.name} ${p.dose}</div>
         <div class="product-desc">${p.desc}</div>
         <div class="product-footer">
-          <div class="product-price">€${p.price}<span> / vial</span></div>
+          <div class="product-price">
+            ${p.wasPrice ? `<span class="price-was">€${p.wasPrice}</span>` : ''}
+            <span class="price-sale">€${p.price}</span>
+            <span style="color:var(--gray-soft);font-size:0.8rem"> / vial</span>
+          </div>
           <div class="purity-badge">✓ ${p.purity}</div>
         </div>
         <button class="add-btn" onclick="event.stopPropagation(); addToCart(${p.id})">
