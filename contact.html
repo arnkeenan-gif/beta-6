@@ -10,15 +10,29 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{--blue-deep:#042C53;--blue-mid:#185FA5;--blue-light:#378ADD;--off-white:#F4F8FD;--gray-text:#4A6680;--gray-soft:#8EA7BE}
 body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--blue-deep)}
-.shipping-banner{background:var(--blue-mid);color:white;text-align:center;padding:0.6rem 1rem;font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;position:fixed;top:0;left:0;right:0;z-index:201}
+.shipping-banner {
+    background: var(--blue-mid);
+    color: white;
+    text-align: center;
+    padding: 0.35rem 1rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 201;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 nav{position:fixed;top:32px;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 4rem;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(4,44,83,0.08)}
-.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;color:var(--blue-deep);display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo{font-family:'DM Sans',sans-serif;font-weight:700;font-size:1.2rem;color:var(--blue-deep);display:flex;align-items:center;gap:10px;text-decoration:none}
 .logo img{width:52px;height:52px;object-fit:contain}
 .page-header{background:linear-gradient(135deg,var(--blue-deep) 0%,#0a3d6b 100%);padding:9rem 4rem 3.5rem;position:relative;overflow:hidden}
 .page-header::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(55,138,221,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(55,138,221,0.07) 1px,transparent 1px);background-size:50px 50px}
 .page-header-inner{position:relative;z-index:1;max-width:900px;margin:0 auto}
-.label{font-size:0.75rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#85B7EB;margin-bottom:0.75rem}
-.page-header h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;color:white;margin-bottom:0.75rem}
+.label{font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#85B7EB;margin-bottom:0.75rem}
+.page-header h1{font-family:'DM Sans',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:white;margin-bottom:0.75rem}
 .page-header p{font-size:1rem;font-weight:300;color:rgba(181,212,244,0.8);line-height:1.7}
 .content{max-width:900px;margin:0 auto;padding:4rem 2rem 6rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem}
 @media(max-width:768px){.content{grid-template-columns:1fr;padding:2.5rem 1.5rem 4rem}}
@@ -43,13 +57,38 @@ nav{position:fixed;top:32px;left:0;right:0;z-index:200;display:flex;align-items:
 .submit-btn:hover{background:#0C447C;transform:translateY(-1px)}
 .success-msg{display:none;background:rgba(15,110,86,0.08);border:1px solid rgba(15,110,86,0.2);border-radius:10px;padding:1rem;text-align:center;font-size:0.9rem;color:#0F6E56;font-weight:500;margin-top:1rem}
 .site-footer{background:#042C53;color:rgba(181,212,244,0.6);padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(133,183,235,0.1)}
-.site-footer .footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:white;display:flex;align-items:center;gap:10px;text-decoration:none}
+.site-footer .footer-logo{font-family:'DM Sans',sans-serif;font-weight:700;font-size:1.1rem;color:white;display:flex;align-items:center;gap:10px;text-decoration:none}
 .site-footer .footer-logo img{width:38px;height:38px;object-fit:contain}
 .site-footer .footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
 .site-footer .footer-links a{font-size:0.82rem;color:rgba(181,212,244,0.55);text-decoration:none;transition:color 0.2s}
 .site-footer .footer-links a:hover{color:rgba(181,212,244,0.9)}
 .site-footer .footer-copy{font-size:0.75rem;width:100%;text-align:center;padding-top:1.5rem;border-top:1px solid rgba(133,183,235,0.08);margin-top:0.5rem}
 @media(max-width:768px){nav{padding:1rem 1.5rem}.page-header{padding:8rem 1.5rem 2.5rem}.form-row{grid-template-columns:1fr}.site-footer{padding:2rem 1.5rem;flex-direction:column;text-align:center}}
+
+  /* Mobile menu */
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
+  .hamburger span { display:block; width:22px; height:2px; background:var(--blue-deep); border-radius:2px; transition:all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+  .hamburger.open span:nth-child(2) { opacity:0; }
+  .hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+  .mobile-menu {
+    display:none; position:fixed; top:0; left:0; right:0; bottom:0;
+    background:white; z-index:999; flex-direction:column;
+    padding:5rem 2rem 2rem;
+  }
+  .mobile-menu.open { display:flex; }
+  .mobile-menu-close { position:absolute; top:1.5rem; right:1.5rem; background:none; border:none; font-size:1.8rem; cursor:pointer; color:var(--blue-deep); line-height:1; }
+  .mobile-menu a {
+    font-family:'DM Sans',sans-serif; font-size:1.4rem; font-weight:600;
+    color:var(--blue-deep); text-decoration:none; padding:0.9rem 0;
+    border-bottom:1px solid rgba(4,44,83,0.07);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .mobile-menu a:after { content:'›'; font-size:1.2rem; color:var(--blue-mid); }
+  .mobile-menu a:last-child { border-bottom:none; }
+  .mobile-menu-footer { margin-top:auto; font-size:0.8rem; color:var(--gray-soft); text-align:center; }
+  @media (max-width: 768px) { .hamburger { display:flex; } }
+
 </style>
 </head>
 <body>
@@ -57,11 +96,27 @@ nav{position:fixed;top:32px;left:0;right:0;z-index:200;display:flex;align-items:
 <div class="shipping-banner">🚚 <span style="opacity:0.75;margin:0 8px">·</span> FREE SHIPPING ON ORDERS OVER €200 <span style="opacity:0.75;margin:0 8px">·</span> 🚚</div>
 
 <nav>
-  <a href="index.html" class="logo">
+  <a href="/" class="logo">
     <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs">
     SyntheticLabs
   </a>
+<!-- Mobile Menu -->
+<button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+  <span></span><span></span><span></span>
+</button>
 </nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="toggleMobileMenu()">×</button>
+  <a href="/" onclick="toggleMobileMenu()">Home</a>
+  <a href="/products" onclick="toggleMobileMenu()">All Products</a>
+  <a href="/shipping" onclick="toggleMobileMenu()">Shipping</a>
+  <a href="/contact" onclick="toggleMobileMenu()">Contact</a>
+  <a href="/terms" onclick="toggleMobileMenu()">Terms of Use</a>
+  <div class="mobile-menu-footer">© 2025 SyntheticLabs · Research Use Only</div>
+</div>
+
 
 <div class="page-header">
   <div class="page-header-inner">
@@ -81,7 +136,7 @@ nav{position:fixed;top:32px;left:0;right:0;z-index:200;display:flex;align-items:
       </div>
       <div>
         <div class="info-label">Email</div>
-        <div class="info-value"><a href="mailto:support@syntheticlabs.eu">support@syntheticlabs.eu</a></div>
+        <div class="info-value"><a href="/cdn-cgi/l/email-protection#2c5f595c5c435e586c5f554258444958454f404d4e5f024959"><span class="__cf_email__" data-cfemail="e99a9c9999869b9da99a90879d818c9d808a85888b9ac78c9c">[email&#160;protected]</span></a></div>
         <div class="info-sub">We respond within 24 hours on business days</div>
       </div>
     </div>
@@ -157,21 +212,21 @@ nav{position:fixed;top:32px;left:0;right:0;z-index:200;display:flex;align-items:
 </div>
 
 <footer class="site-footer">
-  <a href="index.html" class="footer-logo">
+  <a href="/" class="footer-logo">
     <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs">
     SyntheticLabs
   </a>
   <ul class="footer-links">
-    <li><a href="products.html">Products</a></li>
+    <li><a href="/products">Products</a></li>
     <li><a href="index.html#about">Science</a></li>
     <li><a href="index.html#process">Process</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="terms.html">Terms of Use</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li><a href="/terms">Terms of Use</a></li>
   </ul>
   <div class="footer-copy">© 2025 SyntheticLabs. All compounds are sold strictly for research purposes only. Not for human consumption.</div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function submitForm(){
   const first = document.getElementById('firstName').value.trim();
   const last  = document.getElementById('lastName').value.trim();
@@ -186,12 +241,4 @@ function submitForm(){
     return;
   }
   document.getElementById('successMsg').style.display = 'block';
-  document.getElementById('firstName').value = '';
-  document.getElementById('lastName').value  = '';
-  document.getElementById('email').value     = '';
-  document.getElementById('message').value   = '';
-  document.getElementById('subject').value   = '';
-}
-</script>
-</body>
-</html>
+  document.getElementById('fir
