@@ -13,33 +13,20 @@
   --blue-frost: #E6F1FB; --white: #ffffff; --off-white: #F4F8FD;
   --gray-soft: #8EA7BE; --gray-text: #4A6680;
 }
-html { scroll-behavior: smooth; background: var(--blue-mid); }
+html { scroll-behavior: smooth; }
 body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--blue-deep); overflow-x: hidden; }
 
 nav {
+  position: fixed; top: 28px; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 1.2rem 4rem;
-  background: #ffffff; 
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(4,44,83,0.08);
 }
-
-/* Updated logo: image on left, "Synthetic" on top, "Labs" below */
-.logo {
-  font-family:'Syne',sans-serif; font-weight:800; color:var(--blue-deep);
-  letter-spacing:-0.02em; display:flex; align-items:center; gap:10px;
-  text-decoration:none; line-height:1;
-}
-.logo-text {
-  display: flex; flex-direction: column; gap: 0px;
-}
-.logo-text .logo-top {
-  font-size: 1rem; font-weight: 800; letter-spacing: -0.02em;
-  color: var(--blue-deep); line-height: 1.1;
-}
-.logo-text .logo-bottom {
-  font-size: 1rem; font-weight: 800; letter-spacing: -0.02em;
-  color: var(--blue-mid); line-height: 1.1;
-}
+.logo-text { display:flex; flex-direction:column; line-height:1.1; }
+.logo-text .logo-top { font-size:1rem; font-weight:800; color:#042C53; }
+.logo-text .logo-bottom { font-size:1rem; font-weight:800; color:#185FA5; }
+.logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.25rem; color:var(--blue-deep); letter-spacing:-0.02em; display:flex; align-items:center; gap:10px; text-decoration:none; }
 
 .nav-back { font-size:0.9rem; color:var(--gray-text); text-decoration:none; display:flex; align-items:center; gap:6px; transition:color 0.2s; }
 .nav-back:hover { color:var(--blue-mid); }
@@ -47,8 +34,7 @@ nav {
 
 .page-header {
   background: linear-gradient(135deg, var(--blue-deep) 0%, #0a3d6b 100%);
-  /* Reduced top padding from 7.5rem to 3.5rem */
-  padding: 3.5rem 4rem 3rem; position: relative; overflow: hidden;
+  padding: 7.5rem 4rem 3rem; position: relative; overflow: hidden;
 }
 .page-header::before { content:''; position:absolute; inset:0; background-image:linear-gradient(rgba(55,138,221,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(55,138,221,0.07) 1px,transparent 1px); background-size:50px 50px; }
 .page-header-inner { position:relative; z-index:1; max-width:1100px; margin:0 auto; }
@@ -132,7 +118,7 @@ nav {
 
 @media (max-width: 768px) {
   nav { padding:1rem 1.5rem; }
-  .page-header { padding:2.5rem 1.5rem 2rem; }
+  .page-header { padding:7rem 1.5rem 2rem; }
   .checkout-wrap { grid-template-columns:1fr; padding:1.5rem 1rem 4rem; }
   .form-row { grid-template-columns:1fr; }
   .summary-card { position:static; }
@@ -141,17 +127,18 @@ nav {
     background: var(--blue-mid);
     color: white;
     text-align: center;
-    padding: 0.35rem 1rem;
-    font-size: 0.7rem;
+    padding: 0;
+    height: 28px;
+    line-height: 28px;
+    font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 201;
     white-space: nowrap;
     overflow: hidden;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
   .shipping-banner span { opacity: 0.75; margin: 0 8px; }
 
@@ -180,7 +167,7 @@ nav {
   @media (max-width: 768px) { .site-footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; } }
 
   /* Mobile menu */
-  .hamburger { display:flex; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
   .hamburger span { display:block; width:22px; height:2px; background:var(--blue-deep); border-radius:2px; transition:all 0.3s; }
   .hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
   .hamburger.open span:nth-child(2) { opacity:0; }
@@ -201,6 +188,7 @@ nav {
   .mobile-menu a:after { content:'›'; font-size:1.2rem; color:var(--blue-mid); }
   .mobile-menu a:last-child { border-bottom:none; }
   .mobile-menu-footer { margin-top:auto; font-size:0.8rem; color:var(--gray-soft); text-align:center; }
+  @media (max-width: 768px) { .hamburger { display:flex; } }
 
 </style>
 </head>
@@ -211,7 +199,6 @@ nav {
 
 
 <nav>
-  <!-- Updated logo: image left, "Synthetic" on top line, "Labs" on bottom line -->
   <a href="/" class="logo">
     <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs" style="width:44px;height:44px;object-fit:contain">
     <div class="logo-text">
@@ -503,12 +490,17 @@ function selectShipping(key) {
 
 function updateTotals() {
   const subtotal = cart.reduce((s,i)=>s+i.price*i.qty, 0);
-  const freeShip = subtotal >= 200;
-  const ship     = freeShip ? 0 : SHIPPING[selectedShipping].price;
-  const total    = subtotal + ship;
+  const freeStandard = subtotal >= 200;
+  const isStandard = selectedShipping === 'standard';
+  const ship = (freeStandard && isStandard) ? 0 : SHIPPING[selectedShipping].price;
+  const total = subtotal + ship;
   document.getElementById('subtotalVal').textContent = '€'+subtotal.toFixed(2);
-  document.getElementById('shippingVal').textContent = freeShip ? '€0.00 — Free!' : '€'+ship.toFixed(2);
-  document.getElementById('totalVal').textContent    = '€'+total.toFixed(2);
+  document.getElementById('shippingVal').textContent = (freeStandard && isStandard) ? '€0.00 — Free!' : '€'+ship.toFixed(2);
+  document.getElementById('totalVal').textContent = '€'+total.toFixed(2);
+
+  // Update standard option label to show FREE
+  const stdPrice = document.querySelector('#opt-standard .shipping-price');
+  if(stdPrice) stdPrice.textContent = freeStandard ? 'FREE' : '€6.99';
 }
 
 function renderSummary() {
@@ -563,8 +555,9 @@ function proceedToPayment() {
   if (!cart.length) { alert('Your cart is empty.'); return; }
 
   const subtotal = cart.reduce((s,i)=>s+i.price*i.qty,0);
-  const freeShip = subtotal >= 200;
-  const shipInfo = { ...SHIPPING[selectedShipping], price: freeShip ? 0 : SHIPPING[selectedShipping].price, label: freeShip ? SHIPPING[selectedShipping].label + ' (Free)' : SHIPPING[selectedShipping].label };
+  const freeStandard = subtotal >= 200 && selectedShipping === 'standard';
+  const shipPrice = freeStandard ? 0 : SHIPPING[selectedShipping].price;
+  const shipInfo = { ...SHIPPING[selectedShipping], price: shipPrice, label: freeStandard ? SHIPPING[selectedShipping].label + ' (Free)' : SHIPPING[selectedShipping].label };
 
   sessionStorage.setItem('rp_shipping', JSON.stringify(fields));
   sessionStorage.setItem('rp_shipping_method', JSON.stringify({
@@ -597,16 +590,5 @@ renderSummary();
   </ul>
   <div class="footer-copy">© 2025 SyntheticLabs. All compounds are sold strictly for research purposes only. Not for human consumption.</div>
 </footer>
-
-<script>
-function toggleMobileMenu() {
-  var menu = document.getElementById('mobileMenu');
-  var ham = document.getElementById('hamburger');
-  if (!menu) return;
-  menu.classList.toggle('open');
-  if (ham) ham.classList.toggle('open');
-}
-</script>
-
 </body>
 </html>
