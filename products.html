@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Products — Research Peptides</title>
+<title>Products — SyntheticLabs</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -39,6 +39,7 @@
     color: var(--blue-deep); letter-spacing: -0.02em;
     display: flex; align-items: center; gap: 10px; text-decoration: none;
   }
+  .logo img { object-fit: contain; }
   .logo-mark {
     width: 34px; height: 34px; background: var(--blue-mid); border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
@@ -141,7 +142,7 @@
   .product-name { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 0.35rem; letter-spacing: -0.01em; }
   .product-desc { font-size: 0.82rem; color: var(--gray-text); font-weight: 300; line-height: 1.55; margin-bottom: 1rem; flex: 1; }
   .product-footer { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
-  .product-price { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--blue-deep); }
+  .product-price { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--blue-deep); }
   .product-price span { font-size: 0.75rem; font-weight: 400; color: var(--gray-soft); font-family: 'DM Sans', sans-serif; }
   .purity-badge { display: inline-flex; align-items: center; gap: 3px; background: rgba(29,158,117,0.1); color: #0F6E56; font-size: 0.68rem; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 100px; white-space: nowrap; }
 
@@ -209,7 +210,7 @@
   .cart-item-info { flex: 1; min-width: 0; }
   .cart-item-name { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--blue-deep); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .cart-item-cat { font-size: 0.75rem; color: var(--gray-soft); }
-  .cart-item-price { font-size: 0.9rem; font-weight: 600; color: var(--blue-mid); margin-top: 4px; }
+  .cart-item-price { font-size: 0.9rem; font-weight: 600; color: var(--blue-mid); margin-top: 4px; font-family: 'DM Sans', sans-serif; }
 
   .qty-controls { display: flex; align-items: center; gap: 8px; }
   .qty-btn { width: 28px; height: 28px; border-radius: 6px; border: 1px solid rgba(4,44,83,0.12); background: white; cursor: pointer; font-size: 1rem; font-weight: 600; color: var(--blue-deep); display: flex; align-items: center; justify-content: center; transition: background 0.15s; line-height: 1; }
@@ -222,7 +223,7 @@
   .drawer-footer { padding: 1.25rem 1.5rem; border-top: 1px solid rgba(4,44,83,0.08); }
   .cart-subtotal { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
   .cart-subtotal span { font-size: 0.88rem; color: var(--gray-text); }
-  .cart-subtotal strong { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--blue-deep); }
+  .cart-subtotal strong { font-family: 'DM Sans', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--blue-deep); }
   .cart-note { font-size: 0.75rem; color: var(--gray-soft); margin-bottom: 1rem; }
   .checkout-btn {
     width: 100%; background: var(--blue-mid); color: white;
@@ -252,20 +253,15 @@
 
 <!-- NAV -->
 <nav>
-  <a href="../" class="logo">
-    <div class="logo-mark">
-      <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="10" cy="10" r="3" fill="white"/>
-        <path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.93 4.93l2.83 2.83M12.24 12.24l2.83 2.83M4.93 15.07l2.83-2.83M12.24 7.76l2.83-2.83" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-    </div>
-    Research Peptides
+  <a href="index.html" class="logo">
+    <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs" style="width:52px;height:52px;object-fit:contain">
+    <span><span style="color:#185FA5">Synthetic</span><span style="color:#042C53">Labs</span></span>
   </a>
   <ul>
-    <li><a href="../">Home</a></li>
+    <li><a href="index.html">Home</a></li>
     <li><a href="#">Products</a></li>
-    <li><a href="../#about">Science</a></li>
-    <li><a href="../#process">Process</a></li>
+    <li><a href="index.html#about">Science</a></li>
+    <li><a href="index.html#process">Process</a></li>
   </ul>
   <button class="cart-btn" onclick="openCart()">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
@@ -302,7 +298,7 @@
       <div class="filter-title">Max Price</div>
       <div class="price-range">
         <input type="range" min="20" max="200" value="200" id="priceRange" oninput="updatePrice(this.value)">
-        <div class="price-range-labels"><span>£20</span><span id="priceLabel">£200</span></div>
+        <div class="price-range-labels"><span>€20</span><span id="priceLabel">€200</span></div>
       </div>
     </div>
     <div class="filter-card">
@@ -346,7 +342,7 @@
   <div class="drawer-footer" id="drawerFooter" style="display:none">
     <div class="cart-subtotal">
       <span>Subtotal</span>
-      <strong id="cartTotal">£0.00</strong>
+      <strong id="cartTotal">€0.00</strong>
     </div>
     <p class="cart-note">Shipping calculated at checkout. For research use only.</p>
     <button class="checkout-btn" onclick="checkout()">
@@ -473,7 +469,7 @@ function renderCards(list) {
         <div class="product-name">${p.name} ${p.dose}</div>
         <div class="product-desc">${p.desc}</div>
         <div class="product-footer">
-          <div class="product-price">£${p.price}<span> / vial</span></div>
+          <div class="product-price">€${p.price}<span> / vial</span></div>
           <div class="purity-badge">✓ ${p.purity}</div>
         </div>
         <button class="add-btn" onclick="event.stopPropagation(); addToCart(${p.id})">
@@ -505,7 +501,7 @@ function filterCards() {
 }
 
 function updatePrice(val) {
-  document.getElementById('priceLabel').textContent = '£' + val;
+  document.getElementById('priceLabel').textContent = '€' + val;
   filterCards();
 }
 
@@ -585,7 +581,7 @@ function updateCartUI() {
 
   footer.style.display = 'block';
   const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  document.getElementById('cartTotal').textContent = '£' + subtotal.toFixed(2);
+  document.getElementById('cartTotal').textContent = '€' + subtotal.toFixed(2);
 
   body.innerHTML = cart.map(item => `
     <div class="cart-item">
@@ -595,7 +591,7 @@ function updateCartUI() {
       <div class="cart-item-info">
         <div class="cart-item-name">${item.name} ${item.dose}</div>
         <div class="cart-item-cat">${item.category}</div>
-        <div class="cart-item-price">£${item.price.toFixed(2)}</div>
+        <div class="cart-item-price">€${item.price.toFixed(2)}</div>
       </div>
       <div class="qty-controls">
         <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
@@ -613,7 +609,7 @@ function closeCart() { document.getElementById('cartDrawer').classList.remove('o
 
 function checkout() {
   // Replace this URL with your crypto payment processor link
-  alert('checkout.html');
+  alert('Connect your crypto payment processor here.');
 }
 
 // Init
