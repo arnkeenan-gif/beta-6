@@ -31,10 +31,26 @@
     overflow-x: hidden;
   }
  
+  /* Shipping banner */
+  .shipping-banner {
+    background: var(--blue-mid);
+    color: white;
+    text-align: center;
+    padding: 0.6rem 1rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 101;
+  }
+  .shipping-banner span { opacity: 0.75; margin: 0 8px; }
+
   /* ── NAV ── */
   nav {
     position: fixed;
-    top: 0; left: 0; right: 0;
+    top: 32px; left: 0; right: 0;
     z-index: 100;
     display: flex;
     align-items: center;
@@ -97,6 +113,7 @@
  
   /* ── HERO ── */
   .hero {
+    padding-top: 32px;
     position: relative;
     min-height: 100vh;
     display: flex;
@@ -150,6 +167,7 @@
   }
  
   .hero-tag {
+    margin-top: 0.5rem;
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -633,6 +651,11 @@
 </head>
 <body>
  
+<!-- SHIPPING BANNER -->
+<div class="shipping-banner">
+  🚚 <span>·</span> FREE SHIPPING ON ORDERS OVER €200 <span>·</span> 🚚
+</div>
+
 <!-- NAV -->
 <nav>
   <a href="index.html" class="logo">
