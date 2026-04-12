@@ -315,6 +315,12 @@
   .mobile-menu a:last-child { border-bottom:none; }
   .mobile-menu-footer { margin-top:auto; font-size:0.8rem; color:var(--gray-soft); text-align:center; }
 
+
+  @media (max-width: 768px) {
+    .logo { flex-direction: column; align-items: flex-start; gap: 2px; }
+    .logo img { width: 32px !important; height: 32px !important; }
+    .logo > span { font-size: 0.85rem; line-height: 1.1; }
+  }
 </style>
 </head>
 <body>
@@ -328,7 +334,7 @@
 <nav>
   <a href="/" class="logo">
     <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs" style="width:52px;height:52px;object-fit:contain">
-    <span><span style="color:#185FA5">Synthetic</span><span style="color:#042C53">Labs</span></span>
+    <span style="display:flex;flex-direction:column;line-height:1.1;"><span style="color:#185FA5;font-size:1rem;">Synthetic</span><span style="color:#042C53;font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;">Labs</span></span>
   </a>
   <ul>
     <li><a href="/>Home</a></li>
