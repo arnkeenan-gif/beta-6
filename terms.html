@@ -3,34 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terms of Use — SyntheticLabs</title>
 <link rel="icon" type="image/svg+xml" href="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg">
+<link rel="apple-touch-icon" href="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg">
+<meta name="theme-color" content="#185FA5">
+<title>Terms of Use — SyntheticLabs</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{--blue-deep:#042C53;--blue-mid:#185FA5;--off-white:#F4F8FD;--gray-text:#4A6680;--gray-soft:#8EA7BE}
 body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--blue-deep)}
 .shipping-banner {
-    background: var(--blue-mid);
+    background: #185FA5;
     color: white;
     text-align: center;
-    padding: 0.35rem 1rem;
+    padding: 0;
     height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
+    line-height: 28px;
+    font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 201;
     white-space: nowrap;
     overflow: hidden;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
-nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2.5rem;background:#ffffff;border-bottom:1px solid rgba(4,44,83,0.08)}
+nav{position:fixed;top:32px;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 4rem;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(4,44,83,0.08)}
 .logo{font-family:'DM Sans',sans-serif;font-weight:700;font-size:1.2rem;color:var(--blue-deep);display:flex;align-items:center;gap:10px;text-decoration:none}
 .logo img{width:52px;height:52px;object-fit:contain}
 .page-header{background:linear-gradient(135deg,var(--blue-deep) 0%,#0a3d6b 100%);padding:9rem 4rem 3.5rem;position:relative;overflow:hidden}
@@ -57,7 +56,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem
 @media(max-width:768px){nav{padding:1rem 1.5rem}.page-header{padding:8rem 1.5rem 2.5rem}.content{padding:2.5rem 1.5rem 4rem}.site-footer{padding:2rem 1.5rem;flex-direction:column;text-align:center}}
 
   /* Mobile menu */
-  .hamburger { display:flex; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
   .hamburger span { display:block; width:22px; height:2px; background:var(--blue-deep); border-radius:2px; transition:all 0.3s; }
   .hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
   .hamburger.open span:nth-child(2) { opacity:0; }
@@ -78,6 +77,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem
   .mobile-menu a:after { content:'›'; font-size:1.2rem; color:var(--blue-mid); }
   .mobile-menu a:last-child { border-bottom:none; }
   .mobile-menu-footer { margin-top:auto; font-size:0.8rem; color:var(--gray-soft); text-align:center; }
+  @media (max-width: 768px) { .hamburger { display:flex; } }
 
 </style>
 </head>
@@ -88,7 +88,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem
 <nav>
   <a href="/" class="logo">
     <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs">
-    <span style="display:flex;flex-direction:column;line-height:1.1;"><span style="color:#185FA5;font-weight:800;">Synthetic</span><span style="color:#042C53;font-weight:800;font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;">Labs</span></span>
+    SyntheticLabs
   </a>
 <!-- Mobile Menu -->
 <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
@@ -187,19 +187,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem
 <footer class="site-footer">
   <a href="/" class="footer-logo">
     <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs">
-    <span style="display:flex;flex-direction:column;line-height:1.1;"><span style="color:#185FA5;font-weight:800;">Synthetic</span><span style="color:#042C53;font-weight:800;font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;">Labs</span></span>
+    SyntheticLabs
   </a>
   <ul class="footer-links">
     <li><a href="/products">Products</a></li>
     <li><a href="index.html#about">Science</a></li>
     <li><a href="index.html#process">Proc
-
-<script>
-function toggleMobileMenu() {
-  var menu = document.getElementById('mobileMenu');
-  var ham = document.getElementById('hamburger');
-  if (!menu) return;
-  menu.classList.toggle('open');
-  if (ham) ham.classList.toggle('open');
-}
-</script>
