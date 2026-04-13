@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg">
+<link rel="apple-touch-icon" href="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg">
+<meta name="theme-color" content="#185FA5">
 <title>Order Confirmed — SyntheticLabs</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
@@ -17,12 +20,15 @@ html { scroll-behavior: smooth; }
 body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--blue-deep); overflow-x: hidden; }
 
 nav {
-  position: fixed; top: 28px; left: 0; right: 0; z-index: 100;
+  position: fixed; top: 32px; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 1.2rem 4rem;
   background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(4,44,83,0.08);
 }
+.logo-text { display:flex; flex-direction:column; line-height:1.1; }
+.logo-text .logo-top { font-size:1rem; font-weight:800; color:#042C53; }
+.logo-text .logo-bottom { font-size:1rem; font-weight:800; color:#185FA5; }
 .logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.25rem; color:#0C4B83; letter-spacing:-0.02em; display:flex; align-items:center; gap:10px; text-decoration:none; }
 
 
@@ -153,11 +159,13 @@ nav {
   .right-col { order:-1; }
 }
   .shipping-banner {
-    background: var(--blue-mid);
+    background: #185FA5;
     color: white;
     text-align: center;
-    padding: 0.35rem 1rem;
-    font-size: 0.7rem;
+    padding: 0;
+    height: 28px;
+    line-height: 28px;
+    font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -166,8 +174,6 @@ nav {
     z-index: 201;
     white-space: nowrap;
     overflow: hidden;
-    height: 28px;
-    line-height: 28px;
   }
   .shipping-banner span { opacity: 0.75; margin: 0 8px; }
 
@@ -514,16 +520,5 @@ if (order.cryptoAmount && order.cryptoTic
 </footer>
 
 </script>
-
-<script>
-function toggleMobileMenu() {
-  var menu = document.getElementById('mobileMenu');
-  var ham = document.getElementById('hamburger');
-  if (!menu) return;
-  menu.classList.toggle('open');
-  if (ham) ham.classList.toggle('open');
-}
-</script>
-
 </body>
 </html>
