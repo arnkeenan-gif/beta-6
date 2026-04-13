@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg">
+<link rel="apple-touch-icon" href="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg">
+<meta name="theme-color" content="#185FA5">
+<title>Research Blog — SyntheticLabs</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--blue-deep:#042C53;--blue-mid:#185FA5;--blue-light:#378ADD;--off-white:#F4F8FD;--gray-text:#4A6680;--gray-soft:#8EA7BE}
+body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--blue-deep)}
+
+.shipping-banner{background:#185FA5;color:white;text-align:center;padding:0;height:28px;line-height:28px;font-size:0.68rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;position:fixed;top:0;left:0;right:0;z-index:201;white-space:nowrap;overflow:hidden}
+.shipping-banner span{opacity:0.75;margin:0 6px}
+
+nav{position:fixed;top:28px;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 4rem;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(4,44,83,0.08)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;color:var(--blue-deep);display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo img{width:44px;height:44px;object-fit:contain}
+
+.page-header{background:linear-gradient(135deg,var(--blue-deep) 0%,#0a3d6b 100%);padding:10rem 4rem 4rem;position:relative;overflow:hidden}
+.page-header::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(55,138,221,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(55,138,221,0.07) 1px,transparent 1px);background-size:50px 50px}
+.page-header-inner{position:relative;z-index:1;max-width:900px;margin:0 auto}
+.label{font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#85B7EB;margin-bottom:0.75rem}
+.page-header h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;color:white;margin-bottom:0.75rem}
+.page-header p{font-size:1rem;font-weight:300;color:rgba(181,212,244,0.8);line-height:1.7}
+
+.content{max-width:1100px;margin:0 auto;padding:4rem 2rem 6rem}
+
+/* Featured post */
+.featured-post{background:white;border-radius:20px;border:1px solid rgba(4,44,83,0.08);overflow:hidden;display:grid;grid-template-columns:1fr 1fr;margin-bottom:3rem;transition:transform 0.2s,box-shadow 0.2s;cursor:pointer;text-decoration:none;color:inherit}
+.featured-post:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(4,44,83,0.1)}
+.featured-img{background:linear-gradient(135deg,#042C53 0%,#185FA5 100%);min-height:320px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:3rem}
+.featured-img::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(55,138,221,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(55,138,221,0.1) 1px,transparent 1px);background-size:30px 30px}
+.featured-img-icon{position:relative;z-index:1;font-size:5rem;opacity:0.9}
+.featured-body{padding:2.5rem}
+.post-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(24,95,165,0.1);color:var(--blue-mid);font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.3rem 0.8rem;border-radius:100px;margin-bottom:1.25rem}
+.featured-body h2{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:700;color:var(--blue-deep);line-height:1.25;margin-bottom:0.85rem}
+.featured-body p{font-size:0.92rem;color:var(--gray-text);line-height:1.8;margin-bottom:1.5rem}
+.post-meta{display:flex;align-items:center;gap:1rem;font-size:0.78rem;color:var(--gray-soft)}
+.post-meta-dot{width:3px;height:3px;border-radius:50%;background:var(--gray-soft)}
+.read-more{display:inline-flex;align-items:center;gap:6px;font-size:0.85rem;font-weight:600;color:var(--blue-mid);margin-top:1rem}
+.read-more::after{content:'→';transition:transform 0.2s}
+.featured-post:hover .read-more::after{transform:translateX(4px)}
+
+/* Posts grid */
+.posts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.post-card{background:white;border-radius:16px;border:1px solid rgba(4,44,83,0.08);overflow:hidden;transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s;cursor:pointer;text-decoration:none;color:inherit;display:flex;flex-direction:column}
+.post-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(4,44,83,0.1);border-color:rgba(55,138,221,0.2)}
+.post-card-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden}
+.post-card-body{padding:1.5rem;flex:1;display:flex;flex-direction:column}
+.post-card-body h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--blue-deep);line-height:1.35;margin-bottom:0.6rem;margin-top:0.5rem}
+.post-card-body p{font-size:0.82rem;color:var(--gray-text);line-height:1.7;flex:1;margin-bottom:1rem}
+
+.site-footer{background:#042C53;color:rgba(181,212,244,0.6);padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(133,183,235,0.1)}
+.site-footer .footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:white;display:flex;align-items:center;gap:10px;text-decoration:none}
+.site-footer .footer-logo img{width:38px;height:38px;object-fit:contain}
+.site-footer .footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+.site-footer .footer-links a{font-size:0.82rem;color:rgba(181,212,244,0.55);text-decoration:none;transition:color 0.2s}
+.site-footer .footer-links a:hover{color:rgba(181,212,244,0.9)}
+.site-footer .footer-copy{font-size:0.75rem;width:100%;text-align:center;padding-top:1.5rem;border-top:1px solid rgba(133,183,235,0.08);margin-top:0.5rem}
+
+/* Mobile menu */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:22px;height:2px;background:var(--blue-deep);border-radius:2px;transition:all 0.3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:white;z-index:999;flex-direction:column;padding:5rem 2rem 2rem}
+.mobile-menu.open{display:flex}
+.mobile-menu-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;font-size:1.8rem;cursor:pointer;color:var(--blue-deep);line-height:1}
+.mobile-menu a{font-family:'DM Sans',sans-serif;font-size:1.4rem;font-weight:600;color:var(--blue-deep);text-decoration:none;padding:0.9rem 0;border-bottom:1px solid rgba(4,44,83,0.07);display:flex;align-items:center;justify-content:space-between}
+.mobile-menu a:after{content:'›';font-size:1.2rem;color:var(--blue-mid)}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu-footer{margin-top:auto;font-size:0.8rem;color:var(--gray-soft);text-align:center}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .hamburger{display:flex}
+  .page-header{padding:7.5rem 1.5rem 2.5rem}
+  .featured-post{grid-template-columns:1fr}
+  .featured-img{min-height:200px}
+  .posts-grid{grid-template-columns:1fr}
+  .content{padding:2.5rem 1.5rem 4rem}
+  .site-footer{padding:2rem 1.5rem;flex-direction:column;text-align:center}
+}
+@media(min-width:769px) and (max-width:1024px){.posts-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<div class="shipping-banner">🚚 <span>·</span> FREE SHIPPING ON ORDERS OVER €200 <span>·</span> 🚚</div>
+
+<nav>
+  <a href="index.html" class="logo">
+    <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs">
+    <div style="display:flex;flex-direction:column;line-height:1.15;">
+      <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#185FA5;letter-spacing:-0.01em">Synthetic</span>
+      <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:0.72rem;color:#042C53;letter-spacing:0.15em;text-transform:uppercase">Labs</span>
+    </div>
+  </a>
+  <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="toggleMobileMenu()">×</button>
+  <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+  <a href="products.html" onclick="toggleMobileMenu()">All Products</a>
+  <a href="shipping.html" onclick="toggleMobileMenu()">Shipping</a>
+  <a href="contact.html" onclick="toggleMobileMenu()">Contact</a>
+  <a href="terms.html" onclick="toggleMobileMenu()">Terms of Use</a>
+  <div class="mobile-menu-footer">© 2025 SyntheticLabs · Research Use Only</div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="label">Research & Science</div>
+    <h1>SyntheticLabs Blog</h1>
+    <p>In-depth articles on peptide science, research protocols, and the latest developments in metabolic and regenerative biology.</p>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- Featured Post -->
+  <a href="retatrutide-vs-tirzepatide-vs-semaglutide.html" class="featured-post">
+    <div class="featured-img">
+      <div class="featured-img-icon">🧬</div>
+    </div>
+    <div class="featured-body">
+      <div class="post-tag">Featured · GLP-1 Research</div>
+      <h2>Retatrutide vs Tirzepatide vs Semaglutide: A Comparative Analysis of Triple vs Dual vs Single Agonism</h2>
+      <p>An in-depth look at how the three receptor targets of retatrutide — GLP-1, GIP, and glucagon — produce additive metabolic effects beyond what dual or single agonism can achieve alone. We examine the Phase 2 data and what it means for obesity research.</p>
+      <div class="post-meta">
+        <span>SyntheticLabs Research Team</span>
+        <div class="post-meta-dot"></div>
+        <span>April 2, 2026</span>
+        <div class="post-meta-dot"></div>
+        <span>8 min read</span>
+      </div>
+      <div class="read-more">Read article</div>
+    </div>
+  </a>
+
+  <!-- Posts Grid -->
+  <div class="posts-grid">
+
+    <a href="bpc157-tendon-healing-vegf-fak.html" class="post-card">
+      <div class="post-card-img" style="background:linear-gradient(135deg,#0a3d6b,#185FA5)">🔬</div>
+      <div class="post-card-body">
+        <div class="post-tag">BPC-157</div>
+        <h3>How BPC-157 Accelerates Tendon-to-Bone Healing: The VEGF and FAK-Paxillin Pathway</h3>
+        <p>BPC-157's tissue repair mechanisms go far deeper than most researchers realise. We break down the VEGF receptor upregulation and FAK-paxillin signalling involved in musculoskeletal recovery.</p>
+        <div class="post-meta">
+          <span>March 18, 2026</span>
+          <div class="post-meta-dot"></div>
+          <span>6 min read</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="epitalon-telomerase-longevity.html" class="post-card">
+      <div class="post-card-img" style="background:linear-gradient(135deg,#1a4d3a,#2d8a5e)">🌿</div>
+      <div class="post-card-body">
+        <div class="post-tag">Anti-Aging</div>
+        <h3>Epitalon and Telomerase Activation: What the Research Actually Shows</h3>
+        <p>Khavinson's original research on Epitalon showed telomere elongation in somatic cell lines. We examine what the data really says, how reproducible the findings are, and the implications for longevity research.</p>
+        <div class="post-meta">
+          <span>March 10, 2026</span>
+          <div class="post-meta-dot"></div>
+          <span>7 min read</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="cjc1295-ipamorelin-stack.html" class="post-card">
+      <div class="post-card-img" style="background:linear-gradient(135deg,#3d1a6b,#7b3fa5)">🎯</div>
+      <div class="post-card-body">
+        <div class="post-tag">GH Secretagogues</div>
+        <h3>CJC-1295 + Ipamorelin: Why This Stack Dominates GH Research Protocols</h3>
+        <p>The synergistic combination of a GHRH analogue with a selective ghrelin mimetic produces GH pulse amplitudes neither can achieve alone. A deep dive into the pharmacodynamics behind the most popular GH stack in research.</p>
+        <div class="post-meta">
+          <span>February 28, 2026</span>
+          <div class="post-meta-dot"></div>
+          <span>5 min read</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="semax-bdnf-neuroprotection.html" class="post-card">
+      <div class="post-card-img" style="background:linear-gradient(135deg,#042C53,#0C447C)">🧠</div>
+      <div class="post-card-body">
+        <div class="post-tag">Cognitive Research</div>
+        <h3>Semax and BDNF: Understanding Neurotrophin Upregulation in the Hippocampus</h3>
+        <p>Semax's neuroprotective effects appear to operate primarily through upregulation of BDNF and NGF in hippocampal and cortical tissue. We examine the evidence from Russian CNS research and what it means for cognitive science.</p>
+        <div class="post-meta">
+          <span>February 14, 2026</span>
+          <div class="post-meta-dot"></div>
+          <span>6 min read</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="peptide-reconstitution-guide.html" class="post-card">
+      <div class="post-card-img" style="background:linear-gradient(135deg,#0C447C,#378ADD)">⚗️</div>
+      <div class="post-card-body">
+        <div class="post-tag">Lab Protocols</div>
+        <h3>Peptide Reconstitution Guide: Solvents, Concentrations and Storage Best Practices</h3>
+        <p>Improper reconstitution is the single most common cause of peptide degradation in research settings. This guide covers the correct solvents, concentrations, and storage conditions for every major peptide class.</p>
+        <div class="post-meta">
+          <span>February 5, 2026</span>
+          <div class="post-meta-dot"></div>
+          <span>9 min read</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="post-card">
+      <div class="post-card-img" style="background:linear-gradient(135deg,#1a3d4d,#2d7a9a)">💉</div>
+      <div class="post-card-body">
+        <div class="post-tag">GLP-1 Research</div>
+        <h3>Understanding Semaglutide's Albumin Binding: Why Half-Life Matters in Research Design</h3>
+        <p>Semaglutide's C-18 fatty diacid modification enables albumin binding that extends plasma half-life to 165–184 hours. Here's why this pharmacokinetic property is critical for designing meaningful research protocols.</p>
+        <div class="post-meta">
+          <span>January 22, 2026</span>
+          <div class="post-meta-dot"></div>
+          <span>5 min read</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <a href="index.html" class="footer-logo">
+    <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs">
+    SyntheticLabs
+  </a>
+  <ul class="footer-links">
+    <li><a href="products.html">Products</a></li>
+    <li><a href="index.html#about">Science</a></li>
+    <li><a href="shipping.html">Shipping</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="terms.html">Terms of Use</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 SyntheticLabs. All compounds are sold strictly for research purposes only. Not for human consumption.</div>
+</footer>
+
+<script>
+function toggleMobileMenu(){
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+</script>
+</body>
+</html>

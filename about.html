@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg">
+<link rel="apple-touch-icon" href="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg">
+<meta name="theme-color" content="#185FA5">
+<title>About Us — SyntheticLabs EU | Leading Peptide Company in Europe</title>
+<meta name="description" content="SyntheticLabs EU is the leading peptide company in Europe, based in the Netherlands. Fast EU-wide shipping, research-grade quality, and discreet packaging.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--blue-deep:#042C53;--blue-mid:#185FA5;--blue-light:#378ADD;--off-white:#F4F8FD;--gray-text:#4A6680;--gray-soft:#8EA7BE}
+body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--blue-deep)}
+.shipping-banner{background:#185FA5;color:white;text-align:center;padding:0;height:28px;line-height:28px;font-size:0.68rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;position:fixed;top:0;left:0;right:0;z-index:201;white-space:nowrap;overflow:hidden}
+.shipping-banner span{opacity:0.75;margin:0 6px}
+nav{position:fixed;top:28px;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 4rem;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(4,44,83,0.08)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;color:var(--blue-deep);display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo img{width:44px;height:44px;object-fit:contain}
+.page-header{background:linear-gradient(135deg,var(--blue-deep) 0%,#0a3d6b 100%);padding:10rem 4rem 5rem;position:relative;overflow:hidden}
+.page-header::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(55,138,221,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(55,138,221,0.07) 1px,transparent 1px);background-size:50px 50px}
+.page-header-inner{position:relative;z-index:1;max-width:900px;margin:0 auto}
+.label{font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#85B7EB;margin-bottom:0.75rem}
+.page-header h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;color:white;margin-bottom:0.75rem}
+.page-header p{font-size:1.05rem;font-weight:300;color:rgba(181,212,244,0.8);line-height:1.75;max-width:600px}
+.content{max-width:900px;margin:0 auto;padding:4rem 2rem 6rem}
+
+/* Stats bar */
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-bottom:4rem}
+.stat-box{background:white;border:1px solid rgba(4,44,83,0.08);border-radius:16px;padding:1.75rem;text-align:center}
+.stat-box .num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--blue-mid);display:block;margin-bottom:0.3rem}
+.stat-box .lbl{font-size:0.8rem;color:var(--gray-text);font-weight:400}
+
+/* Sections */
+.section{margin-bottom:3rem}
+.section h2{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;color:var(--blue-deep);margin-bottom:1rem;padding-bottom:0.65rem;border-bottom:2px solid rgba(24,95,165,0.1)}
+.section p{font-size:0.97rem;color:var(--gray-text);line-height:1.85;margin-bottom:1rem}
+
+/* Features grid */
+.features-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.5rem}
+.feature-box{background:white;border:1px solid rgba(4,44,83,0.08);border-radius:14px;padding:1.5rem;display:flex;align-items:flex-start;gap:1rem}
+.feature-icon{width:44px;height:44px;background:rgba(24,95,165,0.08);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.feature-box h3{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;color:var(--blue-deep);margin-bottom:0.4rem}
+.feature-box p{font-size:0.83rem;color:var(--gray-text);line-height:1.65;margin:0}
+
+/* Countries */
+.countries-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0.5rem;margin-top:1rem}
+.country-tag{background:white;border:1px solid rgba(4,44,83,0.08);border-radius:8px;padding:0.5rem 0.75rem;font-size:0.82rem;color:var(--gray-text);text-align:center}
+
+/* CTA */
+.cta-box{background:linear-gradient(135deg,var(--blue-mid) 0%,var(--blue-deep) 100%);border-radius:20px;padding:3rem;text-align:center;margin-top:3rem}
+.cta-box h2{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:white;margin-bottom:0.75rem}
+.cta-box p{font-size:0.95rem;color:rgba(181,212,244,0.8);line-height:1.7;margin-bottom:1.5rem}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--blue-deep);font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;padding:0.85rem 2rem;border-radius:8px;text-decoration:none;transition:transform 0.15s}
+.cta-btn:hover{transform:translateY(-2px)}
+
+.site-footer{background:#042C53;color:rgba(181,212,244,0.6);padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(133,183,235,0.1)}
+.site-footer .footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:white;display:flex;align-items:center;gap:10px;text-decoration:none}
+.site-footer .footer-logo img{width:38px;height:38px;object-fit:contain}
+.site-footer .footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+.site-footer .footer-links a{font-size:0.82rem;color:rgba(181,212,244,0.55);text-decoration:none;transition:color 0.2s}
+.site-footer .footer-links a:hover{color:rgba(181,212,244,0.9)}
+.site-footer .footer-copy{font-size:0.75rem;width:100%;text-align:center;padding-top:1.5rem;border-top:1px solid rgba(133,183,235,0.08);margin-top:0.5rem}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:22px;height:2px;background:var(--blue-deep);border-radius:2px;transition:all 0.3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:white;z-index:999;flex-direction:column;padding:5rem 2rem 2rem}
+.mobile-menu.open{display:flex}
+.mobile-menu-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;font-size:1.8rem;cursor:pointer;color:var(--blue-deep);line-height:1}
+.mobile-menu a{font-family:'DM Sans',sans-serif;font-size:1.4rem;font-weight:600;color:var(--blue-deep);text-decoration:none;padding:0.9rem 0;border-bottom:1px solid rgba(4,44,83,0.07);display:flex;align-items:center;justify-content:space-between}
+.mobile-menu a:after{content:'›';font-size:1.2rem;color:var(--blue-mid)}
+.mobile-menu-footer{margin-top:auto;font-size:0.8rem;color:var(--gray-soft);text-align:center}
+@media(max-width:768px){nav{padding:1rem 1.5rem}.hamburger{display:flex}.page-header{padding:7.5rem 1.5rem 3rem}.content{padding:2.5rem 1.5rem 4rem}.stats-bar{grid-template-columns:1fr 1fr}.features-grid{grid-template-columns:1fr}.countries-grid{grid-template-columns:repeat(3,1fr)}.site-footer{padding:2rem 1.5rem;flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+
+<div class="shipping-banner">🚚 <span>·</span> FREE SHIPPING ON ORDERS OVER €200 <span>·</span> 🚚</div>
+
+<nav>
+  <a href="index.html" class="logo">
+    <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs">
+    <div style="display:flex;flex-direction:column;line-height:1.15;">
+      <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#185FA5;letter-spacing:-0.01em">Synthetic</span>
+      <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:0.72rem;color:#042C53;letter-spacing:0.15em;text-transform:uppercase">Labs</span>
+    </div>
+  </a>
+  <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="toggleMobileMenu()">×</button>
+  <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+  <a href="products.html" onclick="toggleMobileMenu()">All Products</a>
+  <a href="blog.html" onclick="toggleMobileMenu()">Blog</a>
+  <a href="shipping.html" onclick="toggleMobileMenu()">Shipping</a>
+  <a href="contact.html" onclick="toggleMobileMenu()">Contact</a>
+  <a href="terms.html" onclick="toggleMobileMenu()">Terms of Use</a>
+  <div class="mobile-menu-footer">© 2025 SyntheticLabs · Research Use Only</div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="label">Who We Are</div>
+    <h1>SyntheticLabs EU — The Leading Peptide Company in Europe</h1>
+    <p>Based in the Netherlands, we supply research institutions and scientists across Europe with the highest-purity peptides available. Fast shipping. Discreet packaging. Uncompromising quality.</p>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="stats-bar">
+    <div class="stat-box"><span class="num">40+</span><span class="lbl">Countries Served</span></div>
+    <div class="stat-box"><span class="num">99.8%</span><span class="lbl">Average Purity</span></div>
+    <div class="stat-box"><span class="num">2K+</span><span class="lbl">Researchers Trust Us</span></div>
+    <div class="stat-box"><span class="num">24h</span><span class="lbl">Dispatch Time</span></div>
+  </div>
+
+  <div class="section">
+    <h2>A European Leader in Peptides</h2>
+    <p>In today's fast-growing biotechnology and research market, finding a reliable and professional peptide supplier is more important than ever. That's where SyntheticLabs EU stands out as a true industry leader. Based in the Netherlands, SyntheticLabs EU has quickly built a reputation as the leading peptide company in the EU, known for its quality, speed, and customer-focused approach.</p>
+    <p>SyntheticLabs EU has positioned itself at the forefront of the peptide industry by delivering high-quality products trusted by customers across Europe. With a strong foundation in the Netherlands, the company benefits from a central location that allows efficient distribution throughout the continent. This strategic advantage makes it easier to serve customers quickly and reliably, no matter where they are located.</p>
+  </div>
+
+  <div class="section">
+    <h2>Fastest Shipping Across Europe</h2>
+    <p>One of the key reasons SyntheticLabs EU is considered a market leader is its exceptionally fast shipping. The company offers rapid delivery to all EU countries, including major markets such as Poland, Denmark, Germany, France, Sweden, and even the United Kingdom. Customers consistently highlight how quickly their orders arrive, making SyntheticLabs EU a top choice for those who value speed and reliability.</p>
+    <p>All orders are dispatched within 24–48 hours from our facility in the Netherlands. Every shipment is tracked and packaged with temperature-controlled materials to maintain peptide integrity throughout transit.</p>
+    <div class="countries-grid">
+      <div class="country-tag">🇳🇱 Netherlands</div>
+      <div class="country-tag">🇩🇪 Germany</div>
+      <div class="country-tag">🇬🇧 United Kingdom</div>
+      <div class="country-tag">🇫🇷 France</div>
+      <div class="country-tag">🇩🇰 Denmark</div>
+      <div class="country-tag">🇸🇪 Sweden</div>
+      <div class="country-tag">🇵🇱 Poland</div>
+      <div class="country-tag">🇧🇪 Belgium</div>
+      <div class="country-tag">🇪🇸 Spain</div>
+      <div class="country-tag">🇮🇹 Italy</div>
+      <div class="country-tag">🇳🇴 Norway</div>
+      <div class="country-tag">🇦🇹 Austria</div>
+      <div class="country-tag">🇨🇭 Switzerland</div>
+      <div class="country-tag">🇵🇹 Portugal</div>
+      <div class="country-tag">🇦🇺 Australia</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Why SyntheticLabs EU Stands Out</h2>
+    <p>What truly sets SyntheticLabs EU apart is the complete package we offer. We are not just another supplier — we are a trusted partner for researchers and scientists across Europe.</p>
+    <div class="features-grid">
+      <div class="feature-box">
+        <div class="feature-icon">🔬</div>
+        <div>
+          <h3>Industry-Leading Peptide Quality</h3>
+          <p>Every batch independently verified by HPLC and mass spectrometry. CoA included with every order. Average purity of 99.8% across our entire catalogue.</p>
+        </div>
+      </div>
+      <div class="feature-box">
+        <div class="feature-icon">🚚</div>
+        <div>
+          <h3>Fast & Reliable EU-Wide Shipping</h3>
+          <p>Dispatched within 24–48 hours. Standard delivery 1–2 weeks, express 2–7 days. Free shipping on all orders over €200. Tracked on every shipment.</p>
+        </div>
+      </div>
+      <div class="feature-box">
+        <div class="feature-icon">📦</div>
+        <div>
+          <h3>Discreet Packaging for Privacy</h3>
+          <p>Every order is packaged discreetly with no reference to SyntheticLabs or product contents on the outer packaging. Your privacy is always protected.</p>
+        </div>
+      </div>
+      <div class="feature-box">
+        <div class="feature-icon">💬</div>
+        <div>
+          <h3>Outstanding Customer Support</h3>
+          <p>Clear communication, fast responses, and helpful support on every enquiry. Our team responds within 24 hours on business days at support@syntheticlabs.eu.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Discreet and Professional Packaging</h2>
+    <p>Privacy and discretion are essential in this industry, and SyntheticLabs EU takes this seriously. Every order is packaged carefully and discreetly to ensure customer confidentiality. The company's packaging process is designed to protect both the contents and the identity of the customer, providing peace of mind with every purchase.</p>
+    <p>Internally, all peptides are sealed under nitrogen and packed with temperature-controlled materials — dry ice or gel packs depending on the compounds ordered — to maintain cold chain integrity from our facility to your door.</p>
+  </div>
+
+  <div class="section">
+    <h2>Our Commitment to Research</h2>
+    <p>As the demand for peptides continues to grow, SyntheticLabs EU remains ahead of the competition by focusing on what matters most: quality, speed, discretion, and customer satisfaction. From our base in the Netherlands to customers across Europe and beyond, we continue to prove why we are considered the leading peptide company in the EU.</p>
+    <p>All products are supplied strictly for in vitro laboratory research purposes. We are committed to supporting legitimate scientific inquiry with the highest quality research compounds available anywhere in Europe.</p>
+  </div>
+
+  <div class="cta-box">
+    <h2>Ready to Start Your Research?</h2>
+    <p>Browse our complete catalogue of research-grade peptides, all third-party verified and shipped directly from the Netherlands.</p>
+    <a href="products.html" class="cta-btn">Browse All Products →</a>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <a href="index.html" class="footer-logo">
+    <img src="https://dox3h6yxkzib2.cloudfront.net/9a776236fadadb9283756501e2c67123.svg" alt="SyntheticLabs">
+    SyntheticLabs
+  </a>
+  <ul class="footer-links">
+    <li><a href="products.html">Products</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="shipping.html">Shipping</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="terms.html">Terms of Use</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 SyntheticLabs. All compounds are sold strictly for research purposes only. Not for human consumption.</div>
+</footer>
+
+<script>
+function toggleMobileMenu(){
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+</script>
+</body>
+</html>
